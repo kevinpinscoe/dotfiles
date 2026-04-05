@@ -1,9 +1,9 @@
 setopt PROMPT_SUBST
 
-# Set things based on normal user or root user
+# Set the zsh prompt based on if we are root or a regular user
 if [ "$EUID" = 0 ] || [ "$(whoami)" = 'root' ]; then
-    PS1="%{\e[0;33m%}[%~] %{\e[m%}
-%{\e[1;31m%}%n@%m%{\e[1;33m%}# %{\e[0m%}"
+    PS1='%F{yellow}[%~]%f
+%B%F{red}%n@%m%f%F{yellow}#%f%b '
 else
     export GIT_PS1_SHOWDIRTYSTATE=1
     [ -r ~/bin/git-prompt.sh ] && . ~/bin/git-prompt.sh
@@ -18,11 +18,14 @@ else
 
     hostn=$(/usr/bin/uname -n)
     if [[ "${hostn}" == "kevin" ]]; then
-        _host_color=$'\e[34;208m'
+        host_color="208"   # orange (256-color)
     else
-        _host_color=$'\e[36;208m'
+        host_color="cyan"
     fi
 
-    PS1='[%{\e[0;32m%}${awsenv}%{\e[m%}] [%{\e[0;31m%}${eks_cluster}%{\e[m%}] %{\e[0;33m%}[%~]%{\e[m%}
-%{\e[1;36m%}%n@%{${_host_color}%}%m%{\e[1;33m%}$(__git_ps1 " (%s)")> %{\e[0m%}'
+    # Use zsh-native prompt escapes (%F/%f, %B/%b) so zsh handles zero-width
+    # correctly. Command substitutions (awsenv, eks_cluster, __git_ps1) are
+    # re-evaluated each prompt thanks to PROMPT_SUBST.
+    PS1='[%F{green}${awsenv}%f] [%F{red}${eks_cluster}%f] %F{yellow}[%~]%f
+%B%F{cyan}%n@%f%B%F{'"${host_color}"'}%m%f%F{yellow}$(__git_ps1 " (%s)")>%f%b '
 fi

@@ -1,5 +1,5 @@
 # Set things based on normal user or root user
-if [ "$EUID" = 0 ] || [ "`whoami`" = 'root' ]; then
+if [ "$EUID" = 0 ] || [ "$(whoami)" = 'root' ]; then
 # root stuff
    alias myhelp='view /root/help.txt'
 # Make things safer (pulled from original /root/.bashrc)
@@ -13,24 +13,25 @@ fi
 # Set the bash prompt based on if we are root or a regular user
 if [ "$EUID" = 0 ] || [ "$(whoami)" = 'root' ]; then
 # set root's prompt
-		root_color="31"
-		PS1="\e[0;33m[\w] \e[m\n\[\033[1;${root_color}m\]\u@\h\[\033[1;33m\]# \[\033[0m\]"; export PS1
+        PS1='\[\e[0;33m\][\w] \[\e[m\]\n\[\e[1;31m\]\u@\h\[\e[1;33m\]# \[\e[0m\]'
+        export PS1
 else
 # This is a non-root user
-	export GIT_PS1_SHOWDIRTYSTATE=1
-   [[ -f ~/bin/git-completion.bash ]] && . ~/bin/git-completion.bash
-   [[ -f ~/bin/git-prompt.sh ]] && . ~/bin/git-prompt.sh
-	if [ -r "$HOME/.environment/what_aws_env_am_i.sh" ]; then
-		awsenv=$("$HOME/.environment/what_aws_env_am_i.sh")
-	else
-		awsenv="none"
-	fi
-	eks_cluster=$(kubectl config get-contexts | grep "*" | awk '{ print $2 }' | awk -F'/' '{ print $2}')
-	hostn=$(/usr/bin/uname -n)
-	host_color="36"
-	if [ "${hostn}" == "kevin"	]
-	then
-		host_color="34"
-	fi
-	PS1='[\e[0;32m$awsenv\e[m] [\e[0;31m$eks_cluster\e[m] \e[0;33m[\w] \e[m\n\[\033[1;36m\]\u@\[\033[${host_color};208m\]\h\[\033[1;33m\]$(__git_ps1 " (%s)")> \[\033[0m\]'; export PS1
+        export GIT_PS1_SHOWDIRTYSTATE=1
+        [[ -f ~/bin/git-completion.bash ]] && . ~/bin/git-completion.bash
+        [[ -f ~/bin/git-prompt.sh ]] && . ~/bin/git-prompt.sh
+        if [ -r "$HOME/.environment/what_aws_env_am_i.sh" ]; then
+                awsenv=$("$HOME/.environment/what_aws_env_am_i.sh")
+        else
+                awsenv="none"
+        fi
+        eks_cluster=$(kubectl config get-contexts 2>/dev/null | awk '/^\*/{print $2}' | awk -F'/' '{print $2}')
+        hostn=$(/usr/bin/uname -n)
+        if [ "${hostn}" = "kevin" ]; then
+                host_color="38;5;208"   # orange (256-color)
+        else
+                host_color="36"         # cyan
+        fi
+        PS1='[\[\e[0;32m\]$awsenv\[\e[m\]] [\[\e[0;31m\]$eks_cluster\[\e[m\]] \[\e[0;33m\][\w] \[\e[m\]\n\[\e[1;36m\]\u@\[\e[1;'"${host_color}"'m\]\h\[\e[1;33m\]$(__git_ps1 " (%s)")> \[\e[0m\]'
+        export PS1
 fi
