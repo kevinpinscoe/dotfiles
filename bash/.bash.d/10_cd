@@ -1,0 +1,30 @@
+cd() {
+  builtin cd "$@" || return
+
+  # Show .readme.txt if it exists
+  if [ -f ".readme.txt" ]; then
+    echo "----- .readme.txt -----"
+    cat .readme.txt
+  fi
+
+  # Detect git repo
+  if repo_root=$(git rev-parse --show-toplevel 2>/dev/null); then
+    export GIT_REPO_HOME="$repo_root"
+
+    echo "----- THIS IS A GIT REPO! -----"
+    echo "Repo root: $GIT_REPO_HOME"
+
+    branch=$(git symbolic-ref --short HEAD 2>/dev/null \
+        || git describe --tags --exact-match 2>/dev/null \
+        || echo "detached HEAD")
+
+    echo "Current branch: $branch"
+
+    git --no-pager log -1 --pretty=format:"Last commit: %h %s (%cr) by %an"
+    git remote update
+    git status
+    echo " "
+  else
+    unset GIT_REPO_HOME
+  fi
+}

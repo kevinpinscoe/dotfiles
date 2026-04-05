@@ -1,0 +1,90 @@
+---
+tags: [ all, logfiles ]
+---
+# Command lnav
+
+## What does this command do:
+
+A log file viewer for the terminal
+
+## Installed from
+
+For Fedora install using: `sudo dnf install lnav`
+For Raspberry Pi install using: `sudo apt install lnav`
+For Mac install using: `homebrew install lnav`
+
+## Command path
+
+For Fedora run: `lnav`
+For Raspberry Pi run: `lnav`
+For Mac run: `lnav`
+
+## Command documentation
+
+Docs can be found at https://docs.lnav.org/en/v0.13.1/
+
+## Command options
+
+# View a log file:
+lnav /var/log/syslog
+
+# Load all files in a directory:
+lnav /var/log
+
+# Recursively load files from directory hierarchies:
+lnav -r /var/log
+
+# Load older rotated log files as well:
+lnav -R /var/log
+
+# Watch the output of a shell command:
+lnav -e 'make -j4'
+
+# Run in headless (no curses UI) mode:
+lnav -n /var/log/syslog
+
+# Do not open default syslog if no files given:
+lnav -N
+
+# Treat stdin as a log file:
+lnav -t
+
+# Execute a command after files are loaded (prefix: : ; | /):
+lnav -c ':filter-in error' /var/log/syslog
+
+# Execute commands from a file:
+lnav -f /path/to/commands.lnav
+
+# Execute a shell command and display output:
+lnav -e 'journalctl -f'
+
+# Add an additional configuration directory:
+lnav -I /path/to/config/dir
+
+# Print warnings about lnav's configuration:
+lnav -W
+
+# Check files against configuration and report errors:
+lnav -C /var/log/syslog
+
+# Display internal help text on startup:
+lnav -H
+
+# Print version information:
+lnav -V
+
+# Do not print informational messages (quiet mode):
+lnav -q
+
+# Install format files:
+lnav -i /path/to/format.json
+
+# Switch to management mode:
+lnav -m config get
+
+# Update formats installed from git repositories:
+lnav -u
+
+# Key bindings (while in lnav):
+# ?    View/leave online help
+# q    Quit the program

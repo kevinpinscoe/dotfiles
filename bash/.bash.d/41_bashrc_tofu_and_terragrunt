@@ -1,0 +1,5 @@
+# Terragrunt: prefer OpenTofu if installed; otherwise leave TG_TF_PATH unset.
+if tofu_path="$(command -v tofu 2>/dev/null)"; then
+  export TG_TF_PATH="$tofu_path"
+fi
+

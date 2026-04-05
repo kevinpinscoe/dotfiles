@@ -1,0 +1,9 @@
+# Load all bash completions from Homebrew's directory
+if [ -d /opt/homebrew/etc/bash_completion.d ]; then
+  for file in /opt/homebrew/etc/bash_completion.d/*; do
+    if [ -r "$file" ]; then
+      # Source only if it's a regular file
+      [ -f "$file" ] && source "$file"
+    fi
+  done
+fi

@@ -1,0 +1,10 @@
+alias login='echo you want logon command'
+alias tg='terragrunt'
+alias eks='~/bin/eks.sh; source ~/.environment/.env_set.sh'
+alias enc='~/bin/mesactlendec.sh encrypt; source ~/.environment/.env_set.sh'
+alias dec='~/bin/mesactlendec.sh decrypt; source ~/.environment/.env_set.sh'
+if [ -n "${work:-}" ]; then
+    alias gettf="git clone git@github.com:${work}/terraform-aws.git"
+    alias mimail="cd ~/Projects/${work}/sre-scripts/missioninsite"
+    alias mpmail="cd ~/Projects/${work}/sre-scripts/ministryplatform"
+fi

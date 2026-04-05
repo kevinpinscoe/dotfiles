@@ -1,0 +1,17 @@
+# User environments come first
+
+export EDITOR=/usr/bin/vim
+export SUDO_EDITOR=/usr/bin/vim
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/tools:$HOME/go/bin:$PATH
+
+if [ -r "$HOME/.environment/replace.sh" ]; then
+    source "$HOME/.environment/replace.sh"
+fi
+
+if [ -r "$HOME/.environment/aws_aliases.sh" ]; then
+    source "$HOME/.environment/aws_aliases.sh"
+fi
+
+if [ -r "$HOME/.environment/work_aliases.sh" ]; then
+    source "$HOME/.environment/work_aliases.sh"
+fi

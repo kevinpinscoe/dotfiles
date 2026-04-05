@@ -1,0 +1,53 @@
+---
+tags: [ fedora, ingest and markdown ]
+---
+# Command defuddle
+
+## What does this command do:
+
+Get the main content of any page as Markdown
+
+## Installed from
+
+For Fedora install using: `npm install defuddle`
+
+## Command path
+
+For Fedora run: `defuddle`
+
+## Command documentation
+
+Docs can be found at https://github.com/kepano/defuddle
+
+## Command options
+
+```
+defuddle parse <input> [options]
+```
+
+Input can be a local HTML file path or a URL.
+
+| Option               | Alias | Description                                      |
+|----------------------|-------|--------------------------------------------------|
+| `--output <file>`    | `-o`  | Write results to file instead of stdout          |
+| `--markdown`         | `-m`  | Convert content to markdown format               |
+| `--md`               |       | Alias for --markdown                             |
+| `--json`             | `-j`  | Output as JSON with metadata                     |
+| `--property <name>`  | `-p`  | Extract specific property (title, description, domain) |
+| `--debug`            |       | Enable debug mode with detailed processing info  |
+| `--lang <code>`      | `-l`  | Set preferred language using BCP 47 format       |
+
+# Parse a URL and output as markdown
+defuddle parse https://example.com/article --markdown
+
+# Parse a local HTML file and save to file
+defuddle parse page.html --output result.md --markdown
+
+# Get JSON output with all metadata
+defuddle parse https://example.com/article --json
+
+# Extract a specific property (e.g. title)
+defuddle parse https://example.com/article --property title
+
+# Enable debug mode
+defuddle parse https://example.com/article --debug

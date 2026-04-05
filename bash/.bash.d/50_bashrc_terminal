@@ -1,0 +1,10 @@
+# Terminal colors
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+# Vi
+# vi editor mode in bash
+set -o vi
+
+# Terminal emulation
+

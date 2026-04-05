@@ -1,0 +1,120 @@
+{
+
+  // I can edit any where I want
+  "security.workspace.trust.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  
+  // Stop the nagging 
+  "extensions.ignoreRecommendations": true,
+  "extensions.autoCheckUpdates": false,
+  "extensions.autoUpdate": false,
+  "update.mode": "manual",
+
+  // Files auto save
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 100,
+
+  // claude
+  "claudeCode.preferredLocation": "panel",
+
+  // Editor
+  "editor.fontSize": 16,
+  "editor.inlineSuggest.suppressSuggestions": true,
+  "editor.accessibilitySupport": "off",
+
+  // Restore previous session (avoid reopening a bunch of windows)
+  "window.restoreWindows": "preserve",
+  "files.hotExit": "onExitAndWindowClose",
+  "workbench.editor.restoreViewState": true,
+  // Prevents the welcome page from opening instead of your restored tabs.
+  "workbench.startupEditor": "none",
+  "window.openFilesInNewWindow": "off",
+
+  // Explorer
+  "explorer.confirmDelete": false,
+
+  // Redhat
+  "redhat.telemetry.enabled": false,
+
+  // Shell env
+  "application.shellEnvironmentResolutionTimeout": 30,
+
+  // Go lang
+  "go.toolsManagement.autoUpdate": true,
+  "go.diagnostic.vulncheck": "Imports",
+
+  // MSSQL
+  "mssql.connectionGroups": [
+    {
+      "name": "ROOT",
+      "id": "ED9F143E-6F3E-46E8-96DD-547681FB05B0",
+    },
+  ],
+  "mssql.connections": [],
+
+  // Spelling
+  "cSpell.userWords": ["heavenlies", "journaling"],
+  "cSpell.ignorePaths": [
+      "**/.vscode/settings.json",
+      "**/.vscode/*.code-workspace"
+    ],
+    "cSpell.enabledLanguageTypes": [
+      "markdown",
+      "plaintext",
+      "yaml",
+      "terraform",
+      "go",
+      "python"
+    ],
+
+  // Docker Compose
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true,
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+
+  // GitHub Actions
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+
+  // Wrapping / Rulers
+  "editor.rulers": [70],
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 70,
+  "[plaintext]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 70,
+  },
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 70,
+  },
+  // Theme / misc
+  "workbench.colorTheme": "Dank Neon",
+  "aws.cloudformation.telemetry.enabled": false,
+  "makefile.configureOnOpen": true,
+
+  // File associations
+  "files.associations": {
+    "*.mmd": "markdown",
+  },
+  "claudeCode.preferredLocation": "panel",
+  "chat.mcp.gallery.enabled": true,
+  "workbench.editor.enablePreview": false,
+   "settings": {
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#053600",
+      "titleBar.activeBackground": "#074C00",
+      "titleBar.activeForeground": "#EEFFED",
+      "tab.activeBorderTop": "#FA9E9E"
+    },
+  }
+}

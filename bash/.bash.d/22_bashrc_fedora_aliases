@@ -1,0 +1,9 @@
+# ~/.bash.d/22_bashrc_fedora_aliases
+
+# Only apply on Fedora systems
+if [ ! -f /etc/fedora-release ]; then
+    return
+fi
+
+# Launch Obsidian Personal Journal vault
+alias journal='flatpak run md.obsidian.Obsidian "obsidian://open?vault=Personal%20Journal"'

@@ -1,0 +1,5 @@
+if [ -n "${work:-}" ]; then
+    alias tf="cd ~/Projects/${work}/terraform-aws"
+fi
+
+export AWS_REGION=us-east-1

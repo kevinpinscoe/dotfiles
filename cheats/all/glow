@@ -1,0 +1,69 @@
+---
+tags: [ markdown, viewer ]
+---
+# Command glow
+
+## What does this command do:
+
+Render Markdown in the terminal
+
+## Installed from
+
+For Fedora install using: `sudo dnf install glow`
+For Raspberry Pi install using:
+```
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
+echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
+sudo apt update
+sudo apt install glow
+```
+For Mac install using: `homebrew install glow`
+
+## Command path
+
+For Fedora run: `glow`
+For Raspberry Pi run: `glow`
+For Mac run: `glow`
+
+## Command documentation
+
+Docs can be found at https://github.com/charmbracelet/glow
+
+## Command options
+
+# Render a markdown file
+glow <file.md>
+
+# Render markdown from a URL
+glow <url>
+
+# Open TUI mode (browse local markdown files)
+glow --tui
+
+# Show all system files and directories (TUI mode only)
+glow --all
+
+# Show line numbers (TUI mode only)
+glow --line-numbers
+
+# Display with pager
+glow --pager <file.md>
+
+# Set a style (name or JSON path)
+glow --style <style> <file.md>
+
+# Wrap at a specific width (0 to disable)
+glow --width <N> <file.md>
+
+# Preserve newlines in output
+glow --preserve-new-lines <file.md>
+
+# Use a custom config file
+glow --config <path/to/config.yml> <file.md>
+
+# Edit the glow config
+glow config
+
+# Print version
+glow --version

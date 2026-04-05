@@ -1,0 +1,10 @@
+**/QUESTION.md
+#**/TASK.md
+.homebrew/gh-token
+.homebrew/gh-token-work
+.env
+.env.*
+*.pem
+*.key
+.environment/
+**/.claude/

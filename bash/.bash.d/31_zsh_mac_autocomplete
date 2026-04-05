@@ -1,0 +1,12 @@
+# Homebrew zsh completions
+if type brew &>/dev/null; then
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
+autoload -Uz compinit
+# Only rebuild completion cache once per day
+if [[ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null) ]]; then
+    compinit
+else
+    compinit -C
+fi

@@ -1,0 +1,123 @@
+---
+tags: [ recursive, grep, file-search ]
+---
+# Command rg
+
+## What does this command do:
+
+ripgrep recursively searches directories for a regex pattern while respecting your gitignore
+
+## Installed from
+
+For Fedora install using: `sudo dnf install rg`
+For Raspberry Pi install using: `sudo apt-get install ripgrep`
+For Mac install using: `homebrew install rg`
+
+## Command path
+
+For Fedora run: `rg`
+For Raspberry Pi run: `rg`
+For Mac run: `rg`
+
+## Command documentation
+
+Docs can be found at https://github.com/BurntSushi/ripgrep
+
+## Command options
+
+# Basic search
+rg <pattern>
+rg <pattern> <path>
+
+# Case insensitive search
+rg -i <pattern>
+
+# Case sensitive search
+rg -s <pattern>
+
+# Smart case (case insensitive if pattern is lowercase)
+rg -S <pattern>
+
+# Treat pattern as literal string (no regex)
+rg -F <pattern>
+
+# Show line numbers (default on)
+rg -n <pattern>
+
+# Print only filenames with matches
+rg -l <pattern>
+
+# Print only filenames without matches
+rg -L <pattern>
+
+# Print count of matches per file
+rg -c <pattern>
+
+# Print only matching portions of lines
+rg -o <pattern>
+
+# Invert match (show non-matching lines)
+rg -v <pattern>
+
+# Match whole words only
+rg -w <pattern>
+
+# Show context lines around match
+rg -A 3 <pattern>   # 3 lines after
+rg -B 3 <pattern>   # 3 lines before
+rg -C 3 <pattern>   # 3 lines before and after
+
+# Search specific file types
+rg -t py <pattern>          # only Python files
+rg -T py <pattern>          # exclude Python files
+
+# Glob-based file filtering
+rg -g '*.js' <pattern>      # include only .js files
+rg -g '!*.min.js' <pattern> # exclude .min.js files
+
+# Search hidden files and directories
+rg --hidden <pattern>
+
+# Ignore .gitignore rules
+rg --no-ignore <pattern>
+
+# Reduce filtering (-u: no .gitignore, -uu: no ignore files, -uuu: include binary)
+rg -u <pattern>
+rg -uu <pattern>
+rg -uuu <pattern>
+
+# Multiline matching
+rg -U <pattern>
+
+# Replace matches in output (does not modify files)
+rg -r 'replacement' <pattern>
+
+# Limit matches per file
+rg -m 5 <pattern>
+
+# Limit directory traversal depth
+rg --max-depth 2 <pattern>
+
+# Skip files larger than a size
+rg --max-filesize 1M <pattern>
+
+# Use multiple patterns
+rg -e <pattern1> -e <pattern2>
+
+# Read patterns from a file
+rg -f patterns.txt
+
+# Sort results
+rg --sort path <pattern>
+
+# Control thread count
+rg -j 4 <pattern>
+
+# Search compressed files
+rg -z <pattern>
+
+# Suppress output (exit code only)
+rg -q <pattern>
+
+# Print statistics
+rg --stats <pattern>

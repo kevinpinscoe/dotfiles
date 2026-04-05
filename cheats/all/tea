@@ -1,0 +1,100 @@
+---
+tags: [ tea, gitea ]
+---
+# Command tea
+
+## What does this command do:
+
+A command line tool to interact with Gitea servers
+
+## Installed from
+
+For Fedora install using: compile from source into $HOME/go/bin/tea
+For Raspberry Pi install using: compile from source into $HOME/go/bin/tea
+For Mac install using: `brew install tea`
+
+## Command path
+
+For Fedora run: tea
+For Raspberry Pi run: tea
+For Mac run: tea
+
+## Command documentation
+
+Docs can be found at https://gitea.com/gitea/tea/raw/branch/main/README.md
+
+## Command options
+
+# Setup
+tea login add                          # add a login (do this first)
+tea logout                             # log out
+tea whoami                             # show current logged-in user
+
+# Issues
+tea issues                             # list open issues for repo in $PWD
+tea issue 189                          # view issue 189
+tea issues --mine                      # list issues assigned to/created by you
+
+# Pull Requests
+tea pulls                              # list open PRs for repo in $PWD
+tea pulls --repo $HOME/foo             # list open PRs for repo at path
+tea pulls --remote upstream            # list PRs for repo at named remote
+tea pulls --repo gitea/tea --login gitea.com  # list PRs for remote repo
+
+# Comments
+tea comment 189                        # add a comment to issue/PR 189
+
+# Labels
+tea labels                             # list issue labels
+tea label create                       # create a label
+
+# Milestones
+tea milestones                         # list milestones
+tea milestone issues 0.7.0             # view open issues for milestone 0.7.0
+
+# Releases
+tea releases                           # list releases
+tea release create                     # create a release
+
+# Branches
+tea branches                           # list branches
+
+# Repos
+tea repos                              # show repository details
+tea clone owner/repo                   # clone a repository locally
+
+# Organizations
+tea organizations                      # list organizations
+
+# Open in browser
+tea open 189                           # open issue/PR 189 in browser
+tea open milestones                    # open milestones page in browser
+
+# Notifications
+tea notifications --mine               # show your notifications
+
+# Actions (CI secrets & variables)
+tea actions secrets list               # list all action secrets
+tea actions secrets create API_KEY     # create a secret (prompts for value)
+tea actions variables list             # list all action variables
+tea actions variables set API_URL https://api.example.com
+
+# Webhooks
+tea webhooks list                      # list repository webhooks
+tea webhooks list --org myorg          # list organization webhooks
+tea webhooks create https://example.com/hook --events push,pull_request
+
+# Shell completions
+source <(tea completion bash)          # bash
+source <(tea completion zsh)           # zsh
+tea completion fish > ~/.config/fish/completions/tea.fish
+
+# Man page
+man <(tea man)                         # view man page (bash/zsh)
+
+# Common flags (most subcommands)
+# --repo / -r    specify repo by local path or owner/repo slug
+# --remote       use repo pointed to by a named git remote
+# --login / -l   specify a login instance (e.g. gitea.com)
+# --mine         filter to items assigned to/created by you
+# -o / --output  output format: simple, table, json

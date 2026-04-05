@@ -1,0 +1,71 @@
+---
+tags: [ file-manager ]
+---
+# Command yazi
+
+## What does this command do:
+
+fast terminal multi-media file manager
+
+## Installed from
+
+For Fedora install using: `sudo dnf install yazi`
+For Raspberry Pi install using:
+```
+sudo apt update
+sudo apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick file
+sudo apt update
+sudo apt install build-essential curl file pkg-config libssl-dev
+
+curl https://sh.rustup.rs -sSf | sh
+. "$HOME/.cargo/env"
+
+cargo install --locked yazi-fm yazi-cli
+cargo install --force yazi-build
+mkdir -p ~/.local/bin
+cp -f ~/.cargo/bin/yazi ~/.local/bin/yazi
+cp -f ~/.cargo/bin/ya ~/.local/bin/ya
+```
+For Mac install using: `homebrew install yazi`
+
+## Command path
+
+For Fedora run: `yazi`
+For Raspberry Pi run: `yazi`
+For Mac run: `yazi`
+
+## Command documentation
+
+Docs can be found at https://yazi-rs.github.io/
+
+## Command options
+
+# Launch yazi at a specific path:
+yazi [path]
+
+# Write the current working directory to a file on exit (useful for shell integration):
+yazi --cwd-file <file>
+
+# Write selected files to a file when open is fired:
+yazi --chooser-file <file>
+
+# Clear the cache directory:
+yazi --clear-cache
+
+# Use a specific client ID (must be globally unique):
+yazi --client-id <id>
+
+# Report local events to stdout:
+yazi --local-events <events>
+
+# Report remote events to stdout:
+yazi --remote-events <events>
+
+# Print debug information:
+yazi --debug
+
+# Print version:
+yazi --version
+
+# Print help:
+yazi --help
