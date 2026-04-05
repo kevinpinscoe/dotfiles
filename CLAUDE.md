@@ -83,8 +83,8 @@ This calls Claude with `CLAUDE.md` and `GENERATE-CHEAT.MD` as context. Templates
 
 ## Platform-conditional logic
 
-`copy.sh` detects the host with `hostname -s`:
-- `kevin` → Fedora, copies from `~/.config/Code/User/`
-- `MacBook` → macOS, copies from `~/Library/Application Support/Code/User/`
+`copy.sh` detects the OS with `uname -s`:
+- `Linux` → Fedora, copies from `~/.config/Code/User/`
+- `Darwin` → macOS, copies from `~/Library/Application Support/Code/User/`
 
-`install.sh` is platform-agnostic (no hostname detection).
+`install.sh` is platform-agnostic (no OS detection).

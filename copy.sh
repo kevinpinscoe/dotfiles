@@ -13,8 +13,10 @@ cp -v ~/.bash_profile bash/.bash_profile
 mkdir -p bash/.bash.d
 rsync -av --delete ~/.bash.d/ bash/.bash.d/
 # vscode
-if [[ "$(hostname -s)" == "kevin" ]]; then
-  echo "I am Fedora"
+os_type="$(uname -s)"
+
+if [[ "$os_type" == "Linux" ]]; then
+  echo "I am Linux"
   dotfiles_vscode="$HOME/.dotfiles/vscode/personal"
   projects_dir="$HOME/Projects"
   pastebooks_dir="$projects_dir/kevininscoe.com/pastebooks"
@@ -49,7 +51,7 @@ if [[ "$(hostname -s)" == "kevin" ]]; then
     "$dotfiles_vscode/.config/Code/User/snippets/"
 fi
 
-if [[ "$(hostname -s)" == "MacBook" ]]; then
+if [[ "$os_type" == "Darwin" ]]; then
   echo "I am Mac"
   cp -v ~/.zshrc bash/.zshrc
   cp -v ~/.zprofile bash/.zprofile

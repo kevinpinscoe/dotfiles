@@ -23,13 +23,13 @@ bash -n copy.sh install.sh restore.sh
 ## Coding Style & Naming Conventions
 Write Bash with `#!/usr/bin/env bash` and `set -euo pipefail`, matching the existing scripts. Use two-space indentation inside conditionals and keep quoting strict (`"$HOME"`, `"$dotfiles_vscode"`). Name shell fragments with numeric prefixes to preserve load order, for example `20_bashrc_aliases` or `98_zsh_prompt`.
 
-Keep platform-specific logic explicit. This repo currently uses `hostname -s` values `kevin` and `MacBook`; follow that pattern when extending host-aware behavior.
+Keep platform-specific logic explicit. This repo uses `uname -s` values `Linux` (Fedora) and `Darwin` (macOS); follow that pattern when extending platform-aware behavior.
 
 ## Testing Guidelines
 There is no formal test framework or coverage gate. Validate changes by:
 - running `bash -n` on edited scripts
 - testing the affected workflow on the target host
-- checking copied destinations and hostname branches before merging
+- checking copied destinations and OS branches before merging
 
 For cheatsheets, confirm files render correctly in `cheat` and are placed under the correct platform directory such as `cheats/all/` or `cheats/mac/`.
 
