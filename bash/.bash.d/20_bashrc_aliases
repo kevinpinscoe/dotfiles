@@ -12,7 +12,14 @@ alias vt100='TERM=vt100; export TERM'
 alias dock='killall Dock'
 alias awspw='pwgen -cyn 15'
 alias proj='cd ~/Projects'
-alias reload=' . ~/.bash_profile'
+unalias reload 2>/dev/null
+function reload {
+    if [ -n "${ZSH_VERSION:-}" ]; then
+        . ~/.zshrc
+    else
+        . ~/.bash_profile
+    fi
+}
 alias gs='git status'
 alias gr='git checkout HEAD --'
 alias gd='git diff'
