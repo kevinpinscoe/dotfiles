@@ -4,6 +4,9 @@
 IS_MACOS=false
 [[ "$(uname)" == "Darwin" ]] && IS_MACOS=true
 
+# Initialize zsh completion system (needed before compdef calls in ~/.bash.d/*)
+autoload -Uz compinit && compinit
+
 # Source appropriate files from ~/.bash.d/
 # Skip bash-only files; mac-tagged files only on macOS
 for file in ~/.bash.d/*; do
