@@ -8,12 +8,15 @@ fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 
-# Add dotnet tools
-dotnet_roots=(/opt/homebrew/Cellar/dotnet/*/libexec)
-if [ -d "${dotnet_roots[-1]}" ]; then
-    export DOTNET_ROOT="${dotnet_roots[-1]}"
+# Add dotnet tools. Use `find` instead of a shell glob: zsh errors on unmatched
+# globs (errexit on NO_NOMATCH) before the subshell's stderr redirect can help.
+if [ -d /opt/homebrew/Cellar/dotnet ]; then
+    latest_dotnet=$(find /opt/homebrew/Cellar/dotnet -mindepth 2 -maxdepth 2 -type d -name libexec 2>/dev/null | sort | tail -n 1)
+    if [ -n "$latest_dotnet" ]; then
+        export DOTNET_ROOT="$latest_dotnet"
+    fi
+    unset latest_dotnet
 fi
-unset dotnet_roots
 export PATH="$PATH:$HOME/.dotnet/tools"
 
 # Finish PATH
@@ -22,5 +25,8 @@ export PATH=$PATH:/System/Cryptexes/App/usr/bin
 # Docker
 source ~/.docker/init-bash.sh || true # Added by Docker Desktop
 
-# mesactl
-[[ -f $HOME/.environment/mesactl-bash-completion-script.sh ]] && source $HOME/.environment/mesactl-bash-completion-script.sh
+# mesactl (bash completion script — only source in bash; it uses `type -t`
+# and `complete`, which are not portable to zsh)
+if [ -n "$BASH_VERSION" ] && [ -f "$HOME/.environment/mesactl-bash-completion-script.sh" ]; then
+    source "$HOME/.environment/mesactl-bash-completion-script.sh"
+fi
