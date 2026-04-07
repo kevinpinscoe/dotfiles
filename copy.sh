@@ -19,11 +19,11 @@ if [[ "$os_type" == "Linux" ]]; then
   echo "I am Linux"
   dotfiles_vscode="$HOME/.dotfiles/vscode/personal"
   projects_dir="$HOME/Projects"
-  pastebooks_dir="$projects_dir/kevininscoe.com/pastebooks"
+  pastebooks_dir="$projects_dir/public/pastebooks"
 
   mkdir -p \
     "$dotfiles_vscode/.config/Code/User" \
-    "$dotfiles_vscode/Projects/kevininscoe.com/pastebooks/.vscode"
+    "$dotfiles_vscode/Projects/public/pastebooks/.vscode"
 
   # User settings
   cp -v \
@@ -31,9 +31,11 @@ if [[ "$os_type" == "Linux" ]]; then
     "$dotfiles_vscode/.config/Code/User/settings.json"
 
   # Pastebooks project settings
-  cp -v \
-    "$pastebooks_dir/.vscode/settings.json" \
-    "$dotfiles_vscode/Projects/kevininscoe.com/pastebooks/.vscode/settings.json"
+  if [[ -f "$pastebooks_dir/.vscode/settings.json" ]]; then
+    cp -v \
+      "$pastebooks_dir/.vscode/settings.json" \
+      "$dotfiles_vscode/Projects/public/pastebooks/.vscode/settings.json"
+  fi
 
   # Project workspace
   cp -v \
