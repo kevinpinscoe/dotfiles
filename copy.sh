@@ -21,48 +21,58 @@ if [[ "$os_type" == "Linux" ]]; then
   projects_dir="$HOME/Projects"
   pastebooks_dir="$projects_dir/public/pastebooks"
 
-  mkdir -p \
-    "$dotfiles_vscode/.config/Code/User" \
-    "$dotfiles_vscode/Projects/public/pastebooks/.vscode"
+  if command -v code &>/dev/null || [[ -d "$HOME/.config/Code/User" ]]; then
+    mkdir -p \
+      "$dotfiles_vscode/.config/Code/User" \
+      "$dotfiles_vscode/Projects/public/pastebooks/.vscode"
 
-  # User settings
-  cp -v \
-    "$HOME/.config/Code/User/settings.json" \
-    "$dotfiles_vscode/.config/Code/User/settings.json"
-
-  # User keybindings
-  if [[ -f "$HOME/.config/Code/User/keybindings.json" ]]; then
+    # User settings
     cp -v \
-      "$HOME/.config/Code/User/keybindings.json" \
-      "$dotfiles_vscode/.config/Code/User/keybindings.json"
-  fi
+      "$HOME/.config/Code/User/settings.json" \
+      "$dotfiles_vscode/.config/Code/User/settings.json"
 
-  # Pastebooks project settings
-  if [[ -f "$pastebooks_dir/.vscode/settings.json" ]]; then
-    cp -v \
-      "$pastebooks_dir/.vscode/settings.json" \
-      "$dotfiles_vscode/Projects/public/pastebooks/.vscode/settings.json"
-  fi
+    # User keybindings
+    if [[ -f "$HOME/.config/Code/User/keybindings.json" ]]; then
+      cp -v \
+        "$HOME/.config/Code/User/keybindings.json" \
+        "$dotfiles_vscode/.config/Code/User/keybindings.json"
+    fi
 
-  # Project workspace
-  cp -v \
-    "$projects_dir/home-projects.code-workspace" \
-    "$dotfiles_vscode/Projects/home-projects.code-workspace"
+    # Pastebooks project settings
+    if [[ -f "$pastebooks_dir/.vscode/settings.json" ]]; then
+      cp -v \
+        "$pastebooks_dir/.vscode/settings.json" \
+        "$dotfiles_vscode/Projects/public/pastebooks/.vscode/settings.json"
+    fi
 
-  # User chatlanguagemodel
-  cp -v \
-    "$HOME/.config/Code/User/chatLanguageModels.json" \
-    "$dotfiles_vscode/.config/Code/User/chatLanguageModels.json"
+    # Project workspace
+    if [[ -f "$projects_dir/home-projects.code-workspace" ]]; then
+      cp -v \
+        "$projects_dir/home-projects.code-workspace" \
+        "$dotfiles_vscode/Projects/home-projects.code-workspace"
+    fi
 
-  # User snippets
-  rsync -av --delete \
-    "$HOME/.config/Code/User/snippets/" \
-    "$dotfiles_vscode/.config/Code/User/snippets/"
+    # User chatlanguagemodel
+    if [[ -f "$HOME/.config/Code/User/chatLanguageModels.json" ]]; then
+      cp -v \
+        "$HOME/.config/Code/User/chatLanguageModels.json" \
+        "$dotfiles_vscode/.config/Code/User/chatLanguageModels.json"
+    fi
 
-  # Extensions list
-  if command -v code &>/dev/null; then
-    code --list-extensions > "$dotfiles_vscode/extensions.txt"
-    echo "Saved VS Code extensions list"
+    # User snippets
+    if [[ -d "$HOME/.config/Code/User/snippets" ]]; then
+      rsync -av --delete \
+        "$HOME/.config/Code/User/snippets/" \
+        "$dotfiles_vscode/.config/Code/User/snippets/"
+    fi
+
+    # Extensions list
+    if command -v code &>/dev/null; then
+      code --list-extensions > "$dotfiles_vscode/extensions.txt"
+      echo "Saved VS Code extensions list"
+    fi
+  else
+    echo "VS Code not found, skipping VS Code config"
   fi
 fi
 
