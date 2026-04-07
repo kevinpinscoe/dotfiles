@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if [[ -n "$(git status --porcelain)" ]]; then
+  echo "Working tree is dirty. Commit or stash changes first."
+  exit 1
+fi
+
 git pull
 
 cp -v bash/.bashrc "$HOME/.bashrc"
@@ -18,6 +23,7 @@ cp -v vim/.vimrc "$HOME/.vimrc"
 
 # Cheat
 rsync -av --delete \
+  --exclude='cheatsheets/' \
   .config/cheat/ \
   "$HOME/.config/cheat/"
 
