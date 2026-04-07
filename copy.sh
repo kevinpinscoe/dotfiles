@@ -30,6 +30,13 @@ if [[ "$os_type" == "Linux" ]]; then
     "$HOME/.config/Code/User/settings.json" \
     "$dotfiles_vscode/.config/Code/User/settings.json"
 
+  # User keybindings
+  if [[ -f "$HOME/.config/Code/User/keybindings.json" ]]; then
+    cp -v \
+      "$HOME/.config/Code/User/keybindings.json" \
+      "$dotfiles_vscode/.config/Code/User/keybindings.json"
+  fi
+
   # Pastebooks project settings
   if [[ -f "$pastebooks_dir/.vscode/settings.json" ]]; then
     cp -v \
@@ -51,6 +58,12 @@ if [[ "$os_type" == "Linux" ]]; then
   rsync -av --delete \
     "$HOME/.config/Code/User/snippets/" \
     "$dotfiles_vscode/.config/Code/User/snippets/"
+
+  # Extensions list
+  if command -v code &>/dev/null; then
+    code --list-extensions > "$dotfiles_vscode/extensions.txt"
+    echo "Saved VS Code extensions list"
+  fi
 fi
 
 if [[ "$os_type" == "Darwin" ]]; then
@@ -72,9 +85,30 @@ if [[ "$os_type" == "Darwin" ]]; then
     "$HOME/Library/Application Support/Code/User/keybindings.json" \
     "$dotfiles_vscode/Library/Application Support/Code/User/keybindings.json"
 
+  # User chatlanguagemodel
+  if [[ -f "$HOME/Library/Application Support/Code/User/chatLanguageModels.json" ]]; then
+    cp -v \
+      "$HOME/Library/Application Support/Code/User/chatLanguageModels.json" \
+      "$dotfiles_vscode/Library/Application Support/Code/User/chatLanguageModels.json"
+  fi
+
+  # User snippets
+  if [[ -d "$HOME/Library/Application Support/Code/User/snippets" ]]; then
+    mkdir -p "$dotfiles_vscode/Library/Application Support/Code/User/snippets"
+    rsync -av --delete \
+      "$HOME/Library/Application Support/Code/User/snippets/" \
+      "$dotfiles_vscode/Library/Application Support/Code/User/snippets/"
+  fi
+
   cp -v \
     "$projects_dir/kevins-work.code-workspace" \
     "$dotfiles_vscode/Projects/kevins-work.code-workspace"
+
+  # Extensions list
+  if command -v code &>/dev/null; then
+    code --list-extensions > "$dotfiles_vscode/extensions.txt"
+    echo "Saved VS Code extensions list"
+  fi
 fi
 
 # vim
