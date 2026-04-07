@@ -50,13 +50,20 @@ if [[ "$(uname -s)" == "Linux" ]]; then
     "$dotfiles_vscode/.config/Code/User/snippets/" \
     "$HOME/.config/Code/User/snippets/"
 
+  if [[ -f "$dotfiles_vscode/.config/Code/User/keybindings.json" ]]; then
+    ensure_dest_dir "$HOME/.config/Code/User/keybindings.json"
+    cp -v \
+      "$dotfiles_vscode/.config/Code/User/keybindings.json" \
+      "$HOME/.config/Code/User/keybindings.json"
+  fi
+
   # Restore project settings if the project directory exists
-  pastebooks_dir="$HOME/Projects/kevininscoe.com/pastebooks"
+  pastebooks_dir="$HOME/Projects/public/pastebooks"
   if [[ -d "$pastebooks_dir" ]]; then
     mkdir -p "$pastebooks_dir/.vscode"
     ensure_dest_dir "$pastebooks_dir/.vscode/settings.json"
     cp -v \
-      "$dotfiles_vscode/Projects/kevininscoe.com/pastebooks/.vscode/settings.json" \
+      "$dotfiles_vscode/Projects/public/pastebooks/.vscode/settings.json" \
       "$pastebooks_dir/.vscode/settings.json"
   fi
 
@@ -96,6 +103,14 @@ elif [[ "$(uname -s)" == "Darwin" ]]; then
 else
   echo "Unrecognized OS '$(uname -s)' — no VS Code config defined for this platform."
   exit 1
+fi
+
+# Restore extensions
+if command -v code &>/dev/null && [[ -f "$dotfiles_vscode/extensions.txt" ]]; then
+  echo "Installing VS Code extensions..."
+  while IFS= read -r ext; do
+    code --install-extension "$ext" --force
+  done < "$dotfiles_vscode/extensions.txt"
 fi
 
 echo "VS Code restore complete."
