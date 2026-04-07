@@ -1,0 +1,50 @@
+---
+tags: [ markdown, web-clipper, html-to-markdown ]
+---
+# Command defuddle
+
+## What does this command do:
+
+Defuddle is an open-source tool that extracts core content from web pages by stripping away clutter like sidebars and ads into clean HTML or Markdown. It has consistent output and extensive metadata extraction across browsers, Node.js, and CLI environments.
+
+## Installed from
+
+For Fedora install using: `npm install -g defuddle`
+For Raspberry Pi install using: `npm install -g defuddle`
+For Mac install using: `npm install -g defuddle`
+
+## Command path
+
+For Fedora run: `defuddle`
+For Raspberry Pi run: `defuddle`
+For Mac run: `defuddle`
+
+## Command documentation
+
+Docs can be found at https://github.com/kepano/defuddle
+
+## Command options
+
+# Parse a local HTML file:
+defuddle parse <file.html>
+
+# Parse a URL:
+defuddle parse <https://example.com/article>
+
+# Output as Markdown:
+defuddle parse <input> --markdown
+
+# Output as JSON with metadata:
+defuddle parse <input> --json
+
+# Extract a specific property (e.g. title, description, domain):
+defuddle parse <input> --property <name>
+
+# Write output to a file instead of stdout:
+defuddle parse <input> --output <file>
+
+# Set preferred language (BCP 47, e.g. en, fr, ja):
+defuddle parse <input> --lang <code>
+
+# Enable debug mode:
+defuddle parse <input> --debug
