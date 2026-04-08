@@ -17,6 +17,9 @@
   // claude
   "claudeCode.preferredLocation": "panel",
 
+  // Terminal
+  "terminal.integrated.copyOnSelection": true,
+
   // Editor
   "editor.fontSize": 16,
   "editor.inlineSuggest.suppressSuggestions": true,
