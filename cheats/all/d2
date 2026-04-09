@@ -1,0 +1,113 @@
+---
+tags: [ d2, diagram, text-to-diagram ]
+---
+# Command d2
+
+## What does this command do:
+
+D2 is a modern diagram scripting language that turns text to diagrams.
+
+## Installed from
+
+For Fedora install using: `curl -fsSL https://d2lang.com/install.sh | sh`
+For Raspberry Pi install using: `curl -fsSL https://d2lang.com/install.sh | sh`
+For Mac install using: `curl -fsSL https://d2lang.com/install.sh | sh`
+
+## Command path
+
+For Fedora run: `~/.local/bin/d2`
+For Raspberry Pi run: `~/.local/bin/d2`
+For Mac run: `~/.local/bin/d2`
+
+## Command documentation
+
+Docs can be found at https://github.com/terrastruct/d2
+
+## Command options
+
+# Compile and render a .d2 file to SVG (default output format):
+d2 file.d2
+
+# Render to a specific output format:
+d2 file.d2 output.png
+d2 file.d2 output.pdf
+d2 file.d2 output.gif
+
+# Watch for changes and live reload:
+d2 --watch file.d2
+
+# Use a specific layout engine (dagre, elk, tala):
+d2 --layout=elk file.d2
+
+# Use a specific theme (run `d2 themes` to list):
+d2 --theme=200 file.d2
+
+# Render in sketch/hand-drawn style:
+d2 --sketch file.d2
+
+# Set dark mode theme:
+d2 --dark-theme=200 file.d2
+
+# Scale the output (0.5 = half size):
+d2 --scale=0.5 file.d2 output.png
+
+# Center the diagram in the viewbox:
+d2 --center file.d2
+
+# Set pixels of padding around the diagram:
+d2 --pad=50 file.d2
+
+# Read from stdin / write to stdout:
+echo 'x -> y' | d2 - -
+d2 input.d2 --stdout-format png - > output.png
+
+# Animate multiple boards (SVG only, interval in ms):
+d2 --animate-interval=1000 file.d2
+
+# Target a specific board to render:
+d2 --target='layers.x.*' file.d2
+
+# Bundle all assets into SVG output:
+d2 --bundle file.d2
+
+# Force an appendix on SVG exports (for tooltips/links):
+d2 --force-appendix file.d2
+
+# Omit XML tag from SVG (useful for HTML embedding):
+d2 --no-xml-tag file.d2
+
+# Add a salt for unique IDs (multiple diagrams in same HTML):
+d2 --salt=mysalt file.d2
+
+# Set timeout in seconds for large diagrams:
+d2 --timeout=300 file.d2
+
+# Use ASCII rendering mode (standard or extended):
+d2 --ascii-mode=standard file.d2 output.txt
+
+# Use a custom font:
+d2 --font-regular=/path/to/font.ttf file.d2
+
+# Format a .d2 file in place:
+d2 fmt file.d2
+
+# Check if a file is correctly formatted:
+d2 --check file.d2
+
+# Validate a .d2 file:
+d2 validate file.d2
+
+# Open a file in the online playground:
+d2 play file.d2
+
+# List available layout engines:
+d2 layout
+
+# Show help for a specific layout engine:
+d2 layout elk
+
+# List available themes:
+d2 themes
+
+# Show version:
+d2 --version
