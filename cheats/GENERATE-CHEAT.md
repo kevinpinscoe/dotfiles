@@ -8,12 +8,13 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="defuddle"
-{{DOCUMENTATION_URL}}="https://github.com/kepano/defuddle"
-{{SUMMARIZE}}="Defuddle is an open-source tool that extracts core content from web pages by stripping away clutter like sidebars and ads into clean HTML or Markdown. It has consistent output and extensive metadata extraction across browsers, Node.js, and CLI environments."
+{{COMMAND_NAME}}="d2"
+{{COMMAND_PATH}}="~/.local/bin/d2"
+{{DOCUMENTATION_URL}}="https://github.com/terrastruct/d2"
+{{SUMMARIZE}}="D2 is a modern diagram scripting language that turns text to diagrams."
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
-{{TAGGING}}="markdown, web-clipper, html-to-markdown"
+{{TAGGING}}="d2 diagram text-to-diagram"
 
 Create or replace a cheat with updated information for command {{COMMAND_NAME}} with tagging as {{TAGGING}}.
 
@@ -29,15 +30,15 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `npm install -g defuddle`.
-Replace {{INSTALL_METHOD_RPI}} with: `npm install -g defuddle`
-Replace {{INSTALL_METHOD_MAC}} with `npm install -g defuddle`. 
+Replace {{INSTALL_METHOD_FEDORA}} with `curl -fsSL https://d2lang.com/install.sh | sh`.
+Replace {{INSTALL_METHOD_RPI}} with: `curl -fsSL https://d2lang.com/install.sh | sh`
+Replace {{INSTALL_METHOD_MAC}} with `curl -fsSL https://d2lang.com/install.sh | sh`. 
 
 ## Command path
 
-Replace {{COMMAND_PATH_FEDORA}} with `{{COMMAND_NAME}}`.
-Replace {{COMMAND_PATH_RPI}} with `{{COMMAND_NAME}}`.
-Replace {{COMMAND_PATH_MAC}} with `{{COMMAND_NAME}}`.
+Replace {{COMMAND_PATH_FEDORA}} with `{{COMMAND_PATH}}`.
+Replace {{COMMAND_PATH_RPI}} with `{{COMMAND_PATH}}`.
+Replace {{COMMAND_PATH_MAC}} with `{{COMMAND_PATH}}`.
 
 ## Command documentation
 
