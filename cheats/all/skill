@@ -1,0 +1,35 @@
+---
+tags: [ ai, skill, claude-code ]
+---
+# Command skill
+
+## What does this command do:
+
+A TUI based command line skills chooser to be executed by Claude-code
+
+## Installed from
+
+For Fedora install using: `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-linux-amd64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`
+For Raspberry Pi install using: `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-linux-arm64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`
+For Mac install using: `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-darwin-arm64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`
+
+## Command path
+
+For Fedora run: `~/.local/bin/skill`
+For Raspberry Pi run: `~/.local/bin/skill`
+For Mac run: `~/.local/bin/skill`
+
+## Command documentation
+
+Docs can be found at https://github.com/kevinpinscoe/skills-tui
+
+## Command options
+
+# Launch the interactive TUI skill chooser
+skill
+
+# Show help
+skill --help
+
+# Set a custom skills root directory (default: ~/skills/skills)
+SKILLS_DIR=<path> skill

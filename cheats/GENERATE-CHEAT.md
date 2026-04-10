@@ -8,13 +8,13 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="d2"
-{{COMMAND_PATH}}="~/.local/bin/d2"
-{{DOCUMENTATION_URL}}="https://github.com/terrastruct/d2"
-{{SUMMARIZE}}="D2 is a modern diagram scripting language that turns text to diagrams."
+{{COMMAND_NAME}}="skill"
+{{COMMAND_PATH}}="~/.local/bin/skill"
+{{DOCUMENTATION_URL}}="https://github.com/kevinpinscoe/skills-tui"
+{{SUMMARIZE}}="A TUI based command line skills chooser to be executed by Claude-code"
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
-{{TAGGING}}="d2 diagram text-to-diagram"
+{{TAGGING}}="ai skill claude-code"
 
 Create or replace a cheat with updated information for command {{COMMAND_NAME}} with tagging as {{TAGGING}}.
 
@@ -30,9 +30,9 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `curl -fsSL https://d2lang.com/install.sh | sh`.
-Replace {{INSTALL_METHOD_RPI}} with: `curl -fsSL https://d2lang.com/install.sh | sh`
-Replace {{INSTALL_METHOD_MAC}} with `curl -fsSL https://d2lang.com/install.sh | sh`. 
+Replace {{INSTALL_METHOD_FEDORA}} with `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-linux-amd64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`.
+Replace {{INSTALL_METHOD_RPI}} with: `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-linux-arm64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`
+Replace {{INSTALL_METHOD_MAC}} with `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-darwin-arm64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`. 
 
 ## Command path
 
