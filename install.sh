@@ -21,6 +21,11 @@ rsync -av --delete bash/.bash.d/ "$HOME/.bash.d/"
 rsync -av --delete vim/.vim/ "$HOME/.vim/"
 cp -v vim/.vimrc "$HOME/.vimrc"
 
+# aspell personal dictionary
+if [[ -f aspell/.aspell.en.pws ]]; then
+  cp -v aspell/.aspell.en.pws "$HOME/.aspell.en.pws"
+fi
+
 # Cheat
 rsync -av --delete \
   --exclude='cheatsheets/' \

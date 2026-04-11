@@ -121,6 +121,14 @@ if [[ "$os_type" == "Darwin" ]]; then
   fi
 fi
 
+# aspell personal dictionary
+mkdir -p aspell
+if [[ -f "$HOME/.aspell.en.pws" ]]; then
+  cp -v "$HOME/.aspell.en.pws" aspell/.aspell.en.pws
+else
+  echo "Warning: ~/.aspell.en.pws not found, skipping"
+fi
+
 # vim
 cp -v ~/.vimrc vim/.vimrc
 rsync -av --delete ~/.vim/ vim/.vim/
