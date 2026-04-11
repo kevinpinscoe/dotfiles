@@ -8,13 +8,13 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="skill"
-{{COMMAND_PATH}}="~/.local/bin/skill"
-{{DOCUMENTATION_URL}}="https://github.com/kevinpinscoe/skills-tui"
-{{SUMMARIZE}}="A TUI based command line skills chooser to be executed by Claude-code"
+{{COMMAND_NAME}}="aspell"
+{{COMMAND_PATH}}="aspell"
+{{DOCUMENTATION_URL}}="https://github.com/GNUAspell/aspell"
+{{SUMMARIZE}}="GNU Aspell a command line spell checker"
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
-{{TAGGING}}="ai skill claude-code"
+{{TAGGING}}="spell spelling"
 
 Create or replace a cheat with updated information for command {{COMMAND_NAME}} with tagging as {{TAGGING}}.
 
@@ -30,9 +30,9 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-linux-amd64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`.
-Replace {{INSTALL_METHOD_RPI}} with: `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-linux-arm64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`
-Replace {{INSTALL_METHOD_MAC}} with `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-darwin-arm64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`. 
+Replace {{INSTALL_METHOD_FEDORA}} with `sudo dnf install aspell`.
+Replace {{INSTALL_METHOD_RPI}} with: `sudo apt install aspell`
+Replace {{INSTALL_METHOD_MAC}} with `brew install aspell`. 
 
 ## Command path
 
@@ -47,6 +47,8 @@ Replace {{DOCUMENTATION_URL}} in template with {{DOCUMENTATION_URL}} from this f
 ## Command options
 
 Using ai put command options here gleaned from {{DOCUMENTATION_URL}}, command -h, the commands help option whatever that is or the command's usage statement under template file section "Command options".
+
+Also mention you can add words to your personal dictionary by using command: `echo "correctly spelled word" >> ~/.aspell.en.pws`
 
 
 ## Assumptions

@@ -1,0 +1,70 @@
+---
+tags: [ spell, spelling ]
+---
+# Command aspell
+
+## What does this command do:
+
+GNU Aspell a command line spell checker
+
+## Installed from
+
+For Fedora install using: `sudo dnf install aspell`
+For Raspberry Pi install using: `sudo apt install aspell`
+For Mac install using: `brew install aspell`
+
+## Command path
+
+For Fedora run: `aspell`
+For Raspberry Pi run: `aspell`
+For Mac run: `aspell`
+
+## Command documentation
+
+Docs can be found at https://github.com/GNUAspell/aspell
+
+## Command options
+
+# Interactively spellcheck a file (opens editor-like interface):
+aspell check <file>
+
+# Spellcheck a file in a specific mode:
+aspell --mode=html check <file>
+aspell --mode=tex check <file>
+aspell --mode=markdown check <file>
+aspell --mode=email check <file>
+
+# Pipe mode (ispell-compatible): reads words and outputs corrections:
+aspell pipe
+echo "helo world" | aspell pipe
+
+# List misspelled words from stdin:
+echo "helo world" | aspell list
+
+# Use a specific language/dictionary:
+aspell -l en_GB check <file>
+aspell -d en_US check <file>
+
+# Ignore words shorter than N characters:
+aspell -W 3 check <file>
+
+# Ignore case when checking:
+aspell --ignore-case check <file>
+
+# Use a personal dictionary:
+aspell -p ~/.aspell.en.pws check <file>
+
+# List available dictionaries:
+aspell dump dicts
+
+# List available filter modes:
+aspell dump modes
+
+# Show current configuration:
+aspell dump config
+
+# Print version:
+aspell -v
+
+# Add a word to your personal dictionary:
+echo "correctly spelled word" >> ~/.aspell.en.pws
