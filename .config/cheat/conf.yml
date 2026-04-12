@@ -72,6 +72,11 @@ cheatpaths:
     tags: [ all ]
     readonly: true
 
+  - name: vim
+    path: ~/cheats/vim
+    tags: [ vim ]
+    readonly: true
+
   # Community cheatsheets 
   # (https://github.com/cheat/cheatsheets):
   # To install: git clone 

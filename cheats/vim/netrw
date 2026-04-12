@@ -1,0 +1,99 @@
+---
+tags: [ vim, netrw ]
+---
+# Command netrw
+
+## What does this command do:
+
+netrw is Vim's built-in file browser plugin for navigating and managing files and directories without leaving Vim
+
+## Installed from
+
+netrw ships with Vim — no installation required
+
+## Command documentation
+
+Docs can be found at `:help netrw` inside Vim
+
+## Opening netrw
+
+# Open netrw in current directory on startup:
+vim .
+
+# Open netrw in the directory of the current file:
+:Explore
+:E
+
+# Split horizontally and open netrw:
+:Sexplore
+
+# Split vertically and open netrw:
+:Vexplore
+
+# Open netrw in a new tab:
+:Texplore
+
+## Navigating
+
+# Open file or enter directory:
+Enter
+
+# Go up one directory:
+-
+
+# Go back in directory history:
+u
+
+# Go forward in directory history:
+U
+
+# Toggle hidden files:
+gh
+
+## File operations
+
+# Create a new file:
+%
+
+# Create a new directory:
+d
+
+# Rename file or directory:
+R
+
+# Delete file or directory:
+D
+
+# Mark target directory (for move/copy):
+mt
+
+# Mark a file:
+mf
+
+# Move marked files to target:
+mm
+
+# Copy marked files to target:
+mc
+
+## Changing the view
+
+# Cycle through view styles (thin, long, wide, tree):
+i
+
+# Cycle sort order (name, time, size):
+s
+
+# Reverse sort order:
+r
+
+## Tips
+
+# Disable netrw directory history file (~/.vim/.netrwhist):
+let g:netrw_dirhistmax = 0
+
+# Get a persistent sidebar — open vertical split then equalize panes:
+:Vexplore
+ctrl-w =
+
+# Tree view (press i repeatedly until tree style appears) is popular for sidebar-like browsing
