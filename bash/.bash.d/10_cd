@@ -11,19 +11,38 @@ cd() {
   if repo_root=$(git rev-parse --show-toplevel 2>/dev/null); then
     export GIT_REPO_HOME="$repo_root"
 
-    echo "----- THIS IS A GIT REPO! -----"
-    echo "Repo root: $GIT_REPO_HOME"
-
     branch=$(git symbolic-ref --short HEAD 2>/dev/null \
         || git describe --tags --exact-match 2>/dev/null \
         || echo "detached HEAD")
 
-    echo "Current branch: $branch"
+    # ahead/behind from cached remote-tracking refs — no network call
+    ahead=$(git rev-list --count "@{upstream}..HEAD" 2>/dev/null)
+    behind=$(git rev-list --count "HEAD..@{upstream}" 2>/dev/null)
 
-    git --no-pager log -1 --pretty=format:"Last commit: %h %s (%cr) by %an"
-    git remote update
-    git status
-    echo " "
+    if [ -z "$ahead" ] && [ -z "$behind" ]; then
+      sync_status="(no upstream tracked)"
+    elif [ "${behind:-0}" -gt 0 ] && [ "${ahead:-0}" -gt 0 ]; then
+      sync_status="DIVERGED — ${ahead} ahead, ${behind} behind (needs rebase or merge)"
+    elif [ "${behind:-0}" -gt 0 ]; then
+      sync_status="PULL NEEDED — ${behind} commit(s) behind"
+    elif [ "${ahead:-0}" -gt 0 ]; then
+      sync_status="PUSH NEEDED — ${ahead} commit(s) ahead"
+    else
+      sync_status="up to date"
+    fi
+
+    echo "git: ${branch}  |  ${sync_status}"
+    if [ "${behind:-0}" -gt 0 ]; then
+      echo "  run 'check-remote' to see what is different on remote"
+    fi
+
+    # Refresh remote refs in background if FETCH_HEAD is older than 5 minutes
+    fetch_head="${repo_root}/.git/FETCH_HEAD"
+    fetch_age=$(( $(date +%s) - $(stat -c %Y "$fetch_head" 2>/dev/null || echo 0) ))
+    if [ ! -f "$fetch_head" ] || [ "$fetch_age" -gt 300 ]; then
+      git fetch --all --quiet 2>/dev/null &
+      disown
+    fi
   else
     unset GIT_REPO_HOME
   fi
