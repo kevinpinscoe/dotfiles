@@ -24,6 +24,7 @@ IS_MACOS=false
 for file in ~/.bash.d/*; do
     if [ -f "$file" ]; then
         [[ "$file" == *_zsh_* ]] && continue
+        [[ "$file" == *.md ]] && continue
         if [[ "$file" == *mac* ]]; then
             [[ "$IS_MACOS" == "true" ]] && source "$file"
         else
