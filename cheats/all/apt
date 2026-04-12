@@ -1,4 +1,5 @@
 ---
+syntax: sh
 tags: [ packaging ]
 ---
 # To find packages matching <phrase>:
