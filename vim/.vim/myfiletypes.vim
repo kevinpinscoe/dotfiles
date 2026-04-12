@@ -19,3 +19,12 @@ augroup filetype
 	au! BufRead,BufNewFile *.xyz    set filetype=drawing
 	au! BufRead,BufNewFile *.prc    set filetype=plsql
 augroup END
+
+augroup kevin_colors
+	au!
+	au! BufRead,BufNewFile *.pl,*.pm,*.t   colorscheme kevin_perl
+	au! BufRead,BufNewFile *.sh,*.bash     colorscheme kevin_perl
+	au! BufRead,BufNewFile *.go            colorscheme kevin_perl
+	au! BufRead,BufNewFile *.py            colorscheme kevin_perl
+	au! BufRead,BufNewFile *.md,*.markdown colorscheme kevin_perl
+augroup END
