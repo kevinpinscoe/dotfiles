@@ -9,3 +9,4 @@
 .environment/
 **/.claude/
 resume.sh
+vim/.vim/.netrwhist
