@@ -1,4 +1,5 @@
 ---
+syntax: sh
 tags: [ {{TAGS}} ]
 ---
 # Command {{COMMAND_NAME}}

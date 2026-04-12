@@ -1,4 +1,5 @@
 ---
+syntax: sh
 tags: [ markdown, web-clipper, html-to-markdown ]
 ---
 # Command defuddle

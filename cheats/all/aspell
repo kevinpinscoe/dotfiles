@@ -1,4 +1,5 @@
 ---
+syntax: sh
 tags: [ spell, spelling ]
 ---
 # Command aspell

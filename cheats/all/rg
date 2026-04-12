@@ -1,4 +1,5 @@
 ---
+syntax: sh
 tags: [ recursive, grep, file-search ]
 ---
 # Command rg

@@ -1,4 +1,5 @@
 ---
+syntax: sh
 tags: [ all, logfiles ]
 ---
 # Command lnav

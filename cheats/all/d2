@@ -1,4 +1,5 @@
 ---
+syntax: sh
 tags: [ d2, diagram, text-to-diagram ]
 ---
 # Command d2
