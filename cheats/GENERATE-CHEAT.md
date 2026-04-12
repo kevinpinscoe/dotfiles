@@ -20,7 +20,7 @@ Create or replace a cheat with updated information for command {{COMMAND_NAME}} 
 
 Template to use for cheat file ~/cheats/templates/{{TEMPLATE_TO_USE}}.
 
-tags go into YAML front matter in cheat file replacing `tags: [ {{TAGS}} ]` with comma delinted tags.
+tags go into YAML front matter in cheat file replacing `tags: [ {{TAGS}} ]` with comma delinted tags. Ensure `syntax: sh` is present in the front matter.
 
 Replace {{COMMAND_NAME}} in template with with {{COMMAND_NAME}} from this file.
 
