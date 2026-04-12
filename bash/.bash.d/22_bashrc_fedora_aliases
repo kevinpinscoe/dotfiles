@@ -6,4 +6,4 @@ if [ ! -f /etc/fedora-release ]; then
 fi
 
 # Launch Obsidian Personal Journal vault
-alias journal='flatpak run md.obsidian.Obsidian "obsidian://open?vault=Personal%20Journal"'
+alias journal='~/AppImages/Obsidian.AppImage "obsidian://open?vault=Personal%20Journal" &>/dev/null &'
