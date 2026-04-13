@@ -1,0 +1,4 @@
+export WOODPECKER_SERVER=https://woodpecker-ci.kevininscoe.com
+if [[ -f ~/.config/woodpecker/api-token ]]; then
+    export WOODPECKER_TOKEN=$(cat ~/.config/woodpecker/api-token)
+fi
