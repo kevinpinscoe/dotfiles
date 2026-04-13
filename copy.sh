@@ -2,10 +2,17 @@
 set -euo pipefail
 
 # Make sure we want to overwrite
-read -p "Are you sure you wish to overwrite the files in this repo? (yes/no): " confirm
-if [[ "$confirm" != "yes" ]]; then
+auto_yes=false
+for arg in "$@"; do
+  [[ "$arg" == "-y" || "$arg" == "--yes" ]] && auto_yes=true
+done
+
+if [[ "$auto_yes" == false ]]; then
+  read -p "Are you sure you wish to overwrite the files in this repo? (yes/no): " confirm
+  if [[ "$confirm" != "yes" ]]; then
     echo "Aborting."
     exit 1
+  fi
 fi
 
 cp -v ~/.bashrc bash/.bashrc
