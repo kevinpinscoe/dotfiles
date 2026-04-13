@@ -1,0 +1,131 @@
+---
+syntax: sh
+tags: [ valkey, redis ]
+---
+# Command valkey-cli
+
+## What does this command do:
+
+Command line interface for Valkey key-value databases, optimized for caching and other realtime workloads. Compatible with Redis protocol.
+
+## Installed from
+
+For Fedora install using: sudo dnf install valkey
+For Raspberry Pi install using: sudo apt install valkey
+For Mac install using: brew install valkey
+
+## Command path
+
+For Fedora run: valkey-cli
+For Raspberry Pi run: valkey-cli
+For Mac run: valkey-cli
+
+## Command documentation
+
+Docs can be found at https://valkey.io/topics/installation/
+
+## Command options
+
+# Start interactive REPL (connects to 127.0.0.1:6379 by default):
+valkey-cli
+
+# Connect to a specific host and port:
+valkey-cli -h <host> -p <port>
+
+# Authenticate with password (prefer REDISCLI_AUTH env var):
+valkey-cli -a <password>
+REDISCLI_AUTH=<password> valkey-cli
+
+# Connect via URI:
+valkey-cli -u valkey://user:pass@host:port/db
+
+# Select database number:
+valkey-cli -n <db>
+
+# Test connectivity (returns PONG):
+valkey-cli ping
+
+# Set a key:
+valkey-cli set <key> <value>
+
+# Get a key's value:
+valkey-cli get <key>
+
+# Delete a key:
+valkey-cli del <key>
+
+# List keys matching pattern (avoid on large datasets — blocks server):
+valkey-cli keys <pattern>
+
+# Safely iterate keys without blocking (use in production):
+valkey-cli --scan --pattern '<pattern>'
+valkey-cli --scan --pattern '<pattern>' --count 100
+
+# Show server info and stats:
+valkey-cli info
+
+# Rolling real-time server stats (mem, clients, etc.):
+valkey-cli --stat
+
+# Continuously sample server latency:
+valkey-cli --latency
+
+# Find keys with the most elements:
+valkey-cli --bigkeys
+
+# Find keys consuming the most memory:
+valkey-cli --memkeys
+
+# Find frequently accessed keys (requires LFU maxmemory-policy):
+valkey-cli --hotkeys
+
+# Dump remote RDB snapshot to local file:
+valkey-cli --rdb <filename>
+
+# Send raw RESP protocol from stdin (bulk import):
+valkey-cli --pipe
+
+# Repeat a command N times:
+valkey-cli -r <n> <cmd>
+
+# Repeat with interval (seconds) between executions:
+valkey-cli -r <n> -i <interval> <cmd>
+
+# Output results in CSV format:
+valkey-cli --csv <cmd>
+
+# Output results in JSON format (RESP3):
+valkey-cli --json <cmd>
+
+# Enable cluster mode (follow MOVED/ASK redirections):
+valkey-cli -c -h <host> -p <port>
+
+# List all cluster management subcommands:
+valkey-cli --cluster help
+
+# Connect with TLS:
+valkey-cli --tls --cert <cert-file> --key <key-file> --cacert <ca-file>
+
+# Run a Lua script via EVAL (comma separates KEYS from ARGV):
+valkey-cli --eval <script.lua> key1 key2 , arg1 arg2
+
+# Read last argument from STDIN:
+cat /etc/passwd | valkey-cli -x set mypasswd
+
+# Connection flags summary:
+# -h <host>       server hostname (default: 127.0.0.1)
+# -p <port>       server port (default: 6379)
+# -s <socket>     unix socket (overrides host/port)
+# -n <db>         database number
+# -a <password>   password
+# -u <uri>        valkey://user:pass@host:port/db
+# --user <name>   ACL username (use with -a)
+# -c              cluster mode
+# -4 / -6         prefer IPv4 / IPv6
+
+# Output flags summary:
+# --raw           raw output (default when stdout is not a tty)
+# --no-raw        force formatted output
+# --csv           CSV format
+# --json          JSON format (RESP3)
+# --quoted-json   ASCII-safe quoted JSON
