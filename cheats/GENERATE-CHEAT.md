@@ -8,13 +8,13 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="aspell"
-{{COMMAND_PATH}}="aspell"
-{{DOCUMENTATION_URL}}="https://github.com/GNUAspell/aspell"
-{{SUMMARIZE}}="GNU Aspell a command line spell checker"
+{{COMMAND_NAME}}="woodpecker-cli"
+{{COMMAND_PATH}}="woodpecker-cli"
+{{DOCUMENTATION_URL}}="https://woodpecker-ci.org/docs/cli"
+{{SUMMARIZE}}="woodpecker-cli - command line utility. Works with woodpecker CI"
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
-{{TAGGING}}="spell spelling"
+{{TAGGING}}="ci woodpecker woodpecker-cli"
 
 Create or replace a cheat with updated information for command {{COMMAND_NAME}} with tagging as {{TAGGING}}.
 

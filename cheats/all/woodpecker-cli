@@ -1,0 +1,144 @@
+---
+syntax: sh
+tags: [ ci, woodpecker, woodpecker-cli ]
+---
+# Command woodpecker-cli
+
+## What does this command do:
+
+woodpecker-cli - command line utility. Works with woodpecker CI
+
+## Installed from
+
+For Fedora install using:
+```
+curl -L https://github.com/woodpecker-ci/woodpecker/releases/download/v3.13.0/woodpecker-cli_linux_amd64.tar.gz \
+  | tar xz -C /tmp
+sudo mv /tmp/woodpecker-cli /usr/local/bin/
+```
+
+For Raspberry Pi install using:
+```
+curl -L https://github.com/woodpecker-ci/woodpecker/releases/download/v3.13.0/woodpecker-cli_linux_arm64.tar.gz \
+  | tar xz -C /tmp
+sudo mv /tmp/woodpecker-cli /usr/local/bin/
+```
+
+For Mac install using:
+```
+curl -L https://github.com/woodpecker-ci/woodpecker/releases/download/v3.13.0/woodpecker-cli_darwin_amd64.tar.gz \
+  | tar xz -C /tmp
+sudo mv /tmp/woodpecker-cli /usr/local/bin/
+```
+
+## Command path
+
+For Fedora run: woodpecker-cli
+For Raspberry Pi run: woodpecker-cli
+For Mac run: woodpecker-cli
+
+## Authentication / environment setup
+
+Add to ~/.bashrc or ~/.zshrc:
+```
+export WOODPECKER_SERVER=https://woodpecker-ci.kevininscoe.com
+export WOODPECKER_TOKEN=<your-api-token>
+```
+
+Get your token from the Woodpecker UI:
+  Avatar menu (top-right) → User Settings → API Token
+
+Or configure interactively:
+```
+woodpecker-cli setup --server https://woodpecker-ci.kevininscoe.com --token <token>
+```
+
+Test connection:
+```
+woodpecker-cli info
+```
+
+## Command documentation
+
+Docs can be found at https://woodpecker-ci.org/docs/cli
+
+## Command options
+
+### Global flags (work with any subcommand)
+
+```
+--server, -s        Server address
+--token, -t         Auth token (prefer env var WOODPECKER_TOKEN)
+--config, -c        Path to config file
+--log-level         Logging level (default: info)
+--log-file          Log output destination
+--pretty            Pretty-print debug output (default: true)
+--nocolor           Disable colored output
+--skip-verify       Skip SSL certificate verification
+--socks-proxy       SOCKS proxy address
+--disable-update-check  Disable update check
+```
+
+### pipeline — manage pipelines
+
+```
+woodpecker-cli pipeline ls <repo>          # list pipeline history
+woodpecker-cli pipeline last <repo>        # show latest pipeline
+woodpecker-cli pipeline show <repo> <id>   # show pipeline details
+woodpecker-cli pipeline ps <repo> <id>     # show pipeline steps
+woodpecker-cli pipeline start <repo> <id>  # restart a pipeline
+woodpecker-cli pipeline stop <repo> <id>   # stop a pipeline
+woodpecker-cli pipeline create <repo>      # trigger a new pipeline
+woodpecker-cli pipeline deploy <repo>      # trigger deployment event
+woodpecker-cli pipeline approve <repo> <id>
+woodpecker-cli pipeline decline <repo> <id>
+woodpecker-cli pipeline queue              # show queued pipelines
+woodpecker-cli pipeline log show <repo> <id> <step>
+woodpecker-cli pipeline log purge <repo> <id>
+```
+
+### repo — manage repositories
+
+```
+woodpecker-cli repo ls                     # list all repos
+woodpecker-cli repo add <repo>             # enable a repo
+woodpecker-cli repo rm <repo>              # disable a repo
+woodpecker-cli repo show <repo>
+woodpecker-cli repo sync <repo>            # sync repo metadata from forge
+woodpecker-cli repo update <repo>
+woodpecker-cli repo repair <repo>          # fix broken webhooks
+woodpecker-cli repo chown <repo>           # reassign ownership
+woodpecker-cli repo cron ls/add/rm <repo>  # manage cron jobs
+woodpecker-cli repo secret ls/add/rm/show/update <repo>
+woodpecker-cli repo registry ls/add/rm/show/update <repo>
+```
+
+### org — manage organizations
+
+```
+woodpecker-cli org ls
+woodpecker-cli org secret ls/add/rm/show/update <org>
+woodpecker-cli org registry ls/add/rm/show/update <org>
+```
+
+### admin — server administration
+
+```
+woodpecker-cli admin user ls/add/rm/show
+woodpecker-cli admin org ls
+woodpecker-cli admin secret ls/add/rm/show/update
+woodpecker-cli admin registry ls/add/rm/show/update
+woodpecker-cli admin log-level            # get or set server log level
+```
+
+### Other commands
+
+```
+woodpecker-cli lint [file]                 # validate .woodpecker.yml
+  --strict                                 # treat warnings as errors
+woodpecker-cli exec                        # run pipeline locally
+woodpecker-cli info                        # show current user info
+woodpecker-cli context ls                  # list saved contexts
+woodpecker-cli context use <name>          # switch context
+woodpecker-cli update                      # update CLI binary
+```
