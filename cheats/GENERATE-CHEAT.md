@@ -8,13 +8,13 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="woodpecker-cli"
-{{COMMAND_PATH}}="woodpecker-cli"
-{{DOCUMENTATION_URL}}="https://woodpecker-ci.org/docs/cli"
-{{SUMMARIZE}}="woodpecker-cli - command line utility. Works with woodpecker CI"
+{{COMMAND_NAME}}="terragrunt"
+{{COMMAND_PATH}}="terragrunt"
+{{DOCUMENTATION_URL}}="https://docs.terragrunt.com/reference/cli/"
+{{SUMMARIZE}}="terragrunt - a thin wrapper for OpenTofu/Terraform that provides extra tools for working with multiple modules, remote state, and DRY configurations"
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
-{{TAGGING}}="ci woodpecker woodpecker-cli"
+{{TAGGING}}="iac terragrunt opentofu terraform"
 
 Create or replace a cheat with updated information for command {{COMMAND_NAME}} with tagging as {{TAGGING}}.
 
@@ -30,9 +30,9 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `sudo dnf install aspell`.
-Replace {{INSTALL_METHOD_RPI}} with: `sudo apt install aspell`
-Replace {{INSTALL_METHOD_MAC}} with `brew install aspell`. 
+Replace {{INSTALL_METHOD_FEDORA}} with `curl -sL https://docs.terragrunt.com/install | bash`.
+Replace {{INSTALL_METHOD_RPI}} with `curl -sL https://docs.terragrunt.com/install | bash`
+Replace {{INSTALL_METHOD_MAC}} with `brew install terragrunt`.
 
 ## Command path
 
@@ -48,7 +48,16 @@ Replace {{DOCUMENTATION_URL}} in template with {{DOCUMENTATION_URL}} from this f
 
 Using ai put command options here gleaned from {{DOCUMENTATION_URL}}, command -h, the commands help option whatever that is or the command's usage statement under template file section "Command options".
 
-Also mention you can add words to your personal dictionary by using command: `echo "correctly spelled word" >> ~/.aspell.en.pws`
+Key commands to include:
+- `terragrunt run-all plan` — plan across all modules
+- `terragrunt run-all apply` — apply across all modules
+- `terragrunt run-all destroy` — destroy across all modules
+- `terragrunt plan` / `terragrunt apply` — single module (mirrors tofu/terraform)
+- `terragrunt init` — initialize with remote state config from terragrunt.hcl
+- `terragrunt output` — show outputs
+- `terragrunt validate` — validate config
+- `terragrunt graph-dependencies` — show dependency graph across modules
+- Global flags: `--terragrunt-working-dir`, `--terragrunt-source`, `--terragrunt-include-dir`, `--terragrunt-log-level`
 
 
 ## Assumptions
