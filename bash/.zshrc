@@ -12,6 +12,7 @@ autoload -Uz compinit && compinit
 for file in ~/.bash.d/*; do
     if [ -f "$file" ]; then
         [[ "$file" == *_bash_* ]] && continue
+        [[ "$file" == *.md ]] && continue
         if [[ "$file" == *mac* ]]; then
             [[ "$IS_MACOS" == "true" ]] && source "$file"
         else
