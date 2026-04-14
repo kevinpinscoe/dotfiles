@@ -32,6 +32,9 @@ else
         else
                 host_color="36"         # cyan
         fi
-        PS1='[\[\e[0;32m\]$awsenv\[\e[m\]] [\[\e[0;31m\]$eks_cluster\[\e[m\]] \[\e[0;33m\][\w] \[\e[m\]\n\[\e[1;36m\]\u@\[\e[1;'"${host_color}"'m\]\h\[\e[1;33m\]$(__git_ps1 " (%s)")> \[\e[0m\]'
+        _workingon_line() {
+            [ -n "$WORKINGON" ] && printf '\n\e[0;35mworking on: %s\e[0m' "$WORKINGON"
+        }
+        PS1='[\[\e[0;32m\]$awsenv\[\e[m\]] [\[\e[0;31m\]$eks_cluster\[\e[m\]] \[\e[0;33m\][\w] \[\e[m\]$(_workingon_line)\n\[\e[1;36m\]\u@\[\e[1;'"${host_color}"'m\]\h\[\e[1;33m\]$(__git_ps1 " (%s)")> \[\e[0m\]'
         export PS1
 fi

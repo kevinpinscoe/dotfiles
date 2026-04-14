@@ -7,6 +7,14 @@ cd() {
     cat .readme.txt
   fi
 
+  # Capture .workingon (first 25 chars) for the prompt
+  if [ -s ".workingon" ]; then
+    WORKINGON=$(head -c 25 .workingon | tr -d '\n')
+    export WORKINGON
+  else
+    unset WORKINGON
+  fi
+
   # Detect git repo
   if repo_root=$(git rev-parse --show-toplevel 2>/dev/null); then
     export GIT_REPO_HOME="$repo_root"

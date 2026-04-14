@@ -26,6 +26,10 @@ else
     # Use zsh-native prompt escapes (%F/%f, %B/%b) so zsh handles zero-width
     # correctly. Command substitutions (awsenv, eks_cluster, __git_ps1) are
     # re-evaluated each prompt thanks to PROMPT_SUBST.
-    PS1='[%F{green}${awsenv}%f] [%F{red}${eks_cluster}%f] %F{yellow}[%~]%f
+    _workingon_line() {
+        [[ -n "$WORKINGON" ]] && print -Pn $'\n'"%F{magenta}working on: ${WORKINGON}%f"
+    }
+
+    PS1='[%F{green}${awsenv}%f] [%F{red}${eks_cluster}%f] %F{yellow}[%~]%f$(_workingon_line)
 %B%F{cyan}%n@%f%B%F{'"${host_color}"'}%m%f%F{yellow}$(__git_ps1 " (%s)")>%f%b '
 fi
