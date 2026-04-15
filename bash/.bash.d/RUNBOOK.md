@@ -1,5 +1,22 @@
 # ~/.bash.d Runbook
 
+## AI sync workflow (dotfiles)
+
+When any file in `~/.bash.d/` is created, edited, or deleted, it must be synced into `~/.dotfiles/bash/.bash.d/` so the change is tracked in git.
+
+After making changes in `~/.bash.d/`:
+
+1. Run `~/.dotfiles/copy.sh` (it will prompt for `yes` confirmation, or pass `-y`) to sync the live files into the repo.
+2. `cd ~/.dotfiles && git status && git diff` to review what changed.
+3. Ask the user to confirm before committing. Only after explicit confirmation:
+   - `git commit` with a message describing the change.
+   - `git push origin` to publish.
+
+Do not commit or push without an explicit user confirmation.
+
+See `~/.dotfiles/CLAUDE.md` for the full dotfiles repo layout.
+
+
 ## Reloading shell config (`reload`)
 
 The `reload` function is defined in `~/.bash.d/20_bashrc_aliases`. Run it after editing any file in `~/.bash.d/` to load those changes into your current shell without opening a new terminal.
