@@ -24,6 +24,7 @@ alias gs='git status'
 alias gr='git checkout HEAD --'
 alias gd='git diff'
 alias ga='git add'
+alias gwt='git worktree list'
 alias home='cd "$(git rev-parse --show-toplevel)"'
 alias main=~/bin/git-default-branch.sh
 alias dotfiles='cd ~/.dotfiles'

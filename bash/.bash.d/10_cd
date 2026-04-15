@@ -1,5 +1,5 @@
 cd() {
-  builtin cd "$@" || return
+  builtin cd "$@" 2>/dev/null || { print -u2 "cd: no such directory: $*"; return 1; }
 
   # Show .readme.txt if it exists
   if [ -f ".readme.txt" ]; then
