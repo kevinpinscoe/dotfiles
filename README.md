@@ -20,6 +20,7 @@ Use `copy.sh` only when you want to capture changes from a live machine back int
 - `cheats/` contains custom cheatsheets for the `cheat` CLI, split by platform (`all/`, `mac/`, `fedora/`, `rpi/`).
 - `.config/cheat/` contains `cheat` configuration.
 - `vscode/` stores host-specific VS Code settings snapshots.
+- `desktop-setup/` contains platform-specific desktop application setup guides and runbooks (currently: [Claude Desktop on Fedora KDE](desktop-setup/fedora-kde/claude-desktop/README.md)).
 - `copy.sh`, `install.sh`, and `restore.sh` drive sync and restore workflows.
 
 ## Workflow
