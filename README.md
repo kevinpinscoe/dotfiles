@@ -43,3 +43,8 @@ This repository is public-safe only if secrets and private tooling remain outsid
 ## Notes for Public Use
 
 This repo is primarily a personal setup, not a generic dotfiles framework. Use it as a reference or starting point, and expect to change paths, hostnames, and tool-specific assumptions for your own environment.
+
+## Fedora desktop
+
+![Fastfetch logo](desktop-setup/fedora-kde/fastfetch/logo.png)
+
