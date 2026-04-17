@@ -1,5 +1,5 @@
 cd() {
-  builtin cd "$@" 2>/dev/null || { print -u2 "cd: no such directory: $*"; return 1; }
+  builtin cd "$@" 2>/dev/null || { printf 'cd: no such directory: %s\n' "$*" >&2; return 1; }
 
   # Show .readme.txt if it exists
   if [ -f ".readme.txt" ]; then
@@ -46,7 +46,8 @@ cd() {
 
     # Refresh remote refs in background if FETCH_HEAD is older than 5 minutes
     fetch_head="${repo_root}/.git/FETCH_HEAD"
-    fetch_age=$(( $(date +%s) - $(stat -c %Y "$fetch_head" 2>/dev/null || echo 0) ))
+    fetch_mtime=$(stat -c %Y "$fetch_head" 2>/dev/null || stat -f %m "$fetch_head" 2>/dev/null || echo 0)
+    fetch_age=$(( $(date +%s) - fetch_mtime ))
     if [ ! -f "$fetch_head" ] || [ "$fetch_age" -gt 300 ]; then
       git fetch --all --quiet 2>/dev/null &
       disown
