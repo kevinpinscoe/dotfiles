@@ -27,16 +27,33 @@ cd() {
     ahead=$(git rev-list --count "@{upstream}..HEAD" 2>/dev/null)
     behind=$(git rev-list --count "HEAD..@{upstream}" 2>/dev/null)
 
+    # How stale are the cached remote refs?
+    fetch_head="${repo_root}/.git/FETCH_HEAD"
+    if [ -f "$fetch_head" ]; then
+      fetch_mtime=$(stat -c %Y "$fetch_head" 2>/dev/null || stat -f %m "$fetch_head" 2>/dev/null || echo 0)
+      fetch_age=$(( $(date +%s) - fetch_mtime ))
+      if [ "$fetch_age" -lt 60 ]; then
+        refs_age="refs ${fetch_age}s old"
+      elif [ "$fetch_age" -lt 3600 ]; then
+        refs_age="refs $((fetch_age / 60))m old"
+      else
+        refs_age="refs $((fetch_age / 3600))h old"
+      fi
+    else
+      fetch_age=99999
+      refs_age="never fetched"
+    fi
+
     if [ -z "$ahead" ] && [ -z "$behind" ]; then
       sync_status="(no upstream tracked)"
     elif [ "${behind:-0}" -gt 0 ] && [ "${ahead:-0}" -gt 0 ]; then
-      sync_status="DIVERGED — ${ahead} ahead, ${behind} behind (needs rebase or merge)"
+      sync_status="DIVERGED — ${ahead} ahead, ${behind} behind (needs rebase or merge) [${refs_age}]"
     elif [ "${behind:-0}" -gt 0 ]; then
-      sync_status="PULL NEEDED — ${behind} commit(s) behind"
+      sync_status="PULL NEEDED — ${behind} commit(s) behind [${refs_age}]"
     elif [ "${ahead:-0}" -gt 0 ]; then
-      sync_status="PUSH NEEDED — ${ahead} commit(s) ahead"
+      sync_status="PUSH NEEDED — ${ahead} commit(s) ahead [${refs_age}]"
     else
-      sync_status="up to date"
+      sync_status="up to date [${refs_age}]"
     fi
 
     echo "git: ${branch}  |  ${sync_status}"
@@ -44,11 +61,8 @@ cd() {
       echo "  run 'check-remote' to see what is different on remote"
     fi
 
-    # Refresh remote refs in background if FETCH_HEAD is older than 5 minutes
-    fetch_head="${repo_root}/.git/FETCH_HEAD"
-    fetch_mtime=$(stat -c %Y "$fetch_head" 2>/dev/null || stat -f %m "$fetch_head" 2>/dev/null || echo 0)
-    fetch_age=$(( $(date +%s) - fetch_mtime ))
-    if [ ! -f "$fetch_head" ] || [ "$fetch_age" -gt 300 ]; then
+    # Refresh remote refs in background if FETCH_HEAD is older than 2 minutes
+    if [ "$fetch_age" -gt 120 ]; then
       git fetch --all --quiet 2>/dev/null &
       disown
     fi
