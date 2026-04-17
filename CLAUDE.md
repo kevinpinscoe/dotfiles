@@ -4,43 +4,51 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository purpose
 
-Personal dotfiles for Linux hosts (Fedora, Raspberry Pi) and Mac. The repo uses two scripts for synchronization:
+Personal dotfiles for Linux hosts (Fedora, Raspberry Pi) and Mac. Dotfiles are managed with **GNU Stow** — `install.sh` creates symlinks in `$HOME` rather than copying files. Editing a file under `~/` edits the repo directly.
 
-- `copy.sh` — copies files **from the live system** into this repo (run when you've made changes on the system and want to save them)
-- `install.sh` — copies files **from this repo** to the live system (run to apply dotfiles to a new or existing host)
-- `restore.sh` — restores VS Code configuration from this repo to the live system (VS Code is excluded from `install.sh`; run this separately after `install.sh`)
+Scripts:
+- `install.sh` — stows all packages (creates symlinks in `$HOME`)
+- `migrate-to-stow.sh` — one-time migration on hosts that used the old copy-based setup; run before `install.sh`
+- `copy.sh` — saves VS Code config **from the live system** into this repo (shell/vim/cheat are symlinks, no copying needed)
+- `restore.sh` — restores VS Code configuration from this repo to the live system (run after `install.sh`)
 
 ## Key workflows
 
-**Save system changes to repo:**
+**First-time setup on a host previously using copy-based install:**
+```bash
+bash migrate-to-stow.sh
+bash install.sh
+bash restore.sh   # optional
+```
+
+**Fresh host:**
+```bash
+bash install.sh
+bash restore.sh   # optional
+```
+
+**Save VS Code changes back to repo:**
 ```bash
 bash copy.sh
 ```
 
-**Apply dotfiles to system:**
-```bash
-bash install.sh
-```
-
-**Restore VS Code config to system:**
-```bash
-bash restore.sh
-```
-
 ## Directory structure and purpose
 
-| Path | Live destination | Notes |
-|------|-----------------|-------|
-| `bash/.bashrc` | `~/.bashrc` | Main bash config, sources `.bash.d/` fragments |
-| `bash/.bash_profile` | `~/.bash_profile` | Login shell config |
-| `bash/.zshrc` | `~/.zshrc` | Zsh config (macOS only) |
-| `bash/.zprofile` | `~/.zprofile` | Zsh login shell config (macOS only) |
-| `bash/.bash.d/` | `~/.bash.d/` | Numbered bash fragments loaded in order |
-| `vim/.vimrc` + `vim/.vim/` | `~/.vimrc`, `~/.vim/` | Vim config |
-| `.config/cheat/conf.yml` | `~/.config/cheat/conf.yml` | Cheat CLI config |
-| `cheats/` | `~/cheats/` | Personal cheatsheets by platform |
-| `vscode/personal/` | Fedora VS Code config | Hostname `kevin` |
-| `vscode/professional/` | Mac VS Code config | Hostname `MacBook` |
+Stow packages — each directory is stowed into `$HOME`:
+
+| Package | Path in repo | Live destination | Notes |
+|---------|-------------|-----------------|-------|
+| `bash` | `bash/.bashrc` | `~/.bashrc` | Main bash config, sources `.bash.d/` fragments |
+| `bash` | `bash/.bash_profile` | `~/.bash_profile` | Login shell config |
+| `bash` | `bash/.zshrc` | `~/.zshrc` | Zsh config (macOS only) |
+| `bash` | `bash/.zprofile` | `~/.zprofile` | Zsh login shell config (macOS only) |
+| `bash` | `bash/.bash.d/` | `~/.bash.d/` | Numbered bash fragments loaded in order |
+| `vim` | `vim/.vimrc` + `vim/.vim/` | `~/.vimrc`, `~/.vim/` | Vim config |
+| `aspell` | `aspell/.aspell.en.pws` | `~/.aspell.en.pws` | Personal spell-check dictionary |
+| `cheat` | `cheat/.config/cheat/conf.yml` | `~/.config/cheat/conf.yml` | Cheat CLI config |
+| `home` | `home/cheats/` | `~/cheats/` | Personal cheatsheets by platform |
+| — | `vscode/personal/` | Fedora VS Code config | Hostname `kevin`; restored via `restore.sh` |
+| — | `vscode/professional/` | Mac VS Code config | Hostname `MacBook`; restored via `restore.sh` |
 
 ## External dependencies (not tracked in this repo)
 
@@ -65,11 +73,11 @@ Files are numbered to control load order:
 
 ## Cheatsheets system
 
-Uses the [`cheat`](https://github.com/cheat/cheat) CLI. Cheatsheets are organized by platform:
-- `cheats/all/` — platform-agnostic (tagged `all`)
-- `cheats/mac/` — macOS only (tagged `mac`)
-- `cheats/fedora/` — Fedora Linux (tagged `fedora`)
-- `cheats/rpi/` (not in repo but referenced in config) — Raspberry Pi
+Uses the [`cheat`](https://github.com/cheat/cheat) CLI. Cheatsheets live in `home/cheats/` (stowed to `~/cheats/`) and are organized by platform:
+- `home/cheats/all/` — platform-agnostic (tagged `all`)
+- `home/cheats/mac/` — macOS only (tagged `mac`)
+- `home/cheats/fedora/` — Fedora Linux (tagged `fedora`)
+- `home/cheats/rpi/` (not in repo but referenced in config) — Raspberry Pi
 
 Community cheatsheets are cloned separately and not tracked in this repo.
 
@@ -77,14 +85,14 @@ Community cheatsheets are cloned separately and not tracked in this repo.
 
 Edit `GENERATE-CHEAT.MD`, fill in the template variables, then run:
 ```bash
-bash cheats/generate-cheat.sh
+bash home/cheats/generate-cheat.sh
 ```
-This calls Claude with `CLAUDE.md` and `GENERATE-CHEAT.MD` as context. Templates are in `cheats/templates/` (`all.md`, `fedora.md`).
+This calls Claude with `CLAUDE.md` and `GENERATE-CHEAT.MD` as context. Templates are in `home/cheats/templates/` (`all.md`, `fedora.md`).
 
 ## Platform-conditional logic
 
-`copy.sh` detects the OS with `uname -s`:
-- `Linux` → Fedora, copies from `~/.config/Code/User/`
-- `Darwin` → macOS, copies from `~/Library/Application Support/Code/User/`
+`copy.sh` detects the OS with `uname -s` to find the VS Code config directory:
+- `Linux` → Fedora, reads from `~/.config/Code/User/`
+- `Darwin` → macOS, reads from `~/Library/Application Support/Code/User/`
 
-`install.sh` is platform-agnostic (no OS detection).
+`install.sh` is platform-agnostic — stow handles all packages the same way on every host.

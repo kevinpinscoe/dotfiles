@@ -2,34 +2,46 @@
 
 Personal Bash, Vim, cheat, and VS Code configuration for macOS and Linux hosts.
 
+Dotfiles are managed with [GNU Stow](https://www.gnu.org/software/stow/). `install.sh` creates symlinks in `$HOME` rather than copying files, so edits to files in your home directory are immediately reflected in the repo.
+
 ## Quick Start
 
-Review the scripts before running them. They copy files into your home directory and use `rsync --delete`, so they can overwrite or remove local config.
+Install stow first (`apt install stow` / `brew install stow` / `dnf install stow`).
 
+**First time on a host that previously used the old copy-based setup:**
 ```bash
+bash migrate-to-stow.sh   # removes old copies so stow can create symlinks
 bash install.sh
-bash restore.sh   # optional, restores VS Code settings
+bash restore.sh           # optional, restores VS Code settings
 ```
 
-Use `copy.sh` only when you want to capture changes from a live machine back into this repository.
+**Fresh host:**
+```bash
+bash install.sh
+bash restore.sh           # optional, restores VS Code settings
+```
+
+Use `copy.sh` only to capture VS Code settings from a live machine back into this repo. All other config (shell, vim, cheat) is live via symlinks — just edit in place.
 
 ## Repository Layout
 
-- `bash/` contains `.bashrc`, `.bash_profile`, macOS zsh files, and numbered fragments in `bash/.bash.d/`.
-- `vim/` stores `.vimrc` and the `.vim/` runtime files.
-- `cheats/` contains custom cheatsheets for the `cheat` CLI, split by platform (`all/`, `mac/`, `fedora/`, `rpi/`).
-- `.config/cheat/` contains `cheat` configuration.
-- `vscode/` stores host-specific VS Code settings snapshots.
-- `desktop-setup/` contains platform-specific desktop application setup guides and runbooks (currently: [Claude Desktop on Fedora KDE](desktop-setup/fedora-kde/claude-desktop/README.md)).
-- `copy.sh`, `install.sh`, and `restore.sh` drive sync and restore workflows.
+Stow packages map directly to `$HOME`. Each top-level directory is a package:
+
+- `bash/` — `.bashrc`, `.bash_profile`, macOS zsh files, and numbered fragments in `bash/.bash.d/`
+- `vim/` — `.vimrc` and `.vim/` runtime files
+- `aspell/` — `.aspell.en.pws` personal dictionary
+- `cheat/` — `cheat` CLI config (`~/.config/cheat/conf.yml`)
+- `home/` — everything that stows into `~/` but doesn't fit a dedicated package (e.g. `~/cheats/`)
+- `vscode/` — host-specific VS Code settings snapshots (not stowed; restored via `restore.sh`)
+- `desktop-setup/` — platform-specific setup guides and runbooks (currently: [Claude Desktop on Fedora KDE](desktop-setup/fedora-kde/claude-desktop/README.md))
 
 ## Workflow
 
-- `bash install.sh` applies shell, Vim, and cheat configuration from this repo to the local machine.
-- `bash restore.sh` restores VS Code settings after `install.sh`.
-- `bash copy.sh` copies live system config back into this repo.
+- `bash install.sh` — stows all packages (creates symlinks in `$HOME`)
+- `bash restore.sh` — restores VS Code settings after `install.sh`
+- `bash copy.sh` — copies VS Code config from the live system back into this repo
 
-`copy.sh` and `restore.sh` contain hostname-specific logic for supported machines. If you are adapting this repo for another system, update those scripts before using them.
+`restore.sh` contains hostname-specific logic. If you are adapting this repo for another system, update it before use.
 
 ## Private Local Dependencies
 
