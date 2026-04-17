@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Applies dotfiles to the live system via GNU Stow (symlinks).
+# Run migrate-to-stow.sh first if you haven't already migrated.
+
 if [[ -n "$(git status --porcelain)" ]]; then
   echo "Working tree is dirty. Commit or stash changes first."
   exit 1
@@ -8,39 +11,30 @@ fi
 
 git pull
 
-cp -v bash/.bashrc "$HOME/.bashrc"
-cp -v bash/.bash_profile "$HOME/.bash_profile"
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-if [[ "$(uname)" == "Darwin" ]]; then
-  cp -v bash/.zshrc "$HOME/.zshrc"
-  cp -v bash/.zprofile "$HOME/.zprofile"
+if ! command -v stow &>/dev/null; then
+  echo "ERROR: stow not found. Install it first (dnf install stow / brew install stow)." >&2
+  exit 1
 fi
 
-rsync -av --delete bash/.bash.d/ "$HOME/.bash.d/"
+# ~/.config/cheat/ must be a real directory so stow symlinks conf.yml inside it
+# rather than making the whole directory a symlink (community cheatsheets live
+# alongside conf.yml and must not be tracked in this repo).
+mkdir -p "$HOME/.config/cheat"
 
-rsync -av --delete vim/.vim/ "$HOME/.vim/"
-cp -v vim/.vimrc "$HOME/.vimrc"
+PACKAGES=(bash vim aspell cheat home)
+for pkg in "${PACKAGES[@]}"; do
+  if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
+    stow -d "$DOTFILES_DIR" -t "$HOME" --restow "$pkg"
+    echo "Stowed: $pkg"
+  fi
+done
 
-# aspell personal dictionary
-if [[ -f aspell/.aspell.en.pws ]]; then
-  cp -v aspell/.aspell.en.pws "$HOME/.aspell.en.pws"
-fi
-
-# Cheat
-rsync -av --delete \
-  --exclude='cheatsheets/' \
-  .config/cheat/ \
-  "$HOME/.config/cheat/"
-
-rsync -av --delete \
-  cheats/ \
-  "$HOME/cheats/"
-
-# Install community cheats if they do not already exist
-mkdir -p "$HOME/.config/cheat/cheatsheets"
-
+# Clone community cheatsheets if absent
 if [[ ! -d "$HOME/.config/cheat/cheatsheets/community" ]]; then
-  git clone \
-    https://github.com/cheat/cheatsheets \
-    "$HOME/.config/cheat/cheatsheets/community"
+  mkdir -p "$HOME/.config/cheat/cheatsheets"
+  git clone https://github.com/cheat/cheatsheets "$HOME/.config/cheat/cheatsheets/community"
 fi
+
+echo "Done. Run restore.sh to also restore VS Code config."
