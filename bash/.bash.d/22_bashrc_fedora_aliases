@@ -10,3 +10,5 @@ alias journal='~/AppImages/Obsidian.AppImage "obsidian://open?vault=Personal%20J
 
 # Log in to self-hosted Gitea container registry
 alias dlogin='cat ~/.config/gitea/api | docker login git.kevininscoe.com --username kevin --password-stdin'
+
+alias km='cd $HOME/KnowledgeVault'

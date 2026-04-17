@@ -5,6 +5,7 @@ alias enc='~/bin/mesactlendec.sh encrypt; source ~/.environment/.env_set.sh'
 alias dec='~/bin/mesactlendec.sh decrypt; source ~/.environment/.env_set.sh'
 alias oneoff='cd ~/Projects/acst/acst-one-offs'
 alias workspace='cd ~/Projects/workspaces'
+alias km='cd $HOME/WorkKnowledgeVault'
 if [ -n "${work:-}" ]; then
     alias gettf="git clone git@github.com:${work}/terraform-aws.git"
     alias mimail="cd ~/Projects/${work}/sre-scripts/missioninsite"

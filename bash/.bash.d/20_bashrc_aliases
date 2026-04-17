@@ -34,6 +34,5 @@ fi
 alias pastebooks='cd $HOME/Projects/kevininscoe.com/pastebooks; code -n $HOME/Projects/kevininscoe.com/pastebooks'
 alias awalledcity='cd $HOME/Projects/private/walled_city; code -n $HOME/Projects/private/walled_city'
 alias ai='cd $HOME/ai'
-alias km='cd $HOME/KnowledgeVault'
 alias il='ps -ef | grep input-leap | grep -v grep'
 alias vi='vim'
