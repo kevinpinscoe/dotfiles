@@ -47,6 +47,10 @@ Stow packages — each directory is stowed into `$HOME`:
 | `aspell` | `aspell/.aspell.en.pws` | `~/.aspell.en.pws` | Personal spell-check dictionary |
 | `cheat` | `cheat/.config/cheat/conf.yml` | `~/.config/cheat/conf.yml` | Cheat CLI config |
 | `home` | `home/cheats/` | `~/cheats/` | Personal cheatsheets by platform |
+| `tmux` | `tmux/.tmux.conf` | `~/.tmux.conf` | tmux config; shared across platforms |
+| `tmux` | `tmux/.config/tmux/status/` | `~/.config/tmux/status/` | Status bar scripts (workingon, git, aws, k8s) |
+| `ghostty-fedora` | `ghostty-fedora/.config/ghostty/config` | `~/.config/ghostty/config` | Ghostty config for Fedora (absolute tmux path) |
+| `ghostty-mac` | `ghostty-mac/.config/ghostty/config` | `~/.config/ghostty/config` | Ghostty config for macOS (Homebrew tmux path) |
 | — | `vscode/personal/` | Fedora VS Code config | Hostname `kevin`; restored via `restore.sh` |
 | — | `vscode/professional/` | Mac VS Code config | Hostname `MacBook`; restored via `restore.sh` |
 

@@ -23,13 +23,26 @@ fi
 # alongside conf.yml and must not be tracked in this repo).
 mkdir -p "$HOME/.config/cheat"
 
-PACKAGES=(bash vim aspell cheat home)
+PACKAGES=(bash vim aspell cheat home tmux)
 for pkg in "${PACKAGES[@]}"; do
   if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
     stow -d "$DOTFILES_DIR" -t "$HOME" --restow "$pkg"
     echo "Stowed: $pkg"
   fi
 done
+
+# ghostty config is platform-specific (tmux binary path differs)
+OS="$(uname -s)"
+if [[ "$OS" == "Darwin" ]]; then
+  GHOSTTY_PKG="ghostty-mac"
+elif [[ "$OS" == "Linux" ]]; then
+  GHOSTTY_PKG="ghostty-fedora"
+fi
+if [[ -n "${GHOSTTY_PKG:-}" && -d "$DOTFILES_DIR/$GHOSTTY_PKG" ]]; then
+  mkdir -p "$HOME/.config/ghostty"
+  stow -d "$DOTFILES_DIR" -t "$HOME" --restow "$GHOSTTY_PKG"
+  echo "Stowed: $GHOSTTY_PKG"
+fi
 
 # Clone community cheatsheets if absent
 if [[ ! -d "$HOME/.config/cheat/cheatsheets/community" ]]; then
