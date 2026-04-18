@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal Bash, Vim, cheat, and VS Code configuration for macOS and Linux hosts.
+Personal Bash, Vim, cheat, and VS Code configuration for macOS, Fedora, and Raspberry Pi (Debian) hosts.
 
 Dotfiles are managed with [GNU Stow](https://www.gnu.org/software/stow/). `install.sh` creates symlinks in `$HOME` rather than copying files, so edits to files in your home directory are immediately reflected in the repo.
 
@@ -69,4 +69,30 @@ This repo is primarily a personal setup, not a generic dotfiles framework. Use i
 ## Fedora desktop
 
 ![Fastfetch logo](desktop-setup/fedora-kde/fastfetch/logo.png)
+
+## Raspberry Pi (Debian Trixie, aarch64)
+
+The Pi is a headless SSH target — Ghostty is not installed there. You connect from Mac or Fedora using Ghostty, which auto-attaches to a tmux session on the Pi.
+
+**Packages stowed on the Pi:** `bash`, `vim`, `aspell`, `cheat`, `home`, `tmux`. The `ghostty-*` packages are skipped automatically by `install.sh` (it detects Fedora via `/etc/os-release` and skips ghostty on all other Linux).
+
+**tmux auto-attach on SSH login** is in `.bashrc` — no extra setup needed after `install.sh`.
+
+**First-time setup on a fresh Pi:**
+```bash
+sudo apt install stow git tmux
+git clone git@github.com:kevinpinscoe/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+bash install.sh
+# Install tpm for tmux plugins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+**If migrating a Pi that was previously set up with the old copy-based deploy-debian.sh:**
+```bash
+# Remove the real (non-symlinked) files so stow can take over
+rm -rf ~/.bash.d ~/.tmux.conf ~/.config/tmux/status/*.sh
+cd ~/.dotfiles
+bash install.sh
+```
 
