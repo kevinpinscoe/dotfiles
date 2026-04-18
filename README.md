@@ -37,6 +37,7 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - `ghostty-mac/` — Ghostty terminal config for macOS (Homebrew tmux path)
 - `ghostty-debian/` — Ghostty terminal config for Raspberry Pi / Debian (built from source)
 - `vscode/` — host-specific VS Code settings snapshots (not stowed; restored via `restore.sh`)
+- [`Brewfile/`](Brewfile/RUNBOOK.md) — Homebrew manifest (taps, formulae, casks, VS Code extensions) for bootstrapping a Mac via `brew bundle install`; not stowed
 - `desktop-setup/` — platform-specific setup guides, runbooks, and GUI app documentation
   - [`fedora-kde/`](desktop-setup/fedora-kde/) — Fedora KDE Plasma setup (including [Claude Desktop](desktop-setup/fedora-kde/claude-desktop/README.md))
   - [`application-runbooks/`](desktop-setup/application-runbooks/README.md) — per-app operational notes for desktop applications (Obsidian, etc.)
