@@ -40,8 +40,11 @@ sudo apt install -y \
   libxml2-utils \
   libgtk-4-dev \
   libadwaita-1-dev \
-  libgtk4-layer-shell-dev
+  libgtk4-layer-shell-dev \
+  mesa-vulkan-drivers
 ```
+
+`mesa-vulkan-drivers` is not a build dependency — it's a runtime requirement. Ghostty requires OpenGL 4.3, but the Pi 5's V3D GPU only exposes OpenGL 3.1 via Mesa's standard driver. The Vulkan driver enables Mesa's Zink backend (GL-over-Vulkan), which provides OpenGL 4.x. Without it, Ghostty fails at launch with "Unable to acquire an OpenGL context for rendering".
 
 Install Zig 0.15.2 via the griffo.io repo:
 
@@ -76,6 +79,7 @@ To upgrade to a new Ghostty release:
 1. Check the required Zig version at `https://ghostty.org/docs/install/build` — it may change between releases.
 2. Download the new source tarball from `https://release.files.ghostty.org/<VERSION>/ghostty-<VERSION>.tar.gz`.
 3. Re-run the build steps above. The `-p ~/.local` flag overwrites the existing binary in place.
+4. **Re-apply the OpenGL fix to the desktop entry** — the build overwrites `~/.local/share/applications/com.mitchellh.ghostty.desktop`, losing the `MESA_LOADER_DRIVER_OVERRIDE=zink MESA_EGL_NO_X11=1` vars. Edit both `Exec` lines to prepend `env MESA_LOADER_DRIVER_OVERRIDE=zink MESA_EGL_NO_X11=1` after each rebuild. See the Troubleshooting section for why this is needed.
 
 ---
 
@@ -131,6 +135,23 @@ Then right-click the LXDE desktop → **Refresh Menu** (or log out and back in).
 ---
 
 ## Troubleshooting
+
+**`Unable to acquire an OpenGL context for rendering` on Pi**
+Ghostty requires OpenGL 4.3. The Pi 5's V3D GPU only exposes OpenGL 3.1 via Mesa's standard driver. The fix is to route OpenGL through Mesa's Zink driver (GL-over-Vulkan), which exposes GL 4.x on top of the Pi's Vulkan stack.
+
+Install the Vulkan driver if not already present:
+```bash
+sudo apt install mesa-vulkan-drivers
+```
+
+Then launch with:
+```bash
+MESA_LOADER_DRIVER_OVERRIDE=zink MESA_EGL_NO_X11=1 ghostty
+```
+
+The desktop entry (`~/.local/share/applications/com.mitchellh.ghostty.desktop`) already has these vars set in its `Exec` line — this only matters if launching from a shell directly. Add both vars to `~/.bashrc` or a shell wrapper if needed.
+
+---
 
 **`ghostty: command not found` on Pi**
 `~/.local/bin` is not on `$PATH`. Check that `~/.bash.d/02_core_path_env` is being sourced, or add `export PATH="$HOME/.local/bin:$PATH"` to `~/.bashrc`.
