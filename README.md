@@ -37,6 +37,14 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
   - [`fedora-kde/`](desktop-setup/fedora-kde/) — Fedora KDE Plasma setup (including [Claude Desktop](desktop-setup/fedora-kde/claude-desktop/README.md))
   - [`application-runbooks/`](desktop-setup/application-runbooks/README.md) — per-app operational notes for desktop applications (Obsidian, etc.)
 
+## Stow folding — why some symlinks are on directories, not files
+
+Stow always folds as high as it can. If the target directory doesn't exist in `$HOME` before stow runs, stow symlinks the whole directory in one go rather than creating a symlink per file inside it. For example, `~/.bash.d/` didn't exist before stow first ran, so stow made `~/.bash.d` a single directory symlink → `.dotfiles/bash/.bash.d/` instead of 24 individual file symlinks.
+
+Consequence: `ls -la ~/.bash.d/somefile` follows the directory symlink and shows a regular file with no `l` prefix or `->` target — it's the underlying real file in the repo. Don't mistake this for "not stowed". Check `readlink ~/.bash.d` or `ls -la ~ | grep bash.d` to see the directory symlink itself.
+
+If stow needs to merge new files into an existing real `$HOME` subdirectory, it "unfolds" — breaks the directory symlink and creates per-file symlinks inside. Both behaviors produce the same end result (edits in `~/.dotfiles/…` are live), but the on-disk layout differs.
+
 ## Workflow
 
 - `bash install.sh` — stows all packages (creates symlinks in `$HOME`)
