@@ -32,6 +32,10 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - `aspell/` — `.aspell.en.pws` personal dictionary
 - `cheat/` — `cheat` CLI config (`~/.config/cheat/conf.yml`)
 - `home/` — everything that stows into `~/` but doesn't fit a dedicated package (e.g. `~/cheats/`)
+- `tmux/` — `.tmux.conf` and `~/.config/tmux/status/` scripts (workingon, git, aws, k8s); shared across platforms
+- `ghostty-fedora/` — Ghostty terminal config for Fedora (absolute tmux path)
+- `ghostty-mac/` — Ghostty terminal config for macOS (Homebrew tmux path)
+- `ghostty-debian/` — Ghostty terminal config for Raspberry Pi / Debian (built from source)
 - `vscode/` — host-specific VS Code settings snapshots (not stowed; restored via `restore.sh`)
 - `desktop-setup/` — platform-specific setup guides, runbooks, and GUI app documentation
   - [`fedora-kde/`](desktop-setup/fedora-kde/) — Fedora KDE Plasma setup (including [Claude Desktop](desktop-setup/fedora-kde/claude-desktop/README.md))
