@@ -20,4 +20,5 @@ Runbooks are not platform-gated. An app directory is created regardless of wheth
 
 | Application | Runbook | Notes |
 |-------------|---------|-------|
+| Mark Text | [MarkText/RUNBOOK.md](MarkText/RUNBOOK.md) | Install (Fedora/macOS), custom CSS theming |
 | Obsidian | [Obsidian/RUNBOOK.md](Obsidian/RUNBOOK.md) | Spell-check dictionary management |
