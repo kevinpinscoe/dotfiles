@@ -105,6 +105,18 @@ Reference examples from the Mark Text source:
 - [academic.theme.css](https://github.com/marktext/marktext/blob/develop/src/renderer/assets/themes/export/academic.theme.css)
 - [liber.theme.css](https://github.com/marktext/marktext/blob/develop/src/renderer/assets/themes/export/liber.theme.css)
 
+#### Gruvbox Dark export theme
+
+A ready-made Gruvbox Dark export theme is available at [kevinpinscoe/marktext-theme-gruvbox](https://github.com/kevinpinscoe/marktext-theme-gruvbox). Install it:
+
+```bash
+# Fedora (Flatpak)
+curl -o ~/.var/app/com.github.marktext.marktext/config/marktext/themes/export/gruvbox.theme.css \
+  https://raw.githubusercontent.com/kevinpinscoe/marktext-theme-gruvbox/main/gruvbox.theme.css
+```
+
+Then restart Mark Text. The theme appears as **Gruvbox Dark** in the export dialog under **File → Export → Theme**.
+
 ### Theme limitations
 
 Mark Text's custom theme support is minimal — there is no hot-reload, no theme packager, and no marketplace. If rich theming is a priority, consider **Typora** (paid, $15 one-time), which has a large community theme library at `theme.typora.io`.
