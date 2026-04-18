@@ -47,3 +47,8 @@ if [[ -n "$SSH_CLIENT" ]]; then
     echo "I am logged in from ${sshvars[0]}"
     echo " "
 fi
+
+# Auto-attach to tmux on SSH login
+if [ -n "$SSH_CONNECTION" ] && [ -z "$TMUX" ]; then
+    tmux new-session -A -s main
+fi
