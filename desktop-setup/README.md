@@ -81,11 +81,18 @@ Small-system desktop and utility setup:
 
 See: [`raspberry-pi-lxde/`](./raspberry-pi-lxde/)
 
+## Application Runbooks
+
+Operational notes for GUI/desktop apps (setup steps, tips, troubleshooting) that have no natural home alongside their source or configuration:
+
+→ [`application-runbooks/`](./application-runbooks/README.md)
+
 ## Repo Layout
 
 ```text
 desktop/
 ├── README.md
+├── application-runbooks/   ← per-app RUNBOOK.md files
 ├── docs/
 │   ├── screenshots/
 │   ├── apps.md

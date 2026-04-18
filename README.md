@@ -33,7 +33,9 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - `cheat/` — `cheat` CLI config (`~/.config/cheat/conf.yml`)
 - `home/` — everything that stows into `~/` but doesn't fit a dedicated package (e.g. `~/cheats/`)
 - `vscode/` — host-specific VS Code settings snapshots (not stowed; restored via `restore.sh`)
-- `desktop-setup/` — platform-specific setup guides and runbooks (currently: [Claude Desktop on Fedora KDE](desktop-setup/fedora-kde/claude-desktop/README.md))
+- `desktop-setup/` — platform-specific setup guides, runbooks, and GUI app documentation
+  - [`fedora-kde/`](desktop-setup/fedora-kde/) — Fedora KDE Plasma setup (including [Claude Desktop](desktop-setup/fedora-kde/claude-desktop/README.md))
+  - [`application-runbooks/`](desktop-setup/application-runbooks/README.md) — per-app operational notes for desktop applications (Obsidian, etc.)
 
 ## Workflow
 
