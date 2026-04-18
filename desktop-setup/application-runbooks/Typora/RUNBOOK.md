@@ -94,6 +94,21 @@ See the [theme gallery source repos](https://github.com/typora) for reference im
 
 Enable developer tools via **Help → Toggle DevTools** (macOS: hold Option and click the Help menu) to inspect elements and tweak CSS live.
 
+## Favorites directory
+
+`~/Documents/Notes/Favorites/` holds symlinks to frequently-used documents (cheatsheets, guides, reference files) for quick access from Typora's file panel.
+
+Set it up on a new host:
+
+```bash
+mkdir -p ~/Documents/Notes/Favorites
+
+# Symlink a document
+ln -s /path/to/document.md ~/Documents/Notes/Favorites/
+```
+
+Open the folder as a Typora sidebar via **File → Open Folder** and point it at `~/Documents/Notes/Favorites`.
+
 ## Export
 
 Typora exports to PDF, HTML, Word, LaTeX, EPUB, and more via **File → Export**. PDF export uses the current editor theme by default; pick a different theme first if you want the PDF styled differently.
