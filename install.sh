@@ -31,16 +31,16 @@ for pkg in "${PACKAGES[@]}"; do
   fi
 done
 
-# ghostty config is platform-specific (tmux binary path differs)
-# Debian/Pi: Ghostty has no arm64 .deb and is headless — skip ghostty entirely.
+# ghostty config is platform-specific (tmux binary path differs per OS)
 OS="$(uname -s)"
 GHOSTTY_PKG=""
 if [[ "$OS" == "Darwin" ]]; then
   GHOSTTY_PKG="ghostty-mac"
 elif [[ "$OS" == "Linux" ]]; then
-  # Only stow ghostty on Fedora; Debian/Ubuntu/Pi machines are headless
   if grep -qi "fedora" /etc/os-release 2>/dev/null; then
     GHOSTTY_PKG="ghostty-fedora"
+  elif grep -qi "debian\|ubuntu\|raspbian" /etc/os-release 2>/dev/null; then
+    GHOSTTY_PKG="ghostty-debian"
   fi
 fi
 if [[ -n "${GHOSTTY_PKG:-}" && -d "$DOTFILES_DIR/$GHOSTTY_PKG" ]]; then
