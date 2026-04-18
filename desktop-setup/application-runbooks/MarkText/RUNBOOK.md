@@ -71,6 +71,40 @@ a { color: #4ec9b0; }
 
 Use browser DevTools (Ctrl+Shift+I on Fedora, Cmd+Option+I on macOS) to inspect elements and iterate on styles live.
 
+### Export themes
+
+Mark Text also supports themes specifically for **exported** documents (PDF, HTML), separate from the editor UI theme. Three are built-in: Academic, GitHub, and Liber.
+
+#### Install an export theme
+
+Copy a `.css` file into the `themes/export/` directory inside the app data directory, then restart Mark Text:
+
+| Platform | Export themes path |
+|----------|--------------------|
+| Fedora (native) | `~/.config/marktext/themes/export/` |
+| Fedora (Flatpak) | `~/.var/app/com.github.marktext.marktext/config/marktext/themes/export/` |
+| macOS | `~/Library/Application Support/marktext/themes/export/` |
+
+#### Create an export theme
+
+Export themes use the GitHub markdown style as a base (via [`github-markdown-css`](https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdown.css)). A custom theme must override those styles to change things like font family or heading decoration.
+
+The theme name is defined by a CSS comment on the first line:
+
+```css
+/** My Theme **/
+
+.markdown-body {
+  font-family: "IBM Plex Mono", monospace;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+}
+```
+
+Reference examples from the Mark Text source:
+- [academic.theme.css](https://github.com/marktext/marktext/blob/develop/src/renderer/assets/themes/export/academic.theme.css)
+- [liber.theme.css](https://github.com/marktext/marktext/blob/develop/src/renderer/assets/themes/export/liber.theme.css)
+
 ### Theme limitations
 
 Mark Text's custom theme support is minimal — there is no hot-reload, no theme packager, and no marketplace. If rich theming is a priority, consider **Typora** (paid, $15 one-time), which has a large community theme library at `theme.typora.io`.
