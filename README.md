@@ -72,15 +72,34 @@ This repo is primarily a personal setup, not a generic dotfiles framework. Use i
 
 ## Raspberry Pi (Debian Trixie, aarch64)
 
-The Pi is a headless SSH target — Ghostty is not installed there. You connect from Mac or Fedora using Ghostty, which auto-attaches to a tmux session on the Pi.
+Raspberry Pi 5 running Debian Trixie with a display attached. Ghostty is built from source (no official arm64 `.deb` exists). `install.sh` detects Debian via `/etc/os-release` and stows the `ghostty-debian` package automatically.
 
-**Packages stowed on the Pi:** `bash`, `vim`, `aspell`, `cheat`, `home`, `tmux`. The `ghostty-*` packages are skipped automatically by `install.sh` (it detects Fedora via `/etc/os-release` and skips ghostty on all other Linux).
+**Packages stowed:** `bash`, `vim`, `aspell`, `cheat`, `home`, `tmux`, `ghostty-debian`.
 
 **tmux auto-attach on SSH login** is in `.bashrc` — no extra setup needed after `install.sh`.
 
 **First-time setup on a fresh Pi:**
 ```bash
-sudo apt install stow git tmux
+sudo apt install stow git tmux pkg-config gettext libxml2-utils \
+  libgtk-4-dev libadwaita-1-dev libgtk4-layer-shell-dev
+
+# zig 0.15.2 — required to build Ghostty 1.3.x
+# Add griffo.io repo first (provides zig-0):
+curl -sS https://debian.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc \
+  | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/debian.griffo.io.gpg
+echo "deb https://debian.griffo.io/apt $(lsb_release -sc) main" \
+  | sudo tee /etc/apt/sources.list.d/debian.griffo.io.list
+sudo apt update && sudo apt install -y zig-0
+
+# Build Ghostty 1.3.0 from source (~5 min on Pi 5)
+curl -L -o /tmp/ghostty-1.3.0.tar.gz \
+  https://release.files.ghostty.org/1.3.0/ghostty-1.3.0.tar.gz
+tar xzf /tmp/ghostty-1.3.0.tar.gz -C /tmp
+cd /tmp/ghostty-1.3.0
+/usr/lib/zig/0.15.2/zig build -Doptimize=ReleaseFast -p ~/.local
+# Binary lands at ~/.local/bin/ghostty
+
+# Clone and apply dotfiles
 git clone git@github.com:kevinpinscoe/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 bash install.sh
