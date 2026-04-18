@@ -5,17 +5,7 @@ if [ "$EUID" = 0 ] || [ "$(whoami)" = 'root' ]; then
     PS1='%F{yellow}[%~]%f
 %B%F{red}%n@%m%f%F{yellow}#%f%b '
 else
-    export GIT_PS1_SHOWDIRTYSTATE=1
-    [ -r ~/bin/git-prompt.sh ] && . ~/bin/git-prompt.sh
-
-    if [ -r "$HOME/.environment/what_aws_env_am_i.sh" ]; then
-        awsenv=$("$HOME/.environment/what_aws_env_am_i.sh")
-    else
-        awsenv="none"
-    fi
-
-    eks_cluster=$(kubectl config get-contexts 2>/dev/null | awk '/^\*/{print $2}' | awk -F'/' '{print $2}')
-
+    # Slim PS1 — context lives in the tmux status bar
     hostn=$(/usr/bin/uname -n)
     if [[ "${hostn}" == "kevin" ]]; then
         host_color="208"   # orange (256-color)
@@ -23,13 +13,5 @@ else
         host_color="cyan"
     fi
 
-    # Use zsh-native prompt escapes (%F/%f, %B/%b) so zsh handles zero-width
-    # correctly. Command substitutions (awsenv, eks_cluster, __git_ps1) are
-    # re-evaluated each prompt thanks to PROMPT_SUBST.
-    _workingon_line() {
-        [[ -n "$WORKINGON" ]] && print -Pn $'\n'"%F{magenta}working on: ${WORKINGON}%f"
-    }
-
-    PS1='[%F{green}${awsenv}%f] [%F{red}${eks_cluster}%f] %F{yellow}[%~]%f$(_workingon_line)
-%B%F{cyan}%n@%f%B%F{'"${host_color}"'}%m%f%F{yellow}$(__git_ps1 " (%s)")>%f%b '
+    PS1='%B%F{cyan}%n@%f%B%F{'"${host_color}"'}%m%f%F{yellow}>%f%b '
 fi
