@@ -110,9 +110,23 @@ Reference examples from the Mark Text source:
 A ready-made Gruvbox Dark export theme is available at [kevinpinscoe/marktext-theme-gruvbox](https://github.com/kevinpinscoe/marktext-theme-gruvbox). Install it:
 
 ```bash
-# Fedora (Flatpak)
+# Fedora (Flatpak) — curl from GitHub
 curl -o ~/.var/app/com.github.marktext.marktext/config/marktext/themes/export/gruvbox.theme.css \
   https://raw.githubusercontent.com/kevinpinscoe/marktext-theme-gruvbox/main/gruvbox.theme.css
+```
+
+Or scp from a machine that has the repo cloned (e.g. from the Pi over Tailscale):
+
+```bash
+# scp from remote host
+scp -i ~/.ssh/id_ed25519 \
+  kinscoe@100.72.95.90:~/Projects/public/marktext-theme-gruvbox/gruvbox.theme.css \
+  ~/.var/app/com.github.marktext.marktext/config/marktext/themes/export/
+
+# scp to remote host
+scp -i ~/.ssh/id_ed25519 \
+  ~/.var/app/com.github.marktext.marktext/config/marktext/themes/export/gruvbox.theme.css \
+  kinscoe@100.72.95.90:~/.var/app/com.github.marktext.marktext/config/marktext/themes/export/
 ```
 
 Then restart Mark Text. The theme appears as **Gruvbox Dark** in the export dialog under **File → Export → Theme**.
