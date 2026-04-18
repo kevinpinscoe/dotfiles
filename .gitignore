@@ -10,3 +10,5 @@
 **/.claude/
 resume.sh
 vim/.vim/.netrwhist
+.DS_Store
+**/.DS_Store
