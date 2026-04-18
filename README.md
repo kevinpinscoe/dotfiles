@@ -79,6 +79,10 @@ This repo is primarily a personal setup, not a generic dotfiles framework. Use i
 
 ![Fastfetch logo](desktop-setup/MacOS/fastfetch/logo.png)
 
+## Raspberry Pi 5
+
+![Fastfetch logo](desktop-setup/rpi5/fastfetch/logo.png)
+
 ## Raspberry Pi (Debian Trixie, aarch64)
 
 Raspberry Pi 5 running Debian Trixie with a display attached. Ghostty is built from source (no official arm64 `.deb` exists). `install.sh` detects Debian via `/etc/os-release` and stows the `ghostty-debian` package automatically.
