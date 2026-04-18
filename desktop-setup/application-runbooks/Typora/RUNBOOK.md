@@ -16,21 +16,22 @@ Or download the `.dmg` directly from [typora.io](https://typora.io/#download).
 
 ### Fedora
 
-Typora provides an official RPM repository:
-
-```bash
-# Add the repository
-sudo rpm --import https://typoraio.cn/linux/public-key.asc
-sudo sh -c 'echo -e "[typora]\nname=Typora\nbaseurl=https://typoraio.cn/linux/dnf-repo/\nenabled=1\ngpgcheck=1" > /etc/yum.repos.d/typora.repo'
-
-# Install
-sudo dnf install typora
-```
-
-Alternatively, install via Flatpak (community-maintained, not official):
+Install via Flatpak (recommended — Typora does not provide an official RPM/DNF repo for Fedora):
 
 ```bash
 flatpak install flathub io.typora.Typora
+```
+
+Run:
+
+```bash
+flatpak run io.typora.Typora
+```
+
+Update:
+
+```bash
+flatpak update io.typora.Typora
 ```
 
 ### Windows
