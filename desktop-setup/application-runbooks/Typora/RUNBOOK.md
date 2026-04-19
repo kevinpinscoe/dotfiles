@@ -70,6 +70,29 @@ Typora has a large community theme library at [theme.typora.io](https://theme.ty
 2. Place the files in the themes directory (see path table above).
 3. Restart Typora, then choose the theme via **Themes** menu (or **File → Preferences → Appearance → Theme**).
 
+### Installed themes
+
+#### Gruvbox
+
+- **Source:** [theme.typora.io/theme/Gruvbox](https://theme.typora.io/theme/Gruvbox/) — GitHub: [TwinklerG/typora-gruvbox-theme](https://github.com/TwinklerG/typora-gruvbox-theme)
+- **Variants:** `gruvbox.css` (light) and `gruvbox-dark.css` (dark)
+- **Description:** Warm, retro Gruvbox color scheme with full syntax highlighting. Requires Typora 1.0+. MIT license.
+
+**Installation:**
+
+1. Download `gruvbox.css` and `gruvbox-dark.css` from the repo's `src/` directory (files are not in releases):
+   ```bash
+   # Fedora Flatpak
+   THEMES=~/.var/app/io.typora.Typora/config/Typora/themes
+   curl -fL https://raw.githubusercontent.com/TwinklerG/typora-gruvbox-theme/main/src/gruvbox.css -o "$THEMES/gruvbox.css"
+   curl -fL https://raw.githubusercontent.com/TwinklerG/typora-gruvbox-theme/main/src/gruvbox-dark.css -o "$THEMES/gruvbox-dark.css"
+   ```
+2. (Or place both files manually in the themes directory — see path table above, or use **File → Preferences → Appearance → Open Theme Folder**.)
+3. Restart Typora.
+4. Select **Gruvbox** or **Gruvbox Dark** from the **Themes** menu.
+
+---
+
 ### Writing a custom theme
 
 Typora renders Markdown as HTML via an embedded Chromium engine. A theme is a single `.css` file — the filename becomes the theme's display name in the menu. Target `#write` and standard HTML elements:
