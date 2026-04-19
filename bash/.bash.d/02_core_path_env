@@ -1,1 +1,8 @@
-export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+_pathadd() { [[ ":$PATH:" != *":$1:"* ]] && export PATH="$PATH:$1"; }
+_pathadd /usr/local/bin
+_pathadd /usr/bin
+_pathadd /bin
+_pathadd /usr/local/sbin
+_pathadd /usr/sbin
+_pathadd /sbin
+unset -f _pathadd
