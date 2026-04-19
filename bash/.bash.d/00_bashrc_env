@@ -2,7 +2,12 @@
 
 export EDITOR=/usr/bin/vim
 export SUDO_EDITOR=/usr/bin/vim
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/tools:$HOME/go/bin:$PATH
+_pathadd() { [[ ":$PATH:" != *":$1:"* ]] && export PATH="$1:$PATH"; }
+_pathadd "$HOME/bin"
+_pathadd "$HOME/.local/bin"
+_pathadd "$HOME/tools"
+_pathadd "$HOME/go/bin"
+unset -f _pathadd
 
 if [ -r "$HOME/.environment/replace.sh" ]; then
     source "$HOME/.environment/replace.sh"

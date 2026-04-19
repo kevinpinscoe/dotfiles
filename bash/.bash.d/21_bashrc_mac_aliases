@@ -1,6 +1,5 @@
 alias login='echo you want logon command'
 alias tg='terragrunt'
-alias eks='~/bin/eks.sh; source ~/.environment/.env_set.sh'
 alias enc='~/bin/mesactlendec.sh encrypt; source ~/.environment/.env_set.sh'
 alias dec='~/bin/mesactlendec.sh decrypt; source ~/.environment/.env_set.sh'
 alias oneoff='cd ~/Projects/acst/acst-one-offs'
