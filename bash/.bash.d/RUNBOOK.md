@@ -72,6 +72,55 @@ Ahead/behind counts are read from git's locally cached remote-tracking refs (e.g
 
 To keep those refs fresh, a background `git fetch --all` is triggered automatically whenever `.git/FETCH_HEAD` is older than 5 minutes. The fetch is fire-and-forget (`disown`ed) and does not block the prompt.
 
+## gitme — quick git repo navigation
+
+[`gitme`](https://github.com/davorg/gitme) is a shell function that lets you jump to any local git repo by name or remote URL.
+
+### Installation (one-time per host)
+
+```bash
+git clone https://github.com/davorg/gitme.git ~/bin/gitme
+```
+
+The dotfiles source `gitme` and `gitme-completion.bash` from `~/bin/gitme/` automatically in `30_bash_autocomplete` (bash) and `30_zsh_autocomplete` (zsh). If `~/bin/gitme/` doesn't exist those blocks silently no-op.
+
+### Configuration
+
+`GITME_DIRS` is set in `00_bashrc_env`:
+
+```bash
+export GITME_DIRS="$HOME:/opt/containers"
+```
+
+`$HOME` covers repos scattered across many top-level directories (`tools`, `KnowledgeVault`, `.environment`, `ai`, `.dotfiles`, `skills`, `admin`, `Journal/Personal Journal`, `bookmarks/browser_bookmarks`, etc.). `/opt/containers` is added for the containers repo outside `$HOME`. gitme's `find` recurses from each base, so both roots are searched. The cache keeps searches fast; run `gitme --rebuild-cache` after cloning new repos.
+
+### Usage
+
+```bash
+gitme my-project       # cd to the matching repo
+gitme github.com/foo   # match by remote URL
+gitme utils            # interactive picker if multiple matches
+```
+
+Tab completion lists repo names and remote URLs from the cache.
+
+### Rebuilding the cache
+
+The cache lives at `~/.gitme/cache` and is built automatically on first use. Rebuild it any time you clone new repos or move existing ones:
+
+```bash
+gitme --rebuild-cache
+```
+
+When to run it:
+- After cloning a new repo anywhere under `$HOME`
+- After moving or deleting a repo
+- If tab completion stops showing a repo you expect
+
+**Permission errors during rebuild** (`find: '...': Permission denied`) from `/opt/containers` are expected — gitme recurses into Gitea and OpenBAO data directories it can't read. These are benign; the cache still builds correctly and all accessible repos are indexed.
+
+---
+
 ### Why `which cd` and `command -v cd` give different results
 
 - `which cd` → `/usr/bin/cd` — `which` only searches `$PATH` executables, not shell functions

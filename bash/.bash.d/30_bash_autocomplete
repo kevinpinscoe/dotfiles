@@ -3,3 +3,8 @@ if command -v kubectl >/dev/null 2>&1; then
     source <(kubectl completion bash)
     complete -o default -F __start_kubectl k
 fi
+
+if [[ -f "$HOME/bin/gitme/gitme" ]]; then
+    source "$HOME/bin/gitme/gitme"
+    [[ -f "$HOME/bin/gitme/gitme-completion.bash" ]] && source "$HOME/bin/gitme/gitme-completion.bash"
+fi

@@ -2,3 +2,11 @@ if command -v kubectl >/dev/null 2>&1; then
     source <(kubectl completion zsh)
     compdef _kubectl k
 fi
+
+if [[ -f "$HOME/bin/gitme/gitme" ]]; then
+    source "$HOME/bin/gitme/gitme"
+    if [[ -f "$HOME/bin/gitme/gitme-completion.bash" ]]; then
+        autoload -U +X bashcompinit && bashcompinit
+        source "$HOME/bin/gitme/gitme-completion.bash"
+    fi
+fi
