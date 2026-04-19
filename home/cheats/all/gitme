@@ -10,15 +10,13 @@ Easily find local Git repos
 
 ## Installed from
 
-For Fedora install using: `git clone https://github.com/davorg/gitme > ~/bin/gitme`
-For Raspberry Pi install using: `git clone https://github.com/davorg/gitme > ~/bin/gitme`
-For Mac install using: `git clone https://github.com/davorg/gitme > ~/bin/gitme`
+For Fedora install using: `git clone https://github.com/davorg/gitme.git ~/bin/gitme`
+For Raspberry Pi install using: `git clone https://github.com/davorg/gitme.git ~/bin/gitme`
+For Mac install using: `git clone https://github.com/davorg/gitme.git ~/bin/gitme`
 
 ## Command path
 
-For Fedora run: `source $HOME/bin/gitme/gitme`
-For Raspberry Pi run: `source $HOME/bin/gitme/gitme`
-For Mac run: `source $HOME/bin/gitme/gitme`
+Sourced automatically at shell startup via `~/.bash.d/30_bash_autocomplete` (bash) and `30_zsh_autocomplete` (zsh). Run `reload` after first clone to activate without opening a new shell.
 
 ## Command documentation
 
