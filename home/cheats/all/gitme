@@ -1,0 +1,42 @@
+---
+syntax: sh
+tags: [ all, git ]
+---
+# Command gitme
+
+## What does this command do:
+
+Easily find local Git repos
+
+## Installed from
+
+For Fedora install using: `git clone https://github.com/davorg/gitme > ~/bin/gitme`
+For Raspberry Pi install using: `git clone https://github.com/davorg/gitme > ~/bin/gitme`
+For Mac install using: `git clone https://github.com/davorg/gitme > ~/bin/gitme`
+
+## Command path
+
+For Fedora run: `source $HOME/bin/gitme/gitme`
+For Raspberry Pi run: `source $HOME/bin/gitme/gitme`
+For Mac run: `source $HOME/bin/gitme/gitme`
+
+## Command documentation
+
+Docs can be found at https://github.com/davorg/gitme
+
+## Command options
+
+# Jump to a repo by name or partial name
+gitme <search-term>
+
+# Jump to a repo matching a remote URL or fragment
+gitme github.com/davorg
+
+# Rebuild the repository cache (faster searching)
+gitme --rebuild-cache
+
+# Show help
+gitme --help
+
+# Show version
+gitme --version

@@ -8,14 +8,14 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="valkey-cli"
+{{COMMAND_NAME}}="gitme"
 <!-- How would I run this command without it being on my PATH? -->
-{{COMMAND_PATH}}="valkey-cli"
-{{DOCUMENTATION_URL}}="https://valkey.io/topics/installation/"
-{{SUMMARIZE}}="Command line interface for Valkey key-value databases, optimized for caching and other realtime workloads. Compatible with Redis protocol."
+{{COMMAND_PATH}}=" source $HOME/bin/gitme/gitme"
+{{DOCUMENTATION_URL}}="https://github.com/davorg/gitme"
+{{SUMMARIZE}}="Easily find local Git repos"
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
-{{TAGGING}}="valkey redis"
+{{TAGGING}}="git"
 
 Create or replace a cheat with updated information for command {{COMMAND_NAME}} with tagging as {{TAGGING}}.
 
@@ -31,9 +31,9 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `sudo dnf install valkey`.
-Replace {{INSTALL_METHOD_RPI}} with `sudo apt install valkey`
-Replace {{INSTALL_METHOD_MAC}} with `brew install valkey`.
+Replace {{INSTALL_METHOD_FEDORA}} with `git clone https://github.com/davorg/gitme > ~/bin/gitme`.
+Replace {{INSTALL_METHOD_RPI}} with `git clone https://github.com/davorg/gitme > ~/bin/gitme`
+Replace {{INSTALL_METHOD_MAC}} with `git clone https://github.com/davorg/gitme > ~/bin/gitme`.
 
 ## Command path
 
@@ -48,38 +48,6 @@ Replace {{DOCUMENTATION_URL}} in template with {{DOCUMENTATION_URL}} from this f
 ## Command options
 
 Using ai put command options here gleaned from {{DOCUMENTATION_URL}}, command -h, the commands help option whatever that is or the command's usage statement under template file section "Command options".
-
-Key commands to include:
-- `valkey-cli` — start interactive REPL (connects to 127.0.0.1:6379 by default)
-- `valkey-cli -h <host> -p <port>` — connect to a specific host and port
-- `valkey-cli -a <password>` — authenticate with password (prefer REDISCLI_AUTH env var)
-- `valkey-cli -u valkey://user:pass@host:port/db` — connect via URI
-- `valkey-cli -n <db>` — select database number
-- `valkey-cli ping` — test connectivity (returns PONG)
-- `valkey-cli set <key> <value>` — set a key
-- `valkey-cli get <key>` — get a key's value
-- `valkey-cli del <key>` — delete a key
-- `valkey-cli keys <pattern>` — list keys matching pattern (use SCAN in production)
-- `valkey-cli --scan --pattern '<pattern>'` — safely iterate keys without blocking
-- `valkey-cli info` — server info and stats
-- `valkey-cli --stat` — rolling real-time server stats (mem, clients, etc.)
-- `valkey-cli --latency` — continuously sample server latency
-- `valkey-cli --bigkeys` — find keys with the most elements
-- `valkey-cli --memkeys` — find keys consuming the most memory
-- `valkey-cli --hotkeys` — find frequently accessed keys (requires LFU maxmemory-policy)
-- `valkey-cli --rdb <file>` — dump remote RDB snapshot to local file
-- `valkey-cli --pipe` — send raw RESP protocol from stdin (bulk import)
-- `valkey-cli -r <n> <cmd>` — repeat a command N times
-- `valkey-cli -r <n> -i <sec> <cmd>` — repeat with interval between executions
-- `valkey-cli --csv` — output results in CSV format
-- `valkey-cli --json` — output results in JSON format (RESP3)
-- `valkey-cli -c` — enable cluster mode (follow MOVED/ASK redirections)
-- `valkey-cli --cluster help` — list all cluster management subcommands
-- `valkey-cli --tls --cert <file> --key <file>` — connect with TLS client cert
-- `valkey-cli --eval <file> key1 , arg1` — run a Lua script via EVAL
-- Connection flags: `-h` (host), `-p` (port), `-s` (unix socket), `-n` (db), `-a` (password), `-u` (URI)
-- Output flags: `--raw`, `--no-raw`, `--csv`, `--json`, `--quoted-json`
-
 
 ## Assumptions
 
