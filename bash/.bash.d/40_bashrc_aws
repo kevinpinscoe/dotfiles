@@ -3,3 +3,14 @@ if [ -n "${work:-}" ]; then
 fi
 
 export AWS_REGION=us-east-1
+
+# Sync AWS_PROFILE to a file so the tmux status bar (which runs outside any
+# shell session) can read the active profile.
+_sync_aws_profile() {
+    if [[ -n "${AWS_PROFILE:-}" ]]; then
+        printf '%s' "$AWS_PROFILE" > "$HOME/.aws/active_profile"
+    else
+        rm -f "$HOME/.aws/active_profile"
+    fi
+}
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }_sync_aws_profile"
