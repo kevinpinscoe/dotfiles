@@ -2,19 +2,23 @@
 
 # Determine OS
 IS_MACOS=false
+IS_FEDORA=false
 [[ "$(uname)" == "Darwin" ]] && IS_MACOS=true
+[ -f /etc/fedora-release ] && IS_FEDORA=true
 
 # Initialize zsh completion system (needed before compdef calls in ~/.bash.d/*)
 autoload -Uz compinit && compinit
 
 # Source appropriate files from ~/.bash.d/
-# Skip bash-only files; mac-tagged files only on macOS
+# Skip bash-only files; mac-tagged files only on macOS; fedora-tagged files only on Fedora
 for file in ~/.bash.d/*; do
     if [ -f "$file" ]; then
         [[ "$file" == *_bash_* ]] && continue
         [[ "$file" == *.md ]] && continue
         if [[ "$file" == *mac* ]]; then
             [[ "$IS_MACOS" == "true" ]] && source "$file"
+        elif [[ "$file" == *fedora* ]]; then
+            [[ "$IS_FEDORA" == "true" ]] && source "$file"
         else
             source "$file"
         fi

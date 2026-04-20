@@ -17,16 +17,20 @@ fi
 
 # Determine OS
 IS_MACOS=false
+IS_FEDORA=false
 [[ "$(uname)" == "Darwin" ]] && IS_MACOS=true
+[ -f /etc/fedora-release ] && IS_FEDORA=true
 
 # Source appropriate files from ~/.bash.d/
-# Skip zsh-only files; mac-tagged files only on macOS
+# Skip zsh-only files; mac-tagged files only on macOS; fedora-tagged files only on Fedora
 for file in ~/.bash.d/*; do
     if [ -f "$file" ]; then
         [[ "$file" == *_zsh_* ]] && continue
         [[ "$file" == *.md ]] && continue
         if [[ "$file" == *mac* ]]; then
             [[ "$IS_MACOS" == "true" ]] && source "$file"
+        elif [[ "$file" == *fedora* ]]; then
+            [[ "$IS_FEDORA" == "true" ]] && source "$file"
         else
             source "$file"
         fi
