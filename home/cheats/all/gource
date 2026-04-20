@@ -1,0 +1,95 @@
+---
+syntax: sh
+tags: [ all, git ]
+---
+# Command gource
+
+## What does this command do:
+
+Software projects are displayed by Gource as an animated tree with the root directory of the project at its centre. Directories appear as branches with files as leaves. Developers can be seen working on the tree at the times they contributed to the project.
+
+## Installed from
+
+For Fedora install using: `sudo dnf install gource`
+For Raspberry Pi install using: `sudo apt install gource`
+For Mac install using: `brew install gource`
+
+## Command path
+
+For Fedora run: `/usr/bin/gource`
+For Raspberry Pi run: `/usr/bin/gource`
+For Mac run: `/usr/bin/gource`
+
+## Command documentation
+
+Docs can be found at https://gource.io/
+
+## Command options
+
+# Basic usage
+gource                          # Animate git log from current directory
+gource /path/to/repo            # Animate git log from specified path
+gource logfile.txt              # Animate from a pre-generated log file
+
+# Display
+gource -WIDTHxHEIGHT            # Set viewport size (e.g. -1280x720)
+gource -f                       # Fullscreen
+gource --screen SCREEN          # Screen number
+gource --high-dpi               # Request a high DPI display
+
+# Playback control
+gource --start-date 'YYYY-MM-DD hh:mm:ss +tz'  # Start at a date
+gource --stop-date  'YYYY-MM-DD hh:mm:ss +tz'  # Stop at a date
+gource -p 0.5                   # Start at position (0.0-1.0 or 'random')
+gource --stop-at-end            # Stop at end of the log
+gource --loop                   # Loop at the end of the log
+gource -s 1                     # Speed: seconds per day (default: 10)
+gource --realtime               # Realtime playback speed
+gource -c 2.0                   # Time scale multiplier (default: 1.0)
+gource -a 1                     # Auto-skip if idle for N seconds (default: 3)
+
+# Camera
+gource --camera-mode track      # Camera mode: overview or track
+gource --padding 1.2            # Camera padding (default: 1.1)
+gource --disable-auto-rotate    # Disable automatic camera rotation
+gource --follow-user "Alice"    # Camera follows this user
+
+# Users and files
+gource --user-scale 1.5         # Scale user avatars (default: 1.0)
+gource --user-image-dir ./avatars  # Dir with avatar images
+gource --default-user-image img.png  # Fallback avatar image
+gource --colour-images          # Colourize user images
+gource --user-filter REGEX      # Ignore usernames matching regex
+gource --file-filter REGEX      # Ignore file paths matching regex
+gource --max-files 0            # Max files shown (0 = no limit)
+
+# Appearance
+gource -b 000000                # Background colour in hex (default: 000000)
+gource --background-image bg.png  # Set a background image
+gource --title "My Project"     # Set a title
+gource --key                    # Show file extension key
+gource --hide users,filenames   # Hide display elements:
+                                # bloom,date,dirnames,files,filenames,
+                                # mouse,progress,root,tree,users,usernames
+gource --highlight-users        # Highlight names of all users
+gource --highlight-dirs         # Highlight names of all directories
+gource --font-size 18           # Font size for date and title
+gource --font-colour FFFFFF     # Font colour in hex
+
+# Output (for recording)
+gource -o output.ppm            # Output PPM stream to file ('-' for STDOUT)
+gource -r 60                    # Output framerate (25, 30, 60)
+
+# Pipe to ffmpeg for MP4
+gource -1280x720 -s 1 -o - | ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p output.mp4
+
+# Log generation
+gource --log-command git        # Show the VCS log command used
+gource --output-custom-log custom.log  # Output custom format log
+
+# Git-specific
+gource --git-branch main        # Visualize a specific git branch
+
+# Config
+gource --save-config my.conf    # Save current options to config file
+gource --load-config my.conf    # Load options from config file

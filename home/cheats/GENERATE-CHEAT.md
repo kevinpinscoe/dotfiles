@@ -8,11 +8,11 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="gitme"
+{{COMMAND_NAME}}="gource"
 <!-- How would I run this command without it being on my PATH? -->
-{{COMMAND_PATH}}=" source $HOME/bin/gitme/gitme"
-{{DOCUMENTATION_URL}}="https://github.com/davorg/gitme"
-{{SUMMARIZE}}="Easily find local Git repos"
+{{COMMAND_PATH}}="/usr/bin/gource"
+{{DOCUMENTATION_URL}}="https://gource.io/"
+{{SUMMARIZE}}="Software projects are displayed by Gource as an animated tree with the root directory of the project at its centre. Directories appear as branches with files as leaves. Developers can be seen working on the tree at the times they contributed to the project."
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
 {{TAGGING}}="git"
@@ -31,9 +31,10 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `git clone https://github.com/davorg/gitme > ~/bin/gitme`.
-Replace {{INSTALL_METHOD_RPI}} with `git clone https://github.com/davorg/gitme > ~/bin/gitme`
-Replace {{INSTALL_METHOD_MAC}} with `git clone https://github.com/davorg/gitme > ~/bin/gitme`.
+Replace {{INSTALL_METHOD_FEDORA}} with `sudo dnf install gource`.
+Replace {{INSTALL_METHOD_MAC}} with `brew install gource`.
+Replace {{INSTALL_METHOD_RPI}} with `sudo apt install gource`
+
 
 ## Command path
 
