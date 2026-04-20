@@ -86,13 +86,12 @@ The dotfiles source `gitme` and `gitme-completion.bash` from `~/bin/gitme/` auto
 
 ### Configuration
 
-`GITME_DIRS` is set in `00_bashrc_env`:
+`GITME_DIRS` is set per-platform:
 
-```bash
-export GITME_DIRS="$HOME:/opt/containers"
-```
+- **Mac** — `01_bashrc_mac_env`: `export GITME_DIRS="$HOME"`
+- **Fedora** — `01_bashrc_fedora_env` (gated on `/etc/fedora-release`): `export GITME_DIRS="$HOME:/opt/containers"`
 
-`$HOME` covers repos scattered across many top-level directories (`tools`, `KnowledgeVault`, `.environment`, `ai`, `.dotfiles`, `skills`, `admin`, `Journal/Personal Journal`, `bookmarks/browser_bookmarks`, etc.). `/opt/containers` is added for the containers repo outside `$HOME`. gitme's `find` recurses from each base, so both roots are searched. The cache keeps searches fast; run `gitme --rebuild-cache` after cloning new repos.
+`$HOME` covers repos scattered across many top-level directories (`tools`, `KnowledgeVault`, `.environment`, `ai`, `.dotfiles`, `skills`, `admin`, `Journal/Personal Journal`, `bookmarks/browser_bookmarks`, etc.). On Fedora, `/opt/containers` is added for the containers repo outside `$HOME`. gitme's `find` recurses from each base, so all roots are searched. The cache keeps searches fast; run `gitme --rebuild-cache` after cloning new repos.
 
 ### Usage
 

@@ -1,0 +1,9 @@
+# ~/.bash.d/01_bashrc_fedora_env
+
+# Only apply on Fedora systems
+if [ ! -f /etc/fedora-release ]; then
+    return
+fi
+
+# gitme search roots (Fedora): home directory plus containers repo
+export GITME_DIRS="$HOME:/opt/containers"

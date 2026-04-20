@@ -1,4 +1,8 @@
 # Work environments
+
+# gitme search roots (Mac): scan home directory only
+export GITME_DIRS="$HOME"
+
 if [[ -r "$HOME/.homebrew/gh-token" ]]; then
   IFS= read -r HOMEBREW_GITHUB_API_TOKEN < "$HOME/.homebrew/gh-token"
   export HOMEBREW_GITHUB_API_TOKEN

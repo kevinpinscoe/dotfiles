@@ -2,7 +2,6 @@
 
 export EDITOR=/usr/bin/vim
 export SUDO_EDITOR=/usr/bin/vim
-export GITME_DIRS="$HOME:/opt/containers"
 _pathadd() { [[ ":$PATH:" != *":$1:"* ]] && export PATH="$1:$PATH"; }
 _pathadd "$HOME/bin"
 _pathadd "$HOME/.local/bin"
