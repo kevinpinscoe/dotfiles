@@ -93,6 +93,15 @@ backup_conflicts() {
 
   # cheats content directory
   backup_and_remove "$HOME/cheats"
+
+  # tmux — only back up the repo-managed status/ subdir so other tmux state
+  # (tmux-resurrect saves, plugin data) under ~/.config/tmux/ is preserved
+  backup_and_remove "$HOME/.tmux.conf"
+  backup_and_remove "$HOME/.config/tmux/status"
+
+  # ghostty — live path is the same on every platform; the repo picks the
+  # right source package (ghostty-mac / ghostty-fedora / ghostty-debian)
+  backup_and_remove "$HOME/.config/ghostty/config"
 }
 
 # ── Stow all packages ─────────────────────────────────────────────────────────
