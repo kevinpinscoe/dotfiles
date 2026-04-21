@@ -8,14 +8,14 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="gource"
+{{COMMAND_NAME}}="gh"
 <!-- How would I run this command without it being on my PATH? -->
-{{COMMAND_PATH}}="/usr/bin/gource"
-{{DOCUMENTATION_URL}}="https://gource.io/"
-{{SUMMARIZE}}="Software projects are displayed by Gource as an animated tree with the root directory of the project at its centre. Directories appear as branches with files as leaves. Developers can be seen working on the tree at the times they contributed to the project."
+{{COMMAND_PATH}}="/usr/bin/gh"
+{{DOCUMENTATION_URL}}="https://cli.github.com/manual/"
+{{SUMMARIZE}}="GitHub CLI, or gh, is a command-line interface to GitHub for use in your terminal or your scripts."
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
-{{TAGGING}}="git"
+{{TAGGING}}="github"
 
 Create or replace a cheat with updated information for command {{COMMAND_NAME}} with tagging as {{TAGGING}}.
 
@@ -31,9 +31,20 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `sudo dnf install gource`.
-Replace {{INSTALL_METHOD_MAC}} with `brew install gource`.
-Replace {{INSTALL_METHOD_RPI}} with `sudo apt install gource`
+Replace {{INSTALL_METHOD_FEDORA}} with `sudo dnf install gh`.
+Replace {{INSTALL_METHOD_MAC}} with `brew install gh`.
+Replace {{INSTALL_METHOD_RPI}} with: 
+```bash
+(type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \
+  && sudo mkdir -p -m 755 /etc/apt/keyrings \
+  && out=$(mktemp) && wget -nv -O"$out" https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+  && cat "$out" | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+  && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+  && sudo mkdir -p -m 755 /etc/apt/sources.list.d \
+  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+  && sudo apt update \
+  && sudo apt install gh -y
+  ```
 
 
 ## Command path

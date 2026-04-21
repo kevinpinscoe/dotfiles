@@ -111,6 +111,17 @@ desktop-setup/application-runbooks/
 
 To add a runbook for a new app, create `desktop-setup/application-runbooks/<AppName>/RUNBOOK.md` and add a row to the table in `application-runbooks/README.md`.
 
+## Third-party binary install paths
+
+On Fedora, third-party binaries that are not installed via `dnf` go into `~/.local/bin/`, never `/usr/local/bin/`. Download the raw binary and place it there:
+
+```bash
+curl -sSfL <url> -o ~/.local/bin/<binary> && chmod +x ~/.local/bin/<binary>
+```
+
+On macOS, prefer `brew install` — Homebrew manages the path automatically.
+On Raspberry Pi (Debian), same convention as Fedora: `~/.local/bin/` for binaries not installed via `apt`.
+
 ## Platform-conditional logic
 
 `copy.sh` detects the OS with `uname -s` to find the VS Code config directory:
