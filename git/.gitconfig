@@ -1,5 +1,7 @@
 [init]
 	defaultBranch = main
+[pull]
+	rebase = false
 [user]
 	email = kevin.inscoe@gmail.com
 	name = Kevin P. Inscoe
