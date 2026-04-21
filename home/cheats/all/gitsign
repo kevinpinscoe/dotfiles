@@ -1,0 +1,62 @@
+---
+syntax: sh
+tags: [ git ]
+---
+# Command gitsign
+
+## What does this command do:
+
+Keyless Git signing using Sigstore
+
+## Installed from
+
+For Fedora install using: `curl -sSfL https://github.com/sigstore/gitsign/releases/latest/download/gitsign_0.14.0_linux_amd64  -o ~/.local/bin/gitsign && chmod +x ~/.local/bin/gitsign`
+For Raspberry Pi install using:
+```
+# Check current version first:
+gh api repos/sigstore/gitsign/releases/latest --jq '.tag_name'
+# Download binary directly to ~/.local/bin (replace 0.14.0 with current version if newer):
+curl -sSfL https://github.com/sigstore/gitsign/releases/latest/download/gitsign_0.14.0_linux_arm64 -o ~/.local/bin/gitsign && chmod +x ~/.local/bin/gitsign
+```
+For Mac install using: `brew install sigstore/tap/gitsign`
+
+## Command path
+
+For Fedora run: `~/.local/bin/gitsign`
+For Raspberry Pi run: `~/.local/bin/gitsign`
+For Mac run: `~/.local/bin/gitsign`
+
+## Command documentation
+
+Docs can be found at https://github.com/sigstore/gitsign
+
+## Command options
+
+# Configure git to use gitsign for commit signing
+git config --global commit.gpgsign true
+git config --global gpg.x509.program gitsign
+git config --global gpg.format x509
+
+# Sign a commit manually (auto-signs when commit.gpgsign=true)
+git commit -S -m "signed commit"
+
+# Verify a commit's gitsign signature
+gitsign verify \
+  --certificate-identity=<your-email@example.com> \
+  --certificate-oidc-issuer=https://accounts.google.com \
+  HEAD
+
+# Verify using GitHub Actions OIDC issuer
+gitsign verify \
+  --certificate-identity=https://github.com/<org>/<repo>/.github/workflows/<workflow>.yml@refs/heads/main \
+  --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
+  HEAD
+
+# Show git log with signature details
+git log --show-signature
+
+# Check gitsign version
+gitsign version
+
+# Show help
+gitsign --help
