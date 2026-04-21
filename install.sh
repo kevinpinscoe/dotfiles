@@ -14,7 +14,10 @@ git pull
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 if ! command -v stow &>/dev/null; then
-  echo "ERROR: stow not found. Install it first (dnf install stow / brew install stow)." >&2
+  echo "ERROR: stow not found. Install it first:" >&2
+  echo "  Fedora : sudo dnf install stow" >&2
+  echo "  macOS  : brew install stow" >&2
+  echo "  Debian : sudo apt install stow" >&2
   exit 1
 fi
 
@@ -23,7 +26,12 @@ fi
 # alongside conf.yml and must not be tracked in this repo).
 mkdir -p "$HOME/.config/cheat"
 
-PACKAGES=(bash vim aspell cheat home tmux)
+# ~/.config/git/ must be a real directory so stow symlinks ignore and hooks/
+# inside it rather than symlinking the whole directory — git may also write
+# credentials or other runtime files alongside the tracked config.
+mkdir -p "$HOME/.config/git"
+
+PACKAGES=(bash vim aspell cheat home tmux git)
 for pkg in "${PACKAGES[@]}"; do
   if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
     stow -d "$DOTFILES_DIR" -t "$HOME" --restow "$pkg"

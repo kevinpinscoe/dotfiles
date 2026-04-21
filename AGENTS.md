@@ -23,7 +23,26 @@ bash -n copy.sh install.sh restore.sh
 ## Coding Style & Naming Conventions
 Write Bash with `#!/usr/bin/env bash` and `set -euo pipefail`, matching the existing scripts. Use two-space indentation inside conditionals and keep quoting strict (`"$HOME"`, `"$dotfiles_vscode"`). Name shell fragments with numeric prefixes to preserve load order, for example `20_bashrc_aliases` or `98_zsh_prompt`.
 
-Keep platform-specific logic explicit. This repo uses `uname -s` values `Linux` (Fedora) and `Darwin` (macOS); follow that pattern when extending platform-aware behavior.
+Keep platform-specific logic explicit. This repo targets three platforms — Fedora workstation (Linux/dnf), macOS (Darwin/brew), and Raspberry Pi 5 Debian Trixie (Linux/apt) — and uses `uname -s` plus `/etc/os-release` to distinguish them. Follow that pattern when extending platform-aware behavior.
+
+## MANDATORY: adding a new stow package
+
+**Every time you create a new stow package, you must update `install.sh` in the same change.** All three platforms must work after a `git pull && bash install.sh`:
+
+| Platform | Detection | stow install |
+|----------|-----------|-------------|
+| Fedora workstation | `uname -s` == `Linux`, `/etc/os-release` contains `fedora` | `sudo dnf install stow` |
+| macOS | `uname -s` == `Darwin` | `brew install stow` |
+| Raspberry Pi 5 Debian Trixie | `uname -s` == `Linux`, `/etc/os-release` contains `debian` | `sudo apt install stow` |
+
+Steps for every new package:
+
+1. Place files under `<package>/<path-relative-to-home>/`.
+2. If the package targets `~/.config/<dir>/` alongside other tools, add `mkdir -p "$HOME/.config/<dir>"` in `install.sh` before the stow loop so stow folds per-file.
+3. Cross-platform packages: add the name to `PACKAGES=(...)` in `install.sh`.
+4. Platform-specific packages: add a detection block mirroring the existing `GHOSTTY_PKG` pattern.
+5. Update the packages table in `CLAUDE.md` and the layout table in `README.md`.
+6. Run `bash -n install.sh` to syntax-check before committing.
 
 ## Testing Guidelines
 There is no formal test framework or coverage gate. Validate changes by:

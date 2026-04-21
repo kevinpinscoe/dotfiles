@@ -49,6 +49,9 @@ Stow packages — each directory is stowed into `$HOME`:
 | `home` | `home/cheats/` | `~/cheats/` | Personal cheatsheets by platform |
 | `tmux` | `tmux/.tmux.conf` | `~/.tmux.conf` | tmux config; shared across platforms |
 | `tmux` | `tmux/.config/tmux/status/` | `~/.config/tmux/status/` | Status bar scripts (workingon, git, aws, k8s) |
+| `git` | `git/.gitconfig` | `~/.gitconfig` | Global git config; shared across all platforms |
+| `git` | `git/.config/git/ignore` | `~/.config/git/ignore` | Global gitignore |
+| `git` | `git/.config/git/hooks/` | `~/.config/git/hooks/` | Global git hooks (pre-push, post-commit) |
 | `ghostty-fedora` | `ghostty-fedora/.config/ghostty/config` | `~/.config/ghostty/config` | Ghostty config for Fedora (absolute tmux path) |
 | `ghostty-mac` | `ghostty-mac/.config/ghostty/config` | `~/.config/ghostty/config` | Ghostty config for macOS (Homebrew tmux path) |
 | — | `vscode/personal/` | Fedora VS Code config | Hostname `kevin`; restored via `restore.sh` |
@@ -115,3 +118,23 @@ To add a runbook for a new app, create `desktop-setup/application-runbooks/<AppN
 - `Darwin` → macOS, reads from `~/Library/Application Support/Code/User/`
 
 `install.sh` is platform-agnostic — stow handles all packages the same way on every host.
+
+## MANDATORY: adding a new stow package
+
+**Every time you create a new stow package in this repository, you must update `install.sh` in the same change.** This repo targets three platforms and all three must work after a `git pull && bash install.sh`:
+
+| Platform | OS detection | stow install |
+|----------|-------------|-------------|
+| Fedora workstation | `uname -s` == `Linux`, `/etc/os-release` contains `fedora` | `sudo dnf install stow` |
+| macOS | `uname -s` == `Darwin` | `brew install stow` |
+| Raspberry Pi 5 Debian Trixie | `uname -s` == `Linux`, `/etc/os-release` contains `debian` | `sudo apt install stow` |
+
+### Checklist for every new package
+
+1. Place files under `<package>/<path-relative-to-home>/` following the existing layout convention.
+2. If the package writes into `~/.config/<dir>/` and other tools may also write there, add `mkdir -p "$HOME/.config/<dir>"` to `install.sh` **before** the stow loop so stow folds per-file rather than symlinking the whole directory.
+3. If the package is **cross-platform** (same files on all three hosts), add its name to the `PACKAGES=(...)` array in `install.sh`.
+4. If the package is **platform-specific** (like ghostty), add a detection block in `install.sh` mirroring the existing `GHOSTTY_PKG` pattern — check `uname -s`, then check `/etc/os-release` for Fedora vs Debian on Linux.
+5. Update the packages table in this file (the `## Directory structure and purpose` section).
+6. Update `README.md` — add a row to the repository layout table.
+7. Run `bash -n install.sh` to syntax-check before committing.
