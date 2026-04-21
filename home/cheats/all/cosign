@@ -12,13 +12,13 @@ Code signing and transparency for containers and binaries
 
 For Fedora install using: `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`
 For Raspberry Pi install using: `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-arm64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`
-For Mac install using: `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`
+For Mac install using: `brew install cosign`
 
 ## Command path
 
 For Fedora run: `~/.local/bin/cosign`
 For Raspberry Pi run: `~/.local/bin/cosign`
-For Mac run: `~/.local/bin/cosign`
+For Mac run: `cosign`
 
 ## Command documentation
 

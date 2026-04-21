@@ -24,7 +24,7 @@ For Mac install using: `brew install sigstore/tap/gitsign`
 
 For Fedora run: `~/.local/bin/gitsign`
 For Raspberry Pi run: `~/.local/bin/gitsign`
-For Mac run: `~/.local/bin/gitsign`
+For Mac run: `gitsign`
 
 ## Command documentation
 
