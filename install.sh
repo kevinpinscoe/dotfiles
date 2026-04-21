@@ -31,6 +31,15 @@ mkdir -p "$HOME/.config/cheat"
 # credentials or other runtime files alongside the tracked config.
 mkdir -p "$HOME/.config/git"
 
+# ~/.config/tmux/status/ must be a real directory so stow symlinks scripts
+# inside it per-file rather than symlinking the whole directory.
+mkdir -p "$HOME/.config/tmux/status"
+# Remove any absolute symlinks stow won't adopt (stow only owns relative ones).
+while IFS= read -r -d '' link; do
+  target="$(readlink "$link")"
+  [[ "$target" = /* ]] && rm "$link"
+done < <(find "$HOME/.config/tmux/status" -maxdepth 1 -type l -print0)
+
 PACKAGES=(bash vim aspell cheat home tmux git)
 for pkg in "${PACKAGES[@]}"; do
   if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
