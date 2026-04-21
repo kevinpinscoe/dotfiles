@@ -8,14 +8,14 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="gh"
+{{COMMAND_NAME}}="cosign"
 <!-- How would I run this command without it being on my PATH? -->
-{{COMMAND_PATH}}="/usr/bin/gh"
-{{DOCUMENTATION_URL}}="https://cli.github.com/manual/"
-{{SUMMARIZE}}="GitHub CLI, or gh, is a command-line interface to GitHub for use in your terminal or your scripts."
+{{COMMAND_PATH}}="~/.local/bin/cosign"
+{{DOCUMENTATION_URL}}="https://github.com/sigstore/cosign"
+{{SUMMARIZE}}="Code signing and transparency for containers and binaries "
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
-{{TAGGING}}="github"
+{{TAGGING}}="git sign codesign sigstore cosign supply-chain-security artifact-signing container-signing oci keyless-signing attestation attestations"
 
 Create or replace a cheat with updated information for command {{COMMAND_NAME}} with tagging as {{TAGGING}}.
 
@@ -31,21 +31,9 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `sudo dnf install gh`.
-Replace {{INSTALL_METHOD_MAC}} with `brew install gh`.
-Replace {{INSTALL_METHOD_RPI}} with: 
-```bash
-(type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \
-  && sudo mkdir -p -m 755 /etc/apt/keyrings \
-  && out=$(mktemp) && wget -nv -O"$out" https://cli.github.com/packages/githubcli-archive-keyring.gpg \
-  && cat "$out" | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
-  && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
-  && sudo mkdir -p -m 755 /etc/apt/sources.list.d \
-  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-  && sudo apt update \
-  && sudo apt install gh -y
-  ```
-
+Replace {{INSTALL_METHOD_FEDORA}} with `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`
+Replace {{INSTALL_METHOD_MAC}} with `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`.
+Replace {{INSTALL_METHOD_RPI}} with: `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-arm64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosig`
 
 ## Command path
 
