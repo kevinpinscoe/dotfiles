@@ -126,6 +126,49 @@ git push origin v1.2.3
 
 ---
 
+## Smoke test (new host setup)
+
+Run this after `bash install.sh` and installing gitsign on any new host.
+
+```bash
+mkdir /tmp/gitsign-test && cd /tmp/gitsign-test
+git init && echo "test" > test.txt && git add .
+git commit -m "gitsign smoke test"
+# Expected: browser opens for Google OIDC auth
+# Expected: "[gitsign] commit signed OK" printed by post-commit hook
+
+# Check the commit signature
+git log -1 --format="%H %G? %GS"
+# Expected: <hash> U <empty> — U ("unknown") is normal, see note below
+
+# Create and verify a signed tag
+git tag -a v0.0.0-test -m "gitsign smoke test"
+gitsign verify \
+  --certificate-identity=kevin.inscoe@gmail.com \
+  --certificate-oidc-issuer=https://accounts.google.com \
+  refs/tags/v0.0.0-test
+# Expected:
+#   Validated Git signature: true
+#   Validated Rekor entry: true
+#   Validated Certificate claims: true
+
+# Clean up
+git tag -d v0.0.0-test
+cd / && rm -rf /tmp/gitsign-test
+```
+
+> **Note on `%G? = U`:** git grades signatures against a local GPG keyring. Sigstore certs are never in that keyring, so git always returns `U` ("unknown"). This is expected — use `gitsign verify` for authoritative verification.
+
+### Headless host (RPi without a browser)
+
+If no browser is available, gitsign will print a URL instead of opening one. Open that URL on any other device, auth with `kevin.inscoe@gmail.com`, and the callback completes on the headless host. To force URL-only mode:
+
+```bash
+BROWSER=echo git commit -m "gitsign smoke test"
+```
+
+---
+
 ## Troubleshooting
 
 ### Browser does not open / OIDC flow hangs
