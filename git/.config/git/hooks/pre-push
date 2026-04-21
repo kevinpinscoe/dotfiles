@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+while read local_ref local_sha remote_ref remote_sha; do
+  if [[ "$local_ref" == refs/tags/v* ]]; then
+    tag="${local_ref#refs/tags/}"
+    if ! git tag -v "$tag" &>/dev/null; then
+      echo "ERROR: tag '$tag' is not signed. Sign it with: git tag -s -f $tag -m 'your message'" >&2
+      exit 1
+    fi
+  fi
+done

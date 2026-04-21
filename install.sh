@@ -30,6 +30,9 @@ mkdir -p "$HOME/.config/cheat"
 # inside it rather than symlinking the whole directory — git may also write
 # credentials or other runtime files alongside the tracked config.
 mkdir -p "$HOME/.config/git"
+# hooks/ must also be a real directory so stow symlinks each hook file
+# individually rather than symlinking the whole directory.
+mkdir -p "$HOME/.config/git/hooks"
 
 # ~/.config/tmux/status/ must be a real directory so stow symlinks scripts
 # inside it per-file rather than symlinking the whole directory.

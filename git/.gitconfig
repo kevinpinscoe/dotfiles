@@ -1,3 +1,13 @@
+[gpg]
+	format = x509
+[gpg "x509"]
+	program = gitsign
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[gitsign]
+	connectorID = https://accounts.google.com
 [init]
 	defaultBranch = main
 [pull]
@@ -13,3 +23,5 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
+[core]
+	hooksPath = ~/.config/git/hooks

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+if git config --get commit.gpgsign | grep -q true; then
+  git log -1 --format="%H %G? %GS" | grep -qv " N " && echo "[gitsign] commit signed OK"
+fi
