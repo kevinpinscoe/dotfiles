@@ -3,5 +3,8 @@
     { "path": "/Users/kevini/Projects", "name": "PROJECTS" },
     { "path": "/Users/kevini", "name": "HOME" },
     { "path": "/Users/kevini/ai", "name": "AI" }
-  ]
+  ],
+  "settings": {
+    "terminal.integrated.cwd": "/Users/kevini/Projects"
+  }
 }
