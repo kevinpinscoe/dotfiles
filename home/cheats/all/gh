@@ -1,0 +1,144 @@
+---
+syntax: sh
+tags: [ all, github ]
+---
+# Command gh
+
+## What does this command do:
+
+GitHub CLI, or gh, is a command-line interface to GitHub for use in your terminal or your scripts.
+
+## Installed from
+
+For Fedora install using: `sudo dnf install gh`
+For Raspberry Pi install using:
+```
+(type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \
+  && sudo mkdir -p -m 755 /etc/apt/keyrings \
+  && out=$(mktemp) && wget -nv -O"$out" https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+  && cat "$out" | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+  && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+  && sudo mkdir -p -m 755 /etc/apt/sources.list.d \
+  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+  && sudo apt update \
+  && sudo apt install gh -y
+```
+For Mac install using: `brew install gh`
+
+## Command path
+
+For Fedora run: `/usr/bin/gh`
+For Raspberry Pi run: `/usr/bin/gh`
+For Mac run: `/usr/bin/gh`
+
+## Command documentation
+
+Docs can be found at https://cli.github.com/manual/
+
+## Command options
+
+### Flags
+    --help      Show help for command
+    --version   Show gh version
+
+### Core commands
+    gh auth <subcommand>        Authenticate gh and git with GitHub
+      login                     Log in to GitHub
+      logout                    Log out of GitHub
+      status                    Show authentication status
+      switch                    Switch active account
+      token                     Print the auth token in use
+      refresh                   Refresh stored authentication credentials
+      setup-git                 Configure git to use gh as a credential helper
+
+    gh browse                   Open repo, issue, PR, or more in the browser
+
+    gh codespace <subcommand>   Connect to and manage codespaces
+    gh gist <subcommand>        Manage gists (create, delete, clone, list, view, edit)
+
+    gh issue <subcommand>       Manage issues
+      create                    Create a new issue
+      list                      List issues
+      view <number>             View an issue
+      close <number>            Close an issue
+      edit <number>             Edit an issue
+      comment <number>          Add a comment
+      lock / pin / transfer      Lock, pin, or transfer an issue
+
+    gh org <subcommand>         Manage organizations (list)
+
+    gh pr <subcommand>          Manage pull requests
+      create                    Create a pull request
+      list                      List pull requests
+      view [number]             View a pull request
+      checkout <number>         Check out a pull request locally
+      merge [number]            Merge a pull request
+      review [number]           Add a review to a pull request
+      diff [number]             View changes in a pull request
+      checks [number]           Show CI status checks
+      close / reopen            Close or reopen a pull request
+      comment <number>          Add a comment
+      edit [number]             Edit a pull request
+
+    gh project <subcommand>     Work with GitHub Projects
+    gh release <subcommand>     Manage releases (create, delete, download, upload, view)
+
+    gh repo <subcommand>        Manage repositories
+      clone <repo>              Clone a repository
+      create                    Create a new repository
+      fork [repo]               Fork a repository
+      view [repo]               View repository info
+      sync                      Sync a fork with its parent
+      delete <repo>             Delete a repository
+
+### GitHub Actions commands
+    gh cache <subcommand>       Manage Actions caches (list, delete)
+    gh run <subcommand>         View/manage workflow runs (list, view, cancel, rerun, download, watch)
+    gh workflow <subcommand>    Manage workflows (enable, disable, run, list, view)
+
+### Additional commands
+    gh alias <subcommand>       Create/manage command shortcuts (set, delete, list, import)
+    gh api <endpoint>           Make an authenticated GitHub API request
+    gh config <subcommand>      Manage gh configuration (get, set, list, clear-cache)
+    gh extension <subcommand>   Manage gh extensions (install, remove, search, upgrade, create)
+    gh gpg-key <subcommand>     Manage GPG keys (add, delete, list)
+    gh label <subcommand>       Manage labels (create, delete, edit, clone, list)
+    gh ruleset <subcommand>     View repo rulesets (check, list, view)
+    gh search <subcommand>      Search GitHub (code, issues, commits, prs, repos)
+    gh secret <subcommand>      Manage secrets (set, delete, list)
+    gh ssh-key <subcommand>     Manage SSH keys (add, delete, list)
+    gh status                   Show relevant issues, PRs, and notifications
+    gh variable <subcommand>    Manage Actions variables (set, get, delete, list)
+
+### Useful environment variables
+    GH_HOST                     Override the default GitHub host
+    GITHUB_TOKEN / GH_TOKEN     Token for authentication
+    GH_ENTERPRISE_TOKEN         Token for GitHub Enterprise
+
+### Examples
+# Authenticate
+gh auth login
+
+# Clone a repo
+gh repo clone owner/repo
+
+# Create a PR from the current branch
+gh pr create --title "My feature" --body "Description"
+
+# View open PRs
+gh pr list
+
+# Check out PR #42
+gh pr checkout 42
+
+# Create an issue
+gh issue create --title "Bug report" --body "Details here"
+
+# View CI checks on current PR
+gh pr checks
+
+# Open current repo in browser
+gh browse
+
+# Make a raw API call
+gh api repos/owner/repo/issues

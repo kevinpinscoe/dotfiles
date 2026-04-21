@@ -8,14 +8,14 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="gource"
+{{COMMAND_NAME}}="cosign"
 <!-- How would I run this command without it being on my PATH? -->
-{{COMMAND_PATH}}="/usr/bin/gource"
-{{DOCUMENTATION_URL}}="https://gource.io/"
-{{SUMMARIZE}}="Software projects are displayed by Gource as an animated tree with the root directory of the project at its centre. Directories appear as branches with files as leaves. Developers can be seen working on the tree at the times they contributed to the project."
+{{COMMAND_PATH}}="~/.local/bin/cosign"
+{{DOCUMENTATION_URL}}="https://github.com/sigstore/cosign"
+{{SUMMARIZE}}="Code signing and transparency for containers and binaries "
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
-{{TAGGING}}="git"
+{{TAGGING}}="git sign codesign sigstore cosign supply-chain-security artifact-signing container-signing oci keyless-signing attestation attestations"
 
 Create or replace a cheat with updated information for command {{COMMAND_NAME}} with tagging as {{TAGGING}}.
 
@@ -31,10 +31,9 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `sudo dnf install gource`.
-Replace {{INSTALL_METHOD_MAC}} with `brew install gource`.
-Replace {{INSTALL_METHOD_RPI}} with `sudo apt install gource`
-
+Replace {{INSTALL_METHOD_FEDORA}} with `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`
+Replace {{INSTALL_METHOD_MAC}} with `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`.
+Replace {{INSTALL_METHOD_RPI}} with: `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-arm64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosig`
 
 ## Command path
 

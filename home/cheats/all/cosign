@@ -1,0 +1,147 @@
+---
+syntax: sh
+tags: [ all, git, sign, codesign, sigstore, cosign, supply-chain-security, artifact-signing, container-signing, oci, keyless-signing, attestation, attestations ]
+---
+# Command cosign
+
+## What does this command do:
+
+Code signing and transparency for containers and binaries
+
+## Installed from
+
+For Fedora install using: `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`
+For Raspberry Pi install using: `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-arm64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`
+For Mac install using: `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`
+
+## Command path
+
+For Fedora run: `~/.local/bin/cosign`
+For Raspberry Pi run: `~/.local/bin/cosign`
+For Mac run: `~/.local/bin/cosign`
+
+## Command documentation
+
+Docs can be found at https://github.com/sigstore/cosign
+
+## Command options
+
+### Global flags
+    -h, --help                  help for cosign
+    --output-file <file>        log output to a file
+    -t, --timeout <duration>    timeout for commands (default 3m0s)
+    -d, --verbose               log debug output
+
+### Key management
+# Generate a key pair
+cosign generate-key-pair
+
+# Import an existing PEM-encoded RSA or EC private key
+cosign import-key-pair --key existing.key
+
+# Get public key from a key pair
+cosign public-key --key cosign.key
+
+### Signing containers (always sign by digest, not tag)
+# Keyless signing via Sigstore OIDC (Fulcio CA + Rekor transparency log)
+cosign sign <IMAGE@sha256:DIGEST>
+
+# Sign with a local key pair
+cosign sign --key cosign.key <IMAGE@sha256:DIGEST>
+
+# Sign with a key in KMS (AWS, GCP, Azure, Vault)
+cosign sign --key awskms://[ENDPOINT]/[ID/ALIAS/ARN] <IMAGE@sha256:DIGEST>
+cosign sign --key gcpkms://projects/[PROJECT]/locations/global/keyRings/[KEYRING]/cryptoKeys/[KEY]/versions/[VERSION] <IMAGE@sha256:DIGEST>
+cosign sign --key azurekms://[VAULT_NAME][VAULT_URI]/[KEY] <IMAGE@sha256:DIGEST>
+cosign sign --key hashivault://[KEY] <IMAGE@sha256:DIGEST>
+
+# Sign with a key in a Kubernetes secret
+cosign sign --key k8s://[NAMESPACE]/[KEY] <IMAGE@sha256:DIGEST>
+
+# Sign and add custom annotations
+cosign sign --key cosign.key -a key1=value1 -a key2=value2 <IMAGE@sha256:DIGEST>
+
+# Sign without uploading to transparency log
+cosign sign --key cosign.key --tlog-upload=false <IMAGE@sha256:DIGEST>
+
+# Sign a multi-arch image and all referenced discrete images
+cosign sign --key cosign.key --recursive <MULTI-ARCH IMAGE@sha256:DIGEST>
+
+### Verifying containers
+# Keyless verification (checks Rekor + Fulcio cert)
+cosign verify --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  --certificate-identity-regexp "https://github.com/org/repo" <IMAGE>
+
+# Verify with a local public key
+cosign verify --key cosign.pub <IMAGE>
+
+# Verify with a local certificate and chain
+cosign verify --cert cosign.crt --cert-chain chain.crt <IMAGE>
+
+# Verify and check specific annotations
+cosign verify --key cosign.pub -a key1=val1 <IMAGE>
+
+### Signing blobs
+# Sign a blob (keyless)
+cosign sign-blob <FILE>
+
+# Sign a blob with a local key
+cosign sign-blob --key cosign.key <FILE>
+
+# Sign a blob and write a bundle (everything needed to verify)
+cosign sign-blob --key cosign.key --bundle cosign.bundle <FILE>
+
+### Verifying blobs
+# Verify a blob with a local public key and signature file
+cosign verify-blob --key cosign.pub --signature <SIG_FILE> <FILE>
+
+# Verify a blob using a bundle
+cosign verify-blob --bundle cosign.bundle <FILE>
+
+# Verify a blob (keyless) with identity constraints
+cosign verify-blob --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  --certificate-identity-regexp "https://github.com/org/repo" \
+  --signature <SIG_FILE> <FILE>
+
+### Attestations
+# Attest a container image (keyless)
+cosign attest --predicate <predicate.json> --type <type> <IMAGE@sha256:DIGEST>
+
+# Attest a blob
+cosign attest-blob --predicate <predicate.json> --type <type> <FILE>
+
+# Verify an attestation on an image
+cosign verify-attestation --key cosign.pub --type <type> <IMAGE>
+
+# Verify a blob attestation
+cosign verify-blob-attestation --key cosign.pub --type <type> --bundle <bundle> <FILE>
+
+### Inspecting supply chain artifacts
+# Show all supply chain artifacts (signatures, SBOMs, attestations) for an image
+cosign tree <IMAGE>
+
+# Download signature for an image
+cosign download signature <IMAGE>
+
+# Download SBOM for an image
+cosign download sbom <IMAGE>
+
+### Registry and image utilities
+# Save image + signatures to disk
+cosign save <IMAGE> --dir ./my-image
+
+# Load a saved signed image to a registry
+cosign load --dir ./my-image <TARGET_IMAGE>
+
+# Remove all signatures from an image
+cosign clean <IMAGE>
+
+# Log in to a registry
+cosign login <REGISTRY> -u <USER> -p <PASSWORD>
+
+### Transparency log / trust root
+# Initialize Sigstore root (fetch trusted certs and keys)
+cosign initialize
+
+# Print cosign environment variables
+cosign env
