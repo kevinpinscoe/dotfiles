@@ -8,14 +8,14 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="cosign"
+{{COMMAND_NAME}}="yq"
 <!-- How would I run this command without it being on my PATH? -->
 {{COMMAND_PATH}}="~/.local/bin/cosign"
-{{DOCUMENTATION_URL}}="https://github.com/sigstore/cosign"
-{{SUMMARIZE}}="Code signing and transparency for containers and binaries "
+{{DOCUMENTATION_URL}}="https://github.com/mikefarah/yq"
+{{SUMMARIZE}}="yq is a portable command-line YAML, JSON, XML, CSV, TOML, HCL and properties processor"
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
-{{TAGGING}}="git sign codesign sigstore cosign supply-chain-security artifact-signing container-signing oci keyless-signing attestation attestations"
+{{TAGGING}}="YAML JSON XML CSV TOML HCL properties-processor"
 
 Create or replace a cheat with updated information for command {{COMMAND_NAME}} with tagging as {{TAGGING}}.
 
@@ -31,9 +31,25 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`
-Replace {{INSTALL_METHOD_MAC}} with `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosign`.
-Replace {{INSTALL_METHOD_RPI}} with: `curl -sSfL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-arm64 -o ~/.local/bin/cosign && chmod +x ~/.local/bin/cosig`
+Replace {{INSTALL_METHOD_FEDORA}} with `sudo dnf install yq`
+Replace {{INSTALL_METHOD_MAC}} with `brew install yq`.
+Replace {{INSTALL_METHOD_RPI}} with: 
+```bash
+arch="$(dpkg --print-architecture)"
+
+case "$arch" in
+  arm64) bin="yq_linux_arm64" ;;
+  armhf|armel) bin="yq_linux_arm" ;;
+  amd64) bin="yq_linux_amd64" ;;
+  *)
+    echo "Unsupported architecture: $arch"
+    exit 1
+    ;;
+esac
+
+sudo wget "https://github.com/mikefarah/yq/releases/latest/download/${bin}" -O /usr/local/bin/yq
+sudo chmod +x /usr/local/bin/yq
+```
 
 ## Command path
 
