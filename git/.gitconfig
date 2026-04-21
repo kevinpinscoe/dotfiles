@@ -2,7 +2,7 @@
 	defaultBranch = main
 [user]
 	email = kevin.inscoe@gmail.com
-	name = kevinpinscoe
+	name = Kevin P. Inscoe
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [credential "https://github.com"]
