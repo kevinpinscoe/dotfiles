@@ -23,4 +23,5 @@ Runbooks are not platform-gated. An app directory is created regardless of wheth
 | Ghostty | [Ghostty/RUNBOOK.md](Ghostty/RUNBOOK.md) | Install (macOS/Fedora/Debian Pi), build from source, config |
 | Mark Text | [MarkText/RUNBOOK.md](MarkText/RUNBOOK.md) | Install (Fedora/macOS), custom CSS theming |
 | Obsidian | [Obsidian/RUNBOOK.md](Obsidian/RUNBOOK.md) | Spell-check dictionary management |
+| tmux | [tmux/RUNBOOK.md](tmux/RUNBOOK.md) | tmux config, status bar, keybindings |
 | Typora | [Typora/RUNBOOK.md](Typora/RUNBOOK.md) | Install (macOS/Fedora/Windows), licensing, themes (paid app) |
