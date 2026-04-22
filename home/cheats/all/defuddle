@@ -18,7 +18,7 @@ For Mac install using: `npm install -g defuddle`
 
 For Fedora run: `defuddle`
 For Raspberry Pi run: `defuddle`
-For Mac run: `defuddle`
+For Mac run: `/opt/homebrew/bin/defuddle`
 
 ## Command documentation
 
