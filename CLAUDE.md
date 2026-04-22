@@ -12,6 +12,12 @@ Scripts:
 - `copy.sh` — saves VS Code config **from the live system** into this repo (shell/vim/cheat are symlinks, no copying needed)
 - `restore.sh` — restores VS Code configuration from this repo to the live system (run after `install.sh`)
 
+## Git commit signing
+
+All commits and tags in this repo are signed using **gitsign** (Sigstore) with Google OAuth (`gpgsign = true`, `format = x509`, `program = gitsign`). Signing opens a browser window to complete the OAuth flow.
+
+**IMPORTANT — SSH sessions:** If you are connected to this machine via SSH from another host, `gitsign` cannot open a browser and any `git commit` or `git tag` will fail. Before asking Claude to commit anything, confirm you are sitting at the machine's physical desktop (or using a local terminal session on it). Claude must remind you of this requirement every time you request a commit.
+
 ## Key workflows
 
 **First-time setup on a host previously using copy-based install:**
