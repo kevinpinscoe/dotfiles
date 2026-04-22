@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Personal dotfiles for Linux hosts (Fedora, Raspberry Pi) and Mac. Dotfiles are managed with **GNU Stow** — `install.sh` creates symlinks in `$HOME` rather than copying files. Editing a file under `~/` edits the repo directly.
 
 Scripts:
-- `install.sh` — stows all packages (creates symlinks in `$HOME`)
+- `install.sh` — stows all packages (creates symlinks in `$HOME`); also auto-repairs a stow-folded `~/.config/git` directory symlink (converts it to per-file symlinks) so git can write runtime files alongside tracked config
 - `migrate-to-stow.sh` — one-time migration on hosts that used the old copy-based setup; run before `install.sh`
 - `copy.sh` — saves VS Code config **from the live system** into this repo (shell/vim/cheat are symlinks, no copying needed)
 - `restore.sh` — restores VS Code configuration from this repo to the live system (run after `install.sh`)

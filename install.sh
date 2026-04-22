@@ -29,9 +29,12 @@ mkdir -p "$HOME/.config/cheat"
 # ~/.config/git/ must be a real directory so stow symlinks ignore and hooks/
 # inside it rather than symlinking the whole directory — git may also write
 # credentials or other runtime files alongside the tracked config.
+# Remove a stow-folded directory symlink if a previous run left one behind.
+[[ -L "$HOME/.config/git" ]] && rm "$HOME/.config/git"
 mkdir -p "$HOME/.config/git"
 # hooks/ must also be a real directory so stow symlinks each hook file
 # individually rather than symlinking the whole directory.
+[[ -L "$HOME/.config/git/hooks" ]] && rm "$HOME/.config/git/hooks"
 mkdir -p "$HOME/.config/git/hooks"
 
 # ~/.config/tmux/status/ must be a real directory so stow symlinks scripts

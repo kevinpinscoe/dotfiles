@@ -88,7 +88,7 @@ This repo is primarily a personal setup, not a generic dotfiles framework. Use i
 
 Raspberry Pi 5 running Debian Trixie with a display attached. Ghostty is built from source (no official arm64 `.deb` exists). `install.sh` detects Debian via `/etc/os-release` and stows the `ghostty-debian` package automatically.
 
-**Packages stowed:** `bash`, `vim`, `aspell`, `cheat`, `home`, `tmux`, `ghostty-debian`.
+**Packages stowed:** `bash`, `vim`, `aspell`, `cheat`, `home`, `tmux`, `git`, `ghostty-debian`.
 
 **tmux auto-attach on SSH login** is in `.bashrc` — no extra setup needed after `install.sh`.
 
@@ -128,4 +128,6 @@ rm -rf ~/.bash.d ~/.tmux.conf ~/.config/tmux/status/*.sh
 cd ~/.dotfiles
 bash install.sh
 ```
+
+`install.sh` automatically repairs a stow-folded `~/.config/git` directory symlink (converts it to per-file symlinks so git can write runtime files alongside tracked config). No manual cleanup needed for the git package.
 
