@@ -136,6 +136,31 @@ On Raspberry Pi (Debian), same convention as Fedora: `~/.local/bin/` for binarie
 
 `install.sh` is platform-agnostic — stow handles all packages the same way on every host.
 
+## MANDATORY: cross-machine todo entries
+
+This repo is stowed on three machines (macOS, Fedora, Raspberry Pi 5). When a change made here requires a follow-up command (e.g. `bash install.sh`, `bash migrate-to-stow.sh`, `bash restore.sh`, or any manual step) on machines **other than the one you are currently working on**, append a one-line entry to `~/todo/<os>/TODO.md` for each target machine so Kevin sees the pending task the next time he is on that host.
+
+Folder mapping (match the directories that already exist under `~/todo/`):
+
+| Target machine | Current OS detection | Todo file |
+|----------------|---------------------|-----------|
+| macOS | `uname -s` == `Darwin` | `~/todo/mac/TODO.md` |
+| Fedora workstation | `uname -s` == `Linux`, `/etc/os-release` contains `fedora` | `~/todo/fedora/TODO.md` |
+| Raspberry Pi 5 (Debian) | `uname -s` == `Linux`, `/etc/os-release` contains `debian` | `~/todo/rpi/TODO.md` |
+
+### Rules
+
+1. Detect the current host with `uname -s` (and `/etc/os-release` on Linux). **Do not** append to the current host's TODO.md — the change is already applied here.
+2. Append to **every** other host's TODO.md that is affected by the change. Cross-platform package changes (e.g. a new entry in the `PACKAGES=(...)` array in `install.sh`) affect all three; platform-specific changes may only affect one.
+3. Entry format — one line per task:
+   ```
+   YYYY-MM-DD <command to run>  # <short reason>
+   ```
+   Example: `2026-04-22 cd ~/.dotfiles && git pull && bash install.sh  # new stow package 'foo' added`
+4. Create `~/todo/<os>/TODO.md` if it does not exist. Do not create anything else in those folders.
+5. Kevin removes the line himself after running the command — do not touch existing entries.
+6. Mention the appended entries in your response so Kevin can sanity-check the target list.
+
 ## MANDATORY: adding a new stow package
 
 **Every time you create a new stow package in this repository, you must update `install.sh` in the same change.** This repo targets three platforms and all three must work after a `git pull && bash install.sh`:
