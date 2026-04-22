@@ -161,3 +161,8 @@ Install the missing dev package: `sudo apt install libgtk4-layer-shell-dev`
 
 **Wrong Zig version**
 Running `zig build` with the wrong Zig will produce a cryptic compile error. Confirm version with `/usr/lib/zig/0.15.2/zig version` before building. Do not use the `zig` or `zig-stable` packages — only `zig-0`.
+
+---
+
+**Clipboard not working when SSH'd to the Pi from Ghostty on Fedora**
+If Ghostty is running inside Fedora's tmux, your `$TERM` is `tmux-256color` when you SSH, not `ghostty`. The Pi's tmux therefore can't match the `ghostty*` terminal-override and won't send OSC 52. The Pi's clipboard stack uses a broadcast script to push clipboard content directly to Fedora via `wl-copy` over SSH, which works regardless of the terminal chain. See the **Clipboard (RPi5 over SSH)** section in the [tmux runbook](../tmux/RUNBOOK.md) for architecture details and troubleshooting steps.

@@ -57,6 +57,110 @@ tmux source-file ~/.tmux.conf
 
 ---
 
+## Clipboard (RPi5 over SSH)
+
+On the Raspberry Pi 5 there is no real display, so the standard X11/Wayland clipboard tools don't work. The clipboard stack has three layers that must all be intact for yanked text to reach the machine you SSHed from.
+
+### Architecture
+
+```
+tmux yank (y / DoubleClick / TripleClick)
+    │
+    ▼
+DISPLAY=:99 copyq copy -        ← copyq running headless on Xvfb :99
+    │
+    ├─► OSC 52 escape sequence → SSH tunnel → outer terminal (Ghostty)
+    │       requires: terminal-overrides Ms capability (see below)
+    │
+    └─► ~/.local/bin/broadcast_clip_from_pi.sh  (runs in background)
+            printf '%s' "$clip" | ssh fedora "wl-copy"    (Wayland)
+            printf '%s' "$clip" | ssh mac    "pbcopy"     (macOS)
+```
+
+**copyq on Xvfb** (`DISPLAY=:99`) is the clipboard store. Xvfb and copyq are started as systemd user services (or at login). tmux-yank is configured to pipe selected text directly into copyq rather than using xsel/xclip, which require a real display.
+
+**OSC 52** is the terminal escape sequence that lets tmux push text into the SSH client's clipboard. It requires the client terminal to support OSC 52 (Ghostty does) and the tmux `Ms` capability to be set for that terminal type.
+
+**broadcast_clip_from_pi.sh** is a belt-and-suspenders fallback that pushes the clipboard to Fedora and Mac over SSH, bypassing OSC 52 entirely. It fires on every yank via the copy command, so the clipboard reliably reaches Fedora even when OSC 52 can't traverse the full chain.
+
+### The nested-tmux problem
+
+When you SSH to the Pi **from inside Ghostty on Fedora**, Ghostty is running inside Fedora's tmux, so your shell's `$TERM` is `tmux-256color`, not `ghostty` or `xterm-256color`. The Pi's tmux sees `client_termname=tmux-256color` and checks whether any `terminal-overrides` entry matches. Without a `tmux*` entry, none match, so `Ms` is never added and OSC 52 is never sent.
+
+Fix already applied in `~/.tmux.conf`:
+
+```
+set -ag terminal-overrides ',tmux*:Ms=\E]52;%p1%s;%p2%s\007'
+```
+
+This is why there are three entries (`xterm*`, `ghostty*`, `tmux*`) — they cover direct Ghostty SSH, SSH from a non-tmux shell on Fedora, and SSH from inside Fedora's tmux respectively.
+
+Even with `tmux*:Ms=...` set on the Pi, the OSC 52 sequence arrives at Fedora's tmux (not directly at Ghostty). For Fedora's tmux to forward it to Ghostty, Fedora's `~/.tmux.conf` would also need `terminal-overrides` with `Ms` for `ghostty*`. The broadcast script sidesteps this entirely.
+
+### Troubleshooting: clipboard not working over SSH
+
+**1. Check that Xvfb and copyq are running on the Pi:**
+
+```bash
+pgrep -a Xvfb          # should show: Xvfb :99 ...
+pgrep -a copyq         # should show multiple copyq processes
+DISPLAY=:99 copyq clipboard   # should print the current clipboard content
+```
+
+If either process is missing, check the systemd user services or re-run whatever starts them at login.
+
+**2. Verify the terminal-overrides are loaded:**
+
+```bash
+tmux show-options -g terminal-overrides
+```
+
+You should see three `Ms=` entries for `xterm*`, `ghostty*`, and `tmux*`. If missing, reload the config:
+
+```bash
+tmux source-file ~/.tmux.conf
+```
+
+**3. Check which terminal tmux sees for your session:**
+
+```bash
+tmux display-message -p "#{client_termname}"
+```
+
+If this returns `tmux-256color`, you are SSHing from inside Fedora's tmux. OSC 52 will pass through tmux on the Pi, but Fedora's tmux must also forward it to Ghostty. The broadcast script is the reliable path in this case.
+
+**4. Test the broadcast script manually:**
+
+```bash
+printf 'test-clip' | DISPLAY=:99 copyq copy -
+~/.local/bin/broadcast_clip_from_pi.sh
+```
+
+Then try pasting in Ghostty on Fedora. If it fails, check SSH connectivity:
+
+```bash
+ssh -o ConnectTimeout=5 -o BatchMode=yes 10.1.10.40 echo ok
+```
+
+**5. Check that broadcast_clip_from_pi.sh is executable:**
+
+```bash
+ls -la ~/.local/bin/broadcast_clip_from_pi.sh
+```
+
+If it lacks the `x` bit: `chmod +x ~/.local/bin/broadcast_clip_from_pi.sh`
+
+**6. Fedora wl-copy path:**
+
+The broadcast script uses:
+```bash
+printf '%s' "$CLIP" | ssh 10.1.10.40 "XDG_RUNTIME_DIR=/run/user/1000 WAYLAND_DISPLAY=wayland-0 wl-copy"
+```
+
+If it stops working on Fedora, verify that the Wayland socket still exists at `/run/user/1000/wayland-0` and that `wl-clipboard` is installed (`dnf install wl-clipboard`).
+
+---
+
 ## Troubleshooting: Status bar not showing expected items
 
 Work through these checks in order.
