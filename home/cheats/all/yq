@@ -1,0 +1,113 @@
+---
+syntax: sh
+tags: [ all, YAML, JSON, XML, CSV, TOML, HCL, properties-processor ]
+---
+# Command yq
+
+## What does this command do:
+
+yq is a portable command-line YAML, JSON, XML, CSV, TOML, HCL and properties processor
+
+## Installed from
+
+For Fedora install using: `sudo dnf install yq`
+For Raspberry Pi install using:
+```
+arch="$(dpkg --print-architecture)"
+
+case "$arch" in
+  arm64) bin="yq_linux_arm64" ;;
+  armhf|armel) bin="yq_linux_arm" ;;
+  amd64) bin="yq_linux_amd64" ;;
+  *)
+    echo "Unsupported architecture: $arch"
+    exit 1
+    ;;
+esac
+
+sudo wget "https://github.com/mikefarah/yq/releases/latest/download/${bin}" -O /usr/local/bin/yq
+sudo chmod +x /usr/local/bin/yq
+```
+For Mac install using: `brew install yq`
+
+## Command path
+
+For Fedora run: `/usr/bin/yq`
+For Raspberry Pi run: `/usr/local/bin/yq`
+For Mac run: `/usr/local/bin/yq`
+
+## Command documentation
+
+Docs can be found at https://github.com/mikefarah/yq
+
+## Command options
+
+### Flags
+    -C, --colors                          force print with colors
+    -M, --no-colors                       force print with no colors
+    -e, --exit-status                     set exit status if there are no matches or null or false is returned
+    -f, --front-matter string             (extract|process) first input as yaml front-matter
+    -h, --help                            help for yq
+    -I, --indent int                      sets indent level for output (default 2)
+    -i, --inplace                         update the file in place of first file given
+    -p, --input-format string             [auto|yaml|json|props|csv|tsv|xml|base64|uri|toml|lua|ini] (default "auto")
+    -N, --no-doc                          don't print document separators (---)
+    -0, --nul-output                      use NUL char to separate values
+    -n, --null-input                      don't read input, evaluate expression only (useful for creating docs)
+    -o, --output-format string            [auto|yaml|json|props|csv|tsv|xml|base64|uri|toml|shell|lua|ini] (default "auto")
+    -P, --prettyPrint                     pretty print, shorthand for '... style = ""'
+    -s, --split-exp string                print each result into a file named by expression
+    -r, --unwrapScalar                    unwrap scalar, print value with no quotes (default true for yaml)
+    -v, --verbose                         verbose mode
+    -V, --version                         print version information and quit
+
+### Subcommands
+    eval        (default) apply expression to each document in each file in sequence
+    eval-all    load all yaml documents of all files and run expression once
+    completion  generate autocompletion script for bash/zsh/fish/powershell
+
+### Examples
+# Read a value from a YAML file
+yq '.key' file.yml
+
+# Read nested value
+yq '.parent.child' file.yml
+
+# Update a value in-place
+yq -i '.key = "newvalue"' file.yml
+
+# Convert YAML to JSON
+yq -o json file.yml
+
+# Convert JSON to YAML
+yq -p json -o yaml file.json
+
+# Pretty-print JSON as YAML
+yq -P -oy sample.json
+
+# Auto-detect XML input from stdin
+cat file.xml | yq -p xml
+
+# Merge two YAML files (eval-all)
+yq eval-all '. as $item ireduce ({}; . * $item)' file1.yml file2.yml
+
+# Select array elements matching a condition
+yq '.items[] | select(.name == "foo")' file.yml
+
+# Add a new key to all array elements
+yq -i '.items[].enabled = true' file.yml
+
+# Delete a key
+yq -i 'del(.unwanted)' file.yml
+
+# Create a new YAML document from scratch
+yq -n '.name = "test" | .version = "1.0"'
+
+# Output a raw scalar (no quotes)
+yq -r '.name' file.yml
+
+# Count array length
+yq '.items | length' file.yml
+
+# Extract specific keys from each array element
+yq '.items[] | {name: .name, id: .id}' file.yml
