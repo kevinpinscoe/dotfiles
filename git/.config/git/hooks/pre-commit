@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# cspell:ignore ACMR
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+if [[ -n "$staged" ]]; then
+  echo "$staged" | xargs cspell --no-must-find-files --quiet
+fi
