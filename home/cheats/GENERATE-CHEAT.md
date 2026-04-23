@@ -8,14 +8,14 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="cspell"
+{{COMMAND_NAME}}="husky"
 <!-- How would I run this command without it being on my PATH? -->
-{{COMMAND_PATH}}="cspell"
-{{DOCUMENTATION_URL}}="https://cspell.org/"
-{{SUMMARIZE}}="A Spell Checker for Code"
+{{COMMAND_PATH}}="husky"
+{{DOCUMENTATION_URL}}="https://github.com/typicode/husky"
+{{SUMMARIZE}}="git hooks library"
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
-{{TAGGING}}="YAML JSON XML CSV TOML HCL properties-processor"
+{{TAGGING}}="git git-hooks"
 
 Create or replace a cheat with updated information for command {{COMMAND_NAME}} with tagging as {{TAGGING}}.
 
@@ -31,21 +31,21 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `npm install -g --save-dev cspell`
-Replace {{INSTALL_METHOD_MAC}} with `brew install cspell`.
+Replace {{INSTALL_METHOD_FEDORA}} with `npm install -g husky`
+Replace {{INSTALL_METHOD_MAC}} with `brew install husky`.
 Replace {{INSTALL_METHOD_RPI}} with: 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
 source ~/.bashrc
 nvm install 22
 nvm use 22
-npm install -g --save-dev cspell
+npm install -g hosky
 ```
 
 ## Command path
 
-Replace {{COMMAND_PATH_FEDORA}} with `/home/kinscoe/.local/bin/cspell`.
-Replace {{COMMAND_PATH_RPI}} with `/home/kinscoe/.nvm/versions/node/v22.22.2/bin/cspell`.
+Replace {{COMMAND_PATH_FEDORA}} with `~/.local/bin/husky`.
+Replace {{COMMAND_PATH_RPI}} with `~/.nvm/versions/node/v22.22.2/bin/husky`.
 Replace {{COMMAND_PATH_MAC}} with `{{COMMAND_PATH}}`.
 
 ## Command documentation

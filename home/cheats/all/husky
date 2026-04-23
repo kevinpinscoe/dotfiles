@@ -1,0 +1,67 @@
+---
+syntax: sh
+tags: [ git, git-hooks ]
+---
+# Command husky
+
+## What does this command do:
+
+git hooks library
+
+## Installed from
+
+For Fedora install using: `npm install -g husky`
+For Raspberry Pi install using:
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+source ~/.bashrc
+nvm install 22
+nvm use 22
+npm install -g husky
+```
+For Mac install using: `brew install husky`
+
+## Command path
+
+For Fedora run: `~/.local/bin/husky`
+For Raspberry Pi run: `~/.nvm/versions/node/v22.22.2/bin/husky`
+For Mac run: `husky`
+
+## Command documentation
+
+Docs can be found at https://github.com/typicode/husky
+
+## Command options
+
+# Initialize husky in a project (creates .husky/pre-commit + updates package.json prepare script)
+npx husky init
+pnpm exec husky init
+bunx husky init
+
+# Run husky manually (used in package.json prepare script)
+husky
+
+# Add a hook (create the hook file directly)
+echo "npm test" > .husky/pre-commit
+echo "npm run lint" > .husky/pre-push
+
+# Disable hooks for a single command
+HUSKY=0 git commit -m "message"
+HUSKY=0 git push
+
+# Disable hooks for a shell session
+export HUSKY=0
+# Re-enable
+unset HUSKY
+
+# Skip hooks via git flag (not husky-specific)
+git commit -m "message" --no-verify
+git commit -m "message" -n
+
+# Global startup file (runs before any hook)
+# Edit: ~/.config/husky/init.sh
+
+# Hooks are plain shell scripts in .husky/
+# Example .husky/pre-commit:
+prettier $(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g') --write --ignore-unknown
+git update-index --again
