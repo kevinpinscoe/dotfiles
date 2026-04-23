@@ -12,7 +12,7 @@ See CLAUDE.md for grounding
 <!-- How would I run this command without it being on my PATH? -->
 {{COMMAND_PATH}}="husky"
 {{DOCUMENTATION_URL}}="https://github.com/typicode/husky"
-{{SUMMARIZE}}="git hooks library"
+{{SUMMARIZE}}="git hook git-hook git-hooks library"
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
 {{TAGGING}}="git git-hooks"
