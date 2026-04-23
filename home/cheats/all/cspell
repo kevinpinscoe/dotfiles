@@ -1,0 +1,169 @@
+---
+syntax: sh
+tags: [ all, YAML, JSON, XML, CSV, TOML, HCL, properties-processor ]
+---
+# Command cspell
+
+## What does this command do:
+
+A Spell Checker for Code
+
+## Installed from
+
+For Fedora install using: `npm install -g --save-dev cspell`
+For Raspberry Pi install using:
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+source ~/.bashrc
+nvm install 22
+nvm use 22
+npm install -g --save-dev cspell
+```
+For Mac install using: `brew install cspell`
+
+## Command path
+
+For Fedora run: `/home/kinscoe/.local/bin/cspell`
+For Raspberry Pi run: `/home/kinscoe/.nvm/versions/node/v22.22.2/bin/cspell`
+For Mac run: `cspell`
+
+## Command documentation
+
+Docs can be found at https://cspell.org/
+
+## Command options
+
+### Top-level commands
+    cspell lint [globs...]              Check spelling (default command)
+    cspell trace [words...]             Search for words across all dictionaries
+    cspell check <files...>             Spell check with full colorized file display
+    cspell suggestions [words...]       Show spelling suggestions for words
+    cspell init                         Initialize a cspell config file
+    cspell link                         Link dictionaries to global config
+    cspell dictionaries                 List available dictionaries
+
+### Lint (check spelling)
+# Check all files recursively
+cspell .
+cspell lint .
+
+# Check specific file types
+cspell "**/*.md"
+cspell "**/*.{ts,js,py}"
+
+# Exclude files or directories
+cspell . --exclude "node_modules/**"
+
+# Show only misspelled words (no context)
+cspell . --words-only
+
+# Show only first occurrence of each unknown word
+cspell . --unique
+
+# Show surrounding context around each issue
+cspell . --show-context
+
+# Show spelling suggestions inline
+cspell . --show-suggestions
+
+# Use a specific config file
+cspell . --config ./cspell.json
+
+# Respect .gitignore files
+cspell . --gitignore
+
+# Include hidden dot-files/dirs
+cspell . --dot
+
+# Use cache to only recheck changed files
+cspell . --cache
+
+# Pipe stdin through cspell
+cat file.txt | cspell stdin
+echo "helo world" | cspell stdin
+
+# Read from stdin treating it as a specific file type
+cat myfile.py | cspell stdin://myfile.py
+
+# Fail fast on first file with issues
+cspell . --fail-fast
+
+# Silent mode (suppress all output, use exit code only)
+cspell . --silent
+
+# Suppress progress and summary, show issues only
+cspell . --quiet
+
+# Force language for unknown extensions
+cspell myfile --language-id python
+
+# Set locale
+cspell . --locale en-GB
+
+### Trace (dictionary lookup)
+# Find which dictionaries contain a word
+cspell trace hello
+cspell trace helo
+
+# Show all dictionaries (including those without the word)
+cspell trace --all hello
+
+# Show only dictionaries that have the word
+cspell trace --only-found hello
+
+# Ignore case when tracing
+cspell trace --ignore-case Hello
+
+### Suggestions
+# Get spelling suggestions for a word
+cspell suggestions helllo
+
+# Increase number of suggestions
+cspell suggestions helllo --num-suggestions 10
+
+# REPL mode for interactive lookups
+cspell suggestions --repl
+
+### Config file (cspell.json / .cspell.json)
+# Initialize config
+cspell init
+
+# Common config structure
+# {
+#   "version": "0.2",
+#   "language": "en",
+#   "words": ["myCustomWord"],
+#   "ignorePaths": ["node_modules", "dist"],
+#   "ignoreWords": ["someword"],
+#   "dictionaries": ["typescript", "node"]
+# }
+
+### In-file directives (inline suppression)
+# Disable cspell for the whole file (top of file)
+# cspell:disable
+
+# Re-enable cspell
+# cspell:enable
+
+# Disable next line only
+# cspell:disable-next-line
+someVariableWithTypo = true
+
+# Add words to the local dictionary inline
+# cspell:words myword anotherword
+
+# Ignore specific words inline
+# cspell:ignore myword
+
+### Integration examples
+# Check only staged files (pre-commit hook)
+git diff --cached --name-only | xargs cspell --no-must-find-files
+
+# Check changed files against main
+git diff main --name-only | xargs cspell --no-must-find-files
+
+# Use with a file list
+cspell --file-list files.txt
+
+# Use a custom reporter (JSON output)
+cspell . --reporter @cspell/cspell-json-reporter

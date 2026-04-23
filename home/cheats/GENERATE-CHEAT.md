@@ -8,11 +8,11 @@ See CLAUDE.md for grounding
 
 <!-- These need changing by a human -->
 
-{{COMMAND_NAME}}="yq"
+{{COMMAND_NAME}}="cspell"
 <!-- How would I run this command without it being on my PATH? -->
-{{COMMAND_PATH}}="~/.local/bin/cosign"
-{{DOCUMENTATION_URL}}="https://github.com/mikefarah/yq"
-{{SUMMARIZE}}="yq is a portable command-line YAML, JSON, XML, CSV, TOML, HCL and properties processor"
+{{COMMAND_PATH}}="cspell"
+{{DOCUMENTATION_URL}}="https://cspell.org/"
+{{SUMMARIZE}}="A Spell Checker for Code"
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
 {{TAGGING}}="YAML JSON XML CSV TOML HCL properties-processor"
@@ -31,30 +31,21 @@ Replace {{SUMMARIZE}} in template with {{SUMMARIZE}} from this file.
 
 ## Install method
 
-Replace {{INSTALL_METHOD_FEDORA}} with `sudo dnf install yq`
-Replace {{INSTALL_METHOD_MAC}} with `brew install yq`.
+Replace {{INSTALL_METHOD_FEDORA}} with `npm install -g --save-dev cspell`
+Replace {{INSTALL_METHOD_MAC}} with `brew install cspell`.
 Replace {{INSTALL_METHOD_RPI}} with: 
 ```bash
-arch="$(dpkg --print-architecture)"
-
-case "$arch" in
-  arm64) bin="yq_linux_arm64" ;;
-  armhf|armel) bin="yq_linux_arm" ;;
-  amd64) bin="yq_linux_amd64" ;;
-  *)
-    echo "Unsupported architecture: $arch"
-    exit 1
-    ;;
-esac
-
-sudo wget "https://github.com/mikefarah/yq/releases/latest/download/${bin}" -O /usr/local/bin/yq
-sudo chmod +x /usr/local/bin/yq
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+source ~/.bashrc
+nvm install 22
+nvm use 22
+npm install -g --save-dev cspell
 ```
 
 ## Command path
 
-Replace {{COMMAND_PATH_FEDORA}} with `{{COMMAND_PATH}}`.
-Replace {{COMMAND_PATH_RPI}} with `{{COMMAND_PATH}}`.
+Replace {{COMMAND_PATH_FEDORA}} with `/home/kinscoe/.local/bin/cspell`.
+Replace {{COMMAND_PATH_RPI}} with `/home/kinscoe/.nvm/versions/node/v22.22.2/bin/cspell`.
 Replace {{COMMAND_PATH_MAC}} with `{{COMMAND_PATH}}`.
 
 ## Command documentation
