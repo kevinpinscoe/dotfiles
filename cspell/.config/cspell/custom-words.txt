@@ -19,6 +19,7 @@ libadwaita
 readlink
 restow
 Sigstore
+terminfo
 Trixie
 vimrc
 workingon
