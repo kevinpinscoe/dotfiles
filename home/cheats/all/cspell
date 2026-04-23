@@ -10,7 +10,7 @@ A Spell Checker for Code
 
 ## Installed from
 
-For Fedora install using: `npm install -g --save-dev cspell`
+For Fedora install using: `npm install -g cspell`
 For Raspberry Pi install using:
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
@@ -23,8 +23,8 @@ For Mac install using: `brew install cspell`
 
 ## Command path
 
-For Fedora run: `/home/kinscoe/.local/bin/cspell`
-For Raspberry Pi run: `/home/kinscoe/.nvm/versions/node/v22.22.2/bin/cspell`
+For Fedora run: `~/.local/bin/cspell`
+For Raspberry Pi run: `~/.nvm/versions/node/v22.22.2/bin/cspell`
 For Mac run: `cspell`
 
 ## Command documentation
