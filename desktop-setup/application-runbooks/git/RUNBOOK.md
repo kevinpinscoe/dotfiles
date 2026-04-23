@@ -111,8 +111,21 @@ Validated Certificate claims: true
 
 | Hook | Trigger | Behaviour |
 |------|---------|-----------|
+| `pre-commit` | Before every commit | Runs `cspell` on staged files; blocks commit if misspellings are found |
 | `post-commit` | After every commit | Prints `[gitsign] commit signed OK` if the commit is signed |
 | `pre-push` | Before pushing | Blocks push of any unsigned `vX.Y.Z` tag |
+
+### pre-commit: cspell spell check
+
+Collects staged filenames (`git diff --cached --name-only --diff-filter=ACMR`) and pipes them to `cspell --no-must-find-files --quiet`. A non-zero exit aborts the commit.
+
+To bypass for a single commit (use sparingly):
+
+```bash
+git commit --no-verify -m "message"
+```
+
+**Dependency:** `cspell` must be on `PATH`. Global config at `~/.cspell.json`; personal word list at `~/.config/cspell/custom-words.txt` (both managed by the `cspell` stow package). See `~/cheats/all/cspell` for install instructions per platform.
 
 ### pre-push: sign a tag before pushing
 
@@ -170,6 +183,27 @@ BROWSER=echo git commit -m "gitsign smoke test"
 ---
 
 ## Troubleshooting
+
+### pre-commit blocks commit with spelling errors
+
+```bash
+# See exactly which words are flagged
+git diff --cached --name-only --diff-filter=ACMR | xargs cspell --no-must-find-files
+
+# Add a word to the personal word list and retry
+echo "SomeProperNoun" >> ~/.config/cspell/custom-words.txt
+git commit -m "message"
+```
+
+### `cspell: command not found` on commit
+
+cspell must be on `PATH`. Install per platform (see `~/cheats/all/cspell`) and verify:
+
+```bash
+which cspell && cspell --version
+```
+
+---
 
 ### Browser does not open / OIDC flow hangs
 

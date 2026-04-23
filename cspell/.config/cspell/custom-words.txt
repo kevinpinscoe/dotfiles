@@ -1,5 +1,6 @@
 ACMR
 askpass
+Behaviour
 cheatsheet
 cheatsheets
 davorg
@@ -17,6 +18,7 @@ hostnames
 kevinpinscoe
 libadwaita
 readlink
+Rekor
 restow
 Sigstore
 terminfo
