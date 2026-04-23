@@ -30,6 +30,7 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - `bash/` — `.bashrc`, `.bash_profile`, macOS zsh files, and numbered fragments in `bash/.bash.d/`
 - `vim/` — `.vimrc` and `.vim/` runtime files
 - `aspell/` — `.aspell.en.pws` personal dictionary
+- `cspell/` — `.cspell.json` global cspell config (auto-discovered from `~/`) and `~/.config/cspell/custom-words.txt` personal word list
 - `cheat/` — `cheat` CLI config (`~/.config/cheat/conf.yml`)
 - `home/` — everything that stows into `~/` but doesn't fit a dedicated package (e.g. `~/cheats/`)
 - `tmux/` — `.tmux.conf` and `~/.config/tmux/status/` scripts (workingon, git, aws, k8s); shared across platforms

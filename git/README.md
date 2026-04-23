@@ -1,4 +1,3 @@
-<!-- cspell:ignore ACMR gitsign gpgsign -->
 # git package
 
 Global git configuration and hooks, stowed to `~/.config/git/` and `~/.gitconfig`.

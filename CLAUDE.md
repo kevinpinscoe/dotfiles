@@ -51,6 +51,8 @@ Stow packages — each directory is stowed into `$HOME`:
 | `bash` | `bash/.bash.d/` | `~/.bash.d/` | Numbered bash fragments loaded in order |
 | `vim` | `vim/.vimrc` + `vim/.vim/` | `~/.vimrc`, `~/.vim/` | Vim config |
 | `aspell` | `aspell/.aspell.en.pws` | `~/.aspell.en.pws` | Personal spell-check dictionary |
+| `cspell` | `cspell/.cspell.json` | `~/.cspell.json` | cspell global config (auto-discovered); points to custom word list |
+| `cspell` | `cspell/.config/cspell/custom-words.txt` | `~/.config/cspell/custom-words.txt` | Personal cspell word list |
 | `cheat` | `cheat/.config/cheat/conf.yml` | `~/.config/cheat/conf.yml` | Cheat CLI config |
 | `home` | `home/cheats/` | `~/cheats/` | Personal cheatsheets by platform |
 | `tmux` | `tmux/.tmux.conf` | `~/.tmux.conf` | tmux config; shared across platforms |

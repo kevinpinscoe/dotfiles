@@ -21,6 +21,10 @@ if ! command -v stow &>/dev/null; then
   exit 1
 fi
 
+# ~/.config/cspell/ must be a real directory so stow symlinks custom-words.txt
+# inside it rather than symlinking the whole directory.
+mkdir -p "$HOME/.config/cspell"
+
 # ~/.config/cheat/ must be a real directory so stow symlinks conf.yml inside it
 # rather than making the whole directory a symlink (community cheatsheets live
 # alongside conf.yml and must not be tracked in this repo).
@@ -46,7 +50,7 @@ while IFS= read -r -d '' link; do
   [[ "$target" = /* ]] && rm "$link"
 done < <(find "$HOME/.config/tmux/status" -maxdepth 1 -type l -print0)
 
-PACKAGES=(bash vim aspell cheat home tmux git)
+PACKAGES=(bash vim aspell cheat cspell home tmux git)
 for pkg in "${PACKAGES[@]}"; do
   if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
     stow -d "$DOTFILES_DIR" -t "$HOME" --restow "$pkg"
