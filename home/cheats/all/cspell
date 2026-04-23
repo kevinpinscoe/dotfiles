@@ -1,6 +1,6 @@
 ---
 syntax: sh
-tags: [ all, YAML, JSON, XML, CSV, TOML, HCL, properties-processor ]
+tags: [ all, spell spelling ]
 ---
 # Command cspell
 
@@ -17,7 +17,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
 source ~/.bashrc
 nvm install 22
 nvm use 22
-npm install -g --save-dev cspell
+npm install -g cspell
 ```
 For Mac install using: `brew install cspell`
 
