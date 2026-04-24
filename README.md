@@ -29,6 +29,8 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 
 - `bash/` — `.bashrc`, `.bash_profile`, macOS zsh files, and numbered fragments in `bash/.bash.d/`
 - `vim/` — `.vimrc` and `.vim/` runtime files
+  - `.vim/colors/` — custom colorschemes: `kevin.vim` (general dark), `kevin_perl.vim` (Perl/shell/Go/Python), `kevin_markdown.vim` (Markdown), plus third-party `af.vim` and `ir_black.vim`
+  - `.vim/myfiletypes.vim` — filetype autocmds; maps non-standard extensions and assigns per-filetype colorschemes
 - `aspell/` — `.aspell.en.pws` personal dictionary
 - `cspell/` — `.cspell.json` global cspell config (auto-discovered from `~/`) and `~/.config/cspell/custom-words.txt` personal word list
 - `cheat/` — `cheat` CLI config (`~/.config/cheat/conf.yml`)
@@ -42,7 +44,8 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - [`Brewfile/`](Brewfile/RUNBOOK.md) — Homebrew manifest (taps, formulae, casks, VS Code extensions) for bootstrapping a Mac via `brew bundle install`; not stowed
 - `desktop-setup/` — platform-specific setup guides, runbooks, and GUI app documentation
   - [`fedora-kde/`](desktop-setup/fedora-kde/) — Fedora KDE Plasma setup (including [Claude Desktop](desktop-setup/fedora-kde/claude-desktop/README.md))
-  - [`application-runbooks/`](desktop-setup/application-runbooks/README.md) — per-app operational notes for desktop applications (Obsidian, etc.)
+  - `MacOS/` — macOS fastfetch config
+  - [`application-runbooks/`](desktop-setup/application-runbooks/README.md) — per-app operational notes for desktop applications (Ghostty, MarkText, Obsidian, Typora, git/gitsign, tmux)
 
 ## Stow folding — why some symlinks are on directories, not files
 

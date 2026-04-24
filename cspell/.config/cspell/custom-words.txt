@@ -49,7 +49,10 @@ Trixie
 vimrc
 workingon
 yellowgreen
+autocmds
 bunx
+colorschemes
 Conversate
+Typora
 llms
 mindmap
