@@ -6,7 +6,7 @@ tags: [ git, git-hooks ]
 
 ## What does this command do:
 
-git hook git-hook git-hooks library
+Library of githooks for teams
 
 ## Installed from
 

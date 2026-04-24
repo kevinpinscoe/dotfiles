@@ -49,6 +49,7 @@ Trixie
 vimrc
 workingon
 yellowgreen
+bunx
 Conversate
 llms
 mindmap

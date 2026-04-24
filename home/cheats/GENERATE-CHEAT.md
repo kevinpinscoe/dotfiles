@@ -12,7 +12,7 @@ See CLAUDE.md for grounding
 <!-- How would I run this command without it being on my PATH? -->
 {{COMMAND_PATH}}="husky"
 {{DOCUMENTATION_URL}}="https://github.com/typicode/husky"
-{{SUMMARIZE}}="git hook git-hook git-hooks library"
+{{SUMMARIZE}}="Library of githooks for teams"
 <!-- For human consumption: choices are all, mac, fedora or rpi -->
 {{TEMPLATE_TO_USE}}="all"
 {{TAGGING}}="git git-hooks"
@@ -39,7 +39,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
 source ~/.bashrc
 nvm install 22
 nvm use 22
-npm install -g hosky
+npm install -g husky
 ```
 
 ## Command path
