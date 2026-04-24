@@ -1,0 +1,80 @@
+---
+syntax: sh
+tags: [ all, hex, viewer ]
+---
+# Command hexyl
+
+## What does this command do:
+
+A command-line colorized hex viewer
+
+## Installed from
+
+For Fedora install using: `sudo dnf install hexyl`
+For Raspberry Pi install using: `sudo apt-get install hexyl`
+For Mac install using: `brew install hexyl`
+
+## Command path
+
+For Fedora run: `/usr/bin/hexyl`
+For Raspberry Pi run: `/usr/bin/hexyl`
+For Mac run: `/opt/homebrew/bin/hexyl`
+
+## Command documentation
+
+Docs can be found at https://github.com/sharkdp/hexyl
+
+## Command options
+
+# View a file
+hexyl <file>
+
+# Read from stdin
+cat <file> | hexyl
+
+# Only show the first N bytes (supports units: kB, MiB, 0xff, etc.)
+hexyl -n 256 <file>
+hexyl --length=4KiB <file>
+
+# Skip the first N bytes
+hexyl -s 64 <file>
+
+# Show all lines (disable squeezing of repeated lines)
+hexyl -v <file>
+
+# Plain output (no color, no border, no character panel, no position)
+hexyl -p <file>
+
+# Hide the character panel on the right
+hexyl --no-characters <file>
+
+# Hide the position panel on the left
+hexyl -P <file>
+
+# Control border style
+hexyl --border=ascii <file>
+hexyl --border=none <file>
+
+# Control color output
+hexyl --color=never <file>
+hexyl --color=auto <file>
+
+# Group bytes together (1, 2, 4, or 8) with endianness control
+hexyl -g 4 <file>
+hexyl -g 4 --endianness=little <file>
+
+# Change number base (binary, octal, decimal, hexadecimal)
+hexyl -b octal <file>
+
+# Set number of hex panels
+hexyl --panels=auto <file>
+
+# Add offset to displayed positions
+hexyl -o 0x100 <file>
+
+# Set terminal width explicitly
+hexyl --terminal-width=120 <file>
+
+# Change character table
+hexyl --character-table=ascii <file>
+hexyl --character-table=codepage-437 <file>
