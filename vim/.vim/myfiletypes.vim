@@ -26,5 +26,5 @@ augroup kevin_colors
 	au! BufRead,BufNewFile *.sh,*.bash     colorscheme kevin_perl
 	au! BufRead,BufNewFile *.go            colorscheme kevin_perl
 	au! BufRead,BufNewFile *.py            colorscheme kevin_perl
-	au! BufRead,BufNewFile *.md,*.markdown colorscheme kevin_perl
+	au! BufRead,BufNewFile *.md,*.markdown colorscheme kevin_markdown
 augroup END
