@@ -25,3 +25,6 @@ terminfo
 Trixie
 vimrc
 workingon
+Conversate
+llms
+mindmap
