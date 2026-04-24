@@ -1,0 +1,77 @@
+---
+syntax: sh
+tags: [ curl, browser ]
+---
+# Command zcurl
+
+## What does this command do:
+
+It's a curl alternative with stunning box-style output that makes API testing actually enjoyable.
+
+## Installed from
+
+For Fedora install using: npm install -g @12britz/zcurl
+For Raspberry Pi install using: npm install -g @12britz/zcurl
+For Mac install using: npm install -g @12britz/zcurl
+
+## Command path
+
+For Fedora run: /home/kinscoe/.local/bin/zcurl
+For Raspberry Pi run: /usr/local/bin/zcurl
+For Mac run: /opt/homebrew/bin/zcurl
+
+## Command documentation
+
+Docs can be found at https://github.com/12britz/zcurl
+
+## Command options
+
+# Make a GET request
+zcurl https://api.example.com/endpoint
+
+# Make a POST request with JSON body
+zcurl -X POST https://api.example.com/endpoint -d '{"key":"value"}'
+
+# Set a request header
+zcurl -H "Authorization: Bearer mytoken" https://api.example.com/endpoint
+
+# Basic auth or Bearer token
+zcurl --auth user:pass https://api.example.com/endpoint
+zcurl --auth mytoken https://api.example.com/endpoint
+
+# Add query parameters
+zcurl -q key=value -q page=1 https://api.example.com/endpoint
+
+# Force JSON content type and pretty output
+zcurl -j -X POST https://api.example.com/endpoint -d '{"key":"val"}'
+
+# Force form-urlencoded content type
+zcurl -f -X POST https://api.example.com/endpoint -d 'key=value'
+
+# Show full request and response details (verbose)
+zcurl -v https://api.example.com/endpoint
+
+# Follow redirects
+zcurl -L https://api.example.com/endpoint
+
+# Skip TLS verification
+zcurl -k https://self-signed.example.com/endpoint
+
+# Set timeout (milliseconds or seconds)
+zcurl --timeout 5000 https://api.example.com/endpoint
+zcurl --max-time 5 https://api.example.com/endpoint
+
+# Save response body to file
+zcurl -o response.json https://api.example.com/endpoint
+
+# Download response as file
+zcurl --download https://api.example.com/file.zip
+
+# Send N concurrent requests (load testing)
+zcurl -n 100 -c 10 https://api.example.com/endpoint
+
+# Replay the last request
+zcurl --replay
+
+# Show request history
+zcurl --history

@@ -56,3 +56,7 @@ Conversate
 Typora
 llms
 mindmap
+britz
+kinscoe
+mytoken
+zcurl
