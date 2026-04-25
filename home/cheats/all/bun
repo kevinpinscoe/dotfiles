@@ -1,0 +1,86 @@
+---
+syntax: sh
+tags: [ javascript, typescript, toolkit ]
+---
+# Command bun
+
+## What does this command do:
+
+Bun is a fast, all-in-one JavaScript and TypeScript toolkit designed to serve as a high-performance alternative to Node.js. While Node.js uses Google's V8 engine, Bun is built on JavaScriptCore (the engine powering Safari), which is optimized for faster startup times and lower memory usage.
+
+## Installed from
+
+For Fedora install using: curl -fsSL https://bun.com/install | bash
+For Raspberry Pi install using: curl -fsSL https://bun.com/install | bash
+For Mac install using: brew install oven-sh/bun/bun
+
+## Command path
+
+For Fedora run: ~/.bun/bin/bun
+For Raspberry Pi run: ~/.bun/bin/bun
+For Mac run: /opt/homebrew/bin/bun
+
+## Command documentation
+
+Docs can be found at https://bun.com/docs
+
+## Command options
+
+# Run a TypeScript or JavaScript file
+bun run ./my-script.ts
+
+# Run a package.json script
+bun run lint
+
+# Run unit tests
+bun test
+
+# Execute a package binary, installing if needed (like npx)
+bunx vite
+
+# Start a REPL
+bun repl
+
+# Install dependencies from package.json
+bun install
+bun i
+
+# Add a dependency
+bun add hono
+bun a hono
+
+# Remove a dependency
+bun remove left-pad
+bun rm left-pad
+
+# Update outdated dependencies
+bun update react
+
+# Bundle TypeScript/JavaScript into a single file
+bun build ./a.ts ./b.jsx
+
+# Initialize a new Bun project
+bun init
+
+# Create a new project from a template
+bun create svelte
+bun c svelte
+
+# Upgrade Bun itself
+bun upgrade
+
+# Check installed packages for vulnerabilities
+bun audit
+
+# Show outdated dependencies
+bun outdated
+
+# Watch mode — restart on file change
+bun run --watch ./server.ts
+
+# Hot reload mode (no restart, live patch)
+bun run --hot ./server.ts
+
+# Check version
+bun --version
+bun --revision

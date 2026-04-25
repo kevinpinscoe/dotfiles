@@ -95,3 +95,5 @@ doko
 hostable
 selfhosting
 pathadd
+vite
+hono

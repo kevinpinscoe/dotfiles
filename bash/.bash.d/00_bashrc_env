@@ -22,3 +22,4 @@ if [ -r "$HOME/.environment/work_aliases.sh" ]; then
 fi
 
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+[ -d "$HOME/.bun/bin" ] && export BUN_INSTALL="$HOME/.bun" && export PATH="$BUN_INSTALL/bin:$PATH"
