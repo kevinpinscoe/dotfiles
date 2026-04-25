@@ -99,3 +99,17 @@ vite
 hono
 infocmp
 opensessions
+ansifilter
+jsonfmt
+kevini
+kevins
+logfile
+Logfile
+mainbranch
+myclaude
+stdlib
+subdirs
+uppercased
+urwid
+vanco
+worktree
