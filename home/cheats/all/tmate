@@ -1,0 +1,46 @@
+---
+syntax: sh
+tags: [ terminal, ssh, sharing, relay ]
+---
+# Command tmate
+
+## What does this command do:
+
+tmate is a fork of tmux that adds a relay server in the middle to make terminal sharing trivially easy without any firewall/NAT configuration. tmux + a cloud relay that eliminates the need for port forwarding or VPNs
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/tmate-io/tmate/releases/download/2.4.0/tmate-2.4.0-static-linux-amd64.tar.xz -o /tmp/tmate.tar.xz && tar -xJf /tmp/tmate.tar.xz -C /tmp && mv /tmp/tmate-2.4.0-static-linux-amd64/tmate ~/.local/bin/tmate && chmod +x ~/.local/bin/tmate
+For Raspberry Pi install using: curl -sSfL https://github.com/tmate-io/tmate/releases/download/2.4.0/tmate-2.4.0-static-linux-arm64v8.tar.xz -o /tmp/tmate.tar.xz && tar -xJf /tmp/tmate.tar.xz -C /tmp && mv /tmp/tmate-2.4.0-static-linux-arm64v8/tmate ~/.local/bin/tmate && chmod +x ~/.local/bin/tmate
+For Mac install using: brew install tmate
+
+## Command path
+
+For Fedora run: ~/.local/bin/tmate
+For Raspberry Pi run: ~/.local/bin/tmate
+For Mac run: /opt/homebrew/bin/tmate
+
+## Command documentation
+
+Docs can be found at https://github.com/tmate-io/tmate
+
+## Command options
+
+tmate                        # start a new shared session (prints SSH and web URLs)
+tmate -F                     # foreground mode — useful for scripted remote access
+tmate -n <name>              # use a named read/write session token instead of random
+tmate -r <name>              # use a named read-only session token instead of random
+tmate -k <api-key>           # supply tmate.io API key (required for named sessions)
+tmate -f <path>              # use a custom config file
+tmate -S <path>              # specify socket path to send commands to a running tmate
+tmate -v                     # verbose output (repeat for more verbosity)
+tmate -V                     # print version
+
+# Once tmate is running, retrieve the share URLs from inside the session:
+tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'          # read/write SSH URL
+tmate -S /tmp/tmate.sock display -p '#{tmate_ssh_ro}'       # read-only SSH URL
+tmate -S /tmp/tmate.sock display -p '#{tmate_web}'          # read/write web URL
+tmate -S /tmp/tmate.sock display -p '#{tmate_web_ro}'       # read-only web URL
+
+# Guest connects with:
+ssh <token>@ssh.tmate.io
