@@ -1,0 +1,41 @@
+---
+syntax: sh
+tags: [ webhook, automation, commands, yaml ]
+---
+# Command dsw
+
+## What does this command do:
+
+A webhook for command line commands defined by YAML
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/overthinkinglabs/dsw/releases/download/v0.0.3/dsw_0.0.3_linux_amd64.tar.gz -o /tmp/dsw.tar.gz && tar -xzf /tmp/dsw.tar.gz -C ~/.local/bin/ && chmod +x ~/.local/bin/dsw
+For Raspberry Pi install using: curl -sSfL https://github.com/overthinkinglabs/dsw/releases/download/v0.0.3/dsw_0.0.3_linux_arm64.tar.gz -o /tmp/dsw.tar.gz && tar -xzf /tmp/dsw.tar.gz -C ~/.local/bin/ && chmod +x ~/.local/bin/dsw
+For Mac install using: curl -sSfL https://github.com/overthinkinglabs/dsw/releases/download/v0.0.3/dsw_0.0.3_darwin_arm64.tar.gz -o /tmp/dsw.tar.gz && tar -xzf /tmp/dsw.tar.gz -C ~/.local/bin/ && chmod +x ~/.local/bin/dsw
+
+## Command path
+
+For Fedora run: ~/.local/bin/dsw
+For Raspberry Pi run: ~/.local/bin/dsw
+For Mac run: ~/.local/bin/dsw
+
+## Command documentation
+
+Docs can be found at https://github.com/overthinkinglabs/dsw
+
+## Command options
+
+dsw create <name> <command>     # create a single action
+dsw create -f <file.yaml>       # create actions from YAML file
+dsw ls                          # list all available actions
+dsw run <name>                  # execute an action locally
+dsw serve [-p 8080] [-d]        # start HTTP API server (default port 4242; -d for daemon mode)
+dsw stop                        # stop daemon server
+dsw status                      # show daemon status
+dsw boot enable [-p 8080]       # enable boot service
+dsw boot disable                # disable boot service
+dsw version                     # show version
+
+# Trigger an action via HTTP once serve is running:
+curl -X POST http://localhost:4242/execute/<action>
