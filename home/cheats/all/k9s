@@ -1,0 +1,45 @@
+---
+syntax: sh
+tags: [ tui, k8s, kubernetes ]
+---
+# Command k9s
+
+## What does this command do:
+
+Kubernetes CLI To manage clusters
+
+## Installed from
+
+For Fedora install using: sudo dnf install k9s
+For Raspberry Pi install using: curl -sSfL https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_arm64.tar.gz | tar -xz -C ~/.local/bin/ k9s
+For Mac install using: brew install derailed/k9s/k9s
+
+## Command path
+
+For Fedora run: /usr/bin/k9s
+For Raspberry Pi run: ~/.local/bin/k9s
+For Mac run: /opt/homebrew/bin/k9s
+
+## Command documentation
+
+Docs can be found at https://github.com/derailed/k9s
+
+## Command options
+
+k9s                              # launch interactive TUI for current kubeconfig context
+k9s --context <ctx>              # launch with a specific kubeconfig context
+k9s --namespace <ns>             # launch scoped to a specific namespace
+k9s -A                           # launch in all-namespaces mode
+k9s --readonly                   # launch in read-only mode (no mutations)
+k9s --write                      # override readOnly config setting to allow writes
+k9s -c <resource>                # start with a specific resource view (e.g. pods, deployments)
+k9s --headless                   # hide the header bar
+k9s --crumbsless                 # hide the breadcrumbs bar
+k9s --logoless                   # hide the logo
+k9s --splashless                 # skip the splash screen
+k9s --invert                     # invert the color skin (dark ↔ light)
+k9s -r <seconds>                 # set refresh rate (default: 2s)
+k9s --logLevel debug             # set log verbosity (error, warn, info, debug)
+k9s info                         # show k9s config file paths
+k9s version                      # print version and build info
+k9s completion bash              # generate bash autocompletion script

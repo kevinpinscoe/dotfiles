@@ -65,3 +65,7 @@ toplevel
 janosmiko
 kubeconfig
 yazi
+crumbsless
+derailed
+logoless
+splashless
