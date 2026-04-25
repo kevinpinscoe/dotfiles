@@ -44,13 +44,17 @@ mkdir -p "$HOME/.config/git/hooks"
 # ~/.config/tmux/status/ must be a real directory so stow symlinks scripts
 # inside it per-file rather than symlinking the whole directory.
 mkdir -p "$HOME/.config/tmux/status"
+
+# ~/.config/opensessions/ must be a real directory so stow symlinks config.json
+# per-file; the opensessions server also writes session-order.json there at runtime.
+mkdir -p "$HOME/.config/opensessions"
 # Remove any absolute symlinks stow won't adopt (stow only owns relative ones).
 while IFS= read -r -d '' link; do
   target="$(readlink "$link")"
   [[ "$target" = /* ]] && rm "$link"
 done < <(find "$HOME/.config/tmux/status" -maxdepth 1 -type l -print0)
 
-PACKAGES=(bash vim aspell cheat cspell home tmux git)
+PACKAGES=(bash vim aspell cheat cspell home tmux git opensessions)
 for pkg in "${PACKAGES[@]}"; do
   if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
     stow -d "$DOTFILES_DIR" -t "$HOME" --restow "$pkg"

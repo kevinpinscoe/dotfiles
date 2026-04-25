@@ -57,6 +57,7 @@ Stow packages — each directory is stowed into `$HOME`:
 | `home` | `home/cheats/` | `~/cheats/` | Personal cheatsheets by platform |
 | `tmux` | `tmux/.tmux.conf` | `~/.tmux.conf` | tmux config; shared across platforms |
 | `tmux` | `tmux/.config/tmux/status/` | `~/.config/tmux/status/` | Status bar scripts (workingon, git, aws, k8s) |
+| `opensessions` | `opensessions/.config/opensessions/config.json` | `~/.config/opensessions/config.json` | opensessions sidebar config (sidebarPosition, width, theme, etc.) |
 | `git` | `git/.gitconfig` | `~/.gitconfig` | Global git config; shared across all platforms |
 | `git` | `git/.config/git/ignore` | `~/.config/git/ignore` | Global gitignore |
 | `git` | `git/.config/git/hooks/` | `~/.config/git/hooks/` | Global git hooks (pre-push, post-commit) |
