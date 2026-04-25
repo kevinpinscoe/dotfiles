@@ -1,0 +1,53 @@
+---
+syntax: sh
+tags: [ sql, log, query, filter, editor ]
+---
+# Command sqd
+
+## What does this command do:
+
+A SQL-like document editor cli
+
+## Installed from
+
+For Fedora install using: GOTOOLCHAIN=auto go install github.com/overthinkinglabs/sqd@latest
+For Raspberry Pi install using: GOTOOLCHAIN=auto go install github.com/overthinkinglabs/sqd@latest
+For Mac install using: GOTOOLCHAIN=auto go install github.com/overthinkinglabs/sqd@latest
+
+## Command path
+
+For Fedora run: ~/go/bin/sqd
+For Raspberry Pi run: ~/go/bin/sqd
+For Mac run: ~/go/bin/sqd
+
+## Command documentation
+
+Docs can be found at https://github.com/overthinkinglabs/sqd
+
+## Command options
+
+sqd '<QUERY>'               # run a SQL-like query against files
+sqd -f <file>               # run all queries from a file
+sqd -t '<QUERY>'            # transaction mode — rollback all changes on failure
+sqd -v                      # print version
+sqd dry '<QUERY>'           # dry-run: show what would change without modifying files
+sqd dry -c '<QUERY>'        # dry-run with per-line detail (file names + modified lines)
+
+# Columns available in SELECT / WHERE
+#   name     — file name
+#   content  — line content
+#   *        — both name and content
+
+# SELECT examples
+sqd 'SELECT * FROM *.md WHERE content LIKE "%- [ ]%"'                    # open todos
+sqd 'SELECT COUNT(*) FROM *.md WHERE content LIKE "### %"'               # count heading lines
+sqd 'SELECT COUNT(name) FROM *.md WHERE content LIKE "### %"'            # count files with heading
+sqd 'SELECT name FROM *.md WHERE content LIKE "- [ ]%" ORDER BY content' # sorted by content
+sqd 'SELECT * FROM *.md ORDER BY content ASC, name DESC'                  # multi-column sort
+
+# UPDATE examples
+sqd 'UPDATE *.md SET content="### " WHERE content LIKE "## %"'           # bulk heading change
+sqd 'UPDATE f.md SET content="new" WHERE content = "old"'                # exact match replace
+
+# DELETE examples
+sqd 'DELETE FROM *.log WHERE content LIKE "%DEBUG%"'                     # remove DEBUG log lines
