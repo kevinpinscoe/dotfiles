@@ -1,0 +1,37 @@
+---
+syntax: sh
+tags: [ file, newest ]
+---
+# Command newest-file
+
+## What does this command do:
+
+Locates and display the newest file name and date in the path of the current directory structure
+
+## Installed from
+
+For Fedora install using: cd ~/tools && git pull
+For Raspberry Pi install using: cd ~/tools && git pull
+For Mac install using: cd ~/tools && git pull
+
+## Command path
+
+For Fedora run: ~/tools/newest-file
+For Raspberry Pi run: ~/tools/newest-file
+For Mac run: ~/tools/newest-file
+
+## Command documentation
+
+Docs can be found at https://github.com/kevinpinscoe/tools/blob/main/newest-file
+
+## Command options
+
+newest-file          # run from any directory; no flags
+
+Output format:
+  <relative/path/to/file>  YYYY-MM-DD HH:MM:SS
+
+Notes:
+  - Skips hidden paths (.git, .terraform, etc.)
+  - Searches recursively from the current directory
+  - Requires python3
