@@ -20,3 +20,5 @@ fi
 if [ -r "$HOME/.environment/work_aliases.sh" ]; then
     source "$HOME/.environment/work_aliases.sh"
 fi
+
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
