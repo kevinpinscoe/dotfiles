@@ -48,13 +48,17 @@ mkdir -p "$HOME/.config/tmux/status"
 # ~/.config/opensessions/ must be a real directory so stow symlinks config.json
 # per-file; the opensessions server also writes session-order.json there at runtime.
 mkdir -p "$HOME/.config/opensessions"
+
+# ~/.config/yazi/plugins/ must be a real directory so stow symlinks each plugin
+# directory individually rather than symlinking the whole plugins/ directory.
+mkdir -p "$HOME/.config/yazi/plugins"
 # Remove any absolute symlinks stow won't adopt (stow only owns relative ones).
 while IFS= read -r -d '' link; do
   target="$(readlink "$link")"
   [[ "$target" = /* ]] && rm "$link"
 done < <(find "$HOME/.config/tmux/status" -maxdepth 1 -type l -print0)
 
-PACKAGES=(bash vim aspell cheat cspell home tmux git opensessions)
+PACKAGES=(bash vim aspell cheat cspell home tmux git opensessions yazi)
 for pkg in "${PACKAGES[@]}"; do
   if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
     stow -d "$DOTFILES_DIR" -t "$HOME" --restow "$pkg"

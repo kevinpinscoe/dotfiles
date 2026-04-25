@@ -37,6 +37,7 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - `home/` — everything that stows into `~/` but doesn't fit a dedicated package (e.g. `~/cheats/`)
 - `tmux/` — `.tmux.conf` and `~/.config/tmux/status/` scripts (workingon, git, aws, k8s); shared across platforms
 - `opensessions/` — `~/.config/opensessions/config.json` (opensessions tmux sidebar config: sidebar position, width, theme)
+- `yazi/` — `~/.config/yazi/plugins/ls-deluxe-colors.yazi/` Yazi linemode plugin that colors mtime by age and file size (lsd-style)
 - `git/` — `.gitconfig` (global git config) and `~/.config/git/` (global ignore, global hooks); shared across platforms
 - `ghostty-fedora/` — Ghostty terminal config for Fedora (absolute tmux path)
 - `ghostty-mac/` — Ghostty terminal config for macOS (Homebrew tmux path)

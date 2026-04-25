@@ -121,3 +121,8 @@ Demangle
 demangle
 dlang
 rodata
+fdate
+linemode
+Linemode
+mathcing
+mtime
