@@ -1,0 +1,55 @@
+---
+syntax: sh
+tags: [ docker, monitor, metric, log, alert, ssh ]
+---
+# Command tori
+
+## What does this command do:
+
+Docker server monitoring without the stack. Metrics, logs, and alerts from your terminal. Single binary, zero exposed ports, SSH-only.
+
+## Installed from
+
+For Fedora install using: curl -fsSL https://raw.githubusercontent.com/thobiasn/tori-cli/main/deploy/install.sh | sh -s -- --client
+For Raspberry Pi install using: curl -fsSL https://raw.githubusercontent.com/thobiasn/tori-cli/main/deploy/install.sh | sh -s -- --client
+For Mac install using: curl -fsSL https://raw.githubusercontent.com/thobiasn/tori-cli/main/deploy/install.sh | sh -s -- --client
+
+## Command path
+
+For Fedora run: ~/.local/bin/tori
+For Raspberry Pi run: ~/.local/bin/tori
+For Mac run: ~/.local/bin/tori
+
+## Command documentation
+
+Docs can be found at https://github.com/thobiasn/tori-cli
+
+## Command options
+
+# Connect to a remote server over SSH
+tori user@host
+
+# Connect with a specific SSH identity file
+tori user@host -identity ~/.ssh/id_rsa
+
+# Connect on a non-default SSH port
+tori user@host -port 2222
+
+# Use a custom client config file
+tori -config /path/to/config.toml
+
+# Connect directly to a local agent socket (no SSH)
+tori -socket /run/tori/tori.sock
+
+# Run the agent locally (server side)
+tori agent
+
+# Run agent with a custom config
+tori agent -config /etc/tori/config.toml
+
+# Install agent on server (Linux, systemd)
+curl -fsSL https://raw.githubusercontent.com/thobiasn/tori-cli/main/deploy/install.sh | sudo sh
+
+# Client config: add a named server (~/.config/tori/config.toml)
+# [servers.prod]
+# host = "user@prod.example.com"
