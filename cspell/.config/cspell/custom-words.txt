@@ -91,3 +91,6 @@ libncursesw
 ncursesw
 GOTOOLCHAIN
 overthinkinglabs
+doko
+hostable
+selfhosting
