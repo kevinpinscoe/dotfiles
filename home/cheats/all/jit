@@ -1,0 +1,75 @@
+---
+syntax: sh
+tags: [ jira ]
+---
+# Command jit
+
+## What does this command do:
+
+Jira CLI for ticket lookup, detailed issue inspection, sprint views, and creating or editing issues from the terminal.
+
+## Installed from
+
+Dependencies: Rust toolchain (rustup + cargo). Install Rust first before running `cargo install jit-cli`.
+
+For Fedora install using:
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && source ~/.cargo/env
+  cargo install jit-cli
+
+For Raspberry Pi install using:
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && source ~/.cargo/env
+  cargo install jit-cli
+
+For Mac install using:
+  brew install rust
+  cargo install jit-cli
+
+## Command path
+
+For Fedora run: ~/.cargo/bin/jit
+For Raspberry Pi run: ~/.cargo/bin/jit
+For Mac run: ~/.cargo/bin/jit
+
+## Command documentation
+
+Docs can be found at https://github.com/cesarferreira/jit
+
+## Command options
+
+jit [OPTIONS] [TICKET] [COMMAND]
+
+# Arguments
+  [TICKET]    JIRA issue key (e.g., RW-1931) or URL (e.g., https://company.atlassian.net/browse/RW-1931)
+
+# Commands
+  create      Create a new Jira issue without sprint assignment (lands in backlog on scrum boards)
+  edit        Edit an existing Jira ticket's core fields, including Task issues
+  help        Print help for this command or a subcommand
+
+# Options
+      --json                           Output in JSON format
+      --text                           Output as plain text: "KEY: Summary"
+      --my-tickets                     Display your current sprint tickets in a table (default when no ticket given)
+      --show                           Show detailed ticket info in table format
+      --include-description            Include ticket description in detailed output
+      --include-comments               Include ticket comments in detailed output
+      --include-prs                    Include linked GitHub pull requests
+      --full                           Include description, comments, PRs, and metadata
+      --comments-limit <N>             Max comments to show (default: 5)
+      --all-comments                   Show all comments (overrides --comments-limit)
+      --since <YYYY-MM-DD>             Only include comments on or after this date
+      --limit <N>                      Max tickets to retrieve (default: 10)
+      --config-file <PATH>             Path to a custom config.toml file
+  -h, --help                           Print help
+  -V, --version                        Print version
+
+# Examples
+  jit RW-1931                          Show ticket summary
+  jit --show RW-1931                   Show ticket details in table format
+  jit --show --full RW-1931            Full details: description, comments, PRs, metadata
+  jit --text RW-1931                   Single-line output: "RW-1931: Summary"
+  jit --json RW-1931                   Machine-readable JSON output
+  jit --my-tickets                     List your current sprint tickets
+  jit create --project RW --summary "Fix login bug"          Create backlog issue
+  jit create --current-sprint --project RW --summary "..."   Create issue in active sprint
+  jit edit RW-1931 --summary "Updated summary"               Edit ticket fields

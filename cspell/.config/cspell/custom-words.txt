@@ -83,3 +83,5 @@ Biohazards
 getunclutter
 Gitea
 imageupload
+rustup
+tlsv
