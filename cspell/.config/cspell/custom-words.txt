@@ -113,3 +113,11 @@ uppercased
 urwid
 vanco
 worktree
+Binutils
+readelf
+greadelf
+syms
+Demangle
+demangle
+dlang
+rodata

@@ -1,0 +1,110 @@
+---
+syntax: sh
+tags: [ elf, debug, binary ]
+---
+# Command readelf
+
+## What does this command do:
+
+readelf is a command-line tool used to display detailed information about ELF (Executable and Linkable Format) files on Unix-like systems. It is a core part of the GNU Binutils package
+
+## Installed from
+
+For Fedora install using: sudo dnf install binutils
+For Raspberry Pi install using: sudo apt install binutils
+For Mac install using: brew install binutils  # installs as greadelf; readelf is not natively available on macOS
+
+## Command path
+
+For Fedora run: /usr/bin/readelf
+For Raspberry Pi run: /usr/bin/readelf
+For Mac run: $(brew --prefix)/bin/greadelf  # note: not useful on Apple Silicon; ELF is a Linux/Unix binary format
+
+## Command documentation
+
+Docs can be found at https://man7.org/linux/man-pages/man1/readelf.1.html
+
+## Command options
+
+# Display all information (equivalent to -h -l -S -s -r -d -V -A -I)
+readelf -a <elf-file>
+
+# Display ELF file header
+readelf -h <elf-file>
+
+# Display program headers (segments)
+readelf -l <elf-file>
+readelf --program-headers <elf-file>
+
+# Display section headers
+readelf -S <elf-file>
+readelf --section-headers <elf-file>
+
+# Display all headers (equivalent to -h -l -S)
+readelf -e <elf-file>
+
+# Display symbol table
+readelf -s <elf-file>
+readelf --syms <elf-file>
+
+# Display dynamic symbol table
+readelf --dyn-syms <elf-file>
+
+# Display relocations
+readelf -r <elf-file>
+
+# Display dynamic section
+readelf -d <elf-file>
+
+# Display note sections
+readelf -n <elf-file>
+
+# Display version sections
+readelf -V <elf-file>
+
+# Display architecture-specific information
+readelf -A <elf-file>
+
+# Demangle symbol names (gnu-v3, java, gnat, dlang, rust)
+readelf -s -C <elf-file>
+readelf -s --demangle=rust <elf-file>
+
+# Hex dump of a section (by name or index)
+readelf -x .rodata <elf-file>
+readelf -x 3 <elf-file>
+
+# String dump of a section
+readelf -p .rodata <elf-file>
+
+# Dump DWARF debug info
+readelf -w <elf-file>                 # all DWARF sections
+readelf -wi <elf-file>                # .debug_info only
+readelf -wl <elf-file>                # raw line table
+readelf -wL <elf-file>                # decoded line table
+readelf -wa <elf-file>                # abbreviations
+readelf -wf <elf-file>                # frame info
+readelf -wF <elf-file>                # frame info (interpreted)
+
+# Display histogram of bucket list lengths
+readelf -I <elf-file>
+
+# Display unwind information
+readelf -u <elf-file>
+
+# Display archive index
+readelf -c <archive.a>
+
+# Wide output (do not truncate at 80 chars)
+readelf -W -s <elf-file>
+
+# Display section groups
+readelf -g <elf-file>
+
+# Display section details
+readelf -t <elf-file>
+
+# Enable lint/warning checks
+readelf -L <elf-file>
+
+# Read options from a file
+readelf @options.txt <elf-file>
