@@ -1,0 +1,43 @@
+---
+syntax: sh
+tags: [ resource, top, monitor ]
+---
+# Command btop
+
+## What does this command do:
+
+Resource monitor that shows usage and stats for processor, memory, disks, network and processes
+
+## Installed from
+
+For Fedora install using: sudo dnf install btop
+For Raspberry Pi install using: sudo apt install btop
+For Mac install using: brew install btop
+
+## Command path
+
+For Fedora run: /usr/bin/btop
+For Raspberry Pi run: /usr/bin/btop
+For Mac run: /opt/homebrew/bin/btop
+
+## Command documentation
+
+Docs can be found at https://github.com/aristocratos/btop
+
+## Command options
+
+btop [OPTIONS]
+
+  -c, --config <file>     Path to a config file
+  -d, --debug             Start in debug mode with additional logs and metrics
+  -f, --filter <filter>   Set an initial process filter
+      --force-utf         Override automatic UTF locale detection
+  -l, --low-color         Disable true color, 256 colors only
+  -p, --preset <id>       Start with a preset (0-9)
+  -t, --tty               Force tty mode with ANSI graph symbols and 16 colors only
+      --themes-dir <dir>  Path to a custom themes directory
+      --no-tty            Force disable tty mode
+  -u, --update <ms>       Set an initial update rate in milliseconds
+      --default-config    Print default config to standard output
+  -h, --help              Show this help message and exit
+  -V, --version           Show a version message and exit (more with --version)
