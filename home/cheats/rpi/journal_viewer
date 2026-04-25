@@ -1,0 +1,44 @@
+---
+syntax: sh
+tags: [ systemd, tui ]
+---
+# Command journal_viewer
+
+## What does this command do:
+
+TUI tool for systemd journals
+
+## Installed from
+
+For Fedora install using: sudo dnf install -y ncurses-devel && git clone --depth=1 https://github.com/nilseuropa/systemd_commander /tmp/sdc_build && cmake -S /tmp/sdc_build -B /tmp/sdc_build/build -DCMAKE_INSTALL_PREFIX="$HOME/.local" && cmake --build /tmp/sdc_build/build -j$(nproc) && cmake --install /tmp/sdc_build/build
+For Raspberry Pi install using: sudo apt install -y libncursesw5-dev cmake g++ && git clone --depth=1 https://github.com/nilseuropa/systemd_commander /tmp/sdc_build && cmake -S /tmp/sdc_build -B /tmp/sdc_build/build -DCMAKE_INSTALL_PREFIX="$HOME/.local" && cmake --build /tmp/sdc_build/build -j$(nproc) && cmake --install /tmp/sdc_build/build
+
+## Command path
+
+For Fedora run: ~/.local/bin/journal_viewer
+For Raspberry Pi run: ~/.local/bin/journal_viewer
+
+## Command documentation
+
+Docs can be found at https://github.com/nilseuropa/systemd_commander
+
+## Command options
+
+journal_viewer                         # launch TUI
+journal_viewer --version               # show version
+journal_viewer --unit ssh.service      # filter by unit
+journal_viewer --namespace robot       # set journal namespace
+
+# Key bindings
+# F1          help
+# F2          toggle live / snapshot mode
+# F4          refresh
+# F5          cycle priority filter
+# F6          text filter
+# F7          namespace picker (press E for manual entry)
+# F10         exit
+# Enter       inspect / open selected item
+# Esc         close popup / return
+# Home / End  jump to first / last item
+# Alt+S       incremental search
+# Alt+T       toggle embedded terminal pane

@@ -1,0 +1,43 @@
+---
+syntax: sh
+tags: [ systemd, tui ]
+---
+# Command systemd_commander
+
+## What does this command do:
+
+TUI tools for systemd and journals
+
+## Installed from
+
+For Fedora install using: sudo dnf install -y ncurses-devel && git clone --depth=1 https://github.com/nilseuropa/systemd_commander /tmp/sdc_build && cmake -S /tmp/sdc_build -B /tmp/sdc_build/build -DCMAKE_INSTALL_PREFIX="$HOME/.local" && cmake --build /tmp/sdc_build/build -j$(nproc) && cmake --install /tmp/sdc_build/build
+
+## Command path
+
+For Fedora run: ~/.local/bin/systemd_commander
+
+## Command documentation
+
+Docs can be found at https://github.com/nilseuropa/systemd_commander
+
+## Command options
+
+systemd_commander                    # launch TUI
+systemd_commander --version          # show version
+systemd_commander --unit ssh.service # open directly at a specific unit
+
+# Key bindings
+# F1          help
+# F2          start selected unit
+# F3          stop selected unit
+# F4          refresh
+# F5          restart selected unit
+# F6          reload selected unit
+# F7          edit unit file (from details view)
+# F9          open logs in journal_viewer
+# F10         exit
+# Enter       inspect / open selected item
+# Esc         close popup / return
+# Home / End  jump to first / last item
+# Alt+S       incremental search
+# Alt+T       toggle embedded terminal pane

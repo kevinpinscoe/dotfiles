@@ -86,3 +86,6 @@ imageupload
 rustup
 tlsv
 btop
+DCMAKE
+libncursesw
+ncursesw
