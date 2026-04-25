@@ -97,3 +97,5 @@ selfhosting
 pathadd
 vite
 hono
+infocmp
+opensessions
