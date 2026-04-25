@@ -1,0 +1,73 @@
+---
+syntax: sh
+tags: [ kubernetes, k8s, tui ]
+---
+# Command lfk
+
+## What does this command do:
+
+Lightning-fast, keyboard-focused, yazi-inspired terminal user interface for navigating and managing Kubernetes clusters.
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/janosmiko/lfk/releases/download/v0.9.24/lfk_0.9.24_linux_amd64.tar.gz | tar -xz -C ~/.local/bin lfk && chmod +x ~/.local/bin/lfk
+For Raspberry Pi install using: curl -sSfL https://github.com/janosmiko/lfk/releases/download/v0.9.24/lfk_0.9.24_linux_arm64.tar.gz | tar -xz -C ~/.local/bin lfk && chmod +x ~/.local/bin/lfk
+For Mac install using: brew install janosmiko/tap/lfk
+
+## Command path
+
+For Fedora run: ~/.local/bin/lfk
+For Raspberry Pi run: ~/.local/bin/lfk
+For Mac run: /opt/homebrew/bin/lfk
+
+## Command documentation
+
+Docs can be found at https://github.com/janosmiko/lfk
+
+## Command options
+
+# Use default kubeconfig (~/.kube/config + ~/.kube/config.d/*)
+lfk
+
+# Start in a specific context
+lfk --context my-cluster
+
+# Start in a specific namespace (disables all-namespaces mode)
+lfk -n kube-system
+
+# Start with multiple namespaces
+lfk -n default -n kube-system
+
+# Use a specific config file
+lfk --config /path/to/config.yaml
+
+# Use a specific kubeconfig
+lfk --kubeconfig /path/to/kubeconfig
+
+# Disable mouse capture (enables native terminal text selection)
+lfk --no-mouse
+
+# Disable all colors
+lfk --no-color
+
+# Override watch-mode polling interval (default 2s)
+lfk --watch-interval 5s
+
+# Key bindings (in-app)
+# h/l or Left/Right  Navigate parent/child level
+# j/k or Down/Up     Move cursor
+# x                  Action menu (logs, exec, delete, scale, port-forward, etc.)
+# L                  View logs
+# v                  Describe resource
+# D / X              Delete / force delete
+# y / Y              Copy name / YAML to clipboard
+# f                  Filter items
+# /                  Search
+# \                  Namespace selector
+# A                  Toggle all-namespaces
+# T                  Open theme selector
+# ?                  Toggle help screen
+# :                  Command bar (resource jumps, kubectl, shell commands)
+# w                  Toggle watch mode
+# Ctrl+S             Toggle secret value visibility
+# Space              Toggle multi-selection

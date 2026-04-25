@@ -62,3 +62,6 @@ mytoken
 zcurl
 esac
 toplevel
+janosmiko
+kubeconfig
+yazi
