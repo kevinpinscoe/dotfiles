@@ -69,3 +69,17 @@ crumbsless
 derailed
 logoless
 splashless
+changeme
+minioadmin
+xcarchive
+tfstate
+kevininscoe
+initdb
+kreuzwerker
+judgements
+openapitools
+tzdata
+Biohazards
+getunclutter
+Gitea
+imageupload
