@@ -88,6 +88,7 @@ diygod
 dlang
 doko
 dxflrs
+elif
 enablerepo
 esac
 excalidraw
@@ -97,6 +98,7 @@ fileb
 filepathsuffix
 filestash
 getenforce
+gitdir
 getunclutter
 ghostty
 gitme
