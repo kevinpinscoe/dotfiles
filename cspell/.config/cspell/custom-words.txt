@@ -201,3 +201,12 @@ scontext
 tcontext
 journalctl
 illin
+archs
+buildah
+creds
+digestfile
+myapp
+myimage
+mykey
+mypass
+myuser

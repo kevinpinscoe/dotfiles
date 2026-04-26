@@ -1,0 +1,86 @@
+---
+syntax: sh
+tags: [ containers, docker, registry, image-management ]
+---
+# Command skopeo
+
+## What does this command do:
+
+Work with remote images registries - retrieving information, images, signing content
+
+## Installed from
+
+For Fedora install using: sudo dnf install skopeo
+For Raspberry Pi install using: sudo apt install skopeo
+For Mac install using: brew install skopeo
+
+## Command path
+
+For Fedora run: /usr/bin/skopeo
+For Raspberry Pi run: /usr/bin/skopeo
+For Mac run: /opt/homebrew/bin/skopeo
+
+## Command documentation
+
+Docs can be found at https://github.com/containers/skopeo
+
+## Command options
+
+# Global flags
+skopeo --debug                          # enable debug output
+skopeo --insecure-policy                # skip trust policy checks
+skopeo --override-arch ARCH             # override CPU architecture for image selection
+skopeo --override-os OS                 # override OS for image selection
+skopeo --command-timeout 30s            # timeout for the command execution
+
+# inspect — show image metadata from a registry
+skopeo inspect docker://docker.io/library/alpine
+skopeo inspect --config docker://docker.io/library/alpine          # show image config (env, entrypoint, etc.)
+skopeo inspect --raw docker://docker.io/library/alpine             # show raw manifest
+skopeo inspect --no-tags docker://docker.io/library/alpine         # omit tag list
+skopeo inspect -f "{{.Digest}}" docker://docker.io/library/alpine  # format output with Go template
+skopeo inspect --creds USER:PASS docker://registry.example.com/img
+
+# list-tags — list all tags for a repository
+skopeo list-tags docker://docker.io/library/alpine
+skopeo list-tags --creds USER:PASS docker://registry.example.com/repo
+
+# copy — copy an image between registries/transports
+skopeo copy docker://quay.io/skopeo/stable:latest docker://registry.example.com/skopeo:latest
+skopeo copy -a docker://docker.io/library/alpine docker://registry.example.com/alpine  # copy all archs
+skopeo copy docker://docker.io/library/alpine dir:/tmp/alpine-dir                      # save to local dir
+skopeo copy docker://docker.io/library/alpine docker-archive:/tmp/alpine.tar           # save as tar
+skopeo copy --dest-creds USER:PASS docker://src.example.com/img docker://dst.example.com/img
+skopeo copy --digestfile /tmp/digest.txt docker://src/img docker://dst/img             # write digest to file
+
+# sync — mirror images from one location to another
+skopeo sync --src docker --dest dir registry.example.com/busybox /media/usb
+skopeo sync --src docker --dest docker --scoped registry.example.com/myapp registry.internal.com
+skopeo sync --src yaml --dest docker sync-manifest.yaml registry.example.com           # use YAML manifest
+skopeo sync --dry-run --src docker --dest dir registry.example.com/myapp /tmp/mirror   # preview only
+
+# delete — remove an image from a registry
+skopeo delete docker://registry.example.com/myimage:tag
+skopeo delete --creds USER:PASS docker://registry.example.com/myimage:tag
+
+# login / logout — authenticate with a registry
+skopeo login registry.example.com
+skopeo login -u myuser -p mypass registry.example.com
+skopeo logout registry.example.com
+
+# manifest-digest — compute the digest of a local manifest file
+skopeo manifest-digest /tmp/manifest.json
+
+# standalone-sign / standalone-verify — sign/verify using local keys (sigstore)
+skopeo generate-sigstore-key --output-prefix mykey
+skopeo standalone-sign manifest.json docker.io/myimage:tag mykey.private --output sig.json
+skopeo standalone-verify manifest.json docker.io/myimage:tag mykey.pub sig.json
+
+# Transport prefixes used in IMAGE-NAME arguments
+#   docker://          — remote registry (docker v2)
+#   docker-archive:    — local .tar file (docker save format)
+#   docker-daemon:     — running docker daemon
+#   containers-storage: — local containers/storage (podman, buildah)
+#   dir:               — local directory (OCI-like layout)
+#   oci:               — local OCI image layout directory
+#   oci-archive:       — local OCI image layout tar
