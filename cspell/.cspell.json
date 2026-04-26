@@ -7,5 +7,8 @@
       "addWords": true
     }
   ],
-  "dictionaries": ["custom-words"]
+  "dictionaries": ["custom-words"],
+  "ignorePaths": [
+    "**/unsorted-from-old-repo/**"
+  ]
 }

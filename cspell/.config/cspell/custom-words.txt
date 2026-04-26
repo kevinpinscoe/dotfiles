@@ -1,5 +1,6 @@
 ACMR
 GOARCH
+gomod
 goroutines
 nolint
 pycache
@@ -182,6 +183,7 @@ orangered
 overthinkinglabs
 pastebooks
 pathadd
+pipefail
 pinboard
 plasmashell
 readelf
@@ -223,6 +225,7 @@ uppercased
 urwid
 valkey
 vanco
+venv
 vhosts
 vimrc
 vite
@@ -231,6 +234,7 @@ woodpecker
 woodpeckerci
 workingon
 worktree
+worktrees
 xcarchive
 yazi
 yellowgreen
