@@ -1,4 +1,9 @@
 ACMR
+GOARCH
+goroutines
+nolint
+pycache
+softprops
 AMDGPU
 AORUS
 Behaviour
