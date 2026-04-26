@@ -1,0 +1,77 @@
+---
+syntax: sh
+tags: [ zsh, autocomplete ]
+---
+# Command zsh-sage
+
+## What does this command do:
+
+Intelligent zsh autosuggestions with multi-signal ranking and confidence-colored ghost text
+
+## Installed from
+
+For Mac install using: brew tap UtsavMandal2022/zsh-sage && brew install zsh-sage
+
+## Post-install setup
+
+Add to ~/.zshrc (if not using Oh My Zsh):
+  source $(brew --prefix)/share/zsh-sage/zsh-sage.plugin.zsh
+
+Or add to Oh My Zsh plugins list:
+  plugins=(git zsh-sage zsh-syntax-highlighting)
+
+Import existing history on first run:
+  zsh -ic '_sage_db_import_history'
+
+Enable AI commands (requires Claude Code CLI):
+  zsage ai
+
+## Command path
+
+For Mac run: /opt/homebrew/bin/zsage
+
+## Command documentation
+
+Docs can be found at https://github.com/UtsavMandal2022/zsh-sage
+
+## Command options
+
+### zsage CLI
+
+zsage status     # current config, DB stats, active weights
+zsage ai         # enable/disable AI commands (hm)
+zsage stats      # top commands by frequency
+zsage weights    # learned weights from your habits
+zsage profile    # view ranking profile presets
+zsage version    # show version
+zsage help       # full usage info with color reference
+
+### hm (AI commands — requires Claude Code)
+
+hm find files larger than 1GB    # ask for a shell command in plain English
+hm                                # suggest a fix for the last failed command
+
+### Keybindings
+
+Right arrow          Accept full suggestion
+Option+Right         Accept word-by-word
+Ctrl+Right           Accept word-by-word
+Ctrl+N               Cycle through alternatives (up to 8 ranked suggestions)
+Backspace            Clear and re-suggest
+
+### Configuration (optional — defaults work without any of these)
+
+export ZSH_SAGE_PROFILE="default"       # default | contextual | recent
+export ZSH_SAGE_RECENCY_HALFLIFE=259200 # 3 days in seconds
+export ZSH_SAGE_CYCLE_COUNT=8           # alternatives on Ctrl+N
+export ZSH_SAGE_COLOR_HIGH=108          # high confidence color (256-color)
+export ZSH_SAGE_COLOR_MED=245           # medium confidence color
+export ZSH_SAGE_COLOR_LOW=240           # low confidence color
+export ZSH_SAGE_CONFIDENCE_HIGH=0.70    # threshold for high confidence
+export ZSH_SAGE_CONFIDENCE_LOW=0.30     # threshold for low confidence
+
+### Uninstall
+
+rm -rf $(brew --prefix)/share/zsh-sage
+brew uninstall zsh-sage
+rm -rf ~/.zsh-sage    # optional: remove command database
