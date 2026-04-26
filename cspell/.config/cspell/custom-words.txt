@@ -238,3 +238,8 @@ youtrack
 yuzutech
 zcurl
 zsage
+EASYDOCKER
+easydocker
+lazydocker
+pgdn
+pgup

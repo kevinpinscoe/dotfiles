@@ -1,0 +1,47 @@
+---
+syntax: sh
+tags: [ docker, tui, containers ]
+---
+# Command easydocker
+
+## What does this command do:
+
+EasyDocker is a TUI focused on investigating and troubleshooting Docker resources. Highly inspired by lazydocker and k9s while leveraging beautiful graphics from BubbleTea. Like k9s command.
+
+## Installed from
+
+For Fedora install using: export EASYDOCKER_INSTALL_DIR=~/.local/bin && curl -fsSL https://raw.githubusercontent.com/joao-zanutto/easydocker/main/install/install.sh | sh
+For Raspberry Pi install using: export EASYDOCKER_INSTALL_DIR=~/.local/bin && curl -fsSL https://raw.githubusercontent.com/joao-zanutto/easydocker/main/install/install.sh | sh
+For Mac install using: curl -fsSL https://raw.githubusercontent.com/joao-zanutto/easydocker/main/install/install.sh | sh
+
+## Command path
+
+For Fedora run: ~/.local/bin/easydocker
+For Raspberry Pi run: ~/.local/bin/easydocker
+For Mac run: /usr/local/bin/easydocker
+
+## Command documentation
+
+Docs can be found at https://github.com/joao-zanutto/easydocker
+
+## Command options
+
+easydocker          # launch the TUI
+
+### Browse Mode (main view)
+# ←/h / →/l       navigate between tabs
+# ↑/k / ↓/j       move selection up/down
+# pgup / pgdn      jump by page
+# a                toggle between running and all resources
+# Enter            open logs for selected container
+# /                activate filter
+# Esc              return to previous screen or quit
+
+### Logs Mode
+# ←/→             scroll logs horizontally
+# ↑/k / ↓/j       move through log lines
+# pgup/pgdn/home/end  navigate full log buffer
+# f                toggle follow mode (auto-scroll to new entries)
+# w                toggle line wrapping
+# /                search within logs
+# Esc              close logs view
