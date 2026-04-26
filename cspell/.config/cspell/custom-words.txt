@@ -243,3 +243,9 @@ easydocker
 lazydocker
 pgdn
 pgup
+LOOKBACK
+gcal
+lookback
+springfest
+fallfest
+summerfest
