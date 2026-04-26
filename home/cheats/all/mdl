@@ -1,0 +1,46 @@
+---
+syntax: sh
+tags: [ markdown, lint ]
+---
+# Command mdl
+
+## What does this command do:
+
+Markdown lint tool
+
+## Installed from
+
+For Fedora install using: gem install --user-install --bindir ~/.local/bin mdl
+For Raspberry Pi install using: gem install --user-install --bindir ~/.local/bin mdl
+For Mac install using: gem install --user-install --bindir ~/.local/bin mdl
+
+## Command path
+
+For Fedora run: ~/.local/bin/mdl
+For Raspberry Pi run: ~/.local/bin/mdl
+For Mac run: ~/.local/bin/mdl
+
+## Command documentation
+
+Docs can be found at https://github.com/markdownlint/markdownlint
+
+## Command options
+
+mdl [options] [FILE.md|DIR ...]
+
+    -c, --config FILE                The configuration file to use
+    -g, --git-recurse                Only process files known to git when given a directory
+    -i, --[no-]ignore-front-matter   Ignore YAML front matter
+    -j, --json                       JSON output
+    -l, --list-rules                 Don't process any files, just list enabled rules
+    -r, --rules RULE1,RULE2          Only process these rules
+    -u, --rulesets RULESET1,RULESET2 Specify additional ruleset files to load
+    -S, --sarif                      SARIF output
+    -a, --[no-]show-aliases          Show rule alias instead of rule ID when viewing rules
+    -w, --[no-]warnings              Show kramdown warnings
+    -d, --skip-default-ruleset       Don't load the default markdownlint ruleset
+    -s, --style STYLE                Load the given style
+    -t, --tags TAG1,TAG2             Only process rules with these tags
+    -v, --[no-]verbose               Increase verbosity
+    -h, --help                       Show this message
+    -V, --version                    Show version
