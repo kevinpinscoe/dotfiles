@@ -3,5 +3,6 @@
   "detailPanelHeights": {
     "main": 10
   },
-  "sidebarPosition": "right"
+  "sidebarPosition": "right",
+  "sidebarWidth": 74
 }
