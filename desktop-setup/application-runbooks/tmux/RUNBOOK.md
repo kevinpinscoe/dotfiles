@@ -161,6 +161,57 @@ If it stops working on Fedora, verify that the Wayland socket still exists at `/
 
 ---
 
+## opensessions sidebar
+
+The opensessions plugin adds an AI session sidebar toggled with `prefix + o + t`.
+
+### Keybindings
+
+| Binding | Action |
+|---------|--------|
+| `prefix + o + t` | Toggle sidebar |
+| `prefix + o + s` | Focus sidebar |
+| `prefix + o + e` | Even horizontal layout |
+
+### Configuration
+
+Config is managed via the `opensessions` Stow package:
+
+| File in repo | Live path |
+|--------------|-----------|
+| `opensessions/.config/opensessions/config.json` | `~/.config/opensessions/config.json` |
+
+Current settings:
+
+```json
+{
+  "plugins": [],
+  "sidebarPosition": "right",
+  "sidebarWidth": 26
+}
+```
+
+- `sidebarWidth` — width in **columns** (character cells). Default: 26. Setting it to 74 takes roughly half the screen.
+- `sidebarPosition` — `"left"` or `"right"`.
+
+### Restarting the opensessions server
+
+The server reads config at startup. After editing `config.json`, restart it so the new width takes effect:
+
+```bash
+kill $(cat /tmp/opensessions.*.pid)
+```
+
+The server restarts automatically the next time you toggle the sidebar (`prefix + o + t`).
+
+If the PID file is missing, kill by process name:
+
+```bash
+pkill -f "main.ts"
+```
+
+---
+
 ## Troubleshooting: Status bar not showing expected items
 
 Work through these checks in order.

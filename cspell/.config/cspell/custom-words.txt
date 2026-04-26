@@ -249,3 +249,9 @@ lookback
 springfest
 fallfest
 summerfest
+xsel
+xclip
+termname
+pgrep
+pkill
+rwxrwxr
