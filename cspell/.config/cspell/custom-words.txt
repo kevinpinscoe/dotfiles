@@ -265,3 +265,6 @@ fomawo
 Ziit
 AMRAD
 Peraza
+bindir
+sarif
+SARIF
