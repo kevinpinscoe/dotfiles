@@ -1,0 +1,47 @@
+---
+syntax: sh
+tags: [ all, directory comparison ]
+---
+# Command ddir
+
+## What does this command do:
+
+Compares two directories recursively, reporting files missing from either side and running side-by-side diffs on files that differ. Hidden files and directories (names starting with `.`) are skipped.
+
+## Installed from
+
+Pre-installed in `~/tools` — clone the tools repo:
+```bash
+git clone git@github.com:kevinpinscoe/tools.git ~/tools
+```
+
+## Command path
+
+For Fedora run: `~/tools/ddir`
+For Raspberry Pi run: `~/tools/ddir`
+For Mac run: `~/tools/ddir`
+
+## Command documentation
+
+Docs can be found at https://github.com/kevinpinscoe/tools
+
+## Command options
+
+### Usage
+    ddir <dir-a> <dir-b>
+
+### Output
+    -- Missing <path>          File exists in one directory but not the other
+    ** <a> and <b> differ      Side-by-side diff of files with differing content
+    Summary statistics printed at the end (file counts, missing, differing)
+
+### Examples
+# Compare two directories
+ddir ~/Projects/foo ~/backup/foo
+
+# Compare current directory with a backup
+ddir . ~/backup/current
+
+### Dependencies
+
+`python3`, `diff`
