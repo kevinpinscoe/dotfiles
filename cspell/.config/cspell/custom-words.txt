@@ -35,6 +35,7 @@ actualbudget
 akmod
 akmods
 allowerasing
+afile
 amdgpu
 ansifilter
 archs
@@ -46,12 +47,16 @@ autocmds
 autocommands
 autoremove
 backupmysql
+bfile
 blockquotes
+bothfilesexisttable
 britz
 btop
 buildah
 bunx
 certbot
+comparefile
+comparisondir
 changeme
 chcon
 cheatsheet
@@ -64,6 +69,13 @@ cterm
 ctermbg
 ctermfg
 darkcyan
+ddir
+diffcount
+diffcmd
+dira
+dirafiles
+dirb
+dirbfiles
 darkgreen
 darkgrey
 davorg
@@ -80,6 +92,9 @@ enablerepo
 esac
 excalidraw
 fdate
+filea
+fileb
+filepathsuffix
 filestash
 getenforce
 getunclutter
@@ -132,6 +147,8 @@ logfile
 logoless
 mainbranch
 mathcing
+missinga
+missingb
 meilisearch
 mindmap
 minioadmin
