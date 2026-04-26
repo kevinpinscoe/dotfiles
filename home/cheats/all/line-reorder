@@ -1,0 +1,29 @@
+---
+syntax: sh
+tags: [ line, reorder, gui, lines ]
+---
+# Command line-reorder
+
+## What does this command do:
+
+Allow you to reorder lines by drag and drop using a GUI
+
+## Installed from
+
+For Fedora install using: sudo dnf install python3-pyside6 && git clone https://github.com/kevinpinscoe/line-reorder-gui /tmp/lrg && cp /tmp/lrg/line_reorder.py /tmp/lrg/line-reorder ~/bin/ && chmod +x ~/bin/line-reorder
+For Raspberry Pi install using: pip install --user PySide6 && git clone https://github.com/kevinpinscoe/line-reorder-gui /tmp/lrg && cp /tmp/lrg/line_reorder.py /tmp/lrg/line-reorder ~/bin/ && chmod +x ~/bin/line-reorder
+For Mac install using: pip install --user PySide6 && git clone https://github.com/kevinpinscoe/line-reorder-gui /tmp/lrg && cp /tmp/lrg/line_reorder.py /tmp/lrg/line-reorder ~/bin/ && chmod +x ~/bin/line-reorder
+
+## Command path
+
+For Fedora run: ~/bin/line-reorder
+For Raspberry Pi run: ~/bin/line-reorder
+For Mac run: ~/bin/line-reorder
+
+## Command documentation
+
+Docs can be found at https://github.com/kevinpinscoe/line-reorder-gui
+
+## Command options
+
+line-reorder /full/path/to/file.txt   # open file in GUI for drag-and-drop line reordering

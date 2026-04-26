@@ -1,4 +1,15 @@
 ACMR
+codesign
+ldflags
+shasum
+spctl
+xattr
+bubbletea
+bubbles
+charmbracelet
+frontmatter
+Frontmatter
+lipgloss
 GOARCH
 gomod
 goroutines
@@ -268,3 +279,5 @@ Peraza
 bindir
 sarif
 SARIF
+pyside
+PySide
