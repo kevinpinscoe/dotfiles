@@ -63,7 +63,10 @@ brew "stow"
 brew "tea"
 brew "telnet"
 brew "tenv"
-brew "terraform-docs"
+# terraform-docs is NOT managed by brew — the acst/terraform-aws repo pins
+# v0.19.0 via CI, and brew only ships latest (v0.22.x). Install the pinned
+# binary directly to /opt/homebrew/bin. See the acst/terraform-aws CLAUDE.md.
+# brew "terraform-docs"
 brew "terraform-ls"
 brew "tmux"
 brew "tree"
