@@ -12,6 +12,14 @@ fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 
+# Cargo (Rust) bin — for tools installed via `cargo install` (e.g. jit-cli)
+[[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
+
+# binutils (keg-only): exposes greadelf/readelf and friends.
+# Note: this also shadows system `as`, `ld`, `ar`, `ranlib`. If a build
+# breaks unexpectedly, suspect this and bypass with absolute paths.
+[[ -d /opt/homebrew/opt/binutils/bin ]] && export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
+
 # Add dotnet tools. Use `find` instead of a shell glob: zsh errors on unmatched
 # globs (errexit on NO_NOMATCH) before the subshell's stderr redirect can help.
 if [ -d /opt/homebrew/Cellar/dotnet ]; then

@@ -26,16 +26,16 @@ sudo mv /tmp/woodpecker-cli /usr/local/bin/
 
 For Mac install using:
 ```
-curl -L https://github.com/woodpecker-ci/woodpecker/releases/download/v3.13.0/woodpecker-cli_darwin_amd64.tar.gz \
+curl -L https://github.com/woodpecker-ci/woodpecker/releases/download/v3.13.0/woodpecker-cli_darwin_arm64.tar.gz \
   | tar xz -C /tmp
-sudo mv /tmp/woodpecker-cli /usr/local/bin/
+mv /tmp/woodpecker-cli ~/.local/bin/
 ```
 
 ## Command path
 
 For Fedora run: woodpecker-cli
 For Raspberry Pi run: woodpecker-cli
-For Mac run: woodpecker-cli
+For Mac run: ~/.local/bin/woodpecker-cli
 
 ## Authentication / environment setup
 

@@ -297,3 +297,7 @@ marshalers
 regen
 mesactl
 env
+cli
+jit
+dnf
+usr

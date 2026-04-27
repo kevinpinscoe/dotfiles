@@ -10,9 +10,9 @@ ripgrep recursively searches directories for a regex pattern while respecting yo
 
 ## Installed from
 
-For Fedora install using: `sudo dnf install rg`
+For Fedora install using: `sudo dnf install ripgrep`
 For Raspberry Pi install using: `sudo apt-get install ripgrep`
-For Mac install using: `homebrew install rg`
+For Mac install using: `brew install ripgrep`
 
 ## Command path
 
