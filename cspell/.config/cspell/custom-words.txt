@@ -313,3 +313,9 @@ hmof
 NWS
 poc
 POC
+wsgi
+WSGI
+mod-wsgi
+TGIE
+Pangea
+mailtools
