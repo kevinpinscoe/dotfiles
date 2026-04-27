@@ -1,0 +1,104 @@
+---
+syntax: sh
+tags: [ k8s, kubernetes, package-manager, helm ]
+---
+# Command helm
+
+## What does this command do:
+
+The Kubernetes Package Manager
+
+## Installed from
+
+For Fedora install using: sudo dnf install helm
+For Raspberry Pi install using: curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null && echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list && sudo apt-get update && sudo apt-get install helm
+For Mac install using: brew install helm
+
+## Command path
+
+For Fedora run: /usr/bin/helm
+For Raspberry Pi run: /usr/bin/helm
+For Mac run: /opt/homebrew/bin/helm
+
+## Command documentation
+
+Docs can be found at https://github.com/helm/helm
+
+## Command options
+
+# Search for a chart in configured repos
+helm search repo <keyword>
+
+# Search Artifact Hub for charts
+helm search hub <keyword>
+
+# Add a chart repository
+helm repo add <name> <url>
+
+# List configured repositories
+helm repo list
+
+# Update repository indexes
+helm repo update
+
+# Install a chart as a new release
+helm install <release-name> <chart>
+
+# Install with custom values
+helm install <release-name> <chart> -f values.yaml
+helm install <release-name> <chart> --set key=value
+
+# Install into a specific namespace
+helm install <release-name> <chart> -n <namespace> --create-namespace
+
+# List all releases
+helm list
+helm list -n <namespace>
+helm list -A   # all namespaces
+
+# Upgrade an existing release
+helm upgrade <release-name> <chart>
+helm upgrade --install <release-name> <chart>   # install if not present
+
+# Uninstall a release
+helm uninstall <release-name> -n <namespace>
+
+# Roll back a release to a previous revision
+helm rollback <release-name> <revision>
+
+# Show release history
+helm history <release-name>
+
+# Show release status
+helm status <release-name>
+
+# Show chart values/readme/chart metadata
+helm show values <chart>
+helm show readme <chart>
+helm show chart <chart>
+
+# Download a chart without installing
+helm pull <chart> --untar
+
+# Render templates locally (dry run)
+helm template <release-name> <chart>
+helm template <release-name> <chart> -f values.yaml
+
+# Lint a chart for issues
+helm lint <chart-dir>
+
+# Create a new chart scaffold
+helm create <chart-name>
+
+# Package a chart directory into a .tgz archive
+helm package <chart-dir>
+
+# Show helm environment variables
+helm env
+
+# Print client version
+helm version
+
+# Generate shell autocompletion
+helm completion bash | sudo tee /etc/bash_completion.d/helm
+helm completion zsh > ~/.zsh/completions/_helm
