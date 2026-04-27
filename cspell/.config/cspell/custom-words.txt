@@ -292,3 +292,8 @@ rpi
 SRE
 devconsole
 exfiltration
+protoc
+marshalers
+regen
+mesactl
+env
