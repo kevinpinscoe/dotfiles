@@ -1,0 +1,99 @@
+---
+syntax: sh
+tags: [ k8s, kubernetes, package-manager, helm ]
+---
+# Command helmfile
+
+## What does this command do:
+
+Declaratively deploy your Kubernetes manifests, Kustomize configs, and Charts as Helm releases.
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/helmfile/helmfile/releases/download/v1.4.4/helmfile_1.4.4_linux_amd64.tar.gz | tar -xz -C ~/.local/bin/ helmfile && chmod +x ~/.local/bin/helmfile
+For Raspberry Pi install using: curl -sSfL https://github.com/helmfile/helmfile/releases/download/v1.4.4/helmfile_1.4.4_linux_arm64.tar.gz | tar -xz -C ~/.local/bin/ helmfile && chmod +x ~/.local/bin/helmfile
+For Mac install using: brew install helmfile
+
+## Command path
+
+For Fedora run: ~/.local/bin/helmfile
+For Raspberry Pi run: ~/.local/bin/helmfile
+For Mac run: /opt/homebrew/bin/helmfile
+
+## Command documentation
+
+Docs can be found at https://github.com/helmfile/helmfile
+
+## Command options
+
+# Apply all releases (only when there are changes)
+helmfile apply
+
+# Sync all releases (always apply)
+helmfile sync
+
+# Diff releases against the current cluster state
+helmfile diff
+
+# Destroy all releases
+helmfile destroy
+
+# List all releases defined in state file
+helmfile list
+
+# Show release status
+helmfile status
+
+# Template releases (render manifests locally)
+helmfile template
+
+# Lint all charts
+helmfile lint
+
+# Update chart dependencies
+helmfile deps
+
+# Add repositories defined in state file
+helmfile repos
+
+# Fetch charts to local directory
+helmfile fetch
+
+# Show deployment order (DAG groups)
+helmfile show-dag
+
+# Target a specific environment
+helmfile -e production sync
+helmfile -e staging apply
+
+# Use a specific state file
+helmfile -f path/to/helmfile.yaml sync
+
+# Target releases by label selector
+helmfile -l app=myapp sync
+helmfile -l tier=frontend,tier!=proxy apply
+
+# Run interactively (prompt before changes)
+helmfile -i apply
+
+# Run against a specific namespace
+helmfile -n mynamespace sync
+
+# Skip repo/dependency updates
+helmfile sync --skip-deps
+
+# Debug output
+helmfile --debug sync
+
+# Initialize helmfile (install helm + plugins)
+helmfile init
+
+# Print environment config
+helmfile print-env
+
+# Write rendered values files
+helmfile write-values
+
+# Generate shell autocompletion
+helmfile completion bash | sudo tee /etc/bash_completion.d/helmfile
+helmfile completion zsh > ~/.zsh/completions/_helmfile
