@@ -1,6 +1,6 @@
 ---
 syntax: sh
-tags: [ notes, readme, editor, viewer, markdown ]
+tags: [ notes, readme, editor, viewer, markdown, tui ]
 ---
 # Command joplin
 
