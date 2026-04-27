@@ -1,91 +1,92 @@
 ---
 syntax: sh
-tags: [ all, logfiles ]
+tags: [ log, logs, navigator, viewer ]
 ---
 # Command lnav
 
 ## What does this command do:
 
-A log file viewer for the terminal
+LNAV -- The Logfile Navigator, log file viewer for the terminal.
 
 ## Installed from
 
-For Fedora install using: `sudo dnf install lnav`
-For Raspberry Pi install using: `sudo apt install lnav`
-For Mac install using: `homebrew install lnav`
+For Fedora install using: curl -sSfL https://github.com/tstack/lnav/releases/download/v0.14.0/lnav-0.14.0-linux-musl-x86_64.zip -o /tmp/lnav.zip && unzip /tmp/lnav.zip -d /tmp/lnav-install && mv /tmp/lnav-install/lnav-0.14.0/lnav ~/.local/bin/lnav && chmod +x ~/.local/bin/lnav
+For Raspberry Pi install using: curl -sSfL https://github.com/tstack/lnav/releases/download/v0.14.0/lnav-0.14.0-linux-musl-arm64.zip -o /tmp/lnav.zip && unzip /tmp/lnav.zip -d /tmp/lnav-install && mv /tmp/lnav-install/lnav-0.14.0/lnav ~/.local/bin/lnav && chmod +x ~/.local/bin/lnav
+For Mac install using: brew install lnav
 
 ## Command path
 
-For Fedora run: `lnav`
-For Raspberry Pi run: `lnav`
-For Mac run: `lnav`
+For Fedora run: ~/.local/bin/lnav
+For Raspberry Pi run: ~/.local/bin/lnav
+For Mac run: /opt/homebrew/bin/lnav
 
 ## Command documentation
 
-Docs can be found at https://docs.lnav.org/en/v0.13.1/
+Docs can be found at https://github.com/tstack/lnav
 
 ## Command options
 
-# View a log file:
-lnav /var/log/syslog
+  lnav [options] [logfile1 logfile2 ...]
 
-# Load all files in a directory:
+  -h         Print help, then exit
+  -H         Display the internal help text (full key bindings and commands)
+  -V         Print version information
+
+  -S, --since  Only index log content since this time
+  -U, --until  Only index log content until this time
+  -r           Recursively load files from the given directory hierarchies
+  -R           Load older rotated log files as well
+  -c cmd       Execute a command after files are loaded
+  -f file      Execute commands from the given file
+  -e cmd       Execute a shell command-line (watch its output)
+  -t           Treat stdin as a log file
+  -n           Run without the curses UI (headless mode)
+  -N           Do not open the default syslog file if no files given
+  -q           Do not print informational messages
+  -W           Print warnings about lnav's configuration
+
+  -i           Install format files; pass 'extra' for third-party formats
+  -m           Management command-line mode (configuration)
+  -I dir       Additional configuration directory
+  -u           Update formats installed from git repositories
+
+## Key bindings (inside lnav)
+
+  ?            View/leave online help
+  q            Quit
+  /            Search (forward)
+  n / N        Next / previous search match
+  g / G        Jump to top / bottom
+  e / E        Next / previous error
+  w / W        Next / previous warning
+  f / F        Next / previous log file
+  SPACE        Page down
+  b            Page up
+  :            Enter lnav command prompt
+  ;            Enter SQL query prompt
+
+## Examples
+
+# Open syslog (default)
+lnav
+
+# Open all logs in /var/log
 lnav /var/log
 
-# Recursively load files from directory hierarchies:
-lnav -r /var/log
-
-# Load older rotated log files as well:
-lnav -R /var/log
-
-# Watch the output of a shell command:
+# Watch output of a command
 lnav -e 'make -j4'
 
-# Run in headless (no curses UI) mode:
+# Pipe stdin into lnav
+journalctl -f | lnav -t
+
+# Load rotated logs recursively
+lnav -Rr /var/log/nginx/
+
+# Run headless (no curses UI)
 lnav -n /var/log/syslog
 
-# Do not open default syslog if no files given:
-lnav -N
-
-# Treat stdin as a log file:
-lnav -t
-
-# Execute a command after files are loaded (prefix: : ; | /):
+# Filter to errors only after loading
 lnav -c ':filter-in error' /var/log/syslog
 
-# Execute commands from a file:
-lnav -f /path/to/commands.lnav
-
-# Execute a shell command and display output:
-lnav -e 'journalctl -f'
-
-# Add an additional configuration directory:
-lnav -I /path/to/config/dir
-
-# Print warnings about lnav's configuration:
-lnav -W
-
-# Check files against configuration and report errors:
-lnav -C /var/log/syslog
-
-# Display internal help text on startup:
-lnav -H
-
-# Print version information:
-lnav -V
-
-# Do not print informational messages (quiet mode):
-lnav -q
-
-# Install format files:
-lnav -i /path/to/format.json
-
-# Switch to management mode:
+# Management mode
 lnav -m config get
-
-# Update formats installed from git repositories:
-lnav -u
-
-# Key bindings (while in lnav):
-# ?    View/leave online help
-# q    Quit the program

@@ -286,3 +286,5 @@ awspw
 killall
 pwgen
 unalias
+lnav
+tstack
