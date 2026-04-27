@@ -1,0 +1,47 @@
+---
+syntax: sh
+tags: [ git, status, report, repos ]
+---
+# Command check-git-repos
+
+## What does this command do:
+
+Walks $HOME recursively, finds every git repository, and reports any that are out of sync with their remote or have a dirty working tree. All repos are checked concurrently, making it significantly faster than an equivalent shell loop.
+
+## Installed from
+
+For Fedora install using: curl -Lo ~/bin/check-git-repos https://github.com/kevinpinscoe/tools/releases/download/check-git-repos-v1.3.0/check-git-repos-linux-amd64 && chmod +x ~/bin/check-git-repos
+For Raspberry Pi install using: curl -Lo ~/bin/check-git-repos https://github.com/kevinpinscoe/tools/releases/download/check-git-repos-v1.3.0/check-git-repos-linux-arm64 && chmod +x ~/bin/check-git-repos
+For Mac install using: curl -Lo ~/bin/check-git-repos https://github.com/kevinpinscoe/tools/releases/download/check-git-repos-v1.3.0/check-git-repos-darwin-arm64 && chmod +x ~/bin/check-git-repos
+
+## Command path
+
+For Fedora run: /home/kinscoe/bin/check-git-repos
+For Raspberry Pi run: ~/bin/check-git-repos
+For Mac run: ~/bin/check-git-repos
+
+## Command documentation
+
+Docs can be found at https://github.com/kevinpinscoe/tools/tree/main/check-git-repos-source
+
+## Command options
+
+check-git-repos              # scan and report (with spinner in interactive terminals)
+check-git-repos --batch-mode # scan without spinner (for systemd/cron)
+check-git-repos --version    # print version and exit
+check-git-repos --help       # print this help
+
+## Output status values
+
+AHEAD                    # local commits not yet pushed
+BEHIND                   # remote commits not yet pulled
+AHEAD and BEHIND (diverged) # both ahead and behind
+STAGED                   # changes indexed but not committed
+UNSTAGED                 # tracked files with uncommitted edits
+UNTRACKED                # files not yet added to git
+
+## Ignore file
+
+# Create ~/.config/check-git-repos-source/ignore.txt to skip repo subtrees
+# One path per line; ~ is expanded; lines beginning with # are comments
+~/archives/playbook      # example: skip a subtree
