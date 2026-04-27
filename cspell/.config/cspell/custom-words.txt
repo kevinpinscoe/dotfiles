@@ -281,3 +281,8 @@ sarif
 SARIF
 pyside
 PySide
+awalledcity
+awspw
+killall
+pwgen
+unalias
