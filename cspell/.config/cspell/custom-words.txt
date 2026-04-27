@@ -307,5 +307,9 @@ utsavmandal
 lfs
 sed
 HMH
+HMO
 gitcf
+hmof
 NWS
+poc
+POC
