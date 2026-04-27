@@ -289,3 +289,6 @@ unalias
 lnav
 tstack
 rpi
+SRE
+devconsole
+exfiltration
