@@ -288,3 +288,4 @@ pwgen
 unalias
 lnav
 tstack
+rpi
