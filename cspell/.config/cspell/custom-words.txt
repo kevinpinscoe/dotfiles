@@ -301,3 +301,7 @@ cli
 jit
 dnf
 usr
+gource
+utsavmandal
+lfs
+sed
