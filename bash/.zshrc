@@ -39,3 +39,6 @@ if [[ -n "$SSH_CLIENT" ]]; then
     echo "I am logged in from ${sshvars[1]}"
     echo " "
 fi
+
+# zsh-sage: intelligent autosuggestions (Homebrew; macOS only)
+[[ -f /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh ]] && source /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh
