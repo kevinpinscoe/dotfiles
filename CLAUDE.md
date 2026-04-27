@@ -184,3 +184,9 @@ Folder mapping (match the directories that already exist under `~/todo/`):
 5. Update the packages table in this file (the `## Directory structure and purpose` section).
 6. Update `README.md` — add a row to the repository layout table.
 7. Run `bash -n install.sh` to syntax-check before committing.
+
+## MANDATORY: cspell word list changes
+
+The personal cspell word list lives at `cspell/.config/cspell/custom-words.txt` (stowed to `~/.config/cspell/custom-words.txt`). Words are added here whenever the pre-commit hook or a spell-check run flags an unknown word that is valid.
+
+**Every time words are added to `custom-words.txt`, immediately offer to commit and push the change to the remote repo.** Do not leave word list edits uncommitted — they accumulate silently and the pre-commit hook will re-flag the same words on the next unrelated commit.
