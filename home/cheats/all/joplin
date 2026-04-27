@@ -1,0 +1,104 @@
+---
+syntax: sh
+tags: [ notes, readme, editor, viewer, markdown ]
+---
+# Command joplin
+
+## What does this command do:
+
+Joplin - privacy-focused note taking app with sync capabilities and stores as Markdown
+
+## Installed from
+
+For Fedora install using: NPM_CONFIG_PREFIX=~/.joplin-bin npm install --loglevel=error -g joplin && ln -sf ~/.joplin-bin/bin/joplin ~/.local/bin/joplin
+For Raspberry Pi install using: NPM_CONFIG_PREFIX=~/.joplin-bin npm install --loglevel=error -g joplin && ln -sf ~/.joplin-bin/bin/joplin ~/.local/bin/joplin
+For Mac install using: NPM_CONFIG_PREFIX=~/.joplin-bin npm install --loglevel=error -g joplin && ln -sf ~/.joplin-bin/bin/joplin ~/.local/bin/joplin
+
+## Command path
+
+For Fedora run: ~/.local/bin/joplin
+For Raspberry Pi run: ~/.local/bin/joplin
+For Mac run: ~/.local/bin/joplin
+
+## Command documentation
+
+Docs can be found at https://github.com/laurent22/joplin
+
+## Command options
+
+# Launch the TUI
+joplin
+
+# Show version
+joplin version
+
+# List notes in current notebook
+joplin ls
+
+# List notebooks
+joplin ls -n
+
+# Show note content
+joplin cat <note>
+
+# Show note with full metadata
+joplin cat -v <note>
+
+# Create a new notebook
+joplin mkbook <notebook>
+
+# Create a new note
+joplin mknote <title>
+
+# Create a new to-do
+joplin mktodo <title>
+
+# Switch to a notebook
+joplin use <notebook>
+
+# Edit a note (opens $EDITOR)
+joplin edit <note>
+
+# Move note to another notebook
+joplin mv <note> <notebook>
+
+# Rename a note or notebook
+joplin ren <item> <name>
+
+# Delete a note
+joplin rmnote <note>
+
+# Delete a notebook
+joplin rmbook <notebook>
+
+# Tag a note
+joplin tag add <tag> <note>
+
+# List tags
+joplin tag ls
+
+# Sync with configured target
+joplin sync
+
+# Configure sync target (e.g. 5=Nextcloud, 7=Dropbox, 10=Joplin Cloud)
+joplin config sync.target <number>
+
+# Show/set a config value
+joplin config [name] [value]
+
+# Show all config including hidden
+joplin config -v
+
+# Export notes (JEX format)
+joplin export <path>
+
+# Import notes
+joplin import <path> [notebook]
+
+# Attach a file to a note
+joplin attach <note> <file>
+
+# End-to-end encryption commands
+joplin e2ee enable
+joplin e2ee disable
+joplin e2ee status
