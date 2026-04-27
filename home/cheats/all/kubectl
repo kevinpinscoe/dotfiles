@@ -1,0 +1,172 @@
+---
+syntax: sh
+tags: [ k8s, kubernetes, control, manage, control-plane ]
+---
+# Command kubectl
+
+## What does this command do:
+
+Kubernetes provides a command line tool for communicating with a Kubernetes cluster's control plane, using the Kubernetes API
+
+## Installed from
+
+For Fedora install using: curl -sSfL "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl
+For Raspberry Pi install using: curl -sSfL "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl" -o ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl
+For Mac install using: brew install kubectl
+
+## Command path
+
+For Fedora run: ~/.local/bin/kubectl
+For Raspberry Pi run: ~/.local/bin/kubectl
+For Mac run: /opt/homebrew/bin/kubectl
+
+## Command documentation
+
+Docs can be found at https://kubernetes.io/docs/reference/kubectl/
+
+## Command options
+
+# Syntax: kubectl [command] [TYPE] [NAME] [flags]
+
+# --- Viewing resources ---
+
+# List resources (pods, nodes, services, deployments, etc.)
+kubectl get pods
+kubectl get pods -n <namespace>
+kubectl get pods -A                        # all namespaces
+kubectl get pods -o wide                   # show node and IP
+kubectl get pods -o yaml                   # full YAML output
+kubectl get nodes
+kubectl get services
+kubectl get deployments
+kubectl get all -n <namespace>
+
+# Watch for changes
+kubectl get pods -w
+
+# Show detailed information about a resource
+kubectl describe pod <pod>
+kubectl describe node <node>
+kubectl describe deployment <name> -n <namespace>
+
+# List supported API resource types
+kubectl api-resources
+
+# Get documentation for a resource type
+kubectl explain pod
+kubectl explain pod.spec.containers
+
+# --- Creating and applying resources ---
+
+# Apply a manifest (create or update)
+kubectl apply -f manifest.yaml
+kubectl apply -f ./dir/                    # apply all files in directory
+kubectl apply -k ./kustomization/          # apply kustomization
+
+# Create resources imperatively
+kubectl create deployment <name> --image=<image>
+kubectl create namespace <name>
+kubectl create secret generic <name> --from-literal=key=value
+
+# Diff local manifest against live state
+kubectl diff -f manifest.yaml
+
+# --- Editing and patching ---
+
+# Open live resource in editor
+kubectl edit deployment <name> -n <namespace>
+
+# Patch a field in-place
+kubectl patch deployment <name> -p '{"spec":{"replicas":3}}'
+
+# Update labels or annotations
+kubectl label pod <pod> env=prod
+kubectl annotate pod <pod> description="my pod"
+
+# --- Deleting resources ---
+
+kubectl delete pod <pod>
+kubectl delete -f manifest.yaml
+kubectl delete deployment <name> -n <namespace>
+
+# --- Rollouts and scaling ---
+
+kubectl rollout status deployment/<name>
+kubectl rollout history deployment/<name>
+kubectl rollout undo deployment/<name>
+kubectl rollout restart deployment/<name>
+
+kubectl scale deployment <name> --replicas=3
+kubectl autoscale deployment <name> --min=2 --max=5 --cpu-percent=80
+
+# --- Debugging and troubleshooting ---
+
+# Print logs for a pod/container
+kubectl logs <pod>
+kubectl logs <pod> -c <container>          # specific container
+kubectl logs <pod> -f                      # follow (tail)
+kubectl logs <pod> --previous             # crashed container logs
+
+# Execute a command in a container
+kubectl exec -it <pod> -- /bin/bash
+kubectl exec -it <pod> -c <container> -- sh
+
+# Attach to a running container's stdout
+kubectl attach <pod> -it
+
+# Forward a local port to a pod
+kubectl port-forward pod/<pod> 8080:80
+kubectl port-forward svc/<service> 8080:80
+
+# Create a debug container (ephemeral)
+kubectl debug <pod> -it --image=busybox --target=<container>
+
+# Show CPU/memory usage
+kubectl top pods
+kubectl top nodes
+
+# List events (sorted by time)
+kubectl events --for=pod/<pod>
+kubectl get events --sort-by='.lastTimestamp'
+
+# --- Cluster management ---
+
+kubectl cluster-info
+kubectl cordon <node>                      # mark unschedulable
+kubectl uncordon <node>
+kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+kubectl taint nodes <node> key=value:NoSchedule
+
+# Inspect authorization
+kubectl auth can-i create pods
+kubectl auth can-i '*' '*' --as=system:serviceaccount:default:default
+
+# --- Config and context ---
+
+kubectl config get-contexts
+kubectl config use-context <context>
+kubectl config current-context
+kubectl config set-context --current --namespace=<namespace>
+kubectl config view
+
+# --- Copy files ---
+
+kubectl cp <pod>:/path/to/file ./local-file
+kubectl cp ./local-file <pod>:/path/to/file
+
+# --- Shell completion ---
+
+kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl
+kubectl completion zsh > ~/.zsh/completions/_kubectl
+
+# --- Common flags ---
+
+# -n, --namespace        Target namespace
+# -A, --all-namespaces   All namespaces
+# -o, --output           Output format: json|yaml|wide|name|jsonpath=...
+# -f, --filename         File(s) containing resource definitions
+# -l, --selector         Label selector filter (e.g. -l app=nginx)
+# -w, --watch            Watch for resource changes
+#     --kubeconfig       Path to kubeconfig file
+#     --context          Kubeconfig context to use
+#     --dry-run=client   Preview changes without applying
