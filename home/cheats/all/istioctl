@@ -1,0 +1,103 @@
+---
+syntax: sh
+tags: [ k8s, istio, kubernetes, ingress ]
+---
+# Command istioctl
+
+## What does this command do:
+
+Istio configuration command line utility for service operators to debug and diagnose Istio mesh
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/istio/istio/releases/download/1.29.2/istioctl-1.29.2-linux-amd64.tar.gz | tar -xz -C ~/.local/bin/ istioctl
+For Raspberry Pi install using: curl -sSfL https://github.com/istio/istio/releases/download/1.29.2/istioctl-1.29.2-linux-arm64.tar.gz | tar -xz -C ~/.local/bin/ istioctl
+For Mac install using: brew install istioctl
+
+## Command path
+
+For Fedora run: ~/.local/bin/istioctl
+For Raspberry Pi run: ~/.local/bin/istioctl
+For Mac run: /opt/homebrew/bin/istioctl
+
+## Command documentation
+
+Docs can be found at https://istio.io/latest/docs/reference/commands/istioctl/
+
+## Command options
+
+# Check client version (no cluster needed)
+istioctl version --remote=false
+
+# Print full version info including control plane
+istioctl version
+
+# Install Istio onto a cluster (uses default profile)
+istioctl install --set profile=default
+
+# Install with a specific profile (minimal, demo, default, ambient)
+istioctl install --set profile=demo
+
+# Uninstall Istio from a cluster
+istioctl uninstall --purge
+
+# Upgrade Istio in-place
+istioctl upgrade
+
+# Analyze cluster config for issues
+istioctl analyze
+
+# Analyze a specific namespace
+istioctl analyze -n <namespace>
+
+# Analyze local manifest files
+istioctl analyze <file.yaml>
+
+# Show proxy sync status for all sidecars
+istioctl proxy-status
+
+# Show proxy sync status for a specific pod
+istioctl proxy-status <pod> -n <namespace>
+
+# View proxy configuration (listeners, routes, clusters, endpoints)
+istioctl proxy-config listener <pod> -n <namespace>
+istioctl proxy-config route <pod> -n <namespace>
+istioctl proxy-config cluster <pod> -n <namespace>
+istioctl proxy-config endpoint <pod> -n <namespace>
+istioctl proxy-config bootstrap <pod> -n <namespace>
+
+# Inject Istio sidecar into a Kubernetes manifest
+istioctl kube-inject -f deployment.yaml | kubectl apply -f -
+
+# Manage revision tags
+istioctl tag list
+istioctl tag set <tag> --revision <rev>
+istioctl tag generate <tag> --revision <rev>
+
+# Manage waypoint proxies (ambient mode)
+istioctl waypoint list
+istioctl waypoint apply -n <namespace>
+istioctl waypoint delete -n <namespace>
+
+# Capture cluster diagnostics into a bug report archive
+istioctl bug-report
+
+# Open Istio web UIs (Kiali, Grafana, Jaeger, etc.)
+istioctl dashboard kiali
+istioctl dashboard grafana
+istioctl dashboard jaeger
+istioctl dashboard prometheus
+
+# Control plane admin log levels
+istioctl admin log --level debug
+
+# Generate shell autocompletion
+istioctl completion bash | sudo tee /etc/bash_completion.d/istioctl
+istioctl completion zsh > ~/.zsh/completions/_istioctl
+
+# Global flags
+# -n, --namespace         Kubernetes namespace
+# -i, --istioNamespace    Istio system namespace (default: istio-system)
+# -c, --kubeconfig        Path to kubeconfig file
+#     --context           Kubernetes config context
+#     --vklog             Log verbosity level (e.g. --vklog=9)

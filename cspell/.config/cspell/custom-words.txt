@@ -320,3 +320,5 @@ TGIE
 Pangea
 mailtools
 orldvls
+istioctl
+istio
