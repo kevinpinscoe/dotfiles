@@ -1,5 +1,1 @@
 #!/usr/bin/env bash
-case "$(git rev-parse --show-toplevel 2>/dev/null)" in
-  */bookmarks/browser_bookmarks) exit 0 ;;
-esac
-git diff --cached --name-only --diff-filter=ACMR -z | xargs -0 --no-run-if-empty cspell --no-must-find-files --quiet

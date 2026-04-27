@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+cspell --no-must-find-files --quiet "$1"

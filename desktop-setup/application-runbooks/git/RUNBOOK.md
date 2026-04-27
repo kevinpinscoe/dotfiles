@@ -111,13 +111,13 @@ Validated Certificate claims: true
 
 | Hook | Trigger | Behaviour |
 |------|---------|-----------|
-| `pre-commit` | Before every commit | Runs `cspell` on staged files; blocks commit if misspellings are found |
+| `commit-msg` | Before every commit | Runs `cspell` on the commit message; blocks commit if misspellings are found |
 | `post-commit` | After every commit | Prints `[gitsign] commit signed OK` if the commit is signed |
 | `pre-push` | Before pushing | Blocks push of any unsigned `vX.Y.Z` tag |
 
-### pre-commit: cspell spell check
+### commit-msg: cspell spell check
 
-Collects staged filenames (`git diff --cached --name-only --diff-filter=ACMR`) and pipes them to `cspell --no-must-find-files --quiet`. A non-zero exit aborts the commit.
+Git passes the path to a temporary file containing the commit message as `$1`. The hook runs `cspell --no-must-find-files --quiet "$1"`. A non-zero exit aborts the commit.
 
 To bypass for a single commit (use sparingly):
 
@@ -184,11 +184,11 @@ BROWSER=echo git commit -m "gitsign smoke test"
 
 ## Troubleshooting
 
-### pre-commit blocks commit with spelling errors
+### commit-msg blocks commit with spelling errors
 
 ```bash
-# See exactly which words are flagged
-git diff --cached --name-only --diff-filter=ACMR | xargs cspell --no-must-find-files
+# See exactly which words are flagged (re-run cspell on the last attempted message)
+cspell --no-must-find-files .git/COMMIT_EDITMSG
 
 # Add a word to the personal word list and retry
 echo "SomeProperNoun" >> ~/.config/cspell/custom-words.txt

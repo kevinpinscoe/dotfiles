@@ -187,6 +187,6 @@ Folder mapping (match the directories that already exist under `~/todo/`):
 
 ## MANDATORY: cspell word list changes
 
-The personal cspell word list lives at `cspell/.config/cspell/custom-words.txt` (stowed to `~/.config/cspell/custom-words.txt`). Words are added here whenever the pre-commit hook or a spell-check run flags an unknown word that is valid.
+The personal cspell word list lives at `cspell/.config/cspell/custom-words.txt` (stowed to `~/.config/cspell/custom-words.txt`). Words are added here whenever the commit-msg hook or a spell-check run flags an unknown word that is valid.
 
-**Every time words are added to `custom-words.txt`, immediately offer to commit and push the change to the remote repo.** Do not leave word list edits uncommitted — they accumulate silently and the pre-commit hook will re-flag the same words on the next unrelated commit.
+**Every time words are added to `custom-words.txt`, immediately offer to commit and push the change to the remote repo.** Do not leave word list edits uncommitted — they accumulate silently and the commit-msg hook will re-flag the same words on the next unrelated commit.

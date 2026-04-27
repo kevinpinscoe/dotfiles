@@ -6,21 +6,21 @@ Global git configuration and hooks, stowed to `~/.config/git/` and `~/.gitconfig
 
 ## Hooks
 
-### pre-commit — cspell spell check
+### commit-msg — cspell spell check
 
-**File:** `.config/git/hooks/pre-commit`
+**File:** `.config/git/hooks/commit-msg`
 
-Runs `cspell` against every staged file before a commit is recorded. The commit is blocked if any misspellings are found.
+Runs `cspell` against the commit message before the commit is recorded. The commit is blocked if any misspellings are found.
 
 ```
-git commit  →  pre-commit runs cspell on staged files  →  pass/fail
+git commit  →  commit-msg runs cspell on the message text  →  pass/fail
 ```
 
 **How it works:**
 
-1. Collects staged filenames with `git diff --cached --name-only --diff-filter=ACMR` (Added, Copied, Modified, Renamed — skips deletions).
-2. Pipes the list to `cspell --no-must-find-files --quiet`.
-   - `--no-must-find-files` silently skips files cspell cannot parse (binaries, unknown extensions).
+1. Git passes the path to a temporary file containing the commit message as `$1`.
+2. The hook runs `cspell --no-must-find-files --quiet "$1"`.
+   - `--no-must-find-files` prevents an error if the file is empty or unrecognised.
    - `--quiet` suppresses progress output; only misspellings are printed.
 3. A non-zero exit from cspell aborts the commit.
 
