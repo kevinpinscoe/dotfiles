@@ -87,6 +87,7 @@ ctermbg
 ctermfg
 darkcyan
 ddir
+gfc
 diffcount
 diffcmd
 dira
