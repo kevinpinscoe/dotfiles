@@ -18,6 +18,9 @@ alias public='cd ~/Projects/public'
 unalias reload 2>/dev/null
 function reload {
     if [ -n "${ZSH_VERSION:-}" ]; then
+        # Silence zsh-sage's sqlite3 coproc stop/restart job notices
+        # ([N] done / [N] PID) emitted while re-sourcing the rc.
+        setopt LOCAL_OPTIONS NO_MONITOR
         . ~/.zshrc
     else
         . ~/.bash_profile
