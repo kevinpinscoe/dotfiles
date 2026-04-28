@@ -119,6 +119,7 @@ getenforce
 gitdir
 getunclutter
 ghostty
+gitm
 gitme
 gitsign
 gpgsign
@@ -232,6 +233,7 @@ termios
 tfstate
 tlsv
 toplevel
+topdirs
 tzdata
 uppercased
 urwid
