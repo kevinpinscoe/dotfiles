@@ -1,0 +1,199 @@
+---
+syntax: sh
+tags: [ obsidian, markdown, editor ]
+---
+# Command obsidian
+
+## What does this command do:
+
+Anything you can do in Obsidian you can do from the command line
+
+## Installed from
+
+For Fedora install using: Download AppImage from https://obsidian.md/download, run it, then enable CLI in Settings → General → "Command line interface" and follow on-screen instructions (copies binary to ~/.local/bin/obsidian)
+For Raspberry Pi install using: Download AppImage from https://obsidian.md/download, run it, then enable CLI in Settings → General → "Command line interface" and follow on-screen instructions (copies binary to ~/.local/bin/obsidian)
+For Mac install using: Download from https://obsidian.md/download, install app, then enable CLI in Settings → General → "Command line interface" and follow on-screen instructions (creates symlink at /usr/local/bin/obsidian)
+
+## Command path
+
+For Fedora run: ~/.local/bin/obsidian
+For Raspberry Pi run: ~/.local/bin/obsidian
+For Mac run: /usr/local/bin/obsidian
+
+## Command documentation
+
+Docs can be found at https://obsidian.md/cli
+
+## Notes
+
+- Obsidian app must be running for commands to work
+- `file=` resolves by name (like wikilinks); `path=` is exact (folder/note.md)
+- Most commands default to the active file when file/path is omitted
+- Quote values with spaces: `name="My Note"`
+- Use `\n` for newline, `\t` for tab in content values
+- Target a specific vault: `vault=<name>` (global option)
+
+## Command options
+
+### Files
+```
+obsidian read file=<name>                    # Read file contents
+obsidian read path=<folder/note.md>          # Read file by exact path
+obsidian create name=<name> content=<text>   # Create a new file
+obsidian create name=<name> template=<name>  # Create from template
+obsidian open file=<name>                    # Open a file in Obsidian
+obsidian open file=<name> newtab             # Open in a new tab
+obsidian append file=<name> content=<text>   # Append content to a file
+obsidian prepend file=<name> content=<text>  # Prepend content to a file
+obsidian delete file=<name>                  # Delete a file (to trash)
+obsidian delete file=<name> permanent        # Delete permanently
+obsidian move file=<name> to=<path>          # Move or rename a file
+obsidian rename file=<name> name=<newname>   # Rename a file
+obsidian file file=<name>                    # Show file info
+obsidian files                               # List all files in vault
+obsidian files folder=<path>                 # List files in a folder
+obsidian files ext=md                        # List files by extension
+obsidian wordcount file=<name>               # Count words and characters
+```
+
+### Daily Notes
+```
+obsidian daily                               # Open daily note
+obsidian daily:read                          # Read daily note contents
+obsidian daily:append content=<text>         # Append to daily note
+obsidian daily:prepend content=<text>        # Prepend to daily note
+obsidian daily:path                          # Get daily note path
+```
+
+### Search
+```
+obsidian search query=<text>                 # Search vault for text
+obsidian search query=<text> path=<folder>   # Search within a folder
+obsidian search query=<text> limit=<n>       # Limit results
+obsidian search query=<text> case            # Case-sensitive search
+obsidian search query=<text> format=json     # JSON output
+obsidian search:context query=<text>         # Search with matching line context
+obsidian search:open query=<text>            # Open search view in Obsidian
+```
+
+### Tasks
+```
+obsidian tasks                               # List all tasks in vault
+obsidian tasks todo                          # Show incomplete tasks
+obsidian tasks done                          # Show completed tasks
+obsidian tasks file=<name>                   # Tasks from a specific file
+obsidian tasks daily                         # Tasks from daily note
+obsidian tasks verbose                       # Group by file with line numbers
+obsidian tasks format=json                   # JSON output
+obsidian task ref=<path:line> toggle         # Toggle a task status
+obsidian task ref=<path:line> done           # Mark task as done
+obsidian task ref=<path:line> todo           # Mark task as todo
+```
+
+### Tags & Properties
+```
+obsidian tags                                # List all tags in vault
+obsidian tags counts                         # Include tag counts
+obsidian tags sort=count                     # Sort by count
+obsidian tags file=<name>                    # Tags for a specific file
+obsidian tag name=<tag> verbose              # Get tag info with file list
+obsidian properties                          # List all properties in vault
+obsidian properties file=<name>              # Properties for a file
+obsidian property:read name=<name> file=<f>  # Read a property value
+obsidian property:set name=<n> value=<v> file=<f>  # Set a property
+obsidian property:remove name=<n> file=<f>   # Remove a property
+```
+
+### Links & Graph
+```
+obsidian links file=<name>                   # List outgoing links
+obsidian backlinks file=<name>               # List backlinks
+obsidian backlinks file=<name> counts        # Include link counts
+obsidian orphans                             # Files with no incoming links
+obsidian deadends                            # Files with no outgoing links
+obsidian unresolved                          # List unresolved links
+obsidian aliases                             # List all aliases in vault
+```
+
+### Vault & Folders
+```
+obsidian vault                               # Show vault info
+obsidian vaults                              # List all known vaults
+obsidian folders                             # List all folders
+obsidian folder path=<path>                  # Show folder info
+obsidian files total                         # Return file count
+obsidian random                              # Open a random note
+obsidian random:read                         # Read a random note
+obsidian recents                             # List recently opened files
+obsidian reload                              # Reload the vault
+obsidian outline file=<name>                 # Show headings for a file
+obsidian outline file=<name> format=json     # JSON outline
+```
+
+### Sync & History
+```
+obsidian sync:status                         # Show sync status
+obsidian sync on                             # Resume sync
+obsidian sync off                            # Pause sync
+obsidian sync:history file=<name>            # List sync version history
+obsidian sync:read file=<name> version=<n>   # Read a sync version
+obsidian sync:restore file=<name> version=<n>  # Restore a sync version
+obsidian history file=<name>                 # List file history versions
+obsidian history:read file=<name> version=<n>  # Read a history version
+obsidian history:restore file=<name> version=<n>  # Restore a history version
+obsidian diff file=<name>                    # List local/sync versions
+```
+
+### Plugins & Themes
+```
+obsidian plugins                             # List installed plugins
+obsidian plugins:enabled                     # List enabled plugins
+obsidian plugin id=<id>                      # Get plugin info
+obsidian plugin:install id=<id>              # Install a community plugin
+obsidian plugin:enable id=<id>               # Enable a plugin
+obsidian plugin:disable id=<id>              # Disable a plugin
+obsidian plugin:uninstall id=<id>            # Uninstall a community plugin
+obsidian themes                              # List installed themes
+obsidian theme                               # Show active theme
+obsidian theme:set name=<name>               # Set active theme
+obsidian theme:install name=<name> enable    # Install and activate a theme
+obsidian snippets                            # List CSS snippets
+obsidian snippet:enable name=<name>          # Enable a CSS snippet
+obsidian snippet:disable name=<name>         # Disable a CSS snippet
+```
+
+### Commands & Hotkeys
+```
+obsidian commands                            # List all available commands
+obsidian commands filter=<prefix>            # Filter commands by ID prefix
+obsidian command id=<command-id>             # Execute an Obsidian command
+obsidian hotkeys                             # List hotkeys
+obsidian hotkey id=<command-id>              # Get hotkey for a command
+```
+
+### Templates & Bases
+```
+obsidian templates                           # List templates
+obsidian template:read name=<template>       # Read template content
+obsidian template:insert name=<template>     # Insert template into active file
+obsidian bases                               # List all base files
+obsidian base:views                          # List views in current base
+obsidian base:query file=<name> view=<name>  # Query a base view
+obsidian base:create file=<name> name=<n>    # Create item in a base
+```
+
+### Bookmarks & Tabs
+```
+obsidian bookmarks                           # List bookmarks
+obsidian bookmark file=<path>                # Bookmark a file
+obsidian bookmark search=<query>             # Bookmark a search
+obsidian tabs                                # List open tabs
+obsidian tab:open file=<path>               # Open a new tab
+```
+
+### Version & Info
+```
+obsidian version                             # Show Obsidian version
+obsidian help                                # Show all commands
+obsidian help <command>                      # Show help for a command
+```
