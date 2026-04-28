@@ -1,12 +1,12 @@
 ---
 syntax: sh
-tags: [ tui, k8s, kubernetes ]
+tags: [ k8s, kubernetes, tui, manage, cluster, eks ]
 ---
 # Command k9s
 
 ## What does this command do:
 
-Kubernetes CLI To manage clusters
+K9s provides a terminal UI to interact with your Kubernetes clusters
 
 ## Installed from
 
@@ -26,20 +26,100 @@ Docs can be found at https://github.com/derailed/k9s
 
 ## Command options
 
-k9s                              # launch interactive TUI for current kubeconfig context
-k9s --context <ctx>              # launch with a specific kubeconfig context
-k9s --namespace <ns>             # launch scoped to a specific namespace
-k9s -A                           # launch in all-namespaces mode
-k9s --readonly                   # launch in read-only mode (no mutations)
-k9s --write                      # override readOnly config setting to allow writes
-k9s -c <resource>                # start with a specific resource view (e.g. pods, deployments)
-k9s --headless                   # hide the header bar
-k9s --crumbsless                 # hide the breadcrumbs bar
-k9s --logoless                   # hide the logo
-k9s --splashless                 # skip the splash screen
-k9s --invert                     # invert the color skin (dark ↔ light)
-k9s -r <seconds>                 # set refresh rate (default: 2s)
-k9s --logLevel debug             # set log verbosity (error, warn, info, debug)
-k9s info                         # show k9s config file paths
-k9s version                      # print version and build info
-k9s completion bash              # generate bash autocompletion script
+# Launch k9s (uses current kubeconfig context)
+k9s
+
+# Launch in a specific namespace
+k9s -n <namespace>
+
+# Launch across all namespaces
+k9s -A
+
+# Launch with a specific kubeconfig context
+k9s --context <context>
+
+# Launch in read-only mode (disables all mutations)
+k9s --readonly
+
+# Launch with write mode (overrides readOnly config)
+k9s --write
+
+# Open directly on a resource type
+k9s -c pods
+k9s -c deployments
+k9s -c nodes
+
+# Show runtime info (config paths, log file location, etc.)
+k9s info
+
+# Print version
+k9s version
+
+# Display/UI flags
+k9s --headless       # hide header
+k9s --crumbsless     # hide breadcrumb trail
+k9s --logoless       # hide logo
+k9s --splashless     # skip splash screen
+k9s --invert         # invert skin (dark↔light)
+
+# Logging
+k9s -l debug                        # set log level (error, warn, info, debug)
+k9s --logFile /tmp/k9s.log          # override log file path
+
+# Set refresh rate (seconds, default 2)
+k9s -r 5
+
+# --- TUI keyboard shortcuts ---
+
+# Navigation
+?              Help / key binding reference
+esc            Go back / cancel
+ctrl-c / :q    Quit k9s
+
+# Jump to a resource view (type in the command bar)
+:pods          View pods (also: :po)
+:deployments   View deployments (also: :deploy)
+:services      View services (also: :svc)
+:nodes         View nodes (also: :no)
+:namespaces    View namespaces (also: :ns)
+:configmaps    View configmaps (also: :cm)
+:secrets       View secrets
+:ingresses     View ingresses (also: :ing)
+:events        View events (also: :ev)
+:crds          View custom resource definitions
+:ctx           Switch kubeconfig context
+:ns            Switch namespace
+
+# Filtering (within a resource list)
+/              Enter filter mode — type to filter by name
+!              Inverse filter
+/label=value   Filter by label
+
+# Resource actions (on selected row)
+d              Describe resource
+e              Edit resource (opens in $EDITOR)
+y              View YAML
+l              View logs (pods only)
+s              Shell into container (pods only)
+shift-f        Port forward
+ctrl-d         Delete resource
+ctrl-k         Kill resource (SIGKILL)
+c              Copy resource name to clipboard
+x              Decode secret value
+f              Full-screen log toggle
+
+# Log view shortcuts (while in log view)
+w              Toggle line wrap
+f              Toggle full-screen
+t              Toggle timestamps
+0-9            Filter by container (0 = all)
+ctrl-s         Save logs to screen dump dir
+
+# Column and sort
+ctrl-w         Toggle wide columns
+ctrl-e         Toggle header
+1-9            Sort by column number
+
+# Shell completion
+k9s completion bash | sudo tee /etc/bash_completion.d/k9s
+k9s completion zsh > ~/.zsh/completions/_k9s
