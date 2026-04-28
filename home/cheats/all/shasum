@@ -1,0 +1,118 @@
+---
+syntax: sh
+tags: [ all, sha, checksum, checksums, message-digest, integrity, tamper ]
+---
+# Command shasum
+
+## What does this command do:
+
+Print or check SHA checksums (SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256). Used to verify file integrity and detect tampering by comparing a known-good digest against a freshly computed one.
+
+## Installed from
+
+For Fedora install using: `sudo dnf install perl-Digest-SHA` (usually pre-installed with perl)
+For Raspberry Pi install using: `sudo apt install libdigest-sha-perl` (usually pre-installed with perl)
+For Mac install using: ships with macOS by default (provided by system Perl)
+
+## Command path
+
+For Fedora run: `/usr/bin/shasum`
+For Raspberry Pi run: `/usr/bin/shasum`
+For Mac run: `/usr/bin/shasum`
+
+## Command documentation
+
+Docs can be found at https://linux.die.net/man/1/shasum
+
+## Command options
+
+### Flags
+    -a, --algorithm    1 (default), 224, 256, 384, 512, 512224, 512256
+    -b, --binary       read in binary mode
+    -c, --check        read SHA sums from the FILEs and check them
+    -t, --text         read in text mode (default)
+    -p, --portable     read in portable mode
+                         (deprecated; use -U with -b for cross-platform)
+    -U, --UNIVERSAL    read in Universal Newlines mode
+                         produces same digest on Windows/Unix/Mac
+    -0, --01           read in BITS mode
+                         ASCII '0' interpreted as 0-bit,
+                         ASCII '1' interpreted as 1-bit,
+                         all other characters ignored
+        --tag          create a BSD-style checksum
+    -h, --help         display this help and exit
+        --version      output version information and exit
+
+### Check-mode flags (only with -c)
+    --ignore-missing   don't fail or report status for missing files
+    --quiet            don't print OK for each successfully verified file
+    --status           don't output anything, status code shows success
+    --strict           exit non-zero for improperly formatted checksum lines
+    -w, --warn         warn about improperly formatted checksum lines
+
+### Compute a checksum
+# Default SHA-1 of a file
+shasum file.iso
+
+# SHA-256 (most common modern choice)
+shasum -a 256 file.iso
+
+# SHA-512
+shasum -a 512 file.iso
+
+# Checksum from stdin
+echo -n "hello" | shasum -a 256
+
+# Multiple files at once
+shasum -a 256 *.tar.gz
+
+# Read filenames from stdin (one per line)
+find . -type f -name "*.txt" | shasum -a 256
+
+### Save and verify checksums
+# Write a checksum file
+shasum -a 256 *.iso > SHA256SUMS
+
+# Verify files against a checksum file
+shasum -a 256 -c SHA256SUMS
+
+# Verify silently, only show failures
+shasum -a 256 -c --quiet SHA256SUMS
+
+# Verify with no output, check exit code only
+shasum -a 256 -c --status SHA256SUMS && echo "all good"
+
+# Skip missing files (useful when checksum file lists more than you have)
+shasum -a 256 -c --ignore-missing SHA256SUMS
+
+# Strict mode: fail on malformed lines in the checksum file
+shasum -a 256 -c --strict SHA256SUMS
+
+### Compare against a published checksum
+# Verify a single file matches an expected digest
+echo "abc123...  file.iso" | shasum -a 256 -c
+
+### Binary vs text vs universal
+# Force binary mode (recommended for non-text files)
+shasum -a 256 -b file.bin
+
+# Universal newlines (cross-platform consistent digest for text)
+shasum -a 256 -U -b file.txt
+
+### BSD-style output
+# Produces "SHA256 (file) = <digest>" instead of "<digest>  file"
+shasum -a 256 --tag file.iso
+
+### SHA-512/224 and SHA-512/256 truncated variants
+shasum -a 512224 file
+shasum -a 512256 file
+
+### BITS mode (digest a stream of ASCII 0s and 1s)
+echo -n "01100001" | shasum -0 -a 256
+
+### Tamper detection workflow
+# 1. Generate baseline manifest of a directory
+find /etc -type f -print0 | xargs -0 shasum -a 256 > /var/backups/etc.sha256
+
+# 2. Later, re-verify and look for changes
+shasum -a 256 -c /var/backups/etc.sha256 | grep -v ': OK$'
