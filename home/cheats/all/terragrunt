@@ -1,0 +1,73 @@
+---
+syntax: sh
+tags: [ hcl, tofu, opentofu, terraform, iac, hashicorp, dry ]
+---
+# Command terragrunt
+
+## What does this command do:
+
+the command that applies a DRY infrastructure automation orchestration system
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/gruntwork-io/terragrunt/releases/download/v1.0.3/terragrunt_linux_amd64 -o ~/.local/bin/terragrunt && chmod +x ~/.local/bin/terragrunt
+For Raspberry Pi install using: curl -sSfL https://github.com/gruntwork-io/terragrunt/releases/download/v1.0.3/terragrunt_linux_arm64 -o ~/.local/bin/terragrunt && chmod +x ~/.local/bin/terragrunt
+For Mac install using: brew install terragrunt
+
+## Command path
+
+For Fedora run: ~/.local/bin/terragrunt
+For Raspberry Pi run: ~/.local/bin/terragrunt
+For Mac run: /opt/homebrew/bin/terragrunt
+
+## Command documentation
+
+Docs can be found at https://docs.terragrunt.com/
+
+## Command options
+
+# OpenTofu/Terraform wrappers (pass-through to tofu/terraform)
+terragrunt init                          # prepare working directory
+terragrunt plan                          # show changes
+terragrunt apply                         # create/update infrastructure
+terragrunt destroy                       # destroy infrastructure
+terragrunt output                        # show output values
+terragrunt validate                      # check configuration is valid
+terragrunt state <subcommand>            # advanced state management
+terragrunt show                          # show current state or saved plan
+
+# Multi-module stack commands
+terragrunt run-all plan                  # plan all modules in dependency order
+terragrunt run-all apply                 # apply all modules in dependency order
+terragrunt run-all destroy               # destroy all modules in reverse order
+
+# Stack commands
+terragrunt stack <subcommand>            # manage Terragrunt stacks
+
+# Discovery
+terragrunt find                          # find relevant Terragrunt configs
+terragrunt list                          # list relevant Terragrunt configs
+
+# Configuration inspection
+terragrunt render                        # print fully-resolved terragrunt.hcl
+terragrunt dag                           # show dependency graph (DAG)
+terragrunt hcl <subcommand>              # interact with HCL files
+terragrunt info                          # show Terragrunt settings
+
+# Backend
+terragrunt backend <subcommand>          # interact with backend infrastructure
+
+# Catalog / scaffolding
+terragrunt catalog                       # browse module catalog UI
+terragrunt scaffold                      # scaffold a new module
+
+# Arbitrary command execution
+terragrunt exec -- <cmd> [args]          # run any command inside Terragrunt's wrapper
+
+# Global flags
+--log-level error|warn|info|debug|trace  # set log verbosity (default: info)
+--no-color                               # disable ANSI colour output
+--non-interactive                        # skip all prompts (useful in CI)
+--working-dir <path>                     # override working directory
+--strict-mode                            # treat deprecated features as errors
+--experiment-mode                        # enable all experiments
