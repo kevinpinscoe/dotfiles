@@ -326,3 +326,5 @@ orldvls
 istioctl
 istio
 coproc
+stty
+libedit
