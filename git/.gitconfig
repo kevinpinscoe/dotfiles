@@ -33,4 +33,4 @@
 [safe]
 	directory = /opt/containers
 [push]
-	autoSetupRemote = tru
+	autoSetupRemote = true
