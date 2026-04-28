@@ -1,0 +1,100 @@
+---
+syntax: sh
+tags: [ ai, cli, coding, cursor, agent ]
+---
+# Command agent
+
+## What does this command do:
+
+Cursor CLI lets you interact with AI agents directly from your terminal to write, review, and modify code. Whether you prefer an interactive terminal interface or print automation for scripts and CI pipelines
+
+Also installed as legacy alias: cursor-agent
+
+## Installed from
+
+For Fedora install using: curl https://cursor.com/install -fsS | bash
+For Raspberry Pi install using: curl https://cursor.com/install -fsS | bash
+For Mac install using: curl https://cursor.com/install -fsS | bash
+
+## Command path
+
+For Fedora run: ~/.local/bin/agent
+For Raspberry Pi run: ~/.local/bin/agent
+For Mac run: ~/.local/bin/agent
+
+## Command documentation
+
+Docs can be found at https://cursor.com/cli
+
+## Command options
+
+# Start interactive session
+agent
+
+# Start with an initial prompt
+agent "refactor this file to use async/await"
+
+# Non-interactive / scripting / CI mode (print response and exit)
+agent --print "explain this function"
+agent -p "what does main.go do?"
+
+# Output formats (only with --print)
+agent --print --output-format text "prompt"
+agent --print --output-format json "prompt"
+agent --print --output-format stream-json --stream-partial-output "prompt"
+
+# Execution modes
+agent --mode plan "design a new auth module"   # read-only planning, no edits
+agent --mode ask  "how does this work?"        # Q&A, read-only
+agent --plan      "shorthand for --mode=plan"
+
+# Model selection
+agent --model sonnet-4 "prompt"
+agent --model sonnet-4-thinking "prompt"
+agent --list-models
+
+# Session management
+agent --resume              # pick a session to resume (interactive)
+agent --resume <chatId>     # resume specific session by ID
+agent --continue            # continue most recent session
+agent ls                    # list previous chat sessions
+agent resume                # resume latest chat session
+agent create-chat           # create a new empty chat and return its ID
+
+# Authentication
+agent login
+agent logout
+agent status                # show auth status / whoami
+agent about                 # version, system, and account info
+
+# MCP servers
+agent mcp                   # manage MCP servers
+agent --approve-mcps "prompt"  # auto-approve all MCP servers
+
+# Git worktrees (isolated environments)
+agent --worktree            # start in an auto-named isolated git worktree
+agent -w my-feature         # start in a named worktree
+agent --worktree-base main  # base the worktree on a specific branch/ref
+
+# Force / trust flags (use with caution)
+agent --force               # allow all commands unless explicitly denied
+agent --yolo                # alias for --force
+agent --trust               # trust workspace without prompting (headless only)
+agent --sandbox enabled     # override sandbox mode
+agent --sandbox disabled
+
+# Workspace
+agent --workspace /path/to/project "prompt"
+
+# Specify API key inline (or use CURSOR_API_KEY env var)
+agent --api-key <key> "prompt"
+
+# Add custom request headers
+agent -H "X-Custom: value" "prompt"
+
+# Shell integration
+agent install-shell-integration    # adds integration to ~/.zshrc
+agent uninstall-shell-integration  # removes it
+
+# Update
+agent update
