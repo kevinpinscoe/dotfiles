@@ -25,6 +25,7 @@ Conversate
 DCMAKE
 Demangle
 Doptimize
+DOSD
 FZBX
 Fastfetch
 GCVM
