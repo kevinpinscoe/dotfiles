@@ -12,13 +12,13 @@ TinyEMU is a system emulator for the RISC-V and x86 architectures. Its purpose i
 
 For Fedora install using: sudo dnf install openssl-devel libcurl-devel SDL-devel && git clone https://github.com/dearchap/tinyemu ~/Projects/3rd-party-repos/tinyemu && cd ~/Projects/3rd-party-repos/tinyemu && make && cp temu ~/.local/bin/ && chmod +x ~/.local/bin/temu
 For Raspberry Pi install using: sudo apt install libssl-dev libcurl4-openssl-dev libsdl1.2-dev && git clone https://github.com/dearchap/tinyemu && cd tinyemu && make && cp temu ~/.local/bin/ && chmod +x ~/.local/bin/temu
-For Mac install using: brew install openssl curl sdl12 && git clone https://github.com/dearchap/tinyemu && cd tinyemu && make && cp temu ~/.local/bin/ && chmod +x ~/.local/bin/temu
+For Mac install using: brew install --HEAD fernandotcl/fernandotcl/tinyemu  # dearchap/tinyemu does not build on macOS (uses Linux-only <byteswap.h>); fernandotcl's fork has macOS support (__APPLE__ guards, SDL2)
 
 ## Command path
 
 For Fedora run: ~/.local/bin/temu
 For Raspberry Pi run: ~/.local/bin/temu
-For Mac run: ~/.local/bin/temu
+For Mac run: /opt/homebrew/bin/temu
 
 ## Command documentation
 

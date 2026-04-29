@@ -335,3 +335,8 @@ getaddrinfo
 unroutable
 shopt
 reimplementation
+fernandotcl
+dearchap
+tinyemu
+byteswap
+SDL
