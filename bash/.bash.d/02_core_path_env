@@ -5,4 +5,5 @@ _pathadd /bin
 _pathadd /usr/local/sbin
 _pathadd /usr/sbin
 _pathadd /sbin
+_pathadd "$HOME/private-tools"
 unset -f _pathadd
