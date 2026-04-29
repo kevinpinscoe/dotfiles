@@ -3,10 +3,110 @@ if command -v kubectl >/dev/null 2>&1; then
     compdef _kubectl k
 fi
 
-if [[ -f "$HOME/bin/gitme/gitme" ]]; then
-    source "$HOME/bin/gitme/gitme"
-    if [[ -f "$HOME/bin/gitme/gitme-completion.bash" ]]; then
-        autoload -U +X bashcompinit && bashcompinit
-        source "$HOME/bin/gitme/gitme-completion.bash"
+# gitme — zsh-native reimplementation. The upstream script at
+# ~/bin/gitme/gitme uses `read -ra` and `shopt`, which are bash-only and fail
+# at call time in zsh. We define portable equivalents here instead of sourcing.
+GITME_CACHE_DIR="${GITME_CACHE_DIR:-$HOME/.gitme}"
+GITME_CACHE_FILE="$GITME_CACHE_DIR/cache"
+
+_gitme_build_cache() {
+    local dirs_str="${GITME_DIRS:-$HOME/git}"
+    local -a dirs
+    dirs=("${(@s.:.)dirs_str}")
+
+    mkdir -p "$GITME_CACHE_DIR"
+    : > "$GITME_CACHE_FILE"
+
+    local base dir remote_url count=0
+    for base in "${dirs[@]}"; do
+        [[ -d "$base" ]] || continue
+        while IFS= read -r dir; do
+            remote_url="$(git -C "$dir" config --get remote.origin.url 2>/dev/null || echo "")"
+            printf '%s\t%s\n' "$dir" "$remote_url" >> "$GITME_CACHE_FILE"
+            (( count++ ))
+        done < <(find "$base" -type d -name .git -exec dirname {} \; 2>/dev/null)
+    done
+
+    echo "Cache rebuilt: $count repositories found."
+}
+
+gitme() {
+    local GITME_VERSION="0.0.2-zsh"
+    case "$1" in
+        -h|--help)
+            cat <<EOF
+
+gitme - jump to a Git repo by name or remote URL
+
+Usage:
+  gitme <search-term>
+  gitme --help | -h
+  gitme --version | -v
+  gitme --rebuild-cache
+
+Searches all directories listed in \$GITME_DIRS (or \$HOME/git by default)
+and interactively jumps to matching Git repositories.
+
+Examples:
+  gitme utils
+  gitme github.com/davorg
+  gitme 127
+
+EOF
+            return 0 ;;
+        -v|--version)
+            echo "gitme version $GITME_VERSION"
+            return 0 ;;
+        --rebuild-cache)
+            _gitme_build_cache
+            return 0 ;;
+    esac
+
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: gitme <search-term>"
+        return 1
     fi
+
+    local search="$1"
+    local -a matches
+
+    if [[ ! -f "$GITME_CACHE_FILE" ]]; then
+        echo "Building repository cache for the first time..."
+        _gitme_build_cache
+    fi
+
+    if [[ -s "$GITME_CACHE_FILE" ]]; then
+        local search_lc="${search:l}"
+        local dir remote_url repo_name
+        while IFS=$'\t' read -r dir remote_url; do
+            [[ -z "$dir" ]] && continue
+            repo_name="$(basename "$dir")"
+            if [[ "${repo_name:l}" == *"$search_lc"* || "${remote_url:l}" == *"$search_lc"* ]]; then
+                [[ -d "$dir" ]] && matches+=("$dir")
+            fi
+        done < "$GITME_CACHE_FILE"
+    fi
+
+    if (( ${#matches[@]} == 0 )); then
+        echo "No matching repositories found."
+        return 1
+    elif (( ${#matches[@]} == 1 )); then
+        echo "Found one match: ${matches[1]}"
+        cd "${matches[1]}"
+    else
+        echo "Multiple matches found:"
+        select repo in "${matches[@]}"; do
+            if [[ -n "$repo" ]]; then
+                cd "$repo"
+                break
+            else
+                echo "Invalid selection."
+            fi
+        done
+    fi
+}
+
+if [[ -f "$HOME/bin/gitme/gitme-completion.bash" ]]; then
+    autoload -U +X bashcompinit && bashcompinit
+    source "$HOME/bin/gitme/gitme-completion.bash"
 fi

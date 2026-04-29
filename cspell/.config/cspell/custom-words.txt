@@ -333,3 +333,5 @@ standups
 urllib
 getaddrinfo
 unroutable
+shopt
+reimplementation
