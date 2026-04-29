@@ -1,0 +1,93 @@
+---
+syntax: sh
+tags: [ git, git-history, cli, git-info, git-commits ]
+---
+# Command glimpse
+
+## What does this command do:
+
+A CLI that extracts structured context from your git history — for AI agents, PR descriptions, and standups.
+
+## Installed from
+
+For Fedora install using: pip install --user gitglimpse
+For Raspberry Pi install using: pip install --user gitglimpse
+For Mac install using: pip install --user gitglimpse
+
+## Command path
+
+For Fedora run: ~/.local/bin/glimpse
+For Raspberry Pi run: ~/.local/bin/glimpse
+For Mac run: ~/.local/bin/glimpse
+
+## Command documentation
+
+Docs can be found at https://github.com/dino-zecevic/gitglimpse
+
+## Command options
+
+# Generate a standup update from recent commits (auto-detects since last standup)
+glimpse standup
+
+# Standup for commits since a specific period
+glimpse standup --since "2 days ago"
+
+# Standup across multiple repos (comma-separated paths)
+glimpse standup --repos "api,frontend,landing"
+
+# Output standup as JSON
+glimpse standup --json
+
+# Save standup output to a markdown file
+glimpse standup --format markdown -o daily.md
+
+# Filter by author email
+glimpse standup --author you@example.com
+
+# Skip LLM, use offline template formatter
+glimpse standup --no-llm
+
+# Use a local Ollama LLM
+glimpse standup --local-llm
+
+# Use a specific Ollama model
+glimpse standup --local-llm --model qwen2.5-coder:latest
+
+# Generate a weekly summary (last 7 days by default)
+glimpse week
+
+# Weekly summary for a custom date range
+glimpse week --since "14 days ago" --until "7 days ago"
+
+# Weekly summary as JSON
+glimpse week --json
+
+# Generate a PR summary (compares current branch to main)
+glimpse pr
+
+# PR summary against a different base branch
+glimpse pr --base develop
+
+# PR summary using diff context for LLM
+glimpse pr --context diffs
+
+# PR summary as JSON
+glimpse pr --json
+
+# Initialize Claude Code slash-command files in current repo
+glimpse init
+
+# Initialize both Claude Code and Cursor slash-command files
+glimpse init --claude --cursor
+
+# Overwrite existing slash-command files
+glimpse init --force
+
+# Show current gitglimpse configuration
+glimpse config show
+
+# Interactive LLM setup (choose mode, configure API keys)
+glimpse config setup
+
+# Install shell completion for the current shell
+glimpse --install-completion
