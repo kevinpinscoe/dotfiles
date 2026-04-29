@@ -329,3 +329,4 @@ coproc
 stty
 libedit
 temu
+standups
