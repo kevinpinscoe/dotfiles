@@ -330,3 +330,6 @@ stty
 libedit
 temu
 standups
+urllib
+getaddrinfo
+unroutable
