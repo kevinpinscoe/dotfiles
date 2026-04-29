@@ -7,8 +7,8 @@
 *.pem
 *.key
 .environment/
-**/.claude/
-resume.sh
-vim/.vim/.netrwhist
-.DS_Store
+**/.claude
+**/.codex
+**/resume.sh
 **/.DS_Store
+vim/.vim/.netrwhist
