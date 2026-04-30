@@ -354,3 +354,4 @@ sfx
 zeroconf
 dedup
 tftp
+picoshare
