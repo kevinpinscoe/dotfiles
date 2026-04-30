@@ -42,6 +42,13 @@ open /Applications/Hammerspoon.app
 - Spoons (reusable plugins) live in `~/.hammerspoon/Spoons/<Name>.spoon/`.
 - Hammerspoon watches `init.lua` and offers to auto-reload on save (configurable via the menu-bar icon).
 
+`init.lua` is managed by this dotfiles repo via the `hammerspoon` stow package
+(macOS only). The real file is `~/.dotfiles/hammerspoon/.hammerspoon/init.lua`;
+`~/.hammerspoon/init.lua` is a symlink to it after `bash install.sh`. Edit
+either path — both point at the same file. `~/.hammerspoon/Spoons/` is left as
+a real directory so Hammerspoon's Spoon installer can write to it; Spoons are
+not tracked in the repo.
+
 Minimal `init.lua` to verify the install works:
 
 ```lua

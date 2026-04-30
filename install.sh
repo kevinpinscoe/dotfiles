@@ -84,6 +84,15 @@ if [[ -n "${GHOSTTY_PKG:-}" && -d "$DOTFILES_DIR/$GHOSTTY_PKG" ]]; then
   echo "Stowed: $GHOSTTY_PKG"
 fi
 
+# hammerspoon is macOS-only. ~/.hammerspoon/ must be a real directory so stow
+# symlinks init.lua inside it per-file rather than the whole directory —
+# Hammerspoon writes Spoons/ and other runtime state alongside init.lua.
+if [[ "$OS" == "Darwin" && -d "$DOTFILES_DIR/hammerspoon" ]]; then
+  mkdir -p "$HOME/.hammerspoon"
+  stow -d "$DOTFILES_DIR" -t "$HOME" --restow hammerspoon
+  echo "Stowed: hammerspoon"
+fi
+
 # Clone community cheatsheets if absent
 if [[ ! -d "$HOME/.config/cheat/cheatsheets/community" ]]; then
   mkdir -p "$HOME/.config/cheat/cheatsheets"

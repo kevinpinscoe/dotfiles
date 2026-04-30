@@ -64,6 +64,7 @@ Stow packages — each directory is stowed into `$HOME`:
 | `git` | `git/.config/git/hooks/` | `~/.config/git/hooks/` | Global git hooks (pre-push, post-commit) |
 | `ghostty-fedora` | `ghostty-fedora/.config/ghostty/config` | `~/.config/ghostty/config` | Ghostty config for Fedora (absolute tmux path) |
 | `ghostty-mac` | `ghostty-mac/.config/ghostty/config` | `~/.config/ghostty/config` | Ghostty config for macOS (Homebrew tmux path) |
+| `hammerspoon` | `hammerspoon/.hammerspoon/init.lua` | `~/.hammerspoon/init.lua` | Hammerspoon Lua config (macOS only); `Spoons/` stays a real dir for HS runtime writes |
 | — | `vscode/personal/` | Fedora VS Code config | Hostname `kevin`; restored via `restore.sh` |
 | — | `vscode/professional/` | Mac VS Code config | Hostname `MacBook`; restored via `restore.sh` |
 

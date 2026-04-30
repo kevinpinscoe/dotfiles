@@ -42,6 +42,7 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - `ghostty-fedora/` — Ghostty terminal config for Fedora (absolute tmux path)
 - `ghostty-mac/` — Ghostty terminal config for macOS (Homebrew tmux path)
 - `ghostty-debian/` — Ghostty terminal config for Raspberry Pi / Debian (built from source)
+- `hammerspoon/` — Hammerspoon `init.lua` (macOS only); only stowed when `uname -s` == `Darwin`
 - `vscode/` — host-specific VS Code settings snapshots (not stowed; restored via `restore.sh`)
 - [`Brewfile/`](Brewfile/RUNBOOK.md) — Homebrew manifest (taps, formulae, casks, VS Code extensions) for bootstrapping a Mac via `brew bundle install`; not stowed
 - `desktop-setup/` — platform-specific setup guides, runbooks, and GUI app documentation
