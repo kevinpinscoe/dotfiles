@@ -1,0 +1,74 @@
+---
+syntax: sh
+tags: [ sftp,server,file-transfer,webdav,http,s3,cloud-storage,azure-blob,encrypted ]
+---
+# Command sftpgo
+
+## What does this command do:
+
+Full-featured and highly configurable SFTP, HTTP/S, FTP/S and WebDAV server - S3, Google Cloud Storage, Azure Blob
+
+## Installed from
+
+For Fedora install using: curl -sS "https://ftp.osuosl.org/pub/sftpgo/yum/x86_64/sftpgo.repo" | sudo tee /etc/yum.repos.d/sftpgo.repo && sudo dnf install -y sftpgo
+For Raspberry Pi install using: curl -sS https://ftp.osuosl.org/pub/sftpgo/apt/gpg.key | sudo tee /etc/apt/trusted.gpg.d/sftpgo.asc && echo "deb https://ftp.osuosl.org/pub/sftpgo/apt bookworm main" | sudo tee /etc/apt/sources.list.d/sftpgo.list && sudo apt update && sudo apt install -y sftpgo
+For Mac install using: brew install sftpgo
+
+## Command path
+
+For Fedora run: /usr/bin/sftpgo
+For Raspberry Pi run: /usr/bin/sftpgo
+For Mac run: /opt/homebrew/bin/sftpgo
+
+## Command documentation
+
+Docs can be found at https://github.com/drakkan/sftpgo
+
+## Command options
+
+### Top-level subcommands
+
+sftpgo serve                    # start the SFTPGo service (reads config from sftpgo.yaml/json)
+sftpgo portable                 # serve a single directory with auto-generated credentials
+sftpgo initprovider             # initialize/update the data provider (run after fresh install)
+sftpgo ping                     # health check against a running sftpgo instance
+sftpgo acme run                 # obtain TLS certificates from Let's Encrypt / ACME CA
+sftpgo gen                      # collection of generators (completions, man pages, etc.)
+sftpgo resetprovider            # reset the data provider (destructive — all data lost)
+sftpgo resetpwd --admin <name>  # reset admin password
+sftpgo smtptest                 # test SMTP configuration
+sftpgo -v                       # print version
+
+### serve flags (key ones)
+
+sftpgo serve -c /etc/sftpgo           # config directory (default: current dir)
+sftpgo serve --config-file /path/to/sftpgo.yaml
+sftpgo serve --log-level info         # debug|info|warn|error
+sftpgo serve --log-file-path /var/log/sftpgo.log
+sftpgo serve --grace-time 30          # seconds to allow transfers to finish on shutdown
+
+### portable mode (quick single-directory sharing)
+
+sftpgo portable                                   # serve cwd, random port, auto credentials
+sftpgo portable -d /path/to/dir -s 2222           # specific dir and SFTP port
+sftpgo portable -u myuser -p mypass -g "*"        # set credentials and full permissions
+sftpgo portable --httpd-port 8080                 # also expose HTTP web client
+sftpgo portable --webdav-port 9090               # also expose WebDAV
+sftpgo portable --ftpd-port 2121                  # also expose FTP
+sftpgo portable -f s3fs --s3-bucket mybucket --s3-region us-east-1  # serve S3 bucket
+sftpgo portable -f azblobfs --az-account-name acct --az-container c  # serve Azure Blob
+sftpgo portable -f gcsfs --gcs-bucket mybucket   # serve GCS bucket (auto credentials)
+sftpgo portable -f cryptfs --crypto-passphrase secret  # serve encrypted local filesystem
+
+### systemd service management (after dnf install)
+
+sudo systemctl start sftpgo
+sudo systemctl enable sftpgo
+sudo systemctl status sftpgo
+sudo journalctl -u sftpgo -f
+
+### web admin / REST API
+
+# After starting, web admin UI is available at:
+# http://localhost:8080/web/admin  (default; configure in sftpgo.yaml)
+# REST API base: http://localhost:8080/api/v2/

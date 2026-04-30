@@ -340,3 +340,12 @@ dearchap
 tinyemu
 byteswap
 SDL
+semanage
+semodule
+setsebool
+sftpgo
+webdav
+WebDAV
+osuosl
+OSUOSL
+drakkan
