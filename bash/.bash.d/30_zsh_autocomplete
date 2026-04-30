@@ -8,6 +8,18 @@ fi
 # at call time in zsh. We define portable equivalents here instead of sourcing.
 GITME_CACHE_DIR="${GITME_CACHE_DIR:-$HOME/.gitme}"
 GITME_CACHE_FILE="$GITME_CACHE_DIR/cache"
+GITME_IGNORE="${GITME_IGNORE:-$GITME_CACHE_DIR/ignore}"
+
+_gitme_is_ignored() {
+    local dir="$1"
+    [[ -f "$GITME_IGNORE" ]] || return 1
+    local pattern
+    while IFS= read -r pattern || [[ -n "$pattern" ]]; do
+        [[ -z "$pattern" || "$pattern" == '#'* ]] && continue
+        [[ "$dir" == ${~pattern} ]] && return 0
+    done < "$GITME_IGNORE"
+    return 1
+}
 
 _gitme_build_cache() {
     local dirs_str="${GITME_DIRS:-$HOME/git}"
@@ -31,7 +43,7 @@ _gitme_build_cache() {
 }
 
 gitme() {
-    local GITME_VERSION="0.0.2-zsh"
+    local GITME_VERSION="0.0.3-zsh"
     case "$1" in
         -h|--help)
             cat <<EOF
@@ -46,6 +58,22 @@ Usage:
 
 Searches all directories listed in \$GITME_DIRS (or \$HOME/git by default)
 and interactively jumps to matching Git repositories.
+
+Options:
+  --rebuild-cache    Rebuild the repository cache for faster searching
+
+Ignore file:
+  Repos can be excluded at search time via an ignore file.
+  Default location: \$GITME_CACHE_DIR/ignore  (~/.gitme/ignore)
+  Override with:    export GITME_IGNORE=/path/to/ignore-file
+
+  Each line is a glob pattern matched against the full repo path.
+  Lines starting with # are comments. Examples:
+    /home/user/Projects/3rd-party-repos/*
+    /home/user/Projects/secret-project
+    /home/user/bin/gitme
+
+  Changes to the ignore file take effect immediately — no cache rebuild needed.
 
 Examples:
   gitme utils
@@ -82,7 +110,9 @@ EOF
             [[ -z "$dir" ]] && continue
             repo_name="$(basename "$dir")"
             if [[ "${repo_name:l}" == *"$search_lc"* || "${remote_url:l}" == *"$search_lc"* ]]; then
-                [[ -d "$dir" ]] && matches+=("$dir")
+                if [[ -d "$dir" ]] && ! _gitme_is_ignored "$dir"; then
+                    matches+=("$dir")
+                fi
             fi
         done < "$GITME_CACHE_FILE"
     fi
