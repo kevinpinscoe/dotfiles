@@ -33,6 +33,7 @@ GHOSTTY
 GOTOOLCHAIN
 Ghostty
 Gitea
+Hammerspoon
 Inscoe
 Kasm
 Linemode
