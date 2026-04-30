@@ -10,9 +10,11 @@ Easily find local Git repos
 
 ## Installed from
 
-For Fedora install using: `git clone https://github.com/davorg/gitme.git ~/bin/gitme`
-For Raspberry Pi install using: `git clone https://github.com/davorg/gitme.git ~/bin/gitme`
-For Mac install using: `git clone https://github.com/davorg/gitme.git ~/bin/gitme`
+Forked from https://github.com/davorg/gitme — using https://github.com/kevinpinscoe/gitme
+
+For Fedora install using: `git clone git@github.com:kevinpinscoe/gitme.git ~/bin/gitme`
+For Raspberry Pi install using: `git clone git@github.com:kevinpinscoe/gitme.git ~/bin/gitme`
+For Mac install using: `git clone git@github.com:kevinpinscoe/gitme.git ~/bin/gitme`
 
 ## Command path
 
@@ -20,7 +22,21 @@ Sourced automatically at shell startup via `~/.bash.d/30_bash_autocomplete` (bas
 
 ## Command documentation
 
-Docs can be found at https://github.com/davorg/gitme
+Docs can be found at https://github.com/kevinpinscoe/gitme
+
+## Ignore file
+
+Create `~/.gitme/ignore` to exclude repos from search results at runtime.
+Each line is a bash glob matched against the full repo path.
+Lines starting with # are comments. No cache rebuild needed after editing.
+
+# Exclude all repos under a directory
+/home/kinscoe/Projects/3rd-party-repos/*
+
+# Exclude a specific repo
+/home/kinscoe/bin/gitme
+
+Override the ignore file path: `export GITME_IGNORE=/path/to/ignore-file`
 
 ## Command options
 
@@ -28,7 +44,7 @@ Docs can be found at https://github.com/davorg/gitme
 gitme <search-term>
 
 # Jump to a repo matching a remote URL or fragment
-gitme github.com/davorg
+gitme github.com/kevinpinscoe
 
 # Rebuild the repository cache (faster searching)
 gitme --rebuild-cache
