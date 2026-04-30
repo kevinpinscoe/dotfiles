@@ -1,0 +1,79 @@
+---
+syntax: sh
+tags: [ WebDAV, sftp, ftp, tftp, file-server, http, sharing ]
+---
+# Command copyparty
+
+## What does this command do:
+
+Portable file server with accelerated resumable uploads, dedup, WebDAV, SFTP, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/9001/copyparty/releases/download/v1.20.14/copyparty-sfx.py -o ~/.local/bin/copyparty && chmod +x ~/.local/bin/copyparty
+For Raspberry Pi install using: curl -sSfL https://github.com/9001/copyparty/releases/download/v1.20.14/copyparty-sfx.py -o ~/.local/bin/copyparty && chmod +x ~/.local/bin/copyparty
+For Mac install using: brew install copyparty
+
+## Command path
+
+For Fedora run: ~/.local/bin/copyparty
+For Raspberry Pi run: ~/.local/bin/copyparty
+For Mac run: /opt/homebrew/bin/copyparty
+
+## Command documentation
+
+Docs can be found at https://github.com/9001/copyparty
+
+## Command options
+
+# Serve current directory read/write (no auth)
+copyparty
+
+# Serve specific directory read-only
+copyparty -v /path/to/files:/:r
+
+# Serve with an account (user:pass) and read-write volume
+copyparty -a user:pass -v /path/to/files:/:rw
+
+# Listen on a specific port (default 3923)
+copyparty -p 8080
+
+# Listen on a specific IP
+copyparty -i 0.0.0.0
+
+# HTTP only (no TLS)
+copyparty --http-only
+
+# HTTPS only (auto-generates self-signed cert)
+copyparty --https-only
+
+# Add a config file
+copyparty -c /path/to/config.ini
+
+# Limit concurrent clients
+copyparty -nc 50
+
+# Use all CPU cores for uploads/downloads
+copyparty -j 0
+
+# Set server name (shown in browser top-left)
+copyparty --name myserver
+
+# Serve behind a reverse proxy at a sub-path
+copyparty --rp-loc /files
+
+# Show help
+copyparty --help
+
+# Volume flags (used with -v SRC:DST:FLAGS)
+# r   = read-only
+# rw  = read+write
+# rwo = read+write+overwrite
+# del = allow delete
+# see: copyparty --help-accounts
+
+# Protocol ports (defaults when enabled via config):
+# HTTP:  3923  (configurable via -p)
+# FTP:   3921
+# SFTP:  3922
+# TFTP:  3969

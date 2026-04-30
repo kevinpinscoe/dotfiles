@@ -349,3 +349,8 @@ WebDAV
 osuosl
 OSUOSL
 drakkan
+copyparty
+sfx
+zeroconf
+dedup
+tftp
