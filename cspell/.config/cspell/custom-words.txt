@@ -357,3 +357,5 @@ dedup
 tftp
 picoshare
 pgxcli
+PII
+wordlist
