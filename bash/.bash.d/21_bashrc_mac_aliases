@@ -1,4 +1,5 @@
 alias login='echo you want logon command'
+alias j='cd ~/Journal/Professional'
 alias tg='terragrunt'
 alias enc='~/bin/mesactlendec.sh encrypt; source ~/.environment/.env_set.sh'
 alias dec='~/bin/mesactlendec.sh decrypt; source ~/.environment/.env_set.sh'
