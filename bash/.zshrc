@@ -42,3 +42,5 @@ fi
 
 # zsh-sage: intelligent autosuggestions (Homebrew; macOS only)
 [[ -f /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh ]] && source /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh
+
+[[ -f ~/.environment/self-hosted-services.sh ]] && source ~/.environment/self-hosted-services.sh

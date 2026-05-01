@@ -56,3 +56,5 @@ fi
 if [ -n "$SSH_CONNECTION" ] && [ -z "$TMUX" ]; then
     tmux new-session -A -s main
 fi
+
+[[ -f ~/.environment/self-hosted-services.sh ]] && source ~/.environment/self-hosted-services.sh
