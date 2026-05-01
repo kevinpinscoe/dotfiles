@@ -364,3 +364,4 @@ wordlist
 DMARC
 SMTP
 SPF
+beszel
