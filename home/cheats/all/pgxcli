@@ -1,0 +1,56 @@
+---
+syntax: sh
+tags: [ postgresql, tui ]
+---
+# Command pgxcli
+
+## What does this command do:
+
+Postgres CLI with autocompletion and syntax highlighting
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/Balaji01-4D/pgxcli/releases/download/v0.1.0/pgxcli_0.1.0_linux_amd64.rpm -o /tmp/pgxcli.rpm && sudo dnf install -y /tmp/pgxcli.rpm
+For Raspberry Pi install using: curl -sSfL https://github.com/Balaji01-4D/pgxcli/releases/download/v0.1.0/pgxcli_0.1.0_linux_arm64.tar.gz | tar -xzf - -C /tmp && mv /tmp/pgxcli ~/.local/bin/pgxcli && chmod +x ~/.local/bin/pgxcli
+For Mac install using: curl -sSfL https://github.com/Balaji01-4D/pgxcli/releases/download/v0.1.0/pgxcli_0.1.0_darwin_arm64.tar.gz | tar -xzf - -C /tmp && mv /tmp/pgxcli ~/.local/bin/pgxcli && chmod +x ~/.local/bin/pgxcli
+
+## Command path
+
+For Fedora run: /usr/bin/pgxcli
+For Raspberry Pi run: ~/.local/bin/pgxcli
+For Mac run: ~/.local/bin/pgxcli
+
+## Command documentation
+
+Docs can be found at https://github.com/Balaji01-4D/pgxcli
+
+## Command options
+
+# Connect by positional args (dbname, username)
+pgxcli mydb myuser
+
+# Connect by flags
+pgxcli --host localhost --port 5432 --user postgres --dbname postgres
+
+# Connect via URI
+pgxcli postgres://user:password@localhost:5432/dbname
+
+# Launch interactive connection form
+pgxcli -i
+
+# Flags
+#   -d, --dbname string     database name to connect to
+#       --debug             enable debug mode for verbose logging
+#   -h, --host string       host address of the postgres database
+#   -i, --interactive       interactive connection mode
+#   -w, --no-password       never prompt for the password
+#   -W, --password          force password prompt
+#   -p, --port uint16       port number (default 5432)
+#   -U, --user string       username
+#   -v, --version           print version
+
+# Useful backslash commands inside the REPL
+#   \l    list databases
+#   \dt   list tables
+#   \d    describe a table
+#   \q    quit

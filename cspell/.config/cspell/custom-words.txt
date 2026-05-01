@@ -356,3 +356,4 @@ zeroconf
 dedup
 tftp
 picoshare
+pgxcli
