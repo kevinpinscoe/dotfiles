@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-cspell --no-must-find-files --quiet "$1"
+cspell --no-must-find-files --quiet --config "${HOME}/.cspell.json" "$1"
