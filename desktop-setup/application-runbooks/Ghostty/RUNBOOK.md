@@ -134,6 +134,43 @@ Then right-click the LXDE desktop → **Refresh Menu** (or log out and back in).
 
 ---
 
+## Clickable URLs (Hotlinks)
+
+Two methods are available for opening URLs from the terminal. Both work when Ghostty is running tmux.
+
+### Method 1 — Ghostty native (modifier + click)
+
+Ghostty detects URLs automatically and opens them on modifier + click. No config required.
+
+| Platform | Gesture |
+|----------|---------|
+| macOS | `Cmd` + click |
+| Linux (Fedora, Raspberry Pi) | `Ctrl` + click |
+
+The modifier bypasses tmux's mouse capture so the click goes directly to Ghostty. This is the fastest path — no mode change needed, works from anywhere in the terminal.
+
+### Method 2 — tmux-open (keyboard, copy mode)
+
+The `tmux-plugins/tmux-open` plugin adds URL-opening keybindings inside tmux copy mode. Configured in `~/.tmux.conf`:
+
+```
+set -g @plugin 'tmux-plugins/tmux-open'
+```
+
+**Usage:**
+
+1. Enter copy mode: `prefix + [`
+2. Move the cursor over any URL
+3. Press `o` — opens the URL in the default browser
+4. Press `Ctrl-o` — opens the URL in `$EDITOR`
+5. Press `S` — searches for the selection on Google
+
+After adding the plugin, install it inside tmux: `prefix + I` (capital I).
+
+**When to use this over Method 1:** when you want to stay on the keyboard entirely, or when the URL is buried in scrollback and you need copy-mode navigation to reach it.
+
+---
+
 ## Troubleshooting
 
 **`Unable to acquire an OpenGL context for rendering` on Pi**
