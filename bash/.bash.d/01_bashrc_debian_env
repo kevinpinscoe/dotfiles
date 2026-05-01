@@ -1,0 +1,9 @@
+# ~/.bash.d/01_bashrc_debian_env
+
+# Only apply on Debian systems
+if [ ! -f /etc/debian_version ]; then
+    return
+fi
+
+# gitme search roots (Debian/Pi): home directory
+export GITME_DIRS="$HOME"

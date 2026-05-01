@@ -18,11 +18,13 @@ fi
 # Determine OS
 IS_MACOS=false
 IS_FEDORA=false
+IS_DEBIAN=false
 [[ "$(uname)" == "Darwin" ]] && IS_MACOS=true
 [ -f /etc/fedora-release ] && IS_FEDORA=true
+[ -f /etc/debian_version ] && IS_DEBIAN=true
 
 # Source appropriate files from ~/.bash.d/
-# Skip zsh-only files; mac-tagged files only on macOS; fedora-tagged files only on Fedora
+# Skip zsh-only files; mac-tagged files only on macOS; fedora-tagged files only on Fedora; debian-tagged files only on Debian
 for file in ~/.bash.d/*; do
     if [ -f "$file" ]; then
         [[ "$file" == *_zsh_* ]] && continue
@@ -31,6 +33,8 @@ for file in ~/.bash.d/*; do
             [[ "$IS_MACOS" == "true" ]] && source "$file"
         elif [[ "$file" == *fedora* ]]; then
             [[ "$IS_FEDORA" == "true" ]] && source "$file"
+        elif [[ "$file" == *debian* ]]; then
+            [[ "$IS_DEBIAN" == "true" ]] && source "$file"
         else
             source "$file"
         fi
