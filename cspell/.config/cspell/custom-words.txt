@@ -359,3 +359,6 @@ picoshare
 pgxcli
 PII
 wordlist
+DMARC
+SMTP
+SPF
