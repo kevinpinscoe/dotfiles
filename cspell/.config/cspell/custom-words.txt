@@ -355,6 +355,8 @@ sfx
 zeroconf
 dedup
 tftp
+metabase
+Metabase
 picoshare
 pgxcli
 PII
