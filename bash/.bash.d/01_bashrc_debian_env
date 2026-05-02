@@ -7,3 +7,4 @@ fi
 
 # gitme search roots (Debian/Pi): home directory
 export GITME_DIRS="$HOME"
+export CHECK_GIT_REPOS="$HOME"
