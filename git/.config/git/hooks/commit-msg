@@ -1,2 +1,8 @@
 #!/usr/bin/env bash
-cspell --no-must-find-files --quiet --config "${HOME}/.cspell.json" "$1"
+output=$(cspell --no-must-find-files --config "${HOME}/.cspell.json" "$1" 2>&1)
+if [[ $? -ne 0 ]]; then
+  echo "$output" >&2
+  echo "" >&2
+  echo "To add a word: echo '<word>' >> ~/.config/cspell/custom-words.txt" >&2
+  exit 1
+fi
