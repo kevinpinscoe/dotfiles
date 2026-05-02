@@ -1,0 +1,58 @@
+---
+syntax: sh
+tags: [ clone, website, web, clone-websites, ai ]
+---
+# Command clone-website
+
+## What does this command do:
+
+Clone any website with one command using AI coding agents
+
+## Installed from
+
+For Fedora install using:
+```
+git clone https://github.com/JCodesMore/ai-website-cloner-template.git \
+  ~/Projects/3rd-party-repos/ai-website-cloner-template
+cd ~/Projects/3rd-party-repos/ai-website-cloner-template && npm install
+curl -sSfL <this-script> -o ~/.local/bin/clone-website && chmod +x ~/.local/bin/clone-website
+```
+
+The wrapper script at ~/.local/bin/clone-website cds into the project and runs `claude --chrome`.
+
+## Command path
+
+For Fedora run: /home/kinscoe/.local/bin/clone-website
+
+## Command documentation
+
+Docs can be found at https://github.com/JCodesMore/ai-website-cloner-template
+
+## Command options
+
+```
+clone-website [claude-options]
+```
+
+Launches Claude Code with Chrome MCP enabled inside the ai-website-cloner-template project
+directory. Any extra arguments are passed through to `claude`.
+
+Once the Claude session opens, run the skill:
+
+```
+/clone-website <url1> [<url2> ...]
+```
+
+### Pipeline phases
+
+1. Reconnaissance   — screenshots, design token extraction, interaction sweep
+2. Foundation       — fonts, colors, globals, asset downloads
+3. Component Specs  — spec files written to docs/research/components/
+4. Parallel Build   — builder agents dispatched in git worktrees per section
+5. Assembly & QA    — merge worktrees, wire page.tsx, visual diff vs original
+
+### Requirements
+
+- Node.js 24+
+- Claude Code with Chrome MCP (`--chrome` flag)
+- Project deps installed: cd ~/Projects/3rd-party-repos/ai-website-cloner-template && npm install
