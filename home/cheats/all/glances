@@ -1,0 +1,114 @@
+---
+syntax: sh
+tags: [ monitoring, system, tui, top, python ]
+---
+# Command glances
+
+## What does this command do:
+
+Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems.
+
+## Installed from
+
+For Fedora install using: sudo dnf install glances
+For Raspberry Pi install using: sudo apt install glances
+For Mac install using: brew install glances
+
+## Command path
+
+For Fedora run: /usr/bin/glances
+For Raspberry Pi run: /usr/bin/glances
+For Mac run: /opt/homebrew/bin/glances
+
+## Command documentation
+
+Docs can be found at https://github.com/nicolargo/glances
+
+## Command options
+
+# Launch standalone TUI (most common usage)
+glances
+
+# Web server mode — exposes TUI at http://localhost:61208/ and REST API
+glances -w
+
+# REST API only (no web UI)
+glances -w --disable-webui
+
+# Per-CPU mode (one row per core)
+glances -1
+
+# Light mode (top menu only)
+glances --light
+
+# Set refresh interval (default 2s)
+glances -t 5
+
+# Filter processes by name/regex
+glances -f nginx
+
+# Sort process list
+glances --sort-processes cpu_percent     # also: memory_percent, username, cpu_times, io_counters, name
+
+# Accumulate processes by program name
+glances --programs
+
+# Server mode (XML-RPC, port 61209)
+glances -s
+
+# Client mode — connect to a Glances server
+glances -c <ip_or_hostname>
+
+# TUI browser (discover Glances servers on LAN)
+glances --browser
+
+# WebUI central browser
+glances --browser -w
+
+# Export stats to CSV
+glances --export csv --export-csv-file /tmp/glances.csv
+
+# Export stats to JSON file
+glances --export-json-file /tmp/glances.json
+
+# Print stats to stdout (one stat per line)
+glances --stdout cpu.user,mem.used,load
+
+# Print stats as JSON to stdout
+glances --stdout-json cpu,mem,load
+
+# Print stats as CSV to stdout
+glances --stdout-csv cpu.user,mem.used,load
+
+# List all available modules (plugins + exporters)
+glances --modules-list
+
+# Enable a disabled plugin (e.g. sensors, irq)
+glances --enable-plugin sensors
+
+# Disable specific plugins
+glances --disable-plugin network,ports
+
+# Disable all plugins except chosen ones
+glances --disable-plugin all --enable-plugin cpu,mem,load
+
+# Show temperatures in Fahrenheit
+glances --fahrenheit
+
+# Display network rate in bytes/s (default: bits/s)
+glances -b
+
+# Use a custom config file
+glances -C ~/.config/glances/glances.conf
+
+# Display field descriptions (API doc)
+glances --api-doc
+
+# Run self-test of all plugins
+glances --issue
+
+# Disable kernel threads in process list
+glances --hide-kernel-threads
+
+# Sparkline graphs in curses UI
+glances --sparkline
