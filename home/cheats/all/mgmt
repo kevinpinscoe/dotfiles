@@ -1,0 +1,66 @@
+---
+syntax: sh
+tags: [ distributed, event-driven, parallel, config, management, packer, image, builder ]
+---
+# Command mgmt
+
+## What does this command do:
+
+Next generation distributed, event-driven, parallel config management!
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/purpleidea/mgmt/releases/download/1.0.2/mgmt-linux-amd64-1.0.2 -o ~/.local/bin/mgmt && chmod +x ~/.local/bin/mgmt
+For Raspberry Pi install using: git clone --recursive https://github.com/purpleidea/mgmt/ ~/mgmt && cd ~/mgmt && make deps && make && cp mgmt ~/.local/bin/mgmt && rm -rf ~/mgmt
+For Mac install using: git clone --recursive https://github.com/purpleidea/mgmt/ ~/mgmt && cd ~/mgmt && make deps && make && cp mgmt ~/.local/bin/mgmt && rm -rf ~/mgmt
+
+## Command path
+
+For Fedora run: ~/.local/bin/mgmt
+For Raspberry Pi run: ~/.local/bin/mgmt
+For Mac run: ~/.local/bin/mgmt
+
+## Command documentation
+
+Docs can be found at https://github.com/purpleidea/mgmt/
+
+## Command options
+
+# run code on this machine
+mgmt run [--hostname HOSTNAME] [--prefix PREFIX] [--tmp-prefix] [--no-watch] [--noop] [--no-network] [--prometheus] <subcommand>
+  --hostname HOSTNAME            hostname to use
+  --prefix PREFIX                path to the working prefix directory [env: MGMT_PREFIX]
+  --tmp-prefix                   use a pseudo-random temporary prefix
+  --allow-tmp-prefix             allow new temporary prefix if main prefix is unavailable
+  --no-watch                     do not update graph under any switch events
+  --no-stream-watch              do not update graph on stream switch events
+  --no-deploy-watch              do not change deploys after an initial deploy
+  --no-autoedges                 skip the autoedges stage
+  --noop                         globally force all resources into no-op mode
+  --converged-timeout SECS       exit after ~this many seconds without activity [env: MGMT_CONVERGED_TIMEOUT]
+  --max-runtime SECS             exit after ~this many seconds [env: MGMT_MAX_RUNTIME]
+  --seeds SEEDS                  default etcd client endpoints [env: MGMT_SEEDS]
+  --no-network                   run single node without clustering [env: MGMT_NO_NETWORK]
+  --no-pgp                       don't create pgp keys
+  --prometheus                   start a prometheus metrics instance
+  --graphviz FILE                output file for graphviz graph data
+  # subcommands: empty, lang, yaml, puppet, langpuppet
+
+# deploy code into a cluster
+mgmt deploy [--seeds SEEDS] [--noop] [--no-git] [--force] <subcommand>
+  --seeds SEEDS                  default etcd client endpoints [env: MGMT_SEEDS]
+  --noop                         globally force all resources into no-op mode
+  --no-git                       don't use git commit id for safe deploys
+  --force                        force a new deploy even if safety chain would break
+  # subcommands: empty, lang, yaml, puppet, langpuppet
+
+# other top-level commands
+mgmt setup <pkg|svc|firstboot>  # bootstrap setup tasks
+mgmt firstboot                  # run tasks on first boot
+mgmt docs                       # generate documentation
+mgmt tools grow                 # tools for growing storage
+mgmt etcd                       # run standalone etcd
+mgmt provisioner                # provision bare metal machines
+
+# quick start
+mgmt run --tmp-prefix lang examples/lang/hello0.mcl

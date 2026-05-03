@@ -384,3 +384,4 @@ RWO
 oiq
 openinfraquote
 terrateamio
+mgmt
