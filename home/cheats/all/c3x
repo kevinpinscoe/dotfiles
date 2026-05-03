@@ -1,0 +1,107 @@
+---
+syntax: sh
+tags: [ aws, terraform, cost, infra, tofu, opentofu, finops ]
+---
+# Command c3x
+
+## What does this command do:
+
+Open source cloud cost estimation for Terraform, Terragrunt, and CloudFormation
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/c3xdev/c3x/releases/download/v1.0.1/c3x-linux-amd64.tar.gz -o /tmp/c3x.tar.gz && tar -xzf /tmp/c3x.tar.gz -C /tmp && mv /tmp/c3x-linux-amd64 ~/.local/bin/c3x && chmod +x ~/.local/bin/c3x
+For Raspberry Pi install using: curl -sSfL https://github.com/c3xdev/c3x/releases/download/v1.0.1/c3x-linux-arm64.tar.gz -o /tmp/c3x.tar.gz && tar -xzf /tmp/c3x.tar.gz -C /tmp && mv /tmp/c3x-linux-arm64 ~/.local/bin/c3x && chmod +x ~/.local/bin/c3x
+For Mac install using: brew install c3xdev/tap/c3x
+
+## Command path
+
+For Fedora run: ~/.local/bin/c3x
+For Raspberry Pi run: ~/.local/bin/c3x
+For Mac run: /opt/homebrew/bin/c3x
+
+## Command documentation
+
+Docs can be found at https://github.com/c3xdev/c3x
+
+## Command options
+
+### Subcommands
+
+  estimate    Estimate cloud infrastructure costs from Terraform/Terragrunt/CloudFormation
+  diff        Show monthly cost diff between current and a saved baseline
+  recommend   Suggest cost optimizations (newer instance types, cheaper storage, etc.)
+  pricing     Manage local pricing data for offline estimation
+  config      Display or change global configuration
+  report      Combine and format C3X JSON output files
+  comment     Post a C3X cost comment to GitHub, GitLab, Azure Repos, or Bitbucket
+  upload      Upload a C3X JSON file to C3X Cloud
+  auth        Get or manage a C3X API key
+  generate    Generate C3X configuration files
+  completion  Generate shell completion script
+
+### estimate flags
+
+  -p, --path string                  Path to Terraform directory or plan JSON file
+      --terraform-var-file strings   Load .tfvars file(s) (relative to --path)
+      --terraform-var stringArray    Set input variable (-var style)
+      --terraform-workspace string   Terraform workspace to use
+      --usage-file string            Path to usage file for usage-based resources
+      --what-if stringArray          Override resource attributes (e.g. 'aws_instance.web.instance_type=m6i.xlarge')
+      --budget float                 Fail (exit 1) if monthly cost exceeds this amount
+      --format string                Output format: table, json, html (default: table)
+      --out-file string              Save output to file
+      --offline                      Use local pricing DB (run 'c3x pricing sync' first)
+      --recommend                    Show optimization recommendations inline
+      --show-skipped                 List unsupported resources
+      --no-cache                     Skip Terraform plan caching
+      --fields strings               Output fields: all, price, monthlyQuantity, unit, hourlyCost, monthlyCost
+
+### diff flags
+
+  -p, --path string          Path to Terraform directory or plan JSON file
+      --compare-to string    Path to C3X baseline JSON file
+      --budget-increase float  Fail (exit 1) if cost increase exceeds this percentage
+      --format string        Output format: diff, json (default: diff)
+      --out-file string      Save output to file
+
+### recommend flags
+
+  -p, --path string    Path to Terraform directory or plan JSON file
+      --format string  Output format: table, json (default: table)
+
+### pricing subcommands
+
+  sync    Download pricing data from cloud providers (--providers aws,azure,google)
+  status  Show local pricing database status
+
+### Global flags
+
+      --no-color           Disable colored output
+      --log-level string   Log level: trace, debug, info, warn, error, fatal
+      --debug-report       Generate a debug report file for the C3X team
+
+### Common workflows
+
+  # Estimate costs for current Terraform directory
+  c3x estimate --path .
+
+  # Estimate with a tfvars file
+  c3x estimate --path . --terraform-var-file prod.tfvars
+
+  # Save baseline, make changes, then diff
+  c3x estimate --path . --format json --out-file baseline.json
+  c3x diff --path . --compare-to baseline.json
+
+  # What-if scenario without changing code
+  c3x estimate --path . --what-if 'aws_instance.web.instance_type=m6i.2xlarge'
+
+  # Enforce a $500/month budget (exits 1 if exceeded)
+  c3x estimate --path . --budget 500
+
+  # Get optimization recommendations
+  c3x recommend --path .
+
+  # Offline mode (download pricing data first)
+  c3x pricing sync --providers aws
+  c3x estimate --path . --offline
