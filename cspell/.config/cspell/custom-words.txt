@@ -381,3 +381,6 @@ setroubleshootd
 tfvars
 iac
 RWO
+oiq
+openinfraquote
+terrateamio

@@ -1,0 +1,56 @@
+---
+syntax: sh
+tags: [ openinfraquote, aws, terraform, cost, infra, tofu, opentofu, finops ]
+---
+# Command oiq
+
+## What does this command do:
+
+Fast, open-source tool for estimating infrastructure costs from Terraform plans and state files
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/terrateamio/openinfraquote/releases/download/v1.10.0/oiq-linux-amd64-v1.10.0.tar.gz -o /tmp/oiq.tar.gz && tar -xzf /tmp/oiq.tar.gz -C /tmp && chmod +x /tmp/oiq && mv /tmp/oiq ~/.local/bin/oiq && rm /tmp/oiq.tar.gz
+For Raspberry Pi install using: curl -sSfL https://github.com/terrateamio/openinfraquote/releases/download/v1.10.0/oiq-linux-arm64-v1.10.0.tar.gz -o /tmp/oiq.tar.gz && tar -xzf /tmp/oiq.tar.gz -C /tmp && chmod +x /tmp/oiq && mv /tmp/oiq ~/.local/bin/oiq && rm /tmp/oiq.tar.gz
+For Mac install using: brew tap terrateamio/openinfraquote && brew install openinfraquote
+
+## Command path
+
+For Fedora run: ~/.local/bin/oiq
+For Raspberry Pi run: ~/.local/bin/oiq
+For Mac run: /opt/homebrew/bin/oiq
+
+## Command documentation
+
+Docs can be found at https://github.com/terrateamio/openinfraquote
+
+## Command options
+
+# Before first use — download the pricing sheet:
+curl -s https://oiq.terrateam.io/prices.csv.gz | gunzip > prices.csv
+
+# Full workflow: match resources then price them
+tofu show -json tfplan.json | oiq match --pricesheet prices.csv | oiq price
+tofu show -json tfplan.json | oiq match -p prices.csv | oiq price --format markdown
+tofu show -json tfplan.json | oiq match -p prices.csv | oiq price --region us-east-1
+
+# Save match output to file, then price separately
+oiq match --pricesheet prices.csv --output match.json plan.json
+oiq price --input match.json --format json
+
+# Output formats: summary (default), text, json, markdown, atlantis-comment
+oiq price --input match.json --format atlantis-comment
+
+# Filter by region using match-query
+oiq price --input match.json --mq 'region = us-east-1'
+
+# Provide a usage file (for resources billed by usage, e.g. data transfer)
+oiq price --input match.json --usage usage.yaml
+
+# Print the default usage file as a starting template
+oiq print-default-usage
+
+# Environment variables
+# OIQ_PRICE_SHEET  — path to pricing CSV (replaces --pricesheet)
+# OIQ_REGION       — region to price against (replaces --region)
+# OIQ_OUTPUT_FORMAT — output format (replaces --format)
