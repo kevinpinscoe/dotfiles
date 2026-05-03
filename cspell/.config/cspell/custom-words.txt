@@ -375,3 +375,6 @@ retarget
 lastdl
 mcp
 MCP
+dac
+setroubleshoot
+setroubleshootd
