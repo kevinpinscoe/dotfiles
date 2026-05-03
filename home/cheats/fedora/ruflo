@@ -1,0 +1,85 @@
+---
+syntax: sh
+tags: [ ai, agents, orchestration, claude-code, claude, rag ]
+---
+# Command ruflo
+
+## What does this command do:
+
+The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration
+
+## Installed from
+
+For Fedora install using: npm install -g ruflo@latest
+
+## Command path
+
+For Fedora run: ~/.local/bin/ruflo
+
+## Command documentation
+
+Docs can be found at https://github.com/ruvnet/ruflo
+
+## Command options
+
+# PRIMARY COMMANDS
+ruflo init                              # Initialize RuFlo in the current directory
+ruflo start                             # Start the RuFlo orchestration system
+ruflo status                            # Show system status
+ruflo agent <subcommand>                # Agent management commands
+ruflo swarm <subcommand>                # Swarm coordination commands
+ruflo memory <subcommand>               # Memory management commands
+ruflo task <subcommand>                 # Task management commands
+ruflo session <subcommand>              # Session management commands
+ruflo mcp <subcommand>                  # MCP server management
+ruflo hooks <subcommand>                # Self-learning hooks for intelligent workflow automation
+
+# ADVANCED COMMANDS
+ruflo neural <subcommand>               # Neural pattern training, MoE, Flash Attention
+ruflo security <subcommand>             # Security scanning, CVE detection, threat modeling
+ruflo performance <subcommand>          # Performance profiling, benchmarking, optimization
+ruflo embeddings <subcommand>           # Vector embeddings, semantic search, similarity ops
+ruflo hive-mind <subcommand>            # Queen-led consensus-based multi-agent coordination
+ruflo ruvector <subcommand>             # RuVector PostgreSQL Bridge management
+ruflo guidance <subcommand>             # Guidance Control Plane — compile, retrieve, enforce
+ruflo autopilot <subcommand>            # Persistent swarm: keeps agents working until ALL tasks done
+
+# UTILITY COMMANDS
+ruflo config <subcommand>               # Configuration management
+ruflo doctor                            # System diagnostics and health checks
+ruflo daemon <subcommand>               # Manage background worker daemon
+ruflo completions                       # Generate shell completion scripts
+ruflo migrate <subcommand>              # V2 to V3 migration tools
+ruflo workflow <subcommand>             # Workflow execution and management
+
+# ANALYSIS COMMANDS
+ruflo analyze <subcommand>              # Code analysis, diff classification, change risk assessment
+ruflo route <subcommand>                # Intelligent task-to-agent routing using Q-Learning
+ruflo progress                          # Check V3 implementation progress
+
+# MANAGEMENT COMMANDS
+ruflo providers <subcommand>            # Manage AI providers, models, and configurations
+ruflo plugins <subcommand>              # Plugin management with IPFS-based decentralized registry
+ruflo deployment <subcommand>           # Deployment management, environments, rollbacks
+ruflo claims <subcommand>               # Claims-based authorization, permissions, access control
+ruflo issues <subcommand>               # Collaborative issue claims for human-agent workflows
+ruflo update <subcommand>               # Manage @claude-flow package updates
+ruflo process <subcommand>              # Background process management and monitoring
+ruflo appliance <subcommand>            # Self-contained RVFA appliance management
+ruflo cleanup                           # Remove project artifacts created by claude-flow/ruflo
+
+# GLOBAL OPTIONS
+ruflo <cmd> -h, --help                  # Show help information
+ruflo -V, --version                     # Show version number
+ruflo <cmd> -v, --verbose               # Enable verbose output
+ruflo <cmd> -Q, --quiet                 # Suppress non-essential output
+ruflo <cmd> -c, --config <path>         # Path to configuration file
+ruflo <cmd> --format text|json|table    # Set output format
+ruflo <cmd> --no-color                  # Disable colored output
+ruflo <cmd> -i, --interactive           # Enable interactive mode
+
+# COMMON EXAMPLES
+ruflo agent spawn -t coder              # Spawn a coder agent
+ruflo swarm init --v3-mode              # Initialize V3 swarm
+ruflo memory search -q "auth patterns"  # Semantic search in memory
+ruflo mcp start                         # Start MCP server
