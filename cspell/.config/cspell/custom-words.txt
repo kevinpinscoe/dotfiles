@@ -378,3 +378,4 @@ MCP
 dac
 setroubleshoot
 setroubleshootd
+tfvars
