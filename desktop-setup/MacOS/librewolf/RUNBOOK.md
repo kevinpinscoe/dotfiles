@@ -18,15 +18,19 @@ The Homebrew cask `librewolf` was deprecated and **disabled on 2026-09-01** beca
 
 1. Download the arm64 `.dmg` from <https://librewolf.net/installation/macos/>
 2. Open the DMG and drag `LibreWolf.app` into `/Applications`
-3. Clear the Gatekeeper quarantine attribute (one-time):
+3. Clear the Gatekeeper quarantine attribute recursively (one-time):
    ```bash
-   xattr -d com.apple.quarantine /Applications/LibreWolf.app
+   xattr -dr com.apple.quarantine /Applications/LibreWolf.app
    ```
-   Or right-click the app → **Open** the first time and approve the warning.
+4. **macOS Tahoe (26+) only:** re-sign the bundle ad-hoc to regenerate the `_CodeSignature` resource manifest. The DMG ships with an embedded adhoc signature on the binary but no bundle resource manifest, and Tahoe's stricter Gatekeeper refuses to launch it (`spctl` reports `code has no resources but signature indicates they must be present`):
+   ```bash
+   codesign --force --deep --sign - /Applications/LibreWolf.app
+   ```
+   After this, `codesign -dv` should report `Sealed Resources version=2`. `spctl` will still say `rejected` (adhoc is not notarized), but the app will launch normally.
 
 ### Update
 
-LibreWolf has an in-app update notifier. When prompted, download the new `.dmg` from librewolf.net and replace `/Applications/LibreWolf.app`. Re-run the `xattr` command after replacing.
+LibreWolf has an in-app update notifier. When prompted, download the new `.dmg` from librewolf.net and replace `/Applications/LibreWolf.app`. Re-run **both** the `xattr -dr` and `codesign --force --deep` commands after replacing — in-app updates that overwrite the bundle will reintroduce the same problem.
 
 ### Configuration files
 
@@ -47,4 +51,24 @@ LibreWolf has an in-app update notifier. When prompted, download the new `.dmg` 
 
 ## Troubleshooting
 
-<!-- record issues and resolutions here -->
+### App refuses to launch on macOS Tahoe (26.x)
+
+**Symptom:** Double-clicking `LibreWolf.app` does nothing, or Finder shows a Gatekeeper damaged/cannot-be-opened dialog. `spctl -a -vv /Applications/LibreWolf.app` reports:
+
+```
+code has no resources but signature indicates they must be present
+```
+
+and `ls /Applications/LibreWolf.app/Contents/_CodeSignature` returns no such file.
+
+**Cause:** LibreWolf's macOS DMG ships the main Mach-O with an embedded adhoc signature but omits the bundle's `_CodeSignature/` resource manifest. Pre-Tahoe Gatekeeper tolerated this; Tahoe (macOS 26+) refuses to launch the bundle until the manifest exists.
+
+**Fix:**
+
+```bash
+xattr -dr com.apple.quarantine /Applications/LibreWolf.app
+codesign --force --deep --sign - /Applications/LibreWolf.app
+open /Applications/LibreWolf.app
+```
+
+Verified working on macOS 26.4.1 (arm64) on 2026-05-04.
