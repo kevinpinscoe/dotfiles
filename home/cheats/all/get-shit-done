@@ -1,0 +1,95 @@
+---
+syntax: sh
+tags: [ claude code, claude-code, prompt, prompt-engineering, meta-prompting, context engineering, spec-driven ]
+---
+# Command get-shit-done
+
+## What does this command do:
+
+A light-weight and powerful meta-prompting, context engineering and spec-driven development system for Claude Code by TÂCHES.
+
+## Installed from
+
+For Fedora install using: npx get-shit-done-cc@latest --claude --global
+For Raspberry Pi install using: npx get-shit-done-cc@latest --claude --global
+For Mac install using: npx get-shit-done-cc@latest --claude --global
+
+## Command path
+
+For Fedora run: N/A — slash commands installed to ~/.claude/
+For Raspberry Pi run: N/A — slash commands installed to ~/.claude/
+For Mac run: N/A — slash commands installed to ~/.claude/
+
+## Command documentation
+
+Docs can be found at https://github.com/gsd-build/get-shit-done
+
+## Command options
+
+### Install flags
+  --claude           Target Claude Code runtime
+  --global / -g      Install for all projects (writes to ~/.claude/)
+  --local / -l       Install for current project only
+  --minimal          Install core 6 commands only (~700 tokens vs ~12k)
+  --no-sdk           Skip SDK installation
+  --uninstall        Remove GSD from the target location
+
+### Non-interactive installs
+  npx get-shit-done-cc@latest --claude --global
+  npx get-shit-done-cc@latest --claude --global --minimal
+  npx get-shit-done-cc@latest --opencode --global
+  npx get-shit-done-cc@latest --gemini --global
+  npx get-shit-done-cc@latest --claude --global --uninstall
+
+### Core slash commands
+  /gsd-new-project          Initialize project: questions, research, requirements, roadmap
+  /gsd-map-codebase         Analyze existing codebase before initialization
+  /gsd-discuss-phase N      Capture implementation decisions before planning
+  /gsd-plan-phase N         Research, create, and verify atomic task plans
+  /gsd-execute-phase N      Run plans in parallel waves with fresh contexts
+  /gsd-verify-work N        User acceptance testing with automated diagnostics
+  /gsd-ship N               Create PR from verified phase work
+  /gsd-next                 Auto-detect next workflow step
+  /gsd-quick                Execute ad-hoc tasks without full planning
+  /gsd-spike [idea]         Throwaway experiments for feasibility testing
+  /gsd-settings             Open settings (or edit .planning/config.json)
+
+### Discuss phase flags
+  --batch            Answer grouped questions instead of one-by-one
+  --chain            Auto-chain into plan+execute
+  --analyze          Add trade-off analysis
+
+### Plan phase flags
+  --auto             Skip confirmations
+  --reviews          Load codebase review findings
+  --skip-research    Omit domain research
+
+### Quick mode flags
+  --discuss          Lightweight context gathering
+  --research         Investigate approaches before planning
+  --full             Enable all phases
+  --validate         Plan-checking and verification only
+
+### Config (edit .planning/config.json or run /gsd-settings)
+  mode               yolo | interactive
+  granularity        coarse | standard | fine
+  model profiles:
+    quality          Opus for all agents (premium)
+    balanced         Opus planning, Sonnet execution (default)
+    budget           Sonnet planning/execution, Haiku verification
+    inherit          Follow runtime model selection
+  workflow.research           Research before planning (default: true)
+  workflow.plan_check         Verify plans before execution (default: true)
+  workflow.verifier           Confirm deliverables post-execution (default: true)
+  workflow.auto_advance       Skip stops between discuss→plan→execute
+  workflow.discuss_mode       discuss (interview) | assumptions (codebase-first)
+
+### Output structure (.planning/)
+  PROJECT.md         Vision and scope
+  REQUIREMENTS.md    v1/v2 requirements
+  ROADMAP.md         Phased delivery plan
+  STATE.md           Decisions and blockers
+  {phase}-PLAN.md    Atomic task definitions
+  {phase}-SUMMARY.md Execution results
+  research/          Domain analysis
+  todos/, threads/, seeds/   Backlog and persistent context
