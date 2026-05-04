@@ -388,3 +388,7 @@ mgmt
 cwd
 authkey
 ruflo
+librewolf
+LibreWolf
+dmg
+akdev
