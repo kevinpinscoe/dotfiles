@@ -394,3 +394,5 @@ dmg
 akdev
 golangci
 staticcheck
+aaronjmars
+templatefile
