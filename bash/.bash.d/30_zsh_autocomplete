@@ -6,7 +6,7 @@ fi
 # gitme — zsh-native reimplementation. The upstream script at
 # ~/bin/gitme/gitme uses `read -ra` and `shopt`, which are bash-only and fail
 # at call time in zsh. We define portable equivalents here instead of sourcing.
-GITME_CACHE_DIR="${GITME_CACHE_DIR:-$HOME/.gitme}"
+export GITME_CACHE_DIR="${GITME_CACHE_DIR:-$HOME/.gitme}"
 GITME_CACHE_FILE="$GITME_CACHE_DIR/cache"
 GITME_IGNORE="${GITME_IGNORE:-$GITME_CACHE_DIR/ignore}"
 
@@ -16,7 +16,7 @@ _gitme_is_ignored() {
     local pattern
     while IFS= read -r pattern || [[ -n "$pattern" ]]; do
         [[ -z "$pattern" || "$pattern" == '#'* ]] && continue
-        [[ "$dir" == ${~pattern} ]] && return 0
+        [[ "$dir" == ${~pattern} || "$dir" == ${~pattern}/* ]] && return 0
     done < "$GITME_IGNORE"
     return 1
 }
