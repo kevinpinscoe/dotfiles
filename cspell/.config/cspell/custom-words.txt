@@ -392,3 +392,5 @@ librewolf
 LibreWolf
 dmg
 akdev
+golangci
+staticcheck
