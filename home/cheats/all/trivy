@@ -1,0 +1,112 @@
+---
+syntax: sh
+tags: [ security, containers, vulnerability-scanning, scanning, docker, k8s, kubernetes, scanner ]
+---
+# Command trivy
+
+## What does this command do:
+
+Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds, vm's and more
+
+## Installed from
+
+For Fedora install using:
+```
+sudo tee /etc/yum.repos.d/trivy.repo << 'EOF'
+[trivy]
+name=Trivy repository
+baseurl=https://aquasecurity.github.io/trivy-repo/rpm/releases/$basearch/
+gpgcheck=1
+enabled=1
+gpgkey=https://aquasecurity.github.io/trivy-repo/rpm/public.key
+EOF
+sudo dnf install -y trivy
+```
+
+For Raspberry Pi install using:
+```
+sudo apt-get install -y wget gnupg
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" | sudo tee /etc/apt/sources.list.d/trivy.list
+sudo apt-get update && sudo apt-get install -y trivy
+```
+
+For Mac install using: `brew install trivy`
+
+## Command path
+
+For Fedora run: /usr/bin/trivy
+For Raspberry Pi run: /usr/bin/trivy
+For Mac run: /opt/homebrew/bin/trivy
+
+## Command documentation
+
+Docs can be found at https://github.com/aquasecurity/trivy
+
+## Command options
+
+```sh
+# Scan a container image
+trivy image python:3.4-alpine
+
+# Scan a container image from a tar archive
+trivy image --input ruby-3.1.tar
+
+# Scan local filesystem
+trivy fs .
+
+# Scan a git repository
+trivy repository https://github.com/aquasecurity/trivy
+
+# Scan for misconfigurations (IaC, Dockerfile, k8s manifests)
+trivy config ./path/to/iac
+
+# Scan a Kubernetes cluster
+trivy kubernetes --report summary cluster
+
+# Scan a virtual machine image
+trivy vm /path/to/vm.vmdk
+
+# Generate an SBOM
+trivy image --format cyclonedx --output sbom.json python:3.4-alpine
+
+# Scan an SBOM for vulnerabilities
+trivy sbom sbom.json
+
+# Output as JSON
+trivy image -f json -o results.json python:3.4-alpine
+
+# Output as SARIF (for GitHub code scanning)
+trivy image -f sarif -o results.sarif python:3.4-alpine
+
+# Filter by severity
+trivy image --severity HIGH,CRITICAL python:3.4-alpine
+
+# Ignore unfixed vulnerabilities
+trivy image --ignore-unfixed python:3.4-alpine
+
+# Run in server mode
+trivy server --listen 0.0.0.0:4954
+
+# Use a remote trivy server
+trivy image --server http://localhost:4954 python:3.4-alpine
+
+# Clear cache
+trivy clean --all
+
+# Generate shell completion
+trivy completion bash | sudo tee /etc/bash_completion.d/trivy
+```
+
+### Global flags
+
+```
+-c, --config string      config path (default "trivy.yaml")
+-d, --debug              debug mode
+-f, --format string      version format (json)
+-q, --quiet              suppress progress bar and log output
+    --timeout duration   timeout (default 5m0s)
+-v, --version            show version
+    --cache-dir string   cache directory (default "~/.cache/trivy")
+    --insecure           allow insecure server connections
+```
