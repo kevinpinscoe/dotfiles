@@ -396,3 +396,7 @@ golangci
 staticcheck
 aaronjmars
 templatefile
+pathexpand
+firewalld
+defuddle
+dlp
