@@ -1,6 +1,6 @@
 ---
 syntax: sh
-tags: [ markdown, web-clipper, html-to-markdown ]
+tags: [ ingest, markdown, web-clipper, html-to-markdown ]
 ---
 # Command defuddle
 
@@ -69,6 +69,20 @@ Pipe through defuddle is not applicable here. Just use the `.txt` or wrap in a `
     " > transcript.txt
 
 ## Command options
+
+    defuddle parse <input> [options]
+
+Input can be a local HTML file path or a URL.
+
+| Option               | Alias | Description                                            |
+|----------------------|-------|--------------------------------------------------------|
+| `--output <file>`    | `-o`  | Write results to file instead of stdout                |
+| `--markdown`         | `-m`  | Convert content to markdown format                     |
+| `--md`               |       | Alias for --markdown                                   |
+| `--json`             | `-j`  | Output as JSON with metadata                           |
+| `--property <name>`  | `-p`  | Extract specific property (title, description, domain) |
+| `--debug`            |       | Enable debug mode with detailed processing info        |
+| `--lang <code>`      | `-l`  | Set preferred language using BCP 47 format             |
 
 # Parse a local HTML file:
 defuddle parse <file.html>

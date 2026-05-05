@@ -1,6 +1,6 @@
 ---
 syntax: sh
-tags: [ systemd, tui ]
+tags: [ systemd, tui, fedora, rpi ]
 ---
 # Command journal_viewer
 

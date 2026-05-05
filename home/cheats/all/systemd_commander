@@ -1,6 +1,6 @@
 ---
 syntax: sh
-tags: [ systemd, tui ]
+tags: [ systemd, tui, fedora, rpi ]
 ---
 # Command systemd_commander
 
@@ -11,10 +11,12 @@ TUI tools for systemd and journals
 ## Installed from
 
 For Fedora install using: sudo dnf install -y ncurses-devel && git clone --depth=1 https://github.com/nilseuropa/systemd_commander /tmp/sdc_build && cmake -S /tmp/sdc_build -B /tmp/sdc_build/build -DCMAKE_INSTALL_PREFIX="$HOME/.local" && cmake --build /tmp/sdc_build/build -j$(nproc) && cmake --install /tmp/sdc_build/build
+For Raspberry Pi install using: sudo apt install -y libncursesw5-dev cmake g++ && git clone --depth=1 https://github.com/nilseuropa/systemd_commander /tmp/sdc_build && cmake -S /tmp/sdc_build -B /tmp/sdc_build/build -DCMAKE_INSTALL_PREFIX="$HOME/.local" && cmake --build /tmp/sdc_build/build -j$(nproc) && cmake --install /tmp/sdc_build/build
 
 ## Command path
 
 For Fedora run: ~/.local/bin/systemd_commander
+For Raspberry Pi run: ~/.local/bin/systemd_commander
 
 ## Command documentation
 
