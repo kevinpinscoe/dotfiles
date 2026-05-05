@@ -1,0 +1,93 @@
+---
+syntax: sh
+tags: [ containers, oci, build, docker, images ]
+---
+# Command buildah
+
+## What does this command do:
+
+A tool that facilitates building OCI images.
+
+## Installed from
+
+For Fedora install using: sudo dnf -y install buildah
+
+## Command path
+
+For Fedora run: /usr/bin/buildah
+
+## Command documentation
+
+Docs can be found at https://github.com/containers/buildah/blob/main/install.md
+
+## Command options
+
+# Build an image from a Containerfile/Dockerfile
+buildah build -t <image-name> .
+buildah build -f <Containerfile> -t <image-name> .
+
+# Create a working container from a base image
+buildah from <image>
+
+# List working containers
+buildah containers
+
+# List images in local storage
+buildah images
+
+# Copy content into a working container
+buildah copy <container> <src> <dst>
+
+# Add content to a working container
+buildah add <container> <src> <dst>
+
+# Run a command inside a working container
+buildah run <container> -- <command>
+
+# Update image configuration (labels, env, entrypoint, etc.)
+buildah config --label <key>=<value> <container>
+buildah config --env <key>=<value> <container>
+buildah config --entrypoint '["cmd"]' <container>
+
+# Commit a working container to an image
+buildah commit <container> <image-name>
+
+# Push an image to a registry
+buildah push <image-name> docker://<registry>/<image>:<tag>
+
+# Pull an image
+buildah pull <image>
+
+# Tag an image
+buildah tag <image> <new-name>:<tag>
+
+# Remove a working container
+buildah rm <container>
+
+# Remove an image
+buildah rmi <image>
+
+# Login/logout to a container registry
+buildah login <registry>
+buildah logout <registry>
+
+# Mount a working container's root filesystem
+buildah mount <container>
+buildah umount <container>
+
+# Inspect a container or image
+buildah inspect <container-or-image>
+
+# Manage manifest lists (multi-arch images)
+buildah manifest create <list-name>
+buildah manifest add <list-name> <image>
+buildah manifest push <list-name> docker://<registry>/<image>:<tag>
+
+# Prune build and mount cache
+buildah prune
+
+# Run command in a modified user namespace (rootless builds)
+buildah unshare <command>
+
+# Display version information
+buildah version
