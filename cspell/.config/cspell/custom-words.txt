@@ -403,3 +403,8 @@ dlp
 categorised
 dysk
 isitmounted
+Curity
+frontendbinary
+srectl
+toggleable
+CKV
