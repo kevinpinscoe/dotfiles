@@ -405,3 +405,10 @@ dysk
 isitmounted
 maildrop
 hcl
+Curity
+frontendbinary
+srectl
+toggleable
+CKV
+Belk
+psql
