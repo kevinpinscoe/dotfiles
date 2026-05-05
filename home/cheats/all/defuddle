@@ -26,47 +26,19 @@ Docs can be found at https://github.com/kepano/defuddle
 
 ## YouTube video text (transcripts)
 
-Defuddle cannot extract transcript text from YouTube pages. Use `yt-dlp` instead.
+Defuddle can extract transcript text from YouTube pages directly via `npx defuddle parse --md`.
 
-### Step 1 — check what captions are available
+### Extract full transcript as Markdown
 
-    yt-dlp --list-subs <URL>
+    npx defuddle parse --md <URL>
 
-### Step 2a — download captions only (fast, no video)
+### Search transcript for a specific timestamp or keyword
 
-    # Auto-generated captions (English), output as SRT
-    yt-dlp --skip-download --write-auto-subs --sub-langs "en" --sub-format "srt" \
-        -o "%(title)s.%(ext)s" <URL>
+    npx defuddle parse --md <URL> | grep <search-term>
 
-    # Prefer manual captions, fall back to auto-generated
-    yt-dlp --skip-download --write-subs --write-auto-subs --sub-langs "en" --sub-format "srt" \
-        -o "%(title)s.%(ext)s" <URL>
+Example — find the line at the 0:36 mark:
 
-Output file will be named `<video-title>.en.srt`.
-
-### Step 2b — strip SRT timestamps → plain text
-
-    sed '/^[0-9][0-9]*$/d; /^[0-9:,]* --> /d; /^$/d; s/<[^>]*>//g' video.en.srt > video.txt
-
-### Step 3 — convert plain text to Markdown (optional)
-
-Pipe through defuddle is not applicable here. Just use the `.txt` or wrap in a `.md` header manually.
-
-### Fallback — no captions available: download audio + Whisper
-
-    # Download audio only
-    yt-dlp --skip-download --extract-audio --audio-format wav -o "%(title)s.%(ext)s" <URL>
-    # Or download video then extract audio with ffmpeg
-    yt-dlp -o "%(title)s.%(ext)s" <URL>
-    ffmpeg -i "video.mp4" -vn -ac 1 -ar 16000 -c:a pcm_s16le audio.wav
-
-    # Transcribe with faster-whisper (install: pip install --user faster-whisper)
-    python3 -c "
-    from faster_whisper import WhisperModel
-    model = WhisperModel('small', device='cpu', compute_type='int8')
-    segs, _ = model.transcribe('audio.wav', vad_filter=True)
-    print('\n'.join(s.text.strip() for s in segs))
-    " > transcript.txt
+    npx defuddle parse --md https://www.youtube.com/watch?v=<id> | grep "**0:36**"
 
 ## Command options
 

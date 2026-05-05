@@ -400,3 +400,6 @@ pathexpand
 firewalld
 defuddle
 dlp
+categorised
+dysk
+isitmounted
