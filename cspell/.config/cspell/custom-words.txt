@@ -412,3 +412,11 @@ toggleable
 CKV
 Belk
 psql
+kevinondemand
+lighttpd
+quadlet
+vhost
+swp
+pyc
+pyo
+procmail
