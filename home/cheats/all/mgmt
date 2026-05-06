@@ -12,7 +12,14 @@ Next generation distributed, event-driven, parallel config management!
 
 For Fedora install using: curl -sSfL https://github.com/purpleidea/mgmt/releases/download/1.0.2/mgmt-linux-amd64-1.0.2 -o ~/.local/bin/mgmt && chmod +x ~/.local/bin/mgmt
 For Raspberry Pi install using: git clone --recursive https://github.com/purpleidea/mgmt/ ~/mgmt && cd ~/mgmt && make deps && make && cp mgmt ~/.local/bin/mgmt && rm -rf ~/mgmt
-For Mac install using: git clone --recursive https://github.com/purpleidea/mgmt/ ~/mgmt && cd ~/mgmt && make deps && make && cp mgmt ~/.local/bin/mgmt && rm -rf ~/mgmt
+For Mac install using: brew install gnu-sed grep coreutils make && export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:/opt/homebrew/opt/grep/libexec/gnubin:/opt/homebrew/opt/coreutils/libexec/gnubin:$HOME/go/bin:$PATH" && git clone --recursive https://github.com/purpleidea/mgmt/ ~/mgmt && cd ~/mgmt && gmake deps && gmake && cp mgmt ~/.local/bin/mgmt && rm -rf ~/mgmt
+
+## Mac install notes
+
+The macOS recipe diverges from Linux because:
+- Apple ships GNU Make 3.81; the upstream Makefile uses syntax (`#` inside `$(shell ...)`) that requires GNU Make 4.x — install with `brew install make` and use `gmake`.
+- Apple ships BSD `sed` and `grep`; the build's code-generation steps use GNU-only flags (`sed -i $'...'`, `grep -P`). Prepend `gnu-sed`, `grep`, and `coreutils` Homebrew gnubin paths to PATH before invoking `gmake`.
+- If a prior build attempted with system `make`/`sed` failed mid-way, `lang/parser/lexer.nn.go` will have duplicate imports — `rm -f lang/parser/lexer.nn.go lang/parser/y.go lang/parser/y.output lang/interpolate/parse.generated.go` before re-running `gmake`.
 
 ## Command path
 
