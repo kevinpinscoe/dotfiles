@@ -420,3 +420,4 @@ swp
 pyc
 pyo
 procmail
+cswords
