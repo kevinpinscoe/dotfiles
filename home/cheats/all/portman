@@ -1,0 +1,57 @@
+---
+syntax: sh
+tags: [ port, manager, registration ]
+---
+# Command portman
+
+## What does this command do:
+
+A comprehensive port management tool for developers with CLI and GUI interfaces
+
+## Installed from
+
+For Fedora install using: npm install -g portkeeper
+For Raspberry Pi install using: npm install -g portkeeper
+For Mac install using: npm install -g portkeeper
+
+## Command path
+
+For Fedora run: /home/kinscoe/.local/bin/portman
+For Raspberry Pi run: ~/.local/bin/portman
+For Mac run: /opt/homebrew/bin/portman
+
+## Command documentation
+
+Docs can be found at https://github.com/ahmadzein/portkeeper
+
+## Command options
+
+# Check if a port is reserved or in use
+portman check <port> [--json]
+
+# Reserve a port for a project
+portman reserve <port> [-n <name>] [-d <description>] [-t <tags...>] [--auto-release] [--json]
+
+# List all reserved and in-use ports
+portman list [-s reserved|in-use|free] [-p <project>] [-t <tags...>] [--json]
+
+# Release one or more reserved ports
+portman release <ports...> [--json]
+
+# Kill process using specified port(s)
+portman kill <ports...> [-f] [--json]
+
+# Scan for all ports currently in use
+portman scan [--range <start-end>] [--json]
+
+# Request and reserve multiple available ports automatically
+portman request <count> [-n <name>] [-d <desc>] [-t <tags>] [--start <port>] [--end <port>] [-r|--random] [--json]
+
+# Export port configuration to JSON
+portman export [-o <file>] [--pretty]
+
+# Import port configuration from JSON
+portman import [file] [--merge] [--dry-run] [--json]
+
+# Launch the GUI application (requires: npm install -g portkeeper --include=optional)
+portman gui
