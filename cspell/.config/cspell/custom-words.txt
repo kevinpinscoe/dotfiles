@@ -430,3 +430,9 @@ oci
 portman
 portkeeper
 dokoapp
+euo
+tskey
+policycoreutils
+envsubst
+keygen
+DERP
