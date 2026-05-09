@@ -436,3 +436,7 @@ policycoreutils
 envsubst
 keygen
 DERP
+upserts
+blockinfile
+postconf
+docroot
