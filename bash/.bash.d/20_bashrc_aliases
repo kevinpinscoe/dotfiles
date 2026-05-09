@@ -19,13 +19,14 @@ alias private='cd ~/Projects/private'
 alias public='cd ~/Projects/public'
 unalias reload 2>/dev/null
 function reload {
+    # exec a fresh login shell instead of re-sourcing the rc.
+    # Re-sourcing ~/.zshrc in the same process corrupts ZLE widget
+    # wrappers (zsh-sage, zsh-autosuggestions, etc.), causing
+    # "_sage_suggest_widget:5: maximum nested function level reached".
     if [ -n "${ZSH_VERSION:-}" ]; then
-        # Silence zsh-sage's sqlite3 coproc stop/restart job notices
-        # ([N] done / [N] PID) emitted while re-sourcing the rc.
-        setopt LOCAL_OPTIONS NO_MONITOR
-        . ~/.zshrc
+        exec zsh -l
     else
-        . ~/.bash_profile
+        exec bash -l
     fi
 }
 alias gs='git status'
