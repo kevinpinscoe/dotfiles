@@ -1,0 +1,77 @@
+---
+syntax: sh
+tags: [ video, media, player, terminal ]
+---
+# Command mpv
+
+## What does this command do:
+
+Command line media player
+
+## Installed from
+
+For Fedora install using: sudo dnf install -y mpv
+For Raspberry Pi install using: sudo apt install -y mpv
+For Mac install using: brew install mpv
+
+## Command path
+
+For Fedora run: /usr/bin/mpv
+For Raspberry Pi run: /usr/bin/mpv
+For Mac run: /opt/homebrew/bin/mpv
+
+## Command documentation
+
+Docs can be found at https://github.com/mpv-player/mpv
+
+## Command options
+
+# Play a file
+mpv <file>
+
+# Play a URL (YouTube, etc. via yt-dlp)
+mpv <url>
+
+# Start at a specific time position
+mpv --start=<time> <file>          # time as seconds, hh:mm:ss, or percent
+
+# Fullscreen
+mpv --fs <file>
+
+# Audio only (no video window)
+mpv --no-video <file>
+
+# Video only (no audio)
+mpv --no-audio <file>
+
+# Load a subtitle file
+mpv --sub-file=<subtitle.srt> <file>
+
+# Play a playlist file
+mpv --playlist=<playlist.m3u>
+
+# Loop playback
+mpv --loop <file>
+mpv --loop-playlist <playlist>
+
+# Set volume (0-100, default 100; can exceed 100)
+mpv --volume=<0-130> <file>
+
+# List all available options
+mpv --list-options
+
+# Search options by keyword
+mpv --h=<string>
+
+# Interactive keyboard shortcuts (during playback)
+# q / Q       quit / quit and save position
+# space       pause/unpause
+# f           toggle fullscreen
+# m           mute
+# 9 / 0       decrease / increase volume
+# [ / ]       decrease / increase playback speed
+# , / .       step backward / forward one frame
+# left/right  seek ±5 seconds
+# up/down     seek ±60 seconds
+# s           screenshot
+# i           show file info overlay

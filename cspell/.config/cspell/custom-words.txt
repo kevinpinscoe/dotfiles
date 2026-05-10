@@ -457,3 +457,4 @@ LOGGENERATIONS
 hba
 bpg
 LVM
+mpv
