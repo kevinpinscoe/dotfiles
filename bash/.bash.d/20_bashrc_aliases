@@ -46,5 +46,5 @@ alias awalledcity='cd $HOME/Projects/private/walled_city; code -n $HOME/Projects
 alias ai='cd $HOME/ai'
 alias il='ps -ef | grep input-leap | grep -v grep'
 alias vi='vim'
-alias commit-repo='claude "$(cat ~/ai/directives/commit-repo.md)"'
+alias commit-repo='claude "$(cat ~/ai/directives/when-making-changes-in-a-directory-that-is-also-a-git-repo.md)"'
 alias resume.sh='echo "resume.sh" >> .gitignore'

@@ -448,3 +448,9 @@ tlog
 tlogs
 writeups
 ghp
+sysstat
+sar
+SADC
+sysconfig
+LOGINTERVAL
+LOGGENERATIONS
