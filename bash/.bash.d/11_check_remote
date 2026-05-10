@@ -1,0 +1,50 @@
+# check-remote — show what differs between the current branch and its upstream.
+# Referenced by the post-cd git status banner in 10_cd.
+
+check-remote() {
+  if ! repo_root=$(git rev-parse --show-toplevel 2>/dev/null); then
+    echo "check-remote: not in a git repo" >&2
+    return 1
+  fi
+
+  if ! upstream=$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null); then
+    echo "check-remote: current branch has no upstream tracked" >&2
+    return 1
+  fi
+
+  branch=$(git symbolic-ref --short HEAD 2>/dev/null || echo "HEAD")
+
+  # Refresh remote refs unless --no-fetch was passed
+  if [ "$1" != "--no-fetch" ]; then
+    echo "fetching $upstream ..."
+    git fetch --quiet "$(echo "$upstream" | cut -d/ -f1)" 2>/dev/null
+  fi
+
+  ahead=$(git rev-list --count "${upstream}..HEAD" 2>/dev/null)
+  behind=$(git rev-list --count "HEAD..${upstream}" 2>/dev/null)
+
+  echo
+  echo "local:    $branch"
+  echo "upstream: $upstream"
+  echo "status:   ${ahead:-0} ahead, ${behind:-0} behind"
+  echo
+
+  if [ "${behind:-0}" -gt 0 ]; then
+    echo "----- incoming commits (would be pulled) -----"
+    git log --oneline --decorate "HEAD..${upstream}"
+    echo
+    echo "----- files changed by incoming commits -----"
+    git diff --stat "HEAD...${upstream}"
+    echo
+  fi
+
+  if [ "${ahead:-0}" -gt 0 ]; then
+    echo "----- local commits (would be pushed) -----"
+    git log --oneline --decorate "${upstream}..HEAD"
+    echo
+  fi
+
+  if [ "${ahead:-0}" -eq 0 ] && [ "${behind:-0}" -eq 0 ]; then
+    echo "branch is in sync with upstream."
+  fi
+}
