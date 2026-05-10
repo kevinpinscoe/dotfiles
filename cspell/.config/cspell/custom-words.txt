@@ -455,3 +455,5 @@ sysconfig
 LOGINTERVAL
 LOGGENERATIONS
 hba
+bpg
+LVM
