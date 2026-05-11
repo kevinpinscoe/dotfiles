@@ -468,3 +468,9 @@ FUNCNEST
 viins
 keymap
 radarhq
+smcup
+rmcup
+termtypes
+screenrc
+mktemp
+altscreen
