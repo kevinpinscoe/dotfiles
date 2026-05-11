@@ -1,0 +1,84 @@
+---
+syntax: sh
+tags: [ security,secrets,git,scanner,credentials ]
+---
+# Command trufflehog
+
+## What does this command do:
+
+Find, verify, and analyze leaked credentials
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b ~/.local/bin
+For Raspberry Pi install using: curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b ~/.local/bin
+For Mac install using: brew install trufflehog
+
+## Command path
+
+For Fedora run: ~/.local/bin/trufflehog
+For Raspberry Pi run: ~/.local/bin/trufflehog
+For Mac run: /opt/homebrew/bin/trufflehog
+
+## Command documentation
+
+Docs can be found at https://github.com/trufflesecurity/trufflehog
+
+## Command options
+
+# Scan a local git repo
+trufflehog git file://path/to/repo
+
+# Scan a remote GitHub repo
+trufflehog git https://github.com/org/repo
+
+# Scan all repos in a GitHub org
+trufflehog github --org=myorg --token=$GITHUB_TOKEN
+
+# Scan a GitLab project
+trufflehog gitlab --token=$GITLAB_TOKEN --project=myproject
+
+# Scan local filesystem path(s)
+trufflehog filesystem /path/to/scan
+
+# Scan an S3 bucket
+trufflehog s3 --bucket=mybucket
+
+# Scan a Docker image
+trufflehog docker --image=myimage:tag
+
+# Output as JSON
+trufflehog git https://github.com/org/repo -j
+
+# Only show verified results
+trufflehog git https://github.com/org/repo --results=verified
+
+# Skip credential verification (faster)
+trufflehog git https://github.com/org/repo --no-verification
+
+# Exit with code 183 if any results found (useful in CI)
+trufflehog git https://github.com/org/repo --fail
+
+# Scan from stdin
+cat somefile | trufflehog stdin
+
+# Analyze a detected API key for permissions
+trufflehog analyze
+
+# Limit concurrency
+trufflehog git https://github.com/org/repo --concurrency=4
+
+# Include only specific detectors (by name or ID)
+trufflehog git https://github.com/org/repo --include-detectors=AWS,Slack
+
+# Exclude specific detectors
+trufflehog git https://github.com/org/repo --exclude-detectors=Generic
+
+# Filter unverified results by Shannon entropy (start with 3.0)
+trufflehog git https://github.com/org/repo --filter-entropy=3.0
+
+# Set log verbosity (0=info .. 5=trace, -1=off)
+trufflehog git https://github.com/org/repo --log-level=2
+
+# Use a config file for multi-source scans
+trufflehog multi-scan --config=trufflehog.yml
