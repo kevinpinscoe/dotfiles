@@ -474,3 +474,7 @@ termtypes
 screenrc
 mktemp
 altscreen
+ragel
+augeas
+xdev
+grvydev
