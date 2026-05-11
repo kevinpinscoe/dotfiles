@@ -462,3 +462,4 @@ kmrx
 KMRX
 ggshield
 pipx
+lockdown
