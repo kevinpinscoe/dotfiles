@@ -465,3 +465,5 @@ pipx
 lockdown
 zoneinfo
 FUNCNEST
+viins
+keymap

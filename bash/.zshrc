@@ -47,6 +47,13 @@ fi
 export FUNCNEST=1000
 
 # zsh-sage: intelligent autosuggestions (Homebrew; macOS only)
-[[ -f /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh ]] && source /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh
+if [[ -f /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh ]]; then
+    source /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh
+    # EDITOR=vim makes zsh pick the viins keymap, where right-arrow is bound
+    # to vi-forward-char. zsh-sage only wraps forward-char, so the suggestion
+    # isn't accepted. Rebind right-arrow in viins to the wrapped forward-char.
+    bindkey -M viins "^[[C" forward-char  # CSI sequence
+    bindkey -M viins "^[OC" forward-char  # SS3 sequence (application mode)
+fi
 
 [[ -f ~/.environment/self-hosted-services.sh ]] && source ~/.environment/self-hosted-services.sh
