@@ -463,3 +463,4 @@ KMRX
 ggshield
 pipx
 lockdown
+zoneinfo

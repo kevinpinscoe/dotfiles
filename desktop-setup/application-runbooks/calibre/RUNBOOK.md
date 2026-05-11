@@ -44,11 +44,19 @@ Or download the `.dmg` from <https://calibre-ebook.com/download_osx>.
 
 ### Raspberry Pi 5 (Debian Trixie, ARM64)
 
+Use `apt` — the official installer fails on Debian Trixie with a `FileNotFoundError: tzdata/zoneinfo/EST5EDT not found` error. Modern `tzdata` dropped POSIX-style timezone names like `EST5EDT`, and Calibre's bundled Python can't find them.
+
 ```bash
-sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+sudo apt install calibre
 ```
 
-The official installer supports ARM64. Alternatively: `sudo apt install calibre` (may be an older version).
+The Trixie package is recent enough for normal use (8.5.0 as of 2026-05-11).
 
 ## Troubleshooting
+
+### Official installer fails with `tzdata/zoneinfo/EST5EDT not found` (Debian Trixie)
+
+Calibre's bundled Python tries to look up the POSIX timezone name `EST5EDT`, which modern `tzdata` no longer ships. The file `/usr/share/zoneinfo/EST5EDT` is absent on Trixie even when `tzdata` is installed and the system timezone is correctly set to `America/New_York`.
+
+**Fix:** use `sudo apt install calibre` instead of the official installer.
 
