@@ -1,0 +1,4 @@
+# ~/.bash.d/02_debian_path_env
+[ -f /etc/debian_version ] || return
+
+[[ ":$PATH:" != *":$HOME/.npm-global/bin:"* ]] && export PATH="$HOME/.npm-global/bin:$PATH"
