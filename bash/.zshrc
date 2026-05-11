@@ -40,6 +40,12 @@ if [[ -n "$SSH_CLIENT" ]]; then
     echo " "
 fi
 
+# zsh-sage wraps self-insert via ZLE widgets; on this Homebrew zsh the
+# default FUNCNEST=700 is too tight and trips
+# "_sage_suggest_widget:5: maximum nested function level reached".
+# Raise the ceiling before the plugin registers its wrappers.
+export FUNCNEST=1000
+
 # zsh-sage: intelligent autosuggestions (Homebrew; macOS only)
 [[ -f /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh ]] && source /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh
 
