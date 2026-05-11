@@ -1,0 +1,126 @@
+---
+syntax: sh
+tags: [ k8s, kubernetes, ui, plugin, debug ]
+---
+# Command kubectl-radar
+
+## What does this command do:
+
+Open-source kubectl plugin — a self-hosted web UI for Kubernetes clusters with topology visualization, event timeline, Helm chart management, GitOps integration, image filesystem inspection, cluster audits, and an MCP (Model Context Protocol) server for AI tooling. Invoked as `kubectl radar` (kubectl plugin convention) or directly as `kubectl-radar`. Loads `~/.kube/config`, starts a server on http://localhost:9280, and opens the browser by default.
+
+## Installed from
+
+For Fedora install using: RADAR_VER=$(curl -fsSL https://api.github.com/repos/skyhook-io/radar/releases/latest | sed -n 's/.*"tag_name": "\(v[^"]*\)".*/\1/p') && curl -fsSL "https://github.com/skyhook-io/radar/releases/download/${RADAR_VER}/radar_${RADAR_VER}_linux_amd64.tar.gz" | tar -xzC ~/.local/bin kubectl-radar && chmod +x ~/.local/bin/kubectl-radar
+For Raspberry Pi install using: RADAR_VER=$(curl -fsSL https://api.github.com/repos/skyhook-io/radar/releases/latest | sed -n 's/.*"tag_name": "\(v[^"]*\)".*/\1/p') && curl -fsSL "https://github.com/skyhook-io/radar/releases/download/${RADAR_VER}/radar_${RADAR_VER}_linux_arm64.tar.gz" | tar -xzC ~/.local/bin kubectl-radar && chmod +x ~/.local/bin/kubectl-radar
+For Mac install using: RADAR_VER=$(curl -fsSL https://api.github.com/repos/skyhook-io/radar/releases/latest | sed -n 's/.*"tag_name": "\(v[^"]*\)".*/\1/p') && curl -fsSL "https://github.com/skyhook-io/radar/releases/download/${RADAR_VER}/radar_${RADAR_VER}_darwin_arm64.tar.gz" | tar -xzC ~/.local/bin kubectl-radar && chmod +x ~/.local/bin/kubectl-radar
+
+# Note: the official `curl -fsSL https://get.radarhq.io | sh` also works but
+# installs to /usr/local/bin (requires sudo) and creates a `radar` shorthand
+# symlink. The commands above install to ~/.local/bin to match the dotfiles
+# "Third-party binary install paths" convention.
+
+## Command path
+
+For Fedora run: ~/.local/bin/kubectl-radar
+For Raspberry Pi run: ~/.local/bin/kubectl-radar
+For Mac run: ~/.local/bin/kubectl-radar
+
+## Command documentation
+
+Docs can be found at https://radarhq.io/  (source: https://github.com/skyhook-io/radar)
+
+## Command options
+
+# kubectl-radar takes flags only — no positional subcommands.
+# When invoked it loads ~/.kube/config, starts a web server on localhost:9280,
+# and opens the browser. Stop with Ctrl-C.
+
+# --- Common invocations ---
+
+# Default: open the UI for the current kubeconfig
+kubectl radar
+
+# Pin to a single namespace at startup
+kubectl radar --namespace kube-system
+
+# Use a different kubeconfig file
+kubectl radar --kubeconfig ~/.kube/work-config
+
+# Combine multiple kubeconfig directories (mutually exclusive with --kubeconfig)
+kubectl radar --kubeconfig-dir ~/.kube/configs,~/.kube/extra
+
+# Run on a different port (default 9280)
+kubectl radar --port 9999
+
+# Headless: don't auto-open the browser
+kubectl radar --no-browser
+
+# --- Safety / read-only modes ---
+
+# Disable exec / terminal / debug shell features
+kubectl radar --disable-exec
+
+# Disable Helm install/upgrade/rollback/uninstall (read-only Helm)
+kubectl radar --disable-helm-write
+
+# Disable the local terminal feature
+kubectl radar --disable-local-terminal
+
+# Disable the MCP (Model Context Protocol) server for AI tools
+kubectl radar --no-mcp
+
+# Override the default pod exec shell (runs as 'sh -c <value>')
+kubectl radar --pod-shell-default 'bash -il'
+
+# --- Authentication ---
+
+# auth-mode: none | proxy | oidc  (default: none)
+kubectl radar --auth-mode oidc \
+  --auth-oidc-issuer https://idp.example.com \
+  --auth-oidc-client-id radar \
+  --auth-oidc-client-secret <secret> \
+  --auth-oidc-redirect-url https://radar.example.com/callback
+
+# Behind an authenticating proxy (X-Forwarded-User / X-Forwarded-Groups)
+kubectl radar --auth-mode proxy
+
+# Custom session cookie TTL (default 4h, sliding — extends on activity)
+kubectl radar --auth-cookie-ttl 8h
+
+# --- Timeline / event history ---
+
+# Persist the timeline to disk (default: in-memory)
+kubectl radar --timeline-storage sqlite \
+  --timeline-db ~/.radar/timeline.db
+
+# Cap the number of events kept in memory
+kubectl radar --history-limit 50000
+
+# --- Metrics ---
+
+# Skip Prometheus auto-discovery and point at a known endpoint
+kubectl radar --prometheus-url http://prometheus.monitoring.svc:9090
+
+# --- Radar Cloud (optional) ---
+
+# Connect this cluster to Radar Cloud (token from the Cloud install wizard)
+RADAR_CLOUD_URL=wss://api.radarhq.io/agent \
+RADAR_CLOUD_TOKEN=rhc_xxxxxxxxxxxxxxxxxxxx \
+RADAR_CLOUD_CLUSTER_NAME=prod-east \
+kubectl radar
+
+# --- Diagnostics ---
+
+# Show version and exit
+kubectl radar --version
+
+# Verbose event debugging (logs all event drops)
+kubectl radar --debug-events
+
+# Dev mode (serve frontend from filesystem)
+kubectl radar --dev
+
+# --- Files Radar writes ---
+
+# ~/.radar/timeline.db   timeline DB (when --timeline-storage=sqlite)
+# ~/.radar/mcp-port      port file for MCP server discovery
