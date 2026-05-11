@@ -28,3 +28,4 @@ Runbooks are not platform-gated. An app directory is created regardless of wheth
 | Terragrunt | [terragrunt/RUNBOOK.md](terragrunt/RUNBOOK.md) | Install/upgrade (Fedora/macOS/RPi5), TG_TF_PATH, common commands |
 | tmux | [tmux/RUNBOOK.md](tmux/RUNBOOK.md) | tmux config, status bar, keybindings |
 | Typora | [Typora/RUNBOOK.md](Typora/RUNBOOK.md) | Install (macOS/Fedora/Windows), licensing, themes (paid app) |
+| Zoom | [Zoom/RUNBOOK.md](Zoom/RUNBOOK.md) | Install (Fedora RPM), upgrade, config locations |
