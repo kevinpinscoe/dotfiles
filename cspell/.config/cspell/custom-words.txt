@@ -461,3 +461,4 @@ mpv
 kmrx
 KMRX
 ggshield
+pipx
