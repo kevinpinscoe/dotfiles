@@ -1,0 +1,61 @@
+---
+syntax: sh
+tags: [ security,secrets,git,scanner,credentials ]
+---
+# Command ggshield
+
+## What does this command do:
+
+The ggshield command line tool helps developers detect and prevent vulnerabilities like hardcoded secrets before pushing their code to shared repositories.
+
+## Installed from
+
+For Fedora install using: pipx install ggshield
+For Raspberry Pi install using: pipx install ggshield
+For Mac install using: brew install ggshield
+
+## Command path
+
+For Fedora run: /home/kinscoe/.local/bin/ggshield
+For Raspberry Pi run: ~/.local/bin/ggshield
+For Mac run: /opt/homebrew/bin/ggshield
+
+## Command documentation
+
+Docs can be found at https://dashboard.gitguardian.com/workspace/886400/get-started
+
+## Command options
+
+# Authenticate with GitGuardian (required before first use)
+ggshield auth login
+
+# Check authentication / API status
+ggshield api-status
+
+# Scan a local git repository for secrets
+ggshield secret scan repo /path/to/your/repo
+
+# Scan staged changes (pre-commit)
+ggshield secret scan pre-commit
+
+# Scan commits about to be pushed (pre-push)
+ggshield secret scan pre-push
+
+# Scan a directory or file
+ggshield secret scan path /path/to/dir
+
+# Scan a commit range
+ggshield secret scan commit-range HEAD~5..HEAD
+
+# Install as a git hook (pre-commit or pre-push)
+ggshield install -m pre-commit
+ggshield install -m pre-push
+
+# Output results as JSON
+ggshield secret scan repo /path/to/repo --format json
+
+# Ignore a detected secret (add to ignore list)
+ggshield secret ignore
+
+# Log out
+ggshield auth logout

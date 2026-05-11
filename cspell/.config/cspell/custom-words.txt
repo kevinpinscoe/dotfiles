@@ -460,3 +460,4 @@ LVM
 mpv
 kmrx
 KMRX
+ggshield
