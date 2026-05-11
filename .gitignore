@@ -12,3 +12,13 @@
 **/resume.sh
 **/.DS_Store
 vim/.vim/.netrwhist
+**/resume.txt
+**/.trash/
+**/.obsidian/workspace.json
+**/.obsidian/graph.json
+**/.obsidian/plugins/*/data.json
+**/*.swp
+**/Thumbs.db
+**/*.pyc
+**/*.pyo
+**/__pycache__/
