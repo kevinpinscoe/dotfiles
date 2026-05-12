@@ -478,3 +478,6 @@ ragel
 augeas
 xdev
 grvydev
+kvm
+KVM
+prereqs
