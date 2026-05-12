@@ -292,6 +292,7 @@ lightred
 lighttpd
 linemode
 lipgloss
+ljust
 llms
 lnav
 lockdown
@@ -369,6 +370,7 @@ prereqs
 procmail
 protoc
 psql
+psycopg
 pwgen
 pyc
 pycache
@@ -396,6 +398,7 @@ rpmfusion
 rsshub
 rsyncs
 ruflo
+runuser
 rustup
 rwxrwxr
 sar
