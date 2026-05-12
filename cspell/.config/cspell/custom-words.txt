@@ -481,3 +481,17 @@ grvydev
 kvm
 KVM
 prereqs
+virbr
+qcow
+libvirt
+virtio
+dmacvicar
+tftpl
+nvram
+ovmf
+qemu
+vcpu
+VCPU
+autostart
+cloudinit
+growpart
