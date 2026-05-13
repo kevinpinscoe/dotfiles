@@ -1,0 +1,75 @@
+---
+syntax: sh
+tags: [ postgresql, database, sql, cli, postgres ]
+---
+# Command psql
+
+## What does this command do:
+
+Interactive PostgreSQL terminal client for running queries and managing databases
+
+## Installed from
+
+For Fedora install using: sudo dnf install postgresql.x86_64
+For Raspberry Pi install using: sudo apt update && sudo apt install postgresql-client
+For Mac install using: brew update && brew install libpq && brew link --force libpq
+
+## Command path
+
+For Fedora run: /usr/bin/psql
+For Raspberry Pi run: /usr/bin/psql
+For Mac run: /opt/homebrew/opt/libpq/bin/psql
+
+## Command documentation
+
+Docs can be found at https://www.postgresql.org/docs/current/app-psql.html
+
+## Command options
+
+# Connect to a database
+psql -h HOSTNAME -p PORT -U USERNAME -d DBNAME
+
+# Run a single SQL command and exit
+psql -c "SELECT version();" -d DBNAME
+
+# Execute commands from a file
+psql -f script.sql -d DBNAME
+
+# List available databases
+psql -l
+
+# Connect (interactive) — prompts for password
+psql -h HOSTNAME -U USERNAME -W DBNAME
+
+# Output as CSV
+psql --csv -c "SELECT * FROM table;" -d DBNAME
+
+# Expanded (vertical) output
+psql -x -c "SELECT * FROM table;" -d DBNAME
+
+# Tuples only (no headers/footers)
+psql -t -c "SELECT count(*) FROM table;" -d DBNAME
+
+# Send session log to file
+psql -L session.log -d DBNAME
+
+# No-align output with custom separator
+psql -A -F ',' -c "SELECT * FROM table;" -d DBNAME
+
+# Run as single transaction (non-interactive)
+psql -1 -f script.sql -d DBNAME
+
+# Set a psql variable
+psql -v ON_ERROR_STOP=1 -f script.sql -d DBNAME
+
+# Inside psql: list tables
+\dt
+
+# Inside psql: describe table
+\d tablename
+
+# Inside psql: list all schemas
+\dn
+
+# Inside psql: quit
+\q
