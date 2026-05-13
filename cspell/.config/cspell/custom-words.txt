@@ -553,3 +553,6 @@ IMDS
 in4gkj
 zsage
 Rundeck
+Kubeconfigs
+nftables
+logseq
