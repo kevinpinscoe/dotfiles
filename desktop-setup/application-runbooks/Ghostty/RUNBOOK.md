@@ -159,7 +159,7 @@ set -g @plugin 'tmux-plugins/tmux-open'
 
 **Usage:**
 
-1. Enter copy mode: `prefix + [`
+1. Enter copy mode: `prefix + v` (or `prefix + [`)
 2. Move the cursor over any URL
 3. Press `o` — opens the URL in the default browser
 4. Press `Ctrl-o` — opens the URL in `$EDITOR`
