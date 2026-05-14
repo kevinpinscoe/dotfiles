@@ -559,3 +559,4 @@ logseq
 maillog
 getent
 subchart
+gotmpl
