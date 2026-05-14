@@ -557,3 +557,4 @@ Kubeconfigs
 nftables
 logseq
 maillog
+getent
