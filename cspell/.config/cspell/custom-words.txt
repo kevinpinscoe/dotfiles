@@ -556,3 +556,4 @@ Rundeck
 Kubeconfigs
 nftables
 logseq
+maillog
