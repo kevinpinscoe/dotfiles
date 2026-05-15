@@ -22,6 +22,7 @@ Runbooks are not platform-gated. An app directory is created regardless of wheth
 |-------------|---------|-------|
 | Calibre | [calibre/RUNBOOK.md](calibre/RUNBOOK.md) | E-book manager/converter; official binary installer to /opt/calibre |
 | git (gitsign) | [git/RUNBOOK.md](git/RUNBOOK.md) | Keyless commit/tag signing via Sigstore, hook setup, verification |
+| Headlamp | [Headlamp/RUNBOOK.md](Headlamp/RUNBOOK.md) | Kubernetes dashboard UI; AppImage install on Fedora |
 | Ghostty | [Ghostty/RUNBOOK.md](Ghostty/RUNBOOK.md) | Install (macOS/Fedora/Debian Pi), build from source, config |
 | Logseq | [Logseq/RUNBOOK.md](Logseq/RUNBOOK.md) | Privacy-first knowledge base; manual zip install on Fedora (nightly) |
 | Mark Text | [MarkText/RUNBOOK.md](MarkText/RUNBOOK.md) | Install (Fedora/macOS), custom CSS theming |
