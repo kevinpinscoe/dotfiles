@@ -236,6 +236,7 @@ gitdir
 gitm
 gitme
 gitsign
+gofmt
 golangci
 gomod
 goroutines
@@ -543,3 +544,4 @@ zcurl
 zeroconf
 zoneinfo
 zsage
+aab
