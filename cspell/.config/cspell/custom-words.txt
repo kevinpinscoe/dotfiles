@@ -560,3 +560,9 @@ maillog
 getent
 subchart
 gotmpl
+Kiali
+Wazuh
+OpenSCAP
+podinfo
+eas
+pubspec
