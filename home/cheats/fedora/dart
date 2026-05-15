@@ -1,0 +1,178 @@
+---
+syntax: sh
+tags: [ dart, flutter, programming, cli ]
+---
+# Command dart
+
+## What does this command do:
+
+Dart programming language SDK CLI — run, compile, analyze, format, and manage Dart packages. Bundled inside the Flutter SDK; no separate install needed when Flutter is present.
+
+## Installed from
+
+For Fedora install using: Bundled with Flutter — install Flutter (see flutter cheat) and dart is available automatically.
+```
+ln -sfn ~/sdk/flutter/current/bin/dart ~/.local/bin/dart
+```
+For a standalone Dart SDK without Flutter:
+```
+mkdir -p ~/sdk/dart
+curl -L -o ~/Downloads/dart-linux-<version>-release.tar.gz \
+  https://storage.googleapis.com/dart-archive/channels/stable/release/<version>/sdk/dartsdk-linux-x64-release.zip
+# Extract and symlink same as Flutter pattern
+```
+
+## Command path
+
+For Fedora run: ~/.local/bin/dart → ~/sdk/flutter/current/bin/dart
+
+## Command documentation
+
+Docs can be found at https://dart.dev/tools/dart-tool
+
+## Command options
+
+# Show version
+dart --version
+
+# --- Running ---
+
+# Run a Dart script
+dart run bin/main.dart
+
+# Run with define constants
+dart run --define=ENV=prod bin/main.dart
+
+# Run a globally installed package tool
+dart run build_runner build
+
+# --- Compiling ---
+
+# Compile to self-contained native executable
+dart compile exe bin/main.dart -o dist/myapp
+
+# Compile to JavaScript (for web, not Flutter web)
+dart compile js bin/main.dart -o dist/main.js
+dart compile js -O4 bin/main.dart -o dist/main.js     # max optimization
+
+# Compile to WebAssembly
+dart compile wasm bin/main.dart -o dist/main.wasm
+
+# AOT snapshot (faster startup, needs Dart runtime)
+dart compile aot-snapshot bin/main.dart
+
+# JIT snapshot (development caching)
+dart compile jit-snapshot bin/main.dart
+
+# --- Code quality ---
+
+# Analyze a directory (uses analysis_options.yaml if present)
+dart analyze
+
+# Analyze specific file
+dart analyze lib/main.dart
+
+# Format all Dart files in-place
+dart format .
+
+# Format and show diff without writing
+dart format --output=none .
+
+# Preview automated fixes (dry run)
+dart fix --dry-run
+
+# Apply automated fixes
+dart fix --apply
+
+# Fix specific diagnostic code only
+dart fix --apply --code=prefer_final_locals
+
+# --- Testing ---
+
+# Run all tests
+dart test
+
+# Run specific test file
+dart test test/my_test.dart
+
+# Run tests matching a name pattern
+dart test --name "login"
+
+# Run with coverage (outputs to coverage/lcov.info)
+dart test --coverage=coverage
+
+# --- Packages (pub) ---
+
+# Fetch dependencies
+dart pub get
+
+# Add a dependency
+dart pub add http
+
+# Add a dev dependency
+dart pub add --dev lints
+
+# Remove a dependency
+dart pub remove http
+
+# Upgrade all to latest compatible versions
+dart pub upgrade
+
+# Upgrade to breaking versions (rewrites pubspec.yaml bounds)
+dart pub upgrade --major-versions
+
+# Show outdated packages
+dart pub outdated
+
+# Show dependency tree
+dart pub deps
+
+# Publish package to pub.dev
+dart pub publish
+
+# Login to pub.dev
+dart pub login
+
+# --- Global packages ---
+
+# Install a tool globally
+dart pub global activate pana
+dart pub global activate dart_style
+
+# Run a globally installed tool
+dart pub global run pana
+
+# List globally installed packages
+dart pub global list
+
+# Deactivate (uninstall) a global package
+dart pub global deactivate pana
+
+# --- Project creation ---
+
+# Create a new Dart console app
+dart create myapp
+
+# Create a package
+dart create --template package mypackage
+
+# Create a web app
+dart create --template web-simple myweb
+
+# List templates
+dart create --list-templates
+
+# --- Documentation ---
+
+# Generate API docs (outputs to doc/api/)
+dart doc
+
+# --- DevTools ---
+
+# Open Dart DevTools in browser
+dart devtools
+
+# --- Info ---
+
+# Show diagnostics (SDK paths, env)
+dart info

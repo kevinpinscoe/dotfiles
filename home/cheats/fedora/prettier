@@ -1,0 +1,108 @@
+---
+syntax: sh
+tags: [ javascript, typescript, css, html, formatter, prettier ]
+---
+# Command prettier
+
+## What does this command do:
+
+Opinionated code formatter for JavaScript, TypeScript, CSS, HTML, JSON, Markdown, YAML, GraphQL, and more — enforces consistent style with zero config required
+
+## Installed from
+
+For Fedora install using: `npm install -g prettier`
+
+To upgrade: `npm install -g prettier@latest`
+
+## Command path
+
+For Fedora run: ~/.local/bin/prettier
+
+## Command documentation
+
+Docs can be found at https://prettier.io/docs/en/cli.html
+
+## Command options
+
+# --- Check and format ---
+
+# Format a single file (writes in-place)
+prettier --write src/index.ts
+
+# Format all files matching a glob
+prettier --write "src/**/*.{ts,tsx,css}"
+
+# Check if files are already formatted (exits 1 if not)
+prettier --check "src/**/*.ts"
+
+# List files that differ from formatted output
+prettier --list-different "src/**/*.ts"
+
+# Format stdin, output to stdout
+echo "const x={a:1}" | prettier --parser babel
+
+# --- Config ---
+
+# Use a specific config file
+prettier --config .prettierrc --write "src/**"
+
+# Pass config inline (overrides .prettierrc)
+prettier --single-quote --no-semi --write "src/**/*.ts"
+
+# Ignore a file pattern (uses .prettierignore by default)
+prettier --ignore-path .prettierignore --write .
+
+# --- Common format options ---
+
+# Print width (default 80)
+prettier --print-width 100 --write .
+
+# Tab width (default 2)
+prettier --tab-width 4 --write .
+
+# Use tabs instead of spaces
+prettier --use-tabs --write .
+
+# Trailing commas: all | es5 | none (default: all)
+prettier --trailing-comma es5 --write .
+
+# Single quotes (default: false — uses double)
+prettier --single-quote --write .
+
+# No semicolons
+prettier --no-semi --write .
+
+# Bracket spacing: { a: 1 } vs {a:1} (default: true)
+prettier --no-bracket-spacing --write .
+
+# Arrow parens: always | avoid (default: always)
+prettier --arrow-parens avoid --write .
+
+# End of line: lf | crlf | cr | auto (default: lf)
+prettier --end-of-line lf --write .
+
+# --- Specific parsers ---
+# prettier auto-detects parser from file extension; override when needed:
+prettier --parser babel          # JS/JSX
+prettier --parser typescript     # TS/TSX
+prettier --parser css
+prettier --parser markdown
+prettier --parser yaml
+prettier --parser json
+prettier --parser html
+
+# --- Project setup ---
+
+# Generate a default .prettierrc
+echo '{}' > .prettierrc
+
+# Create .prettierignore (same syntax as .gitignore)
+# node_modules
+# dist
+# build
+
+# Check version
+prettier --version
+
+# Show effective config for a file
+prettier --find-config-path src/index.ts

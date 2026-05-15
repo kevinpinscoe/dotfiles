@@ -1,0 +1,120 @@
+---
+syntax: sh
+tags: [ node, nodejs, version-manager, fnm ]
+---
+# Command fnm
+
+## What does this command do:
+
+Fast Node Manager — install, switch, and manage multiple Node.js versions. Uses `.node-version` or `.nvmrc` files for per-project version pinning.
+
+## Installed from
+
+For Fedora install using:
+```
+curl -fsSL https://fnm.vercel.app/install | bash
+# or download the binary directly:
+curl -fsSL https://github.com/Schniz/fnm/releases/latest/download/fnm-linux.zip \
+  -o /tmp/fnm.zip && unzip /tmp/fnm.zip -d ~/.local/bin && chmod +x ~/.local/bin/fnm
+```
+Then add shell integration to ~/.bashrc or ~/.zshrc:
+```
+eval "$(fnm env --use-on-cd)"
+```
+
+## Command path
+
+For Fedora run: ~/.local/bin/fnm  (FNM_DIR defaults to ~/.local/share/fnm)
+
+## Command documentation
+
+Docs can be found at https://github.com/Schniz/fnm
+
+## Command options
+
+# Show installed version
+fnm --version
+
+# --- Installing Node versions ---
+
+# Install latest LTS
+fnm install --lts
+
+# Install a specific version
+fnm install 22
+fnm install 22.14.0
+
+# Install latest available
+fnm install latest
+
+# --- Using a version ---
+
+# Switch to a version in the current shell
+fnm use 22
+fnm use lts/iron
+
+# Switch based on .nvmrc or .node-version in current dir
+fnm use
+
+# --- Listing ---
+
+# List locally installed versions
+fnm list
+fnm ls
+
+# List all available remote versions
+fnm list-remote
+fnm ls-remote
+
+# List LTS versions only
+fnm list-remote --lts
+
+# Show current active version
+fnm current
+
+# --- Default version ---
+
+# Get the current default
+fnm default
+
+# Set a version as default (used in new shells)
+fnm default 22
+
+# --- Aliases ---
+
+# Create a named alias
+fnm alias 22.14.0 work-project
+
+# Remove an alias
+fnm unalias work-project
+
+# --- Uninstalling ---
+
+fnm uninstall 20
+fnm uni 20
+
+# --- Project version pinning ---
+
+# Create a .node-version file (fnm and volta compatible)
+node --version > .node-version
+
+# Create a .nvmrc file (nvm compatible)
+node --version > .nvmrc
+# fnm reads both formats; .node-version takes precedence
+
+# With --use-on-cd in shell init, fnm switches automatically on cd
+
+# --- Environment ---
+
+# Print env vars (used in shell init)
+fnm env
+fnm env --use-on-cd        # also hooks cd to auto-switch
+
+# Run a command in a specific Node context without switching shell
+fnm exec --using 20 node --version
+
+# --- Shell completions ---
+
+fnm completions --shell bash >> ~/.bash_completion
+fnm completions --shell zsh  >> ~/.zshrc
+fnm completions --shell fish > ~/.config/fish/completions/fnm.fish
