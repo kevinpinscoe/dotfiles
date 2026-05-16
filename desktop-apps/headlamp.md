@@ -76,20 +76,33 @@ Path: `~/.local/bin/headlamp-launch`
 
 ```bash
 #!/usr/bin/env bash
-# Kill any stale headlamp processes before launching to avoid port 4466 conflicts.
-# Pattern anchored with $ so it matches .local/bin/headlamp but NOT .local/bin/headlamp-launch.
+# Kill any stale headlamp processes before launching.
+# Headlamp uses single-instance mode: a zombie Electron shell (even without its
+# headlamp-server) will absorb the new launch and then fail silently.
+# Three patterns needed:
+#   headlamp-server       — embedded Go backend subprocess
+#   \.local/bin/headlamp$ — AppImage FUSE mount helper ($ avoids matching headlamp-launch)
+#   \.mount_headla        — Electron processes running from the AppImage FUSE mount in /tmp
 pkill -f 'headlamp-server' 2>/dev/null
 pkill -f '\.local/bin/headlamp$' 2>/dev/null
-sleep 0.5
+pkill -f '\.mount_headla' 2>/dev/null
+sleep 1
 exec /home/kinscoe/.local/bin/headlamp "$@"
 ```
 
-**Why `\.local/bin/headlamp$` and not `Headlamp.*AppImage`?**
+**Why three kill patterns?**
 
-The AppImage process never shows the AppImage filename in `ps` output. Running processes
-appear as the symlink path (`/home/kinscoe/.local/bin/headlamp`) or the FUSE mount path
-(`/tmp/.mount_headla*/headlamp`). The `Headlamp.*AppImage` pattern therefore matched
-nothing, leaving stale processes alive.
+The AppImage spawns two process families visible in `ps`:
+
+| Pattern | What it kills |
+|---------|--------------|
+| `headlamp-server` | Embedded Go backend subprocess |
+| `\.local/bin/headlamp$` | AppImage FUSE mount helper (`$` stops it matching `headlamp-launch`) |
+| `\.mount_headla` | Electron main process + zygotes inside `/tmp/.mount_headla*/` |
+
+Killing only the FUSE helper leaves the Electron process alive. Headlamp's single-instance
+logic sees the zombie Electron shell, forwards the new launch to it, and exits — so nothing
+appears on screen. All three must be killed.
 
 Install / reinstall the wrapper:
 
@@ -98,7 +111,8 @@ cat > ~/.local/bin/headlamp-launch << 'EOF'
 #!/usr/bin/env bash
 pkill -f 'headlamp-server' 2>/dev/null
 pkill -f '\.local/bin/headlamp$' 2>/dev/null
-sleep 0.5
+pkill -f '\.mount_headla' 2>/dev/null
+sleep 1
 exec /home/kinscoe/.local/bin/headlamp "$@"
 EOF
 chmod +x ~/.local/bin/headlamp-launch

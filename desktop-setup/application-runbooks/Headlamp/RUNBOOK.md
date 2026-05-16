@@ -84,7 +84,8 @@ cat > ~/.local/bin/headlamp-launch << 'EOF'
 #!/usr/bin/env bash
 pkill -f 'headlamp-server' 2>/dev/null
 pkill -f '\.local/bin/headlamp$' 2>/dev/null
-sleep 0.5
+pkill -f '\.mount_headla' 2>/dev/null
+sleep 1
 exec /home/kinscoe/.local/bin/headlamp "$@"
 EOF
 chmod +x ~/.local/bin/headlamp-launch
@@ -176,7 +177,7 @@ A stale `headlamp-server` subprocess or FUSE mount helper is blocking the port. 
 everything and relaunch:
 
 ```bash
-pkill -f 'headlamp-server'; pkill -f '\.local/bin/headlamp$'; sleep 1
+pkill -f 'headlamp-server'; pkill -f '\.local/bin/headlamp$'; pkill -f '\.mount_headla'; sleep 1
 headlamp-launch &
 ```
 
