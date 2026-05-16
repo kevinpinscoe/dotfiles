@@ -87,6 +87,13 @@ pkill -f 'headlamp-server' 2>/dev/null
 pkill -f '\.local/bin/headlamp$' 2>/dev/null
 pkill -f '\.mount_headla' 2>/dev/null
 sleep 1
+# Remove stale Electron single-instance files. If headlamp was killed externally
+# (SIGTERM from pkill, KDE crash, etc.) Electron doesn't finish cleanup, leaving
+# SingletonSocket behind. The next instance then spends ~20s waiting on the dead
+# socket before timing out, often ending in a crash.
+rm -f "${HOME}/.config/Headlamp/SingletonLock" \
+      "${HOME}/.config/Headlamp/SingletonSocket" \
+      "${HOME}/.config/Headlamp/SingletonCookie"
 exec /home/kinscoe/.local/bin/headlamp "$@"
 ```
 
@@ -101,8 +108,24 @@ The AppImage spawns two process families visible in `ps`:
 | `\.mount_headla` | Electron main process + zygotes inside `/tmp/.mount_headla*/` |
 
 Killing only the FUSE helper leaves the Electron process alive. Headlamp's single-instance
-logic sees the zombie Electron shell, forwards the new launch to it, and exits — so nothing
+logic sees the zombie Electron shell, forwards the new launch to it, and exits — nothing
 appears on screen. All three must be killed.
+
+**Why delete the Singleton files?**
+
+When headlamp is killed externally (pkill, KDE crash, machine freeze), Electron's cleanup
+handler never runs. Three files are left behind in `~/.config/Headlamp/`:
+
+| File | Purpose |
+|------|---------|
+| `SingletonLock` | Marks the user-data dir as claimed |
+| `SingletonSocket` | Unix socket for cross-instance IPC |
+| `SingletonCookie` | Authentication token for that socket |
+
+The next launch connects to `SingletonSocket`, gets no answer, waits ~20 seconds for its
+timeout, then tries to claim the lock itself — but the lock state is now inconsistent and
+the launch usually crashes. Deleting all three before `exec` gives the new instance a clean
+slate every time.
 
 Install / reinstall the wrapper:
 
@@ -113,6 +136,9 @@ pkill -f 'headlamp-server' 2>/dev/null
 pkill -f '\.local/bin/headlamp$' 2>/dev/null
 pkill -f '\.mount_headla' 2>/dev/null
 sleep 1
+rm -f "${HOME}/.config/Headlamp/SingletonLock" \
+      "${HOME}/.config/Headlamp/SingletonSocket" \
+      "${HOME}/.config/Headlamp/SingletonCookie"
 exec /home/kinscoe/.local/bin/headlamp "$@"
 EOF
 chmod +x ~/.local/bin/headlamp-launch

@@ -86,6 +86,9 @@ pkill -f 'headlamp-server' 2>/dev/null
 pkill -f '\.local/bin/headlamp$' 2>/dev/null
 pkill -f '\.mount_headla' 2>/dev/null
 sleep 1
+rm -f "${HOME}/.config/Headlamp/SingletonLock" \
+      "${HOME}/.config/Headlamp/SingletonSocket" \
+      "${HOME}/.config/Headlamp/SingletonCookie"
 exec /home/kinscoe/.local/bin/headlamp "$@"
 EOF
 chmod +x ~/.local/bin/headlamp-launch
