@@ -561,3 +561,7 @@ zcurl
 zeroconf
 zoneinfo
 zsage
+PKI
+swtpm
+kdeconnect
+localca
