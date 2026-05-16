@@ -68,6 +68,34 @@ Old AppImages can be removed from `~/.local/share/headlamp/` manually.
 | Icon | `~/.local/share/icons/hicolor/256x256/apps/headlamp.svg` |
 | Kubeconfig | `~/.kube/config` (standard; Headlamp reads it automatically) |
 
+### KDE Plasma launch wrapper (`headlamp-launch`)
+
+The `.desktop` entry calls `~/.local/bin/headlamp-launch` rather than `headlamp` directly.
+The wrapper kills any stale `headlamp-server` or FUSE mount processes before launching, to
+avoid port 4466 conflicts when the previous instance exited uncleanly.
+
+Full details and the wrapper script verbatim:
+→ [`~/.dotfiles/desktop-apps/headlamp.md`](../../../../desktop-apps/headlamp.md)
+
+Install the wrapper:
+
+```bash
+cat > ~/.local/bin/headlamp-launch << 'EOF'
+#!/usr/bin/env bash
+pkill -f 'headlamp-server' 2>/dev/null
+pkill -f '\.local/bin/headlamp$' 2>/dev/null
+sleep 0.5
+exec /home/kinscoe/.local/bin/headlamp "$@"
+EOF
+chmod +x ~/.local/bin/headlamp-launch
+```
+
+The `.desktop` entry must point to `headlamp-launch`:
+
+```ini
+Exec=/home/kinscoe/.local/bin/headlamp-launch %U
+```
+
 ### Sandbox note
 
 Fedora 42 enables unprivileged user namespaces by default, so the Electron sandbox works without `--no-sandbox`.
@@ -142,4 +170,15 @@ Download the new `.dmg` from the [releases page](https://github.com/kubernetes-s
 
 ## Troubleshooting
 
-<!-- Document issues and resolutions here as they arise -->
+### KDE icon click does nothing (port 4466 conflict)
+
+A stale `headlamp-server` subprocess or FUSE mount helper is blocking the port. Kill
+everything and relaunch:
+
+```bash
+pkill -f 'headlamp-server'; pkill -f '\.local/bin/headlamp$'; sleep 1
+headlamp-launch &
+```
+
+See the KDE launch doc for full diagnostics:
+→ [`~/.dotfiles/desktop-apps/headlamp.md`](../../../../desktop-apps/headlamp.md)

@@ -565,3 +565,6 @@ PKI
 swtpm
 kdeconnect
 localca
+looseversion
+pyzmq
+getstate
