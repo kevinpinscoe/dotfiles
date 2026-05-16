@@ -9,6 +9,7 @@ Behaviour
 Belk
 Binutils
 Biohazards
+Burstable
 CKV
 Conversate
 Curity
@@ -17,6 +18,7 @@ DERP
 DMARC
 DOSD
 Demangle
+Dio
 Doptimize
 EASYDOCKER
 FUNCNEST
@@ -49,12 +51,14 @@ LibreWolf
 Linemode
 Logfile
 MCP
+MTU
 Mandal
 Marky
 Metabase
 Moby
 NWS
 OCI
+OOM
 OSUOSL
 OpenSCAP
 PGDG
@@ -83,13 +87,17 @@ TGIE
 Temurin
 Trixie
 Typora
+UDP
 Utsav
+Uyuni
 VCPU
+VXLAN
 WSGI
 Wazuh
 WebDAV
 ZLE
 Ziit
+aab
 aaronjmars
 acpi
 acst
@@ -123,6 +131,7 @@ awspw
 backlink
 backupmysql
 bbcf
+beljar
 beszel
 bfile
 bindir
@@ -156,6 +165,7 @@ convertx
 cooldown
 coproc
 copyparty
+coredns
 coreutils
 creds
 crumbsless
@@ -181,6 +191,7 @@ devconsole
 diffcmd
 diffcount
 digestfile
+dio
 dira
 dirafiles
 dirb
@@ -361,6 +372,7 @@ nvram
 oci
 oiq
 onrealm
+oom
 openapitools
 openbao
 opencontainers
@@ -385,6 +397,7 @@ pinboard
 pipefail
 pipx
 pkill
+pkm
 plasmashell
 poc
 podinfo
@@ -392,6 +405,7 @@ policycoreutils
 portkeeper
 portman
 postconf
+prereq
 prereqs
 presign
 procmail
@@ -431,6 +445,7 @@ ruflo
 runuser
 rustup
 rwxrwxr
+saltmaster
 sar
 sarif
 scontext
@@ -450,6 +465,7 @@ shasum
 shopt
 skopeo
 slategrey
+sls
 smcup
 softprops
 spctl
@@ -460,6 +476,7 @@ squashfuse
 srectl
 srelab
 sreops
+srv
 standups
 staticcheck
 statusline
@@ -544,16 +561,3 @@ zcurl
 zeroconf
 zoneinfo
 zsage
-aab
-dio
-Dio
-prereq
-pkm
-coredns
-beljar
-UDP
-VXLAN
-MTU
-Burstable
-oom
-OOM
