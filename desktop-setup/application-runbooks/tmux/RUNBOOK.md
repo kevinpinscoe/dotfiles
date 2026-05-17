@@ -57,6 +57,42 @@ tmux source-file ~/.tmux.conf
 
 ---
 
+## Copy Mode
+
+tmux uses vi-style keybindings in copy mode (`mode-keys vi`).
+
+### Entering copy mode
+
+| Binding | Action |
+|---------|--------|
+| `prefix + v` | Enter copy mode |
+| `prefix + [` | Enter copy mode (tmux default, also works) |
+| `q` | Exit copy mode |
+
+### Selecting and yanking
+
+| Binding | Action |
+|---------|--------|
+| `v` | Begin character selection |
+| `y` | Yank selection and exit copy mode |
+| `C-u` | Scroll half-page up |
+| `C-d` | Scroll half-page down |
+
+### Mouse wheel scrolling
+
+Mouse wheel scrolls 5 lines per tick in copy mode. This replaces the default behaviour where the wheel would drag a virtual scrollbar slowly at the top of the viewport.
+
+The bindings that produce this:
+
+```
+bind -T copy-mode-vi WheelUpPane   select-pane \; send-keys -X -N 5 scroll-up
+bind -T copy-mode-vi WheelDownPane select-pane \; send-keys -X -N 5 scroll-down
+```
+
+The scroll speed (5) can be changed in `~/.tmux.conf` — increase for faster scrolling through long output.
+
+---
+
 ## Clipboard (RPi5 over SSH)
 
 On the Raspberry Pi 5 there is no real display, so the standard X11/Wayland clipboard tools don't work. The clipboard stack has three layers that must all be intact for yanked text to reach the machine you SSHed from.

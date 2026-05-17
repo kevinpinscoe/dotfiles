@@ -8,3 +8,4 @@ fi
 # gitme search roots (Fedora): home directory plus containers repo
 export GITME_DIRS="$HOME:/opt/containers"
 export CHECK_GIT_REPOS="$HOME:/opt/containers"
+export CHECK_GIT_BRANCH="$HOME:/opt/containers"

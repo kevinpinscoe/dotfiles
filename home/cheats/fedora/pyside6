@@ -1,0 +1,97 @@
+---
+syntax: sh
+tags: [ python, qt, qt6, gui, pyside6, desktop ]
+---
+# Command pyside6
+
+## What does this command do:
+
+Qt6 Python bindings — build cross-platform desktop GUIs with Python using the full Qt framework. Includes a suite of CLI tools for compiling UI files, resources, translations, and deploying applications.
+
+## Installed from
+
+For Fedora install using: `pip install --user pyside6`
+
+To upgrade: `pip install --user --upgrade pyside6`
+
+## Command path
+
+For Fedora run: ~/.local/bin/pyside6-*  (family of tools, all at this location)
+
+## Command documentation
+
+Docs can be found at https://doc.qt.io/qtforpython-6/
+
+## Command options
+
+# --- pyside6-designer ---
+# Visual GUI editor — drag and drop widgets, save as .ui files
+pyside6-designer
+pyside6-designer mywindow.ui
+
+# --- pyside6-uic (UI compiler) ---
+# Convert .ui file (from Designer) to Python class
+pyside6-uic mainwindow.ui -o ui_mainwindow.py
+
+# Generate to stdout
+pyside6-uic mainwindow.ui
+
+# --- pyside6-rcc (Resource compiler) ---
+# Compile a .qrc resource file into a Python module
+pyside6-rcc resources.qrc -o rc_resources.py
+
+# Output to stdout
+pyside6-rcc resources.qrc
+
+# --- pyside6-qml ---
+# Run a QML file directly
+pyside6-qml main.qml
+
+# --- pyside6-lrelease (Translation release) ---
+# Compile .ts translation source to binary .qm
+pyside6-lrelease translations/app_de.ts -qm app_de.qm
+
+# --- pyside6-lupdate (Translation update) ---
+# Extract translatable strings from Python/QML sources into .ts files
+pyside6-lupdate main.py -ts translations/app_de.ts
+
+# --- pyside6-deploy ---
+# Package a PySide6 app into a standalone executable
+pyside6-deploy main.py
+
+# Deploy with a specific config file
+pyside6-deploy main.py -c pysidedeploy.spec
+
+# Android deploy
+pyside6-android-deploy --name MyApp --mode release
+
+# --- pyside6-genpyi ---
+# Generate .pyi stub files for IDE autocompletion
+pyside6-genpyi all
+
+# --- pyside6-project ---
+# Manage a PySide6 project (build, clean, run)
+pyside6-project build
+pyside6-project run
+pyside6-project clean
+
+# --- Quick hello-world boilerplate ---
+# from PySide6.QtWidgets import QApplication, QLabel
+# import sys
+# app = QApplication(sys.argv)
+# label = QLabel("Hello PySide6!")
+# label.show()
+# sys.exit(app.exec())
+
+# --- Signals & slots pattern ---
+# button.clicked.connect(self.on_click)
+# def on_click(self): ...
+
+# --- Loading a .ui file at runtime (no uic step) ---
+# from PySide6.QtUiTools import QUiLoader
+# loader = QUiLoader()
+# ui = loader.load("mainwindow.ui")
+# ui.show()
+
+# --- Check installed version ---
+python -c "import PySide6; print(PySide6.__version__)"

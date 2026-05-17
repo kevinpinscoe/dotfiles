@@ -1,0 +1,66 @@
+---
+syntax: sh
+tags: [ kubernetes, gitops, cd, argocd ]
+---
+# Command argocd
+
+## What does this command do:
+
+GitOps continuous delivery CLI for Kubernetes — manages apps, clusters, and repos in Argo CD
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -o ~/.local/bin/argocd && chmod +x ~/.local/bin/argocd
+For Raspberry Pi install using: curl -sSfL https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-arm64 -o ~/.local/bin/argocd && chmod +x ~/.local/bin/argocd
+For Mac install using: brew install argocd
+
+## Command path
+
+For Fedora run: ~/.local/bin/argocd
+For Raspberry Pi run: ~/.local/bin/argocd
+For Mac run: /opt/homebrew/bin/argocd
+
+## Command documentation
+
+Docs can be found at https://argo-cd.readthedocs.io/en/stable/user-guide/commands/argocd/
+
+## Command options
+
+# Login (port-forward first if no ingress)
+kubectl --context=dev -n argocd port-forward svc/argocd-server 8090:443 &
+argocd login localhost:8090 --insecure
+
+# Get initial admin password
+kubectl --context=dev -n argocd get secret argocd-initial-admin-secret \
+  -o jsonpath='{.data.password}' | base64 -d
+
+# List clusters
+argocd cluster list
+
+# Register a remote cluster (uses current kubeconfig context)
+argocd cluster add <context-name> --name <friendly-name> --insecure --yes
+
+# List apps
+argocd app list
+
+# Create an app
+argocd app create <name> \
+  --repo <git-url> \
+  --path <path-in-repo> \
+  --dest-server <cluster-url-or-https://kubernetes.default.svc> \
+  --dest-namespace <namespace>
+
+# Sync an app
+argocd app sync <name>
+
+# Get app status
+argocd app get <name>
+
+# List projects
+argocd proj list
+
+# Switch argocd context
+argocd context
+
+# Logout
+argocd logout localhost:8090

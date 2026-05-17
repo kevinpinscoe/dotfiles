@@ -1,0 +1,92 @@
+---
+syntax: sh
+tags: [ yaml, lint, yamllint ]
+---
+# Command yamllint
+
+## What does this command do:
+
+YAML linter — checks syntax validity plus cosmetic issues: indentation, line length, trailing spaces, key ordering, duplicate keys, and truthy value style
+
+## Installed from
+
+For Fedora install using: `pip install --user yamllint`
+
+To upgrade: `pip install --user --upgrade yamllint`
+
+## Command path
+
+For Fedora run: ~/.local/bin/yamllint
+
+## Command documentation
+
+Docs can be found at https://yamllint.readthedocs.io/en/stable/
+
+## Command options
+
+# --- Basic usage ---
+
+# Lint a single file
+yamllint file.yaml
+
+# Lint all YAML files in a directory (recursive)
+yamllint .
+
+# Lint from stdin
+cat file.yaml | yamllint -
+
+# --- Output formats ---
+
+# Standard (default) — human readable with rule names
+yamllint -f standard file.yaml
+
+# Colored output
+yamllint -f colored file.yaml
+
+# Parsable (for editors / CI tools)
+yamllint -f parsable file.yaml
+
+# GitHub Actions annotations
+yamllint -f github file.yaml
+
+# --- Strictness ---
+
+# Strict mode: warnings become errors (exit 1 on warnings too)
+yamllint -s file.yaml
+
+# Suppress warnings, show errors only
+yamllint --no-warnings file.yaml
+
+# --- Config ---
+
+# Use a specific config file
+yamllint -c .yamllint.yaml file.yaml
+
+# Use a built-in profile: default | relaxed
+yamllint -d relaxed file.yaml
+
+# Pass config inline (overrides .yamllint)
+yamllint -d '{extends: default, rules: {line-length: {max: 120}}}' file.yaml
+
+# --- .yamllint config file (place in project root) ---
+# extends: default
+# rules:
+#   line-length:
+#     max: 120
+#   truthy:
+#     allowed-values: ['true', 'false']
+#     check-keys: false
+#   comments:
+#     min-spaces-from-content: 1
+#   indentation:
+#     spaces: 2
+#     indent-sequences: true
+
+# --- List files that would be linted ---
+yamllint --list-files .
+
+# --- Check version ---
+yamllint --version
+
+# --- CI one-liner (lint all YAML, fail on warnings) ---
+find . -name '*.yml' -o -name '*.yaml' | xargs yamllint -s

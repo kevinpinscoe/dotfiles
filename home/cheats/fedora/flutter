@@ -1,0 +1,212 @@
+---
+syntax: sh
+tags: [ flutter, dart, mobile, android, web, linux, cross-platform ]
+---
+# Command flutter
+
+## What does this command do:
+
+Google's cross-platform UI toolkit — build natively compiled apps for Android, iOS, web, and Linux desktop from a single Dart codebase
+
+## Installed from
+
+For Fedora install using:
+```
+mkdir -p ~/sdk/flutter
+curl -L -o ~/Downloads/flutter_linux_<version>-stable.tar.xz \
+  https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_<version>-stable.tar.xz
+tar -xf ~/Downloads/flutter_linux_<version>-stable.tar.xz -C ~/sdk/flutter
+mv ~/sdk/flutter/flutter ~/sdk/flutter/<version>
+ln -sfn ~/sdk/flutter/<version> ~/sdk/flutter/current
+ln -sfn ~/sdk/flutter/current/bin/flutter ~/.local/bin/flutter
+flutter config --android-sdk "$HOME/sdk/android"
+yes | flutter doctor --android-licenses
+```
+
+## Command path
+
+For Fedora run: ~/.local/bin/flutter → ~/sdk/flutter/current/bin/flutter
+
+## Command documentation
+
+Docs can be found at https://docs.flutter.dev/reference/flutter-cli
+
+## Command options
+
+# Check toolchain health
+flutter doctor
+flutter doctor -v
+
+# --- Project setup ---
+
+# Create a new app (all platforms by default)
+flutter create myapp
+
+# Minimal starter (no sample code)
+flutter create --empty myapp
+
+# Specific platforms only
+flutter create --platforms android,web myapp
+
+# With org prefix for package IDs
+flutter create --org com.example --project-name myapp myapp
+
+# Plugin (platform API with method channels)
+flutter create --template plugin --platforms android,ios myapp_plugin
+
+# FFI plugin (dart:ffi bridge)
+flutter create --template plugin_ffi --platforms android,linux myapp_ffi
+
+# Package (pure Dart, no platform code)
+flutter create --template package mypackage
+
+# --- Dependencies ---
+
+# Fetch/refresh packages
+flutter pub get
+
+# Add a dependency
+flutter pub add provider
+flutter pub add --dev build_runner
+
+# Remove a dependency
+flutter pub remove provider
+
+# Upgrade all dependencies
+flutter pub upgrade
+
+# Show outdated packages
+flutter pub outdated
+
+# Run pub interactively
+flutter pub run build_runner build
+
+# --- Running ---
+
+# Run on the first available device (hot reload active)
+flutter run
+
+# Target a specific device
+flutter run -d chrome
+flutter run -d linux
+flutter run -d <device-id>
+
+# Release mode
+flutter run --release
+
+# Profile mode (performance tracing)
+flutter run --profile
+
+# Pass compile-time constants
+flutter run --dart-define=API_URL=https://api.example.com
+
+# Load constants from file
+flutter run --dart-define-from-file=.env
+
+# Run with a specific flavor
+flutter run --flavor staging
+
+# --- Building ---
+
+# Android APK (debug)
+flutter build apk
+
+# Android APK (release, split by ABI)
+flutter build apk --release --split-per-abi
+
+# Android App Bundle (for Play Store)
+flutter build appbundle --release
+
+# Web
+flutter build web --release
+
+# Linux desktop
+flutter build linux --release
+
+# With flavor
+flutter build apk --flavor production --release
+
+# --- Testing ---
+
+# Run all unit/widget tests
+flutter test
+
+# Run a specific test file
+flutter test test/widget_test.dart
+
+# Run with coverage
+flutter test --coverage
+
+# Run integration tests (device required)
+flutter test integration_test/app_test.dart -d linux
+
+# --- Code quality ---
+
+# Analyze Dart code
+flutter analyze
+
+# Format all Dart files in-place
+dart format .
+
+# --- Devices & emulators ---
+
+# List connected devices
+flutter devices
+
+# List available emulators
+flutter emulators
+
+# Launch an emulator
+flutter emulators --launch <emulator-id>
+
+# --- SDK management ---
+
+# Show current channel and version
+flutter channel
+
+# Switch channel
+flutter channel stable
+flutter channel beta
+
+# Upgrade Flutter (stays on current channel)
+flutter upgrade
+
+# Downgrade to previous version
+flutter downgrade
+
+# Show version
+flutter --version
+
+# --- Config ---
+
+# Show all config values
+flutter config
+
+# Disable analytics
+flutter config --no-analytics
+
+# Point at Android SDK
+flutter config --android-sdk ~/sdk/android
+
+# Enable/disable platforms globally
+flutter config --enable-linux-desktop
+flutter config --no-enable-android
+
+# --- Hot reload / attach ---
+
+# Attach to already-running app (e.g. release build with observatory)
+flutter attach
+
+# Take screenshot from connected device
+flutter screenshot
+
+# Show device logs
+flutter logs
+
+# --- Cleanup ---
+
+# Delete build/ and .dart_tool/ directories
+flutter clean
+
+# Populate binary artifact cache (useful offline)
+flutter precache

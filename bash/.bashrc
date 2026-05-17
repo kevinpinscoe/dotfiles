@@ -56,9 +56,4 @@ if [[ -n "$SSH_CLIENT" ]]; then
     echo " "
 fi
 
-# Auto-attach to tmux on SSH login
-if [ -n "$SSH_CONNECTION" ] && [ -z "$TMUX" ]; then
-    tmux new-session -A -s main
-fi
-
 [[ -f ~/.environment/self-hosted-services.sh ]] && source ~/.environment/self-hosted-services.sh
