@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-output=$(cspell --no-must-find-files --config "${HOME}/.cspell.json" "$1" 2>&1)
+[ -t 1 ] || exit 0
+output=$(cspell --no-must-find-files --cache --cache-location "${HOME}/.config/cspell/.cspellcache" --config "${HOME}/.cspell.json" "$1" 2>&1)
 if [[ $? -ne 0 ]]; then
   echo "$output" >&2
   echo "" >&2

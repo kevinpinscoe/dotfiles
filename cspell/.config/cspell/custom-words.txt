@@ -580,3 +580,6 @@ pyzmq
 Rundeck
 swtpm
 unrecognised
+enp
+NIC
+CCM
