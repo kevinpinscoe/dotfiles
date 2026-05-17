@@ -1,0 +1,79 @@
+---
+syntax: sh
+tags: [ secrets, vault, openbao ]
+---
+# Command bao
+
+## What does this command do:
+
+OpenBao command-line interface
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/openbao/openbao/releases/download/v2.5.2/bao_2.5.2_Linux_x86_64.tar.gz -o /tmp/bao.tar.gz && tar -xzf /tmp/bao.tar.gz -C /tmp bao && mv /tmp/bao ~/.local/bin/bao && chmod +x ~/.local/bin/bao
+
+## Command path
+
+For Fedora run: ~/.local/bin/bao
+
+## Command documentation
+
+Docs can be found at https://openbao.org/docs/commands/
+
+## Command options
+
+### Common commands
+    read        Read data and retrieves secrets
+    write       Write data, configuration, and secrets
+    delete      Delete secrets and configuration
+    list        List data or secrets
+    login       Authenticate locally
+    agent       Start an OpenBao agent
+    server      Start an OpenBao server
+    status      Print seal and HA status
+    unwrap      Unwrap a wrapped secret
+
+### Other commands
+    audit        Interact with audit devices
+    auth         Interact with auth methods
+    kv           Interact with OpenBao's Key-Value storage
+    lease        Interact with leases
+    monitor      Stream log messages from an OpenBao server
+    namespace    Interact with namespaces
+    operator     Perform operator-specific tasks
+    patch        Patch data, configuration, and secrets
+    path-help    Retrieve API help for paths
+    pki          Interact with OpenBao's PKI Secrets Engine
+    plugin       Interact with OpenBao plugins and catalog
+    policy       Interact with policies
+    print        Prints runtime configurations
+    proxy        Start an OpenBao Proxy
+    scan         Scan (recursively list) data or secrets
+    secrets      Interact with secrets engines
+    ssh          Initiate an SSH session
+    token        Interact with tokens
+    transit      Interact with OpenBao's Transit Secrets Engine
+
+### Typical workflow
+# Set env vars (add to ~/.bashrc or ~/.bash.d/ fragment)
+export BAO_ADDR=https://openbao.kevininscoe.com
+export BAO_TOKEN=$(cat ~/.vault-token)
+
+# Check status
+bao status
+
+# KV v2 — read/write
+bao kv put -mount=k3s tailscale/operator key=<value>
+bao kv get -mount=k3s tailscale/operator
+bao kv list -mount=k3s
+
+# List mounts / policies
+bao secrets list
+bao policy list
+bao policy read <name>
+
+# AppRole auth
+bao auth enable approle
+bao write auth/approle/role/<role> token_policies=<policy>
+bao read auth/approle/role/<role>/role-id
+bao write -f auth/approle/role/<role>/secret-id
