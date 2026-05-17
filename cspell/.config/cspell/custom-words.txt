@@ -573,3 +573,4 @@ bao
 openbao
 ESO
 eso
+unrecognised
