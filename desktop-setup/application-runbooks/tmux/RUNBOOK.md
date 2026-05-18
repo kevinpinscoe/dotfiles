@@ -197,6 +197,45 @@ If it stops working on Fedora, verify that the Wayland socket still exists at `/
 
 ---
 
+## Claude Code attention indicator
+
+When Claude Code finishes a turn and is waiting for input, the tmux tab for that window turns red with a bell icon (`󰂞`) so you can see which session needs attention without switching to it.
+
+### How it works
+
+Two Claude Code hooks in `~/.claude/settings.json` manipulate a custom tmux window variable:
+
+| Hook | Action |
+|------|--------|
+| `Stop` | Sets `@claude_needs_input 1` on the current window |
+| `UserPromptSubmit` | Clears `@claude_needs_input 0` on the current window |
+
+The `window-status-format` in `.tmux.conf` reads that variable:
+
+```
+#{?#{==:#{@claude_needs_input},1},#[fg=#f38ba8 bold] #I:#W 󰂞 ,#[default] #I:#W }
+```
+
+`#f38ba8` is Catppuccin Mocha red. The icon requires a Nerd Font.
+
+### Ghostty dock badge
+
+`preferredNotifChannel: "ghostty"` in `~/.claude/settings.json` makes Claude Code send a Ghostty OS notification (dock badge) when it needs attention — useful when you've switched away from Ghostty entirely.
+
+### Troubleshooting
+
+**Tab not turning red:** Confirm the hooks are set in `~/.claude/settings.json` and that `tmux` is on `$PATH` when Claude Code runs. Test manually:
+
+```bash
+tmux set-window-option -t "$(tmux display-message -p '#{session_name}:#{window_index}')" @claude_needs_input 1
+```
+
+The current window's tab should immediately turn red in all other windows.
+
+**Icon not showing:** Install a Nerd Font (e.g. JetBrains Mono Nerd Font) and set it as your Ghostty font. To use a plain text indicator instead, replace `󰂞` with `!` in `.tmux.conf`.
+
+---
+
 ## opensessions sidebar
 
 The opensessions plugin adds an AI session sidebar toggled with `prefix + o + t`.
