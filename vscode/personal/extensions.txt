@@ -1,4 +1,7 @@
 anthropic.claude-code
+bradlc.vscode-tailwindcss
+dbaeumer.vscode-eslint
+esbenp.prettier-vscode
 golang.go
 mermaidchart.vscode-mermaid-chart
 ms-python.debugpy
@@ -8,3 +11,4 @@ ms-python.vscode-python-envs
 redhat.vscode-yaml
 streetsidesoftware.code-spell-checker
 terrastruct.d2
+usernamehw.errorlens
