@@ -1,1 +1,11 @@
 #!/usr/bin/env bash
+
+# Delegate to a repo-local .githooks/pre-commit if one exists.
+# Safe everywhere: no-ops in repos that don't have .githooks/pre-commit.
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+if [[ -n "$repo_root" ]]; then
+    local_hook="$repo_root/.githooks/pre-commit"
+    if [[ -f "$local_hook" && -x "$local_hook" ]]; then
+        "$local_hook" "$@" || exit $?
+    fi
+fi
