@@ -57,3 +57,6 @@ if [[ -f /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh ]]; then
 fi
 
 [[ -f ~/.environment/self-hosted-services.sh ]] && source ~/.environment/self-hosted-services.sh
+
+# Disable terminal bell
+unsetopt BEEP
