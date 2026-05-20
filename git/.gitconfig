@@ -1,13 +1,9 @@
 [gpg]
-	format = x509
-[gpg "x509"]
-	program = gitsign
+	format = ssh
 [commit]
 	gpgsign = true
 [tag]
 	gpgsign = true
-[gitsign]
-	connectorID = https://accounts.google.com
 [init]
 	defaultBranch = main
 [pull]
@@ -15,6 +11,7 @@
 [user]
 	email = kevin.inscoe@gmail.com
 	name = Kevin P. Inscoe
+	signingkey = /home/kinscoe/.ssh/id_ed25519_signing.pub
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [credential "https://github.com"]
@@ -34,3 +31,5 @@
 	directory = /opt/containers
 [push]
 	autoSetupRemote = true
+[gpg "ssh"]
+	allowedSignersFile = /home/kinscoe/.ssh/allowed_signers
