@@ -11,7 +11,7 @@
 [user]
 	email = kevin.inscoe@gmail.com
 	name = Kevin P. Inscoe
-	signingkey = /home/kinscoe/.ssh/id_ed25519_signing.pub
+	signingkey = ~/.ssh/id_ed25519_signing.pub
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [credential "https://github.com"]
@@ -32,4 +32,4 @@
 [push]
 	autoSetupRemote = true
 [gpg "ssh"]
-	allowedSignersFile = /home/kinscoe/.ssh/allowed_signers
+	allowedSignersFile = ~/.ssh/allowed_signers
