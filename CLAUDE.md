@@ -107,20 +107,20 @@ bash home/cheats/generate-cheat.sh
 ```
 This calls Claude with `CLAUDE.md` and `GENERATE-CHEAT.MD` as context. Templates are in `home/cheats/templates/` (`all.md`, `fedora.md`).
 
-## Desktop setup and application runbooks
+## Desktop application configuration and runbooks
 
-`desktop-setup/` contains platform-specific GUI environment documentation and is not a Stow package — nothing here is symlinked into `$HOME`.
+`desktop-apps-configuration-and-runbooks/` holds per-app operational notes, install procedures, and personal usage notes for GUI/desktop applications across all three platforms. It is not a Stow package — nothing here is symlinked into `$HOME`.
 
-`desktop-setup/application-runbooks/` holds per-app operational notes for GUI/desktop applications that cannot carry colocated documentation. Each app gets its own subdirectory with a `RUNBOOK.md`:
+Each application gets its own subdirectory with a `RUNBOOK.md`. Platform-specific content lives in named sections within the single RUNBOOK, not in separate per-OS files. Every RUNBOOK starts with a `## Operation` section for personal usage notes, followed by technical install/config/troubleshooting content.
 
 ```
-desktop-setup/application-runbooks/
+desktop-apps-configuration-and-runbooks/
 └── <AppName>/
     ├── RUNBOOK.md
     └── <supporting files>
 ```
 
-To add a runbook for a new app, create `desktop-setup/application-runbooks/<AppName>/RUNBOOK.md` and add a row to the table in `application-runbooks/README.md`.
+To add a runbook for a new app, create `desktop-apps-configuration-and-runbooks/<AppName>/RUNBOOK.md` and add a row to the table in `desktop-apps-configuration-and-runbooks/README.md`.
 
 ## Third-party binary install paths
 
