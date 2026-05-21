@@ -14,9 +14,7 @@ Scripts:
 
 ## Git commit signing
 
-All commits and tags in this repo are signed using **gitsign** (Sigstore) with Google OAuth (`gpgsign = true`, `format = x509`, `program = gitsign`). Signing opens a browser window to complete the OAuth flow.
-
-**IMPORTANT — SSH sessions:** If you are connected to this machine via SSH from another host, `gitsign` cannot open a browser and any `git commit` or `git tag` will fail. Before asking Claude to commit anything, confirm you are sitting at the machine's physical desktop (or using a local terminal session on it). Claude must remind you of this requirement every time you request a commit.
+All commits and tags in this repo are signed using **SSH key signing** (`gpgsign = true`, `gpg.format = ssh`). Signing is automatic and works in any session including SSH — no browser or OAuth flow required.
 
 ## Key workflows
 
