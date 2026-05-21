@@ -55,4 +55,21 @@ brew uninstall --cask GRVYDEV/tap/marky
 brew untap GRVYDEV/tap   # optional, only if no other casks from this tap are installed
 ```
 
+### Set as default app for markdown files
+
+macOS Launch Services does not recognise Marky as a registered `.md` handler, so the Finder "Always Open With" preference reverts after one use. Fix it via `duti`, which writes directly to the Launch Services database.
+
+```bash
+brew install duti
+duti -s dev.marky.app .md all
+duti -s dev.marky.app .markdown all
+```
+
+Verify:
+
+```bash
+duti -x md
+# should print: Marky.app / /Applications/Marky.app / dev.marky.app
+```
+
 ## Troubleshooting
