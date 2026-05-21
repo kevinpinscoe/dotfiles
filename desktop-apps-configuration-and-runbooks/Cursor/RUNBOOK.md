@@ -48,6 +48,14 @@ Cursor stores settings in the same locations as VS Code:
 | macOS | `~/Library/Application Support/Cursor/User/` |
 | Fedora | `~/.config/Cursor/User/` |
 
+## Cursor SDK
+
+Cursor's SDK is now in public beta. Install it with `npm install @cursor/sdk`. You get the same runtime powering the desktop app: codebase indexing, semantic search, MCP servers, skills from `.cursor/skills/`, hooks, and subagent spawning. Run agents locally, in Cursor's cloud, or self-hosted. The API is built around durable agents and per-prompt runs with SSE streaming.
+
+Teams are already using it to kick off agents from CI/CD (summarize changes, fix failures, update PRs), build internal apps that let non-developers query product data, and embed agent experiences inside customer-facing products.
+
+If you're running Cursor as just an IDE, this changes the surface area. Start with one CI integration and expand from there.
+
 ## Troubleshooting
 
 <!-- Record issues and resolutions here -->
