@@ -61,6 +61,63 @@ tmux source-file ~/.tmux.conf
 
 ---
 
+## Session Persistence
+
+Sessions are saved and restored across reboots by two plugins:
+
+- **tmux-resurrect** — saves and restores windows, panes, layouts, working directories, and window names
+- **tmux-continuum** — auto-saves every 15 minutes and auto-restores on tmux server start
+
+### What is saved
+
+| Saved | Not saved |
+|-------|-----------|
+| Window names | Running processes (shells return idle) |
+| Pane layouts (splits) | Shell history |
+| Working directories per pane | Environment variables |
+| Active window | tmux options set at runtime |
+
+### Keybindings
+
+| Binding | Action |
+|---------|--------|
+| `prefix + Ctrl-s` | Save session now |
+| `prefix + Ctrl-r` | Restore last saved session |
+
+**Before a planned reboot**, always do a manual `prefix + Ctrl-s` to capture current state. Continuum auto-saves every 15 minutes but a manual save guarantees freshness.
+
+### Auto-restore
+
+With `@continuum-restore 'on'`, tmux restores the last save automatically when the server starts (i.e. when you open Ghostty after a reboot). If something goes wrong, trigger manually with `prefix + Ctrl-r`.
+
+### Save file location
+
+Resurrect stores saves in `~/.tmux/resurrect/`. The most recent save is symlinked as `last`:
+
+```bash
+ls -lt ~/.tmux/resurrect/   # all saves, newest first
+cat ~/.tmux/resurrect/last  # inspect what will be restored
+```
+
+Old saves accumulate here — safe to delete all but `last` if space is a concern.
+
+### Troubleshooting
+
+**Auto-restore did not fire on startup:**
+Confirm `@continuum-restore 'on'` is set and that TPM ran `tmux-continuum` after resurrect (plugin order matters — resurrect must come before continuum in `.tmux.conf`).
+
+**Wrong directory restored for a pane:**
+Resurrect captures the directory at save time. If you moved around after the last save, the restored directory will be stale. Manual `prefix + Ctrl-s` just before rebooting avoids this.
+
+**`prefix + Ctrl-s` does nothing:**
+Plugin may not be loaded. Reload config and reinstall:
+```bash
+tmux source-file ~/.tmux.conf
+~/.tmux/plugins/tpm/bin/install_plugins
+```
+
+---
+
 ## Copy Mode
 
 tmux uses vi-style keybindings in copy mode (`mode-keys vi`).
