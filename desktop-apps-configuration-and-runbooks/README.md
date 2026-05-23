@@ -20,6 +20,7 @@ Each application gets its own directory containing a `RUNBOOK.md` and any suppor
 
 | Application | Runbook | Platforms |
 |-------------|---------|-----------|
+| Anytype | [Anytype/RUNBOOK.md](Anytype/RUNBOOK.md) | Fedora |
 | Calibre | [Calibre/RUNBOOK.md](Calibre/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | Claude Desktop | [Claude-Desktop/RUNBOOK.md](Claude-Desktop/RUNBOOK.md) | Fedora |
 | Cursor | [Cursor/RUNBOOK.md](Cursor/RUNBOOK.md) | macOS, Fedora |
