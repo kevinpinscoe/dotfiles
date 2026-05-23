@@ -78,6 +78,7 @@ These directories must be populated separately on each host:
 Files are numbered to control load order:
 - `00_bashrc_env` / `01_bashrc_mac_env` — environment variables
 - `02_core_path_env` / `02_fedora_path_env` — PATH setup
+- `03_mise` — mise developer environment manager activation (bash + zsh, all platforms)
 - `10_cd` — cd helpers
 - `20_bashrc_aliases` / `21_bashrc_mac_aliases` / `22_bashrc_fedora_aliases` — aliases
 - `30_bash_autocomplete` / `30_zsh_autocomplete` — tab completion (bash/zsh)

@@ -44,6 +44,31 @@ reload
 
 
 
+## mise activation (`03_mise`)
+
+The file `~/.bash.d/03_mise` activates [mise](https://mise.jdx.dev/) in the current shell session. It runs after the `02_*` PATH fragments so that `mise` is already on `$PATH`, and `mise activate` prepends its shims directory to `$PATH` so mise-managed tool versions take precedence.
+
+### What it does
+
+Calls `mise activate bash` or `mise activate zsh` depending on the current shell. This makes mise shims the first thing searched on `$PATH`, ensuring repos with a `mise.toml` or `.tool-versions` file get the right tool versions automatically when you `cd` into them.
+
+### Platform coverage
+
+Sourced on all three platforms (Fedora, macOS, Raspberry Pi) in both bash and zsh — the filename has no platform marker. On macOS, `brew install mise` places the binary at `/opt/homebrew/bin/mise`; on Linux, it lands at `~/.local/bin/mise` via the curl installer. The fragment guards with `command -v mise` so hosts without mise installed silently no-op.
+
+### Installation reminder
+
+After cloning dotfiles on a new host, install mise separately — it is not bundled here:
+
+```bash
+# Linux (Fedora, Raspberry Pi)
+curl https://mise.run | sh
+
+# macOS
+brew install mise
+```
+
+
 ## cd override (`10_cd`)
 
 The file `~/.bash.d/10_cd` defines a `cd()` shell function that wraps `builtin cd`.
