@@ -1,0 +1,109 @@
+---
+syntax: sh
+tags: [ dev, runtime, versions, tools, developer, environment, manager, cli, developer-tools, tool-version-manager, path-manager ]
+---
+# Command mise
+
+## What does this command do:
+
+mise is a developer environment manager. When you enter a repo, mise ensures the right tool versions and environment variables are active. It is basically a cross between asdf, direnv, and a lightweight task runner.
+
+## Installed from
+
+For Fedora install using: curl https://mise.run | sh
+For Raspberry Pi install using: curl https://mise.run | sh
+For Mac install using: brew install mise
+
+## Command path
+
+For Fedora run: ~/.local/bin/mise
+For Raspberry Pi run: ~/.local/bin/mise
+For Mac run: /opt/homebrew/bin/mise
+
+## Command documentation
+
+Docs can be found at https://mise.jdx.dev/cli/
+
+## Shell activation (add to ~/.bashrc or ~/.zshrc)
+
+eval "$(mise activate bash)"   # bash
+eval "$(mise activate zsh)"    # zsh
+
+## Command options
+
+# Install all tools defined in mise.toml / .tool-versions:
+mise install
+
+# Install a specific tool version:
+mise install node@20
+mise install node@20.0.0
+
+# Set a tool version for the current project (writes mise.toml):
+mise use node@20
+
+# Set a global default tool version:
+mise use -g node@20
+
+# List installed and active tool versions:
+mise ls
+
+# List available remote versions for a tool:
+mise ls-remote node
+
+# Show outdated tools:
+mise outdated
+
+# Upgrade all tools (interactive):
+mise up --interactive
+
+# Upgrade a specific tool:
+mise upgrade node
+
+# Uninstall a tool version:
+mise uninstall node@20
+
+# Show current environment variables mise would set:
+mise env
+
+# Set an environment variable in mise.toml:
+mise set NODE_ENV=production
+
+# Unset an environment variable:
+mise unset NODE_ENV
+
+# Execute a command with mise environment active (one-off):
+mise exec -- npm install
+mise x node@20 -- node app.js
+
+# Run a task defined in mise.toml:
+mise run build
+mise r build
+
+# Watch and re-run a task on file changes:
+mise watch build
+
+# Show where a tool binary lives:
+mise where node
+mise which node
+
+# Trust a mise.toml config file (required before mise loads it):
+mise trust
+
+# Check mise installation for problems:
+mise doctor
+
+# Activate mise in current shell (one-off, no rc edit needed):
+mise activate bash
+
+# Show mise settings:
+mise settings
+
+# Update mise itself:
+mise self-update
+
+# Remove mise and all managed data:
+mise implode
+
+# Generate shell completions:
+mise completion bash
+mise completion zsh
