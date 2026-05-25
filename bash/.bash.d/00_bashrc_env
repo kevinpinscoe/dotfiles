@@ -21,5 +21,9 @@ if [ -r "$HOME/.environment/work_aliases.sh" ]; then
     source "$HOME/.environment/work_aliases.sh"
 fi
 
+if [ -r "$HOME/.environment/openbao/openbao-env.sh" ]; then
+    source "$HOME/.environment/openbao/openbao-env.sh"
+fi
+
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 [ -d "$HOME/.bun/bin" ] && export BUN_INSTALL="$HOME/.bun" && export PATH="$BUN_INSTALL/bin:$PATH"
