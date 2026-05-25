@@ -35,6 +35,7 @@ Each application gets its own directory containing a `RUNBOOK.md` and any suppor
 | MarkText | [MarkText/RUNBOOK.md](MarkText/RUNBOOK.md) | macOS, Fedora |
 | Obsidian | [Obsidian/RUNBOOK.md](Obsidian/RUNBOOK.md) | macOS, Fedora |
 | Open Design | [Open-Design/RUNBOOK.md](Open-Design/RUNBOOK.md) | Fedora |
+| Signal Desktop | [Signal/RUNBOOK.md](Signal/RUNBOOK.md) | Fedora |
 | Terragrunt | [Terragrunt/RUNBOOK.md](Terragrunt/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | tmux | [tmux/RUNBOOK.md](tmux/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | Typora | [Typora/RUNBOOK.md](Typora/RUNBOOK.md) | macOS, Fedora, Windows |
