@@ -143,6 +143,15 @@ woodpecker-cli context use <name>          # switch context
 woodpecker-cli update                      # update CLI binary
 ```
 
+## How to list pipelines with timestamps
+
+`woodpecker-cli pipeline ls --output json` is not supported — use the API directly:
+
+```
+curl -s -H "Authorization: Bearer $WOODPECKER_TOKEN" "$WOODPECKER_SERVER/api/repos/<repo-id>/pipelines" \
+  | jq '.[] | "\(.number) \(.status) \(.created | todate) \(.message[0:60])"'
+```
+
 ## How to update woodpecker-cli
 
 The built-in `update` subcommand fails with a cross-device link error because it
