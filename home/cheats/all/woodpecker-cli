@@ -142,3 +142,13 @@ woodpecker-cli context ls                  # list saved contexts
 woodpecker-cli context use <name>          # switch context
 woodpecker-cli update                      # update CLI binary
 ```
+
+## How to update woodpecker-cli
+
+The built-in `update` subcommand fails with a cross-device link error because it
+downloads to `/tmp` (tmpfs) and tries to rename into `/usr/local/bin` (a different
+filesystem). Fix by pointing TMPDIR to the same mount:
+
+```
+sudo TMPDIR=/usr/local woodpecker-cli update
+```
