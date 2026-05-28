@@ -102,6 +102,47 @@ The APT repo added by `extrepo` keeps LibreWolf up to date via `apt upgrade`.
 
 ## Troubleshooting
 
+### "LibreWolf is already running" after a crash (Fedora / Linux)
+
+**Symptom:** LibreWolf crashed and now refuses to start, showing a dialog that says it is already running and asking whether to start a new instance.
+
+**Cause:** A crash skips the normal shutdown routine, leaving a stale `.parentlock` file in the profile directory. LibreWolf sees the lock and refuses to open.
+
+**Fix:**
+
+1. Confirm no LibreWolf process is actually running:
+   ```bash
+   pgrep -a librewolf
+   ```
+   If any PID is returned, kill it first: `kill <PID>`
+
+2. Remove the stale lock file (substitute your actual profile directory name):
+   ```bash
+   rm ~/.config/librewolf/librewolf/<profile>/.parentlock
+   ```
+   Quick find if you don't know the profile name:
+   ```bash
+   find ~/.config/librewolf -name ".parentlock"
+   ```
+
+3. Launch LibreWolf normally.
+
+**Are cookies safe after a crash?**
+
+Yes — because the crash skips shutdown, the `privacy.sanitize.pending` "clear on shutdown" routine never runs. The `cookies.sqlite` and its WAL journal survive intact. LibreWolf replays the WAL on next open, restoring the full session state.
+
+To verify cookie count before opening LibreWolf:
+```bash
+cp ~/.config/librewolf/librewolf/<profile>/cookies.sqlite /tmp/lw-check.sqlite
+sqlite3 /tmp/lw-check.sqlite "SELECT COUNT(*) FROM moz_cookies;"
+```
+
+**Prevent cookie clearing on shutdown (optional):**
+
+Go to **Settings → Privacy & Security → History** and uncheck *Clear history when LibreWolf closes*, or customize it to exclude *Cookies and Site Data*.
+
+---
+
 ### App refuses to launch on macOS Tahoe (26.x)
 
 **Symptom:** Double-clicking `LibreWolf.app` does nothing, or Finder shows a Gatekeeper damaged/cannot-be-opened dialog. `spctl -a -vv /Applications/LibreWolf.app` reports:
