@@ -30,6 +30,7 @@ Each application gets its own directory containing a `RUNBOOK.md` and any suppor
 | git (gitsign) | [git/RUNBOOK.md](git/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | Hammerspoon | [Hammerspoon/RUNBOOK.md](Hammerspoon/RUNBOOK.md) | macOS only |
 | Headlamp | [Headlamp/RUNBOOK.md](Headlamp/RUNBOOK.md) | macOS, Fedora, RPi5 |
+| Inkscape | [Inkscape/RUNBOOK.md](Inkscape/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | LibreWolf | [LibreWolf/RUNBOOK.md](LibreWolf/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | Logseq | [Logseq/RUNBOOK.md](Logseq/RUNBOOK.md) | Fedora |
 | Marky | [Marky/RUNBOOK.md](Marky/RUNBOOK.md) | macOS, Fedora |
