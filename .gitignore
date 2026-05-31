@@ -8,6 +8,8 @@
 *.key
 .environment/
 **/.claude
+!claude/.claude/
+!claude/.claude/**
 **/.codex
 **/resume.sh
 **/.DS_Store

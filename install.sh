@@ -58,7 +58,12 @@ while IFS= read -r -d '' link; do
   [[ "$target" = /* ]] && rm "$link"
 done < <(find "$HOME/.config/tmux/status" -maxdepth 1 -type l -print0)
 
-PACKAGES=(bash vim aspell cheat cspell home tmux git opensessions yazi)
+# ~/.claude/hooks/ must be a real directory so stow symlinks hook scripts
+# inside it per-file rather than symlinking the whole directory — Claude Code
+# writes settings.json and other runtime files into ~/.claude/ alongside hooks/.
+mkdir -p "$HOME/.claude/hooks"
+
+PACKAGES=(bash vim aspell cheat cspell home tmux git opensessions yazi claude)
 for pkg in "${PACKAGES[@]}"; do
   if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
     stow -d "$DOTFILES_DIR" -t "$HOME" --restow "$pkg"
