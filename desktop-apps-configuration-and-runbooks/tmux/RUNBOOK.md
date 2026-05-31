@@ -260,26 +260,48 @@ If it stops working on Fedora, verify that the Wayland socket still exists at `/
 
 ## Claude Code attention indicator
 
-When Claude Code finishes a turn and is waiting for input, the tmux tab for that window turns red with a bell icon (`󰂞`) so you can see which session needs attention without switching to it.
+When Claude Code finishes a turn and is waiting for input, the tmux tab for that window turns red with a bell icon (`󰂞`) so you can see which session needs attention without switching to it. Switching to the window clears the indicator automatically.
+
+### Files
+
+| File in repo | Live path | Purpose |
+|---|---|---|
+| `claude/.claude/hooks/bell-notify.sh` | `~/.claude/hooks/bell-notify.sh` | Hook script (stow-managed symlink) |
+| `tmux/.tmux.conf` | `~/.tmux.conf` | `window-status-format` reads `@claude_needs_input` |
+| — | `~/.claude/settings.json` | Wires `Stop` and `Notification` hooks to the script |
 
 ### How it works
 
-Two Claude Code hooks in `~/.claude/settings.json` manipulate a custom tmux window variable:
+**Setting the indicator** — two Claude Code hooks in `~/.claude/settings.json` call `bell-notify.sh`:
 
-| Hook | Action |
-|------|--------|
-| `Stop` | Sets `@claude_needs_input 1` on the current window |
-| `UserPromptSubmit` | Clears `@claude_needs_input 0` on the current window |
+| Hook | Fires when… |
+|------|-------------|
+| `Stop` | Claude finishes a turn and is waiting for input |
+| `Notification` | Claude raises an in-turn notification (e.g. permission prompt) |
 
-The `window-status-format` in `.tmux.conf` reads that variable:
+`bell-notify.sh` resolves the tmux window ID for the pane Claude is running in and sets a custom window variable:
+
+```bash
+tmux set-window-option -t "$WIN" @claude_needs_input 1
+```
+
+It also registers a one-shot `after-select-window` hook on that window. When you switch to the window, the hook clears the indicator and removes itself:
+
+```bash
+tmux set-hook -t "$WIN" after-select-window \
+    "if-shell 'test \"#{window_id}\" = \"$WIN\"' \
+        'set-window-option -t $WIN @claude_needs_input 0 ; set-hook -u -t $WIN after-select-window'"
+```
+
+**Displaying the indicator** — `window-status-format` in `.tmux.conf` reads `@claude_needs_input` and switches to the red style only when it is `1`:
 
 ```
 #{?#{==:#{@claude_needs_input},1},#[fg=#f38ba8 bold] #I:#W 󰂞 ,#[default] #I:#W }
 ```
 
-`#f38ba8` is Catppuccin Mocha red. The icon requires a Nerd Font.
+`#f38ba8` is Catppuccin Mocha red. The `󰂞` icon requires a Nerd Font.
 
-`bell-action none` is set in `.tmux.conf` deliberately. tmux's generic `window-status-bell-style` was triggering from readline vi-mode BEL characters (pressing Escape when already in command mode, failed tab completions) and producing false-positive red tabs indistinguishable from the Claude indicator. The `@claude_needs_input` variable is the sole indicator; no BEL character is sent by the hook.
+**Why `bell-action none`** — an earlier version of the hook also sent a `\a` BEL character to the pane TTY to trigger tmux's `window-status-bell-style`. This caused false-positive red tabs: readline's vi-mode sends BEL on Escape-when-already-in-command-mode and failed completions, which were indistinguishable from the Claude indicator. The BEL send and `window-status-bell-style` have been removed; `bell-action none` suppresses all tmux bell activity. The `@claude_needs_input` variable is the sole indicator.
 
 ### Ghostty dock badge
 
@@ -287,13 +309,19 @@ The `window-status-format` in `.tmux.conf` reads that variable:
 
 ### Troubleshooting
 
-**Tab not turning red:** Confirm the hooks are set in `~/.claude/settings.json` and that `tmux` is on `$PATH` when Claude Code runs. Test manually:
+**Tab not turning red:** Confirm the `Stop` and `Notification` hooks are set in `~/.claude/settings.json` and that `tmux` is on `$PATH` when Claude Code runs. Test the variable manually:
 
 ```bash
 tmux set-window-option -t "$(tmux display-message -p '#{session_name}:#{window_index}')" @claude_needs_input 1
 ```
 
-The current window's tab should immediately turn red in all other windows.
+The current window's tab should immediately turn red when viewed from any other window.
+
+**Indicator not clearing after switching to the window:** The `after-select-window` hook may not have been registered (e.g. Claude was killed before the hook fired). Clear it manually:
+
+```bash
+tmux set-window-option @claude_needs_input 0
+```
 
 **Icon not showing:** Install a Nerd Font (e.g. JetBrains Mono Nerd Font) and set it as your Ghostty font. To use a plain text indicator instead, replace `󰂞` with `!` in `.tmux.conf`.
 
