@@ -307,6 +307,26 @@ tmux set-hook -t "$WIN" after-select-window \
 
 `preferredNotifChannel: "ghostty"` in `~/.claude/settings.json` makes Claude Code send a Ghostty OS notification (dock badge) when it needs attention — useful when you've switched away from Ghostty entirely.
 
+### Resetting the indicator manually
+
+If a tab is stuck red (e.g. Claude was killed before the auto-clear hook fired), clear it from any pane in that window:
+
+```bash
+tmux set-window-option @claude_needs_input 0
+```
+
+To clear a specific window by index (e.g. window 3):
+
+```bash
+tmux set-window-option -t :3 @claude_needs_input 0
+```
+
+To reset all windows in the current session at once:
+
+```bash
+tmux list-windows -F '#{window_id}' | xargs -I{} tmux set-window-option -t {} @claude_needs_input 0
+```
+
 ### Troubleshooting
 
 **Tab not turning red:** Confirm the `Stop` and `Notification` hooks are set in `~/.claude/settings.json` and that `tmux` is on `$PATH` when Claude Code runs. Test the variable manually:
@@ -317,11 +337,15 @@ tmux set-window-option -t "$(tmux display-message -p '#{session_name}:#{window_i
 
 The current window's tab should immediately turn red when viewed from any other window.
 
-**Indicator not clearing after switching to the window:** The `after-select-window` hook may not have been registered (e.g. Claude was killed before the hook fired). Clear it manually:
+**Tabs turning red at a bash prompt (not from Claude):** Verify `bell-action none` is active:
 
 ```bash
-tmux set-window-option @claude_needs_input 0
+tmux show-option -g bell-action   # must return: none
 ```
+
+If it returns `any`, reload the config: `tmux source-file ~/.tmux.conf`
+
+**Indicator not clearing after switching to the window:** See *Resetting the indicator manually* above.
 
 **Icon not showing:** Install a Nerd Font (e.g. JetBrains Mono Nerd Font) and set it as your Ghostty font. To use a plain text indicator instead, replace `󰂞` with `!` in `.tmux.conf`.
 
