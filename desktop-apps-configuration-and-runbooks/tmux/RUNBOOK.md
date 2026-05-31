@@ -309,7 +309,7 @@ tmux set-hook -t "$WIN" after-select-window \
 
 ### Resetting the indicator manually
 
-If a tab is stuck red (e.g. Claude was killed before the auto-clear hook fired), clear it from any pane in that window:
+If a tab is stuck red (e.g. Claude was killed before the auto-clear hook fired), press **`prefix + Ctrl+A`** to clear the current window's indicator, or run:
 
 ```bash
 tmux set-window-option @claude_needs_input 0
