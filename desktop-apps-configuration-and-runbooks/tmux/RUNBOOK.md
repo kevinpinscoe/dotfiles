@@ -279,6 +279,8 @@ The `window-status-format` in `.tmux.conf` reads that variable:
 
 `#f38ba8` is Catppuccin Mocha red. The icon requires a Nerd Font.
 
+`bell-action none` is set in `.tmux.conf` deliberately. tmux's generic `window-status-bell-style` was triggering from readline vi-mode BEL characters (pressing Escape when already in command mode, failed tab completions) and producing false-positive red tabs indistinguishable from the Claude indicator. The `@claude_needs_input` variable is the sole indicator; no BEL character is sent by the hook.
+
 ### Ghostty dock badge
 
 `preferredNotifChannel: "ghostty"` in `~/.claude/settings.json` makes Claude Code send a Ghostty OS notification (dock badge) when it needs attention — useful when you've switched away from Ghostty entirely.
