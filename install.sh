@@ -41,9 +41,10 @@ mkdir -p "$HOME/.config/git"
 [[ -L "$HOME/.config/git/hooks" ]] && rm "$HOME/.config/git/hooks"
 mkdir -p "$HOME/.config/git/hooks"
 
-# ~/.config/tmux/status/ must be a real directory so stow symlinks scripts
-# inside it per-file rather than symlinking the whole directory.
+# ~/.config/tmux/status/ and scripts/ must be real directories so stow
+# symlinks files inside them per-file rather than symlinking the whole directory.
 mkdir -p "$HOME/.config/tmux/status"
+mkdir -p "$HOME/.config/tmux/scripts"
 
 # ~/.config/opensessions/ must be a real directory so stow symlinks config.json
 # per-file; the opensessions server also writes session-order.json there at runtime.
