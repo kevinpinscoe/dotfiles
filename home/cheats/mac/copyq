@@ -1,0 +1,133 @@
+---
+syntax: sh
+tags: [ clipboard, clipboard-manager, macos ]
+---
+# Command copyq
+
+## What does this command do:
+
+CLI interface to the CopyQ clipboard manager daemon — inspect history, read/write entries, control the GUI, and automate via scripting
+
+## Installed from
+
+For Mac install using: DMG from https://github.com/hluk/CopyQ/releases/latest
+(Do NOT use `brew install --cask copyq` — deprecated, unsigned, crashes on macOS 26+)
+See desktop-apps-configuration-and-runbooks/CopyQ/RUNBOOK.md for full install procedure.
+
+## Command path
+
+For Mac run: /Applications/CopyQ.app/Contents/MacOS/copyq
+
+## Command documentation
+
+Docs can be found at https://hluk.github.io/CopyQ/
+
+## Command options
+
+# --- History inspection ---
+
+# Count items in history
+copyq count
+
+# Print most recent item (index 0 = newest)
+copyq read 0
+
+# Print items at specific rows
+copyq read 0 1 2
+
+# Print last 10 items with index numbers
+for i in $(seq 0 9); do echo "[$i] $(copyq read $i | head -c 100)"; done
+
+# Print current clipboard contents
+copyq clipboard
+
+# --- Writing / modifying history ---
+
+# Set clipboard to text
+copyq copy "some text"
+
+# Add text to history without changing the live clipboard
+copyq add "some text"
+
+# Insert text at a specific row
+copyq insert 0 "text"
+
+# Delete item at row 0 (most recent)
+copyq remove 0
+
+# Copy item at row N to the live clipboard
+copyq select 3
+
+# --- Navigation ---
+
+# Copy next item from history to clipboard
+copyq next
+
+# Copy previous item from history to clipboard
+copyq previous
+
+# --- Window control ---
+
+# Show main CopyQ window
+copyq show
+
+# Hide main window
+copyq hide
+
+# Toggle main window visibility
+copyq toggle
+
+# Open context menu (tray)
+copyq menu
+
+# --- Daemon control ---
+
+# Pause clipboard monitoring
+copyq disable
+
+# Resume clipboard monitoring
+copyq enable
+
+# Shut down the daemon
+copyq exit
+
+# --- Tabs ---
+
+# List all tab names
+copyq tab
+
+# Run command on a named tab
+copyq tab "MyTab" count
+
+# Remove a tab
+copyq removetab "MyTab"
+
+# Rename a tab
+copyq renametab "OldName" "NewName"
+
+# Export/import tab history
+copyq exporttab /tmp/clipboard-backup.cpq
+copyq importtab /tmp/clipboard-backup.cpq
+
+# --- Config ---
+
+# List all config options
+copyq config
+
+# Get a single option
+copyq config maxitems
+
+# Set max history size (default 200)
+copyq config maxitems 500
+
+# --- Scripting ---
+
+# Evaluate JavaScript in the CopyQ scripting engine
+copyq eval 'print(size())'
+copyq eval 'popup("Title", "Message")'
+
+# Search history for a string
+copyq eval 'for(var i=0;i<size();i++) if(str(read(i)).match(/searchterm/)) print("["+i+"] "+str(read(i)).slice(0,80)+"\n")'
+
+# --- Verify CopyQ is alive and capturing ---
+TEST="verify-$(date +%s)"; printf '%s' "$TEST" | pbcopy; sleep 1; [ "$(copyq read 0)" = "$TEST" ] && echo OK || echo FAIL
