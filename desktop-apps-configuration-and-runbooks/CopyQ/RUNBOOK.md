@@ -57,6 +57,63 @@ After install, re-grant Accessibility access — see **Accessibility Permission*
 3. Follow the install steps above with the new version.
 4. Re-grant Accessibility access (macOS revokes it when the binary changes).
 
+## CLI
+
+CopyQ ships a `copyq` CLI that talks to the running daemon. It is available at `/Applications/CopyQ.app/Contents/MacOS/copyq` and symlinked to wherever your PATH picks it up after install.
+
+### Quick reference
+
+| Command | What it does |
+|---------|-------------|
+| `copyq count` | Number of items in history |
+| `copyq read 0` | Print the most recent item (index 0 = newest) |
+| `copyq read 0 1 2` | Print items at rows 0, 1, 2 |
+| `copyq select 3` | Copy item at row 3 to the clipboard |
+| `copyq add "text"` | Add text to history without affecting the live clipboard |
+| `copyq remove 0` | Delete the most recent item |
+| `copyq clipboard` | Print current clipboard contents |
+| `copyq copy "text"` | Set clipboard to text |
+| `copyq count` \| `copyq read` | Pipe-friendly: read from stdin with `-` |
+| `copyq tab` | List all tabs |
+| `copyq show` | Raise the CopyQ window |
+| `copyq toggle` | Show or hide the main window |
+| `copyq disable` / `copyq enable` | Pause / resume clipboard monitoring |
+| `copyq exit` | Shut down the CopyQ daemon |
+| `copyq config` | List all config options |
+| `copyq config OPTION VALUE` | Set a config option |
+| `copyq exporttab FILE` | Export a tab's history to a file |
+| `copyq importtab FILE` | Import a tab's history from a file |
+
+### Useful one-liners
+
+```bash
+# Print the last 10 clipboard entries with index numbers
+for i in $(seq 0 9); do echo "[$i] $(copyq read $i | head -c 100)"; done
+
+# Search history for a string (grep on all items)
+copyq eval 'for(var i=0;i<size();i++) if(str(read(i)).match(/searchterm/)) print("["+i+"] "+str(read(i)).slice(0,80)+"\n")'
+
+# Pipe clipboard history item 0 into a command
+copyq read 0 | pbcopy   # re-copy to pasteboard (useful after a select)
+
+# Set max history size (default 200)
+copyq config maxitems 500
+
+# Verify CopyQ is alive and capturing
+TEST="verify-$(date +%s)"; printf '%s' "$TEST" | pbcopy; sleep 1; [ "$(copyq read 0)" = "$TEST" ] && echo OK || echo FAIL
+```
+
+### Script / eval mode
+
+`copyq eval` runs JavaScript inside the CopyQ scripting engine, giving access to the full API:
+
+```bash
+copyq eval 'popup("Test", "CopyQ scripting works")'
+copyq eval 'print(size())'   # same as copyq count
+```
+
+See the [CopyQ scripting docs](https://hluk.github.io/CopyQ/docs/scripting-api.html) for the full API.
+
 ## Configuration
 
 CopyQ stores its configuration in `~/Library/Preferences/io.github.hluk.CopyQ.plist` and its clipboard history in `~/Library/Application Support/CopyQ/`. No GNU Stow management — settings live only on macOS.
