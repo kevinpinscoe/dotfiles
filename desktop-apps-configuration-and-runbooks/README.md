@@ -24,6 +24,7 @@ Each application gets its own directory containing a `RUNBOOK.md` and any suppor
 | DBeaver Community | [DBeaver/RUNBOOK.md](DBeaver/RUNBOOK.md) | Fedora |
 | Calibre | [Calibre/RUNBOOK.md](Calibre/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | Claude Desktop | [Claude-Desktop/RUNBOOK.md](Claude-Desktop/RUNBOOK.md) | Fedora |
+| CopyQ | [CopyQ/RUNBOOK.md](CopyQ/RUNBOOK.md) | macOS only |
 | Cursor | [Cursor/RUNBOOK.md](Cursor/RUNBOOK.md) | macOS, Fedora |
 | Fastfetch | [Fastfetch/RUNBOOK.md](Fastfetch/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | Ghostty | [Ghostty/RUNBOOK.md](Ghostty/RUNBOOK.md) | macOS, Fedora, RPi5 |
