@@ -1,0 +1,54 @@
+---
+syntax: sh
+tags: [ terminal, session, attach ]
+---
+# Command abduco
+
+## What does this command do:
+
+abduco provides session management i.e. it allows programs to be run independently from its controlling terminal. That is programs can be detached - run in the background - and then later reattached. Together with dvtm it provides a simpler and cleaner alternative to tmux or screen.
+
+## Installed from
+
+For Fedora install using: sudo dnf install abduco
+For Raspberry Pi install using: sudo apt install abduco
+For Mac install using: brew install abduco
+
+## Command path
+
+For Fedora run: /usr/bin/abduco
+For Raspberry Pi run: /usr/bin/abduco
+For Mac run: /opt/homebrew/bin/abduco
+
+## Command documentation
+
+Docs can be found at https://github.com/martanne/abduco
+
+## Command options
+
+# List all existing sessions
+abduco
+
+# Create a new session running <cmd> (detach with Ctrl-\)
+abduco -c <session-name> <cmd>
+
+# Create a new session using $ABDUCO_CMD or dvtm if unset
+abduco -c <session-name>
+
+# Attach to an existing session
+abduco -a <session-name>
+
+# Attach to a session read-only (keyboard input is ignored)
+abduco -a -r <session-name>
+
+# Create a new session but don't attach (run in background immediately)
+abduco -n <session-name> <cmd>
+
+# Set a custom detach character (default: Ctrl-\)
+abduco -c <session-name> <cmd> -e '^q'
+
+# Force attach even if another client is connected
+abduco -A <session-name>
+
+# Recreate a lost socket by sending SIGUSR1 to the server process
+kill -USR1 $(pgrep -P 1 abduco)
