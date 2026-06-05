@@ -1,0 +1,54 @@
+---
+syntax: sh
+tags: [ terminal, session, attach ]
+---
+# Command dtach
+
+## What does this command do:
+
+A simple program that emulates the detach feature of screen
+
+## Installed from
+
+For Fedora install using: sudo dnf install dtach
+For Raspberry Pi install using: sudo apt install dtach
+For Mac install using: brew install dtach
+
+## Command path
+
+For Fedora run: /usr/bin/dtach
+For Raspberry Pi run: /usr/bin/dtach
+For Mac run: /opt/homebrew/bin/dtach
+
+## Command documentation
+
+Docs can be found at https://github.com/crigler/dtach
+
+## Command options
+
+# Create a new session (or attach if socket exists), running <cmd>
+dtach -A <socket> <cmd>
+
+# Attach to an existing session only
+dtach -a <socket>
+
+# Create a new session (never attaches to an existing one)
+dtach -c <socket> <cmd>
+
+# Pipe mode: send stdin to session without scanning for detach character
+dtach -p <socket>
+
+# Set a custom detach character (default: Ctrl-\)
+dtach -A <socket> <cmd> -e '^A'
+
+# Disable the detach character entirely
+dtach -A <socket> <cmd> -E
+
+# Disable Ctrl-Z suspend handling
+dtach -A <socket> <cmd> -z
+
+# Set the redraw method: none, ctrl_l (default), or winch
+dtach -A <socket> <cmd> -r winch
+
+# Run in foreground (don't background the master process)
+dtach -A <socket> <cmd> -N
