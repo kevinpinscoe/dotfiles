@@ -11,13 +11,16 @@ abduco provides session management i.e. it allows programs to be run independent
 ## Installed from
 
 For Fedora install using: sudo dnf install abduco
-For Raspberry Pi install using: sudo apt install abduco
+For Raspberry Pi install using: build from source (not in Debian repos)
+  sudo apt update && sudo apt install -y build-essential git
+  git clone https://github.com/martanne/abduco.git && cd abduco
+  ./configure && make && sudo make install
 For Mac install using: brew install abduco
 
 ## Command path
 
 For Fedora run: /usr/bin/abduco
-For Raspberry Pi run: /usr/bin/abduco
+For Raspberry Pi run: /usr/local/bin/abduco
 For Mac run: /opt/homebrew/bin/abduco
 
 ## Command documentation
