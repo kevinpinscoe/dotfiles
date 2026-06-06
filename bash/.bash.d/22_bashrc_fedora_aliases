@@ -12,3 +12,6 @@ alias journal='~/AppImages/Obsidian.AppImage "obsidian://open?vault=Personal%20J
 alias dlogin='cat ~/.config/gitea/api | docker login git.kevininscoe.com --username kevin --password-stdin'
 
 alias km='cd $HOME/KnowledgeVault'
+
+# SSH into the acst account on this machine
+alias work='ssh acst@127.0.0.1'

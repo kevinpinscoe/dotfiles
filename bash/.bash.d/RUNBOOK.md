@@ -17,6 +17,17 @@ Do not commit or push without an explicit user confirmation.
 See `~/.dotfiles/CLAUDE.md` for the full dotfiles repo layout.
 
 
+## Fedora-only aliases (`22_bashrc_fedora_aliases`)
+
+| Alias | Command | Purpose |
+|-------|---------|---------|
+| `journal` | `~/AppImages/Obsidian.AppImage …` | Open Obsidian Personal Journal vault |
+| `dlogin` | `docker login git.kevininscoe.com …` | Log in to self-hosted Gitea container registry |
+| `km` | `cd $HOME/KnowledgeVault` | Jump to KnowledgeVault directory |
+| `work` | `ssh acst@127.0.0.1` | SSH into the acst account on this machine |
+
+---
+
 ## Reloading shell config (`reload`)
 
 The `reload` function is defined in `~/.bash.d/20_bashrc_aliases`. Run it after editing any file in `~/.bash.d/` to load those changes into your current shell without opening a new terminal.
