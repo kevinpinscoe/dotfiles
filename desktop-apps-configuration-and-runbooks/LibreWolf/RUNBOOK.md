@@ -34,7 +34,11 @@ The Homebrew cask `librewolf` was deprecated and **disabled on 2026-09-01** beca
    ```
    After this, `codesign -dv` should report `Sealed Resources version=2`. `spctl` will still say `rejected` (adhoc is not notarized), but the app will launch normally.
 
-**Update:** Download the new `.dmg` from librewolf.net and replace `/Applications/LibreWolf.app`. Re-run **both** the `xattr -dr` and `codesign --force --deep` commands after replacing.
+**Update:** Download the new `.dmg` from librewolf.net and replace `/Applications/LibreWolf.app`. macOS will flag the new build as damaged — clear the quarantine attribute:
+```bash
+xattr -dr com.apple.quarantine /Applications/LibreWolf.app
+```
+On **macOS Tahoe (26+) only**, also re-sign (see Troubleshooting below). On Sequoia (25.x) the `xattr` step alone is sufficient.
 
 **Config locations:**
 
