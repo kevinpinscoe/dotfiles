@@ -33,3 +33,5 @@
 	autoSetupRemote = true
 [gpg "ssh"]
 	allowedsignersfile = ~/.ssh/allowed_signers
+[credential]
+	helper = store
