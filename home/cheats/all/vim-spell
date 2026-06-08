@@ -1,0 +1,72 @@
+---
+syntax: sh
+tags: [ all, vim, spell, spelling ]
+---
+# vim spell checker
+
+## What does this do:
+
+Vim's built-in spell checker. Misspelled words are highlighted (red underline
+on this system). Custom word list lives at ~/.vim/spell/en.utf-8.add.
+
+## Navigating misspelled words
+
+# Jump to next misspelled word
+]s
+
+# Jump to previous misspelled word
+[s
+
+# Jump to next misspelled word (bad words only, skip rare/region words)
+]S
+
+## Fixing misspelled words
+
+# Show numbered suggestion list — type a number + Enter to accept
+z=
+
+# Accept the top suggestion instantly (no menu)
+1z=
+
+# Accept Nth suggestion instantly
+2z=
+
+## Managing the custom word list
+
+# Mark word under cursor as correct (adds to ~/.vim/spell/en.utf-8.add)
+zg
+
+# Mark word under cursor as wrong (adds to bad-words list)
+zw
+
+# Undo zg — remove word from good list
+zug
+
+# Undo zw — remove word from bad list
+zuw
+
+## Toggling spell check on/off
+
+# Enable spell checking
+:set spell
+
+# Disable spell checking
+:set nospell
+
+# Toggle
+:set spell!
+
+## Changing language
+
+# Switch to British English
+:set spelllang=en_gb
+
+# Check multiple languages at once
+:set spelllang=en_us,en_gb
+
+# Check against all installed languages
+:set spelllang=en
+
+## Viewing full help
+
+:help spell
