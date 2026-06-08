@@ -45,10 +45,10 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - `hammerspoon/` — Hammerspoon `init.lua` (macOS only); only stowed when `uname -s` == `Darwin`
 - `vscode/` — host-specific VS Code settings snapshots (not stowed; restored via `restore.sh`)
 - [`Brewfile/`](Brewfile/RUNBOOK.md) — Homebrew manifest (taps, formulae, casks, VS Code extensions) for bootstrapping a Mac via `brew bundle install`; not stowed
-- `desktop-setup/` — platform-specific setup guides, runbooks, and GUI app documentation
+- `desktop-setup/` — platform-specific setup guides and system screenshots
   - [`fedora-kde/`](desktop-setup/fedora-kde/) — Fedora KDE Plasma setup (including [Claude Desktop](desktop-setup/fedora-kde/claude-desktop/README.md))
   - `MacOS/` — macOS fastfetch config
-  - [`application-runbooks/`](desktop-setup/application-runbooks/README.md) — per-app operational notes for desktop applications (Ghostty, MarkText, Obsidian, Typora, git/gitsign, tmux)
+- [`desktop-apps-configuration-and-runbooks/`](desktop-apps-configuration-and-runbooks/README.md) — per-app runbooks for GUI and desktop applications across all three platforms (install, config, troubleshooting)
 
 ## Stow folding — why some symlinks are on directories, not files
 
