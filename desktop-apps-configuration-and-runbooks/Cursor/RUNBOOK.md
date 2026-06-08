@@ -28,16 +28,27 @@ brew install --cask cursor
 
 ### Fedora
 
-Download the `.AppImage` or `.deb` from <https://cursor.com/downloads>.
-
-For the AppImage:
+Download the RPM from <https://cursor.com/downloads> and install with `dnf`:
 
 ```bash
-mkdir -p ~/.local/share/cursor
-curl -fL -o ~/.local/share/cursor/cursor.AppImage "$(curl -s https://api.cursor.sh/updates/latest | jq -r '.linux.x64.url')"
-chmod +x ~/.local/share/cursor/cursor.AppImage
-ln -sf ~/.local/share/cursor/cursor.AppImage ~/.local/bin/cursor
+curl -fL -o /tmp/cursor.rpm "https://api2.cursor.sh/updates/download/golden/linux-x64-rpm/cursor/3.7"
+sudo dnf install /tmp/cursor.rpm
+rm /tmp/cursor.rpm
 ```
+
+To update later, re-download and reinstall the same way (`dnf install` handles upgrades).
+
+### Raspberry Pi 5 (Debian Trixie, ARM64)
+
+Download the ARM64 `.deb` from <https://cursor.com/downloads> and install with `apt`:
+
+```bash
+curl -fL -o /tmp/cursor.deb "https://api2.cursor.sh/updates/download/golden/linux-arm64-deb/cursor/3.7"
+sudo apt install /tmp/cursor.deb
+rm /tmp/cursor.deb
+```
+
+> Note: Replace `3.7` in the URL with the current version shown at <https://cursor.com/downloads>.
 
 ## Configuration
 
@@ -47,6 +58,7 @@ Cursor stores settings in the same locations as VS Code:
 |----------|--------------|
 | macOS | `~/Library/Application Support/Cursor/User/` |
 | Fedora | `~/.config/Cursor/User/` |
+| Raspberry Pi 5 | `~/.config/Cursor/User/` |
 
 ## Cursor SDK
 
