@@ -36,8 +36,10 @@ Each application gets its own directory containing a `RUNBOOK.md` and any suppor
 | Logseq | [Logseq/RUNBOOK.md](Logseq/RUNBOOK.md) | Fedora |
 | Marky | [Marky/RUNBOOK.md](Marky/RUNBOOK.md) | macOS, Fedora |
 | MarkText | [MarkText/RUNBOOK.md](MarkText/RUNBOOK.md) | macOS, Fedora |
+| Mullvad Browser | [Mullvad Browser/RUNBOOK.md](Mullvad%20Browser/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | Obsidian | [Obsidian/RUNBOOK.md](Obsidian/RUNBOOK.md) | macOS, Fedora |
 | Open Design | [Open-Design/RUNBOOK.md](Open-Design/RUNBOOK.md) | Fedora |
+| Salt Project | [Salt-Project/RUNBOOK.md](Salt-Project/RUNBOOK.md) | Fedora |
 | Signal Desktop | [Signal/RUNBOOK.md](Signal/RUNBOOK.md) | Fedora |
 | Terragrunt | [Terragrunt/RUNBOOK.md](Terragrunt/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | tmux | [tmux/RUNBOOK.md](tmux/RUNBOOK.md) | macOS, Fedora, RPi5 |
