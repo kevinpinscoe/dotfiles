@@ -1,12 +1,12 @@
 ---
 syntax: sh
-tags: [ ai, cli, coding, cursor, agent ]
+tags: [ cursor, cli, ai, editor, ide, cursor-cli ]
 ---
 # Command agent
 
 ## What does this command do:
 
-Cursor CLI lets you interact with AI agents directly from your terminal to write, review, and modify code. Whether you prefer an interactive terminal interface or print automation for scripts and CI pipelines
+Cursor CLI lets you interact with AI agents directly from your terminal to write, review, and modify code. Whether you prefer an interactive terminal interface or print automation for scripts and CI pipelines, the CLI provides powerful coding assistance right where you work.
 
 Also installed as legacy alias: cursor-agent
 
@@ -24,7 +24,7 @@ For Mac run: ~/.local/bin/agent
 
 ## Command documentation
 
-Docs can be found at https://cursor.com/cli
+Docs can be found at https://cursor.com/docs/cli/installation
 
 ## Command options
 

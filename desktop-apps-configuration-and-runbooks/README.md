@@ -25,7 +25,8 @@ Each application gets its own directory containing a `RUNBOOK.md` and any suppor
 | Calibre | [Calibre/RUNBOOK.md](Calibre/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | Claude Desktop | [Claude-Desktop/RUNBOOK.md](Claude-Desktop/RUNBOOK.md) | Fedora |
 | CopyQ | [CopyQ/RUNBOOK.md](CopyQ/RUNBOOK.md) | macOS only |
-| Cursor | [Cursor/RUNBOOK.md](Cursor/RUNBOOK.md) | macOS, Fedora |
+| Cursor (desktop app) | [Cursor/RUNBOOK.md](Cursor/RUNBOOK.md) | macOS, Fedora, RPi5 |
+| Cursor CLI (`agent`) | [Cursor/RUNBOOK.md](Cursor/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | Fastfetch | [Fastfetch/RUNBOOK.md](Fastfetch/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | Ghostty | [Ghostty/RUNBOOK.md](Ghostty/RUNBOOK.md) | macOS, Fedora, RPi5 |
 | git (gitsign) | [git/RUNBOOK.md](git/RUNBOOK.md) | macOS, Fedora, RPi5 |
