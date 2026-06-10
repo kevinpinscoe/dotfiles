@@ -56,6 +56,7 @@ Stow packages — each directory is stowed into `$HOME`:
 | `tmux` | `tmux/.tmux.conf` | `~/.tmux.conf` | tmux config; shared across platforms |
 | `tmux` | `tmux/.config/tmux/status/` | `~/.config/tmux/status/` | Status bar scripts (workingon, git, aws, k8s) |
 | `opensessions` | `opensessions/.config/opensessions/config.json` | `~/.config/opensessions/config.json` | opensessions sidebar config (sidebarPosition, width, theme, etc.) |
+| `opensessions` | `opensessions/.tmux/plugins/opensessions/bin/` | `~/.tmux/plugins/opensessions/bin/` | opensessions binaries (`opensessions-server`, `opensessions-sidebar`, `.opensessions-version`); `lazydiff` is not tracked here — it lives in `~/.local/bin/` |
 | `yazi` | `yazi/.config/yazi/plugins/ls-deluxe-colors.yazi/` | `~/.config/yazi/plugins/ls-deluxe-colors.yazi/` | Yazi linemode plugin: colors mtime by age and file size (lsd-style) |
 | `git` | `git/.gitconfig` | `~/.gitconfig` | Global git config; shared across all platforms |
 | `git` | `git/.config/git/ignore` | `~/.config/git/ignore` | Global gitignore |

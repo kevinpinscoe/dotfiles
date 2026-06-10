@@ -50,6 +50,10 @@ mkdir -p "$HOME/.config/tmux/scripts"
 # per-file; the opensessions server also writes session-order.json there at runtime.
 mkdir -p "$HOME/.config/opensessions"
 
+# ~/.tmux/plugins/opensessions/bin/ must be a real directory so stow symlinks
+# the server and sidebar binaries per-file rather than symlinking the whole directory.
+mkdir -p "$HOME/.tmux/plugins/opensessions/bin"
+
 # ~/.config/yazi/plugins/ must be a real directory so stow symlinks each plugin
 # directory individually rather than symlinking the whole plugins/ directory.
 mkdir -p "$HOME/.config/yazi/plugins"
