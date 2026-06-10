@@ -44,8 +44,8 @@ Stow packages — each directory is stowed into `$HOME`:
 |---------|-------------|-----------------|-------|
 | `bash` | `bash/.bashrc` | `~/.bashrc` | Main bash config, sources `.bash.d/` fragments |
 | `bash` | `bash/.bash_profile` | `~/.bash_profile` | Login shell config |
-| `bash` | `bash/.zshrc` | `~/.zshrc` | Zsh config (macOS only) |
-| `bash` | `bash/.zprofile` | `~/.zprofile` | Zsh login shell config (macOS only) |
+| `bash` | `bash/.zshrc` | `~/.zshrc` | Zsh config (all platforms; platform-gates fragments via IS_MACOS/IS_FEDORA/IS_DEBIAN) |
+| `bash` | `bash/.zprofile` | `~/.zprofile` | Zsh login shell config (macOS only; Linux returns early at top) |
 | `bash` | `bash/.bash.d/` | `~/.bash.d/` | Numbered bash fragments loaded in order |
 | `vim` | `vim/.vimrc` + `vim/.vim/` | `~/.vimrc`, `~/.vim/` | Vim config |
 | `aspell` | `aspell/.aspell.en.pws` | `~/.aspell.en.pws` | Personal spell-check dictionary |

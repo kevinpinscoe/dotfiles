@@ -2,6 +2,8 @@
 # Sets up PATH and environment before .zshrc runs.
 # Mirrors the login environment from .bash_profile -> .bashrc -> 01_bashrc_mac_env
 
+[[ "$(uname)" != "Darwin" ]] && return
+
 # Homebrew - must come first so all brew-installed tools are on PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 

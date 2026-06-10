@@ -13,4 +13,9 @@ _sync_aws_profile() {
         rm -f "$HOME/.aws/active_profile"
     fi
 }
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }_sync_aws_profile"
+if [ -n "${ZSH_VERSION:-}" ]; then
+    autoload -Uz add-zsh-hook
+    add-zsh-hook precmd _sync_aws_profile
+else
+    PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }_sync_aws_profile"
+fi
