@@ -50,6 +50,13 @@ mkdir -p "$HOME/.config/tmux/scripts"
 # per-file; the opensessions server also writes session-order.json there at runtime.
 mkdir -p "$HOME/.config/opensessions"
 
+# opensessions tmux plugin — clone if not already present. The bin/ files are
+# managed by the opensessions stow package; the clone provides the plugin itself.
+if [[ ! -d "$HOME/.tmux/plugins/opensessions/.git" ]]; then
+  mkdir -p "$HOME/.tmux/plugins"
+  git clone https://github.com/Ataraxy-Labs/opensessions.git "$HOME/.tmux/plugins/opensessions"
+fi
+
 # ~/.tmux/plugins/opensessions/bin/ must be a real directory so stow symlinks
 # the server and sidebar binaries per-file rather than symlinking the whole directory.
 mkdir -p "$HOME/.tmux/plugins/opensessions/bin"
