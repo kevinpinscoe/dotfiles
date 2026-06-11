@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Platform-aware clipboard copy with CR stripping.
+# Platform-aware clipboard copy with CR and newline stripping.
 # Called by tmux copy-pipe; reads selection from stdin.
-content=$(cat | tr -d $'\r')
+content=$(cat | tr -d $'\r\n')
 if [[ "$(uname)" == "Darwin" ]]; then
     printf '%s' "$content" | copyq copy -
 else
