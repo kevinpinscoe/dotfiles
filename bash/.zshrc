@@ -60,6 +60,11 @@ if [[ -f /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh ]]; then
     bindkey -M viins "^[OC" forward-char  # SS3 sequence (application mode)
 fi
 
+# zsh-autosuggestions: Linux (Fedora + Debian install to the same path)
+if [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
 [[ -f ~/.environment/self-hosted-services.sh ]] && source ~/.environment/self-hosted-services.sh
 
 # Disable terminal bell

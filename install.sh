@@ -110,6 +110,15 @@ if [[ "$OS" == "Darwin" && -d "$DOTFILES_DIR/hammerspoon" ]]; then
   echo "Stowed: hammerspoon"
 fi
 
+# zsh-autosuggestions — install if absent (grey-text history suggestions; right-arrow to accept)
+if [[ "$OS" == "Linux" ]] && [[ ! -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+  if grep -qi "fedora" /etc/os-release 2>/dev/null; then
+    sudo dnf install -y zsh-autosuggestions
+  elif grep -qi "debian\|ubuntu\|raspbian" /etc/os-release 2>/dev/null; then
+    sudo apt install -y zsh-autosuggestions
+  fi
+fi
+
 # Clone community cheatsheets if absent
 if [[ ! -d "$HOME/.config/cheat/cheatsheets/community" ]]; then
   mkdir -p "$HOME/.config/cheat/cheatsheets"
