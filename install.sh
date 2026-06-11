@@ -113,6 +113,16 @@ if [[ "$OS" == "Darwin" && -d "$DOTFILES_DIR/hammerspoon" ]]; then
   echo "Stowed: hammerspoon"
 fi
 
+# Cursor is macOS-only. ~/Library/Application Support/Cursor/User/ must be
+# a real directory so stow symlinks config files inside it per-file rather
+# than the whole directory — Cursor writes extensions and other runtime state
+# alongside the config files.
+if [[ "$OS" == "Darwin" && -d "$DOTFILES_DIR/cursor-professional" ]]; then
+  mkdir -p "$HOME/Library/Application Support/Cursor/User"
+  stow -d "$DOTFILES_DIR" -t "$HOME" --restow cursor-professional
+  echo "Stowed: cursor-professional"
+fi
+
 # zsh-autosuggestions — install if absent (grey-text history suggestions; right-arrow to accept)
 if [[ "$OS" == "Linux" ]] && [[ ! -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
   if grep -qi "fedora" /etc/os-release 2>/dev/null; then
