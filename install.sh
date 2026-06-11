@@ -60,6 +60,9 @@ fi
 # ~/.tmux/plugins/opensessions/bin/ must be a real directory so stow symlinks
 # the server and sidebar binaries per-file rather than symlinking the whole directory.
 mkdir -p "$HOME/.tmux/plugins/opensessions/bin"
+# The clone places real binaries here; remove them so stow can create its symlinks.
+rm -f "$HOME/.tmux/plugins/opensessions/bin/opensessions-server"
+rm -f "$HOME/.tmux/plugins/opensessions/bin/opensessions-sidebar"
 
 # ~/.config/yazi/plugins/ must be a real directory so stow symlinks each plugin
 # directory individually rather than symlinking the whole plugins/ directory.
