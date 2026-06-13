@@ -48,7 +48,7 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - `desktop-setup/` — platform-specific setup guides and system screenshots
   - [`fedora-kde/`](desktop-setup/fedora-kde/) — Fedora KDE Plasma setup (including [Claude Desktop](desktop-setup/fedora-kde/claude-desktop/README.md))
   - `MacOS/` — macOS fastfetch config
-- [`desktop-apps-configuration-and-runbooks/`](desktop-apps-configuration-and-runbooks/README.md) — per-app runbooks for GUI and desktop applications across all three platforms (install, config, troubleshooting)
+- ~~`desktop-apps-configuration-and-runbooks/`~~ — **migrated** to [`~/Projects/private/app-configuration`](https://git.kevininscoe.com/kinscoe/app-configuration) (June 2026); per-app runbooks now live there with normalized lowercase directory names
 
 ## Stow folding — why some symlinks are on directories, not files
 
