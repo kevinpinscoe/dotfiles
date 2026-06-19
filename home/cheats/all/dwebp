@@ -1,0 +1,67 @@
+---
+syntax: sh
+tags: [ webp, image, decode, conversion ]
+---
+# Command dwebp
+
+## What does this command do:
+
+Decodes and decompresses a .webp image file into PNG, PPM, PGM, BMP, or TIFF.
+
+## Installed from
+
+For Fedora install using: sudo dnf install libwebp-tools
+For Raspberry Pi install using: sudo apt install webp
+For Mac install using: brew install webp
+
+## Command path
+
+For Fedora run: /usr/bin/dwebp
+For Raspberry Pi run: /usr/bin/dwebp
+For Mac run: /opt/homebrew/bin/dwebp
+
+## Command documentation
+
+Docs can be found at https://developers.google.com/speed/webp/docs/dwebp
+
+## Command options
+
+Usage: dwebp in_file [options] [-o out_file]
+
+Decodes the WebP image file to PNG format by default. Animated WebP files are not supported.
+
+Output format options:
+  -pam ......... save the raw RGBA samples as a color PAM
+  -ppm ......... save the raw RGB samples as a color PPM
+  -bmp ......... save as uncompressed BMP format
+  -tiff ........ save as uncompressed TIFF format
+  -pgm ......... save the raw YUV samples as a grayscale PGM (IMC4 layout)
+  -yuv ......... save the raw YUV samples in flat layout
+
+Other options:
+  -version ..... print version number and exit
+  -nofancy ..... don't use the fancy YUV420 upscaler
+  -nofilter .... disable in-loop filtering
+  -nodither .... disable dithering
+  -dither <d> .. dithering strength (in 0..100)
+  -alpha_dither  use alpha-plane dithering if needed
+  -mt .......... use multi-threading
+  -crop <x> <y> <w> <h> ... crop output with the given rectangle
+  -resize <w> <h> ......... resize output (*after* any cropping)
+  -flip ........ flip the output vertically
+  -alpha ....... only save the alpha plane
+  -incremental . use incremental decoding (useful for tests)
+  -h ........... this help message
+  -v ........... verbose (e.g. print decoding times)
+  -quiet ....... quiet mode, don't print anything
+  -noasm ....... disable all assembly optimizations
+
+Examples:
+  # Decode to PNG (default)
+  dwebp photo.webp -o photo.png
+
+  # Decode to BMP
+  dwebp photo.webp -bmp -o photo.bmp
+
+  # Decode, crop a 100x100 region at (10,10), then resize to 64x64
+  dwebp photo.webp -crop 10 10 100 100 -resize 64 64 -o thumb.png
