@@ -4,15 +4,25 @@ tags: [ sftp,server,file-transfer,webdav,http,s3,cloud-storage,azure-blob,encryp
 ---
 # Command sftpgo
 
+## Canonical runbook
+
+Full install/config/troubleshooting now lives in the app-configuration repo:
+  apps/sftpgo/RUNBOOK.md  (git.kevininscoe.com/kinscoe/app-configuration)
+  local clone: ~/projects/private/app-configuration/apps/sftpgo/RUNBOOK.md
+This cheat is the quick command reference only.
+
 ## What does this command do:
 
 Full-featured and highly configurable SFTP, HTTP/S, FTP/S and WebDAV server - S3, Google Cloud Storage, Azure Blob
 
 ## Installed from
 
-For Fedora install using: curl -sS "https://ftp.osuosl.org/pub/sftpgo/yum/x86_64/sftpgo.repo" | sudo tee /etc/yum.repos.d/sftpgo.repo && sudo dnf install -y sftpgo
-For Raspberry Pi install using: curl -sS https://ftp.osuosl.org/pub/sftpgo/apt/gpg.key | sudo tee /etc/apt/trusted.gpg.d/sftpgo.asc && echo "deb https://ftp.osuosl.org/pub/sftpgo/apt bookworm main" | sudo tee /etc/apt/sources.list.d/sftpgo.list && sudo apt update && sudo apt install -y sftpgo
-For Mac install using: brew install sftpgo
+NOTE: the osuosl mirror commands below are DEAD — /pub/sftpgo/ now 404s (apt/yum).
+Install from GitHub release .deb/.rpm instead; see the canonical runbook above.
+
+(dead) Fedora: curl -sS "https://ftp.osuosl.org/pub/sftpgo/yum/x86_64/sftpgo.repo" | sudo tee /etc/yum.repos.d/sftpgo.repo && sudo dnf install -y sftpgo
+(dead) Raspberry Pi: curl -sS https://ftp.osuosl.org/pub/sftpgo/apt/gpg.key | sudo tee /etc/apt/trusted.gpg.d/sftpgo.asc && echo "deb https://ftp.osuosl.org/pub/sftpgo/apt bookworm main" | sudo tee /etc/apt/sources.list.d/sftpgo.list && sudo apt update && sudo apt install -y sftpgo
+For Mac install using: brew install sftpgo  (still works)
 
 ## Command path
 
