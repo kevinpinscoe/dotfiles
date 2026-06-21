@@ -15,7 +15,7 @@ alias dock='killall Dock'
 alias awspw='pwgen -cyn 15'
 alias j='cd ~/Journal/Personal\ Journal'
 alias proj='cd ~/Projects'
-alias pcm='cd ~/KnowledgeVault/personal-knowledge-base'
+alias pcm='cd ~/Projects/private/personal-context-management-private'
 alias private='cd ~/Projects/private'
 alias public='cd ~/Projects/public'
 unalias reload 2>/dev/null
