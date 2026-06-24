@@ -115,11 +115,11 @@ To keep those refs fresh, a background `git fetch --all` is triggered automatica
 ### Installation (one-time per host)
 
 ```bash
-git clone https://github.com/davorg/gitme.git ~/bin/gitme
+git clone git@github.com:kevinpinscoe/gitme.git ~/private-tools/gitme
 ```
 
-- **bash hosts** (`30_bash_autocomplete`) source the upstream `~/bin/gitme/gitme` directly. If `~/bin/gitme/` doesn't exist the block silently no-ops.
-- **zsh hosts** (`30_zsh_autocomplete`, Mac) define a zsh-native reimplementation of `gitme` and `_gitme_build_cache` inline. The upstream script uses `read -ra` and `shopt`, which are bash-only and fail at call time in zsh. Tab completion still sources `~/bin/gitme/gitme-completion.bash` under `bashcompinit`.
+- **bash hosts** (`30_bash_autocomplete`) source the upstream `~/private-tools/gitme/gitme` directly. If `~/private-tools/gitme/` doesn't exist the block silently no-ops.
+- **zsh hosts** (`30_zsh_autocomplete`, Mac) define a zsh-native reimplementation of `gitme` and `_gitme_build_cache` inline. The upstream script uses `read -ra` and `shopt`, which are bash-only and fail at call time in zsh. Tab completion still sources `~/private-tools/gitme/gitme-completion.bash` under `bashcompinit`.
 
 ### Configuration
 

@@ -4,7 +4,7 @@ if command -v kubectl >/dev/null 2>&1; then
 fi
 
 # gitme — zsh-native reimplementation. The upstream script at
-# ~/bin/gitme/gitme uses `read -ra` and `shopt`, which are bash-only and fail
+# ~/private-tools/gitme/gitme uses `read -ra` and `shopt`, which are bash-only and fail
 # at call time in zsh. We define portable equivalents here instead of sourcing.
 export GITME_CACHE_DIR="${GITME_CACHE_DIR:-$HOME/.gitme}"
 GITME_CACHE_FILE="$GITME_CACHE_DIR/cache"
@@ -71,7 +71,7 @@ Ignore file:
   Lines starting with # are comments. Examples:
     /home/user/Projects/3rd-party-repos/*
     /home/user/Projects/secret-project
-    /home/user/bin/gitme
+    /home/user/private-tools/gitme
 
   Changes to the ignore file take effect immediately — no cache rebuild needed.
 
@@ -136,7 +136,7 @@ EOF
     fi
 }
 
-if [[ -f "$HOME/bin/gitme/gitme-completion.bash" ]]; then
+if [[ -f "$HOME/private-tools/gitme/gitme-completion.bash" ]]; then
     autoload -U +X bashcompinit && bashcompinit
-    source "$HOME/bin/gitme/gitme-completion.bash"
+    source "$HOME/private-tools/gitme/gitme-completion.bash"
 fi
