@@ -7,18 +7,7 @@
 # Homebrew - must come first so all brew-installed tools are on PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# GitHub token for Homebrew (private ACST org taps).
-# Migrated 2026-06-22 from plaintext ~/.homebrew/gh-token to 1Password
-# (Employee vault, "GitHub PAT - homebrew (mac)"). Fetched lazily on first
-# `brew` call so we don't pay op's ~3s latency on every shell startup.
-brew() {
-    if [[ -z "$HOMEBREW_GITHUB_API_TOKEN" ]] && command -v op >/dev/null 2>&1; then
-        HOMEBREW_GITHUB_API_TOKEN="$(op read --account acst.1password.com \
-            'op://Employee/g3eycecdhipnznib5v55qnzglm/credential' 2>/dev/null)"
-        [[ -n "$HOMEBREW_GITHUB_API_TOKEN" ]] && export HOMEBREW_GITHUB_API_TOKEN
-    fi
-    command brew "$@"
-}
+[[ -f "$HOME/.environment/zsh_secrets.sh" ]] && source "$HOME/.environment/zsh_secrets.sh"
 
 # PostgreSQL
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"

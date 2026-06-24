@@ -8,10 +8,7 @@ export GITME_DIRS="$HOME"
 export CHECK_GIT_REPOS="$HOME"
 export CHECK_GIT_BRANCH="$HOME"
 
-if [[ -r "$HOME/.homebrew/gh-token" ]]; then
-  IFS= read -r HOMEBREW_GITHUB_API_TOKEN < "$HOME/.homebrew/gh-token"
-  export HOMEBREW_GITHUB_API_TOKEN
-fi
+[[ -f "$HOME/.environment/zsh_secrets.sh" ]] && source "$HOME/.environment/zsh_secrets.sh"
 
 # Add Homebrew to PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
