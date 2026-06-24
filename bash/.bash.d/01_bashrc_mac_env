@@ -1,5 +1,8 @@
 # Work environments
 
+# OpenBao (local dev vault)
+export BAO_ADDR=http://127.0.0.1:8200
+
 # gitme search roots (Mac): scan home directory only
 export GITME_DIRS="$HOME"
 export CHECK_GIT_REPOS="$HOME"
