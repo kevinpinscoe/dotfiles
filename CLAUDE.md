@@ -2,6 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+> **Clipboard / copy-on-select issues (tmux + Ghostty + copyq):** read
+> [`tmux/CLIPBOARD-RUNBOOK.md`](tmux/CLIPBOARD-RUNBOOK.md) **first**. The usual
+> cause is `set -g set-clipboard` drifting back to `off` in `tmux/.tmux.conf`,
+> which disables the OSC 52 path. Correct value is `on`. Shared across all three
+> machines via this stow package.
+
 ## Repository purpose
 
 Personal dotfiles for Linux hosts (Fedora, Raspberry Pi) and Mac. Dotfiles are managed with **GNU Stow** — `install.sh` creates symlinks in `$HOME` rather than copying files. Editing a file under `~/` edits the repo directly.
