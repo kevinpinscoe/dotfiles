@@ -67,5 +67,8 @@ fi
 
 [[ -f ~/.environment/self-hosted-services.sh ]] && source ~/.environment/self-hosted-services.sh
 
+# Container-local overrides (not stowed; exists only on hosts that have it)
+[[ -f ~/container-zshrc.sh ]] && source ~/container-zshrc.sh
+
 # Disable terminal bell
 unsetopt BEEP
