@@ -66,6 +66,7 @@ if [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
 fi
 
 [[ -f ~/.environment/self-hosted-services.sh ]] && source ~/.environment/self-hosted-services.sh
+[[ -f ~/.environment/zsh_secrets.sh ]] && source ~/.environment/zsh_secrets.sh
 
 # Container-local overrides (not stowed; exists only on hosts that have it)
 [[ -f ~/container-zshrc.sh ]] && source ~/container-zshrc.sh
