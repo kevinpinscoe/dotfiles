@@ -2,12 +2,14 @@
 # Sets up PATH and environment before .zshrc runs.
 # Mirrors the login environment from .bash_profile -> .bashrc -> 01_bashrc_mac_env
 
+# Private secrets — sourced on ALL machines that share ~/.dotfiles, so this must
+# stay above the Darwin gate below. The file itself is a no-op where `op` is absent.
+[[ -f "$HOME/.environment/zsh_secrets.sh" ]] && source "$HOME/.environment/zsh_secrets.sh"
+
 [[ "$(uname)" != "Darwin" ]] && return
 
 # Homebrew - must come first so all brew-installed tools are on PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-[[ -f "$HOME/.environment/zsh_secrets.sh" ]] && source "$HOME/.environment/zsh_secrets.sh"
 
 # PostgreSQL
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
