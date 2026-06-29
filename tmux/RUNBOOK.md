@@ -1,1 +1,0 @@
-../desktop-setup/application-runbooks/tmux/RUNBOOK.md
