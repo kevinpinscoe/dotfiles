@@ -6,7 +6,26 @@ alias l='ls -lahF'
 alias lf='ls -F'
 alias up='cd ..'
 alias dl='cd ~/Downloads'
-alias lastdl='echo "$HOME/Downloads/$(ls -tc ~/Downloads/ | head -n 1)"'
+unalias lastdl 2>/dev/null
+lastdl() {
+    # Print the most recently modified entry in Downloads.
+    # Tries $HOME/Downloads first, then /mac-home/Downloads so it works
+    # natively (Fedora/macOS) and inside the mounted mac-home container.
+    local d f
+    for d in "$HOME/Downloads" /mac-home/Downloads; do
+        [ -d "$d" ] || continue
+        f=$(ls -t "$d" 2>/dev/null | head -n 1)
+        if [ -n "$f" ]; then
+            echo "$d/$f"
+        else
+            echo "lastdl: $d is empty" >&2
+            return 1
+        fi
+        return 0
+    done
+    echo "lastdl: no Downloads directory found" >&2
+    return 1
+}
 alias wx='curl https://wttr.in/Greeneville_TN'
 alias k='kubectl'
 alias eks='~/tools/eks; source ~/.environment/.env_set.sh'
