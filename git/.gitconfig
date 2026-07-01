@@ -12,14 +12,12 @@
 	email = kevin.inscoe@gmail.com
 	name = Kevin P. Inscoe
 	signingkey = ~/.ssh/id_ed25519_signing.pub
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 [credential "https://github.com"]
 	helper = 
-	helper = !gh auth git-credential
+	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !gh auth git-credential
+	helper = !/usr/bin/gh auth git-credential
 [core]
 	hooksPath = ~/.config/git/hooks
 [filter "lfs"]
