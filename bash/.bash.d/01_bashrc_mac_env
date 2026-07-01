@@ -2,6 +2,11 @@
 
 # OpenBao (local dev vault)
 export BAO_ADDR=http://127.0.0.1:8200
+# mac-local OpenBao uses interactive login (root token from 1Password ->
+# ~/.vault-token). Clear any home-instance BAO_TOKEN inherited from
+# 00_bashrc_env -> ~/.environment/openbao/openbao-env.sh, which exports the
+# HOME instance token and would 403 against this mac-local address.
+unset BAO_TOKEN
 
 # gitme search roots (Mac): scan home directory only
 export GITME_DIRS="$HOME"
