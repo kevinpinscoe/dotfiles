@@ -43,7 +43,7 @@ _gitme_build_cache() {
 }
 
 gitme() {
-    local GITME_VERSION="0.0.3-zsh"
+    local GITME_VERSION="0.0.4-zsh"
     case "$1" in
         -h|--help)
             cat <<EOF
@@ -105,16 +105,33 @@ EOF
 
     if [[ -s "$GITME_CACHE_FILE" ]]; then
         local search_lc="${search:l}"
-        local dir remote_url repo_name
+        local dir remote_url repo_name repo_lc url_lc
+        # Collect matches into three tiers of decreasing specificity so a term
+        # like "kevininscoe.com" (part of every Gitea remote URL) does not drown
+        # out the repo actually named "kevininscoe.com".
+        local -a name_exact name_match url_match
         while IFS=$'\t' read -r dir remote_url; do
             [[ -z "$dir" ]] && continue
             repo_name="$(basename "$dir")"
-            if [[ "${repo_name:l}" == *"$search_lc"* || "${remote_url:l}" == *"$search_lc"* ]]; then
-                if [[ -d "$dir" ]] && ! _gitme_is_ignored "$dir"; then
-                    matches+=("$dir")
-                fi
+            [[ -d "$dir" ]] && ! _gitme_is_ignored "$dir" || continue
+            repo_lc="${repo_name:l}"
+            url_lc="${remote_url:l}"
+            if [[ "$repo_lc" == "$search_lc" ]]; then
+                name_exact+=("$dir")
+            elif [[ "$repo_lc" == *"$search_lc"* ]]; then
+                name_match+=("$dir")
+            elif [[ "$url_lc" == *"$search_lc"* ]]; then
+                url_match+=("$dir")
             fi
         done < "$GITME_CACHE_FILE"
+        # Prefer the most specific tier that produced any results.
+        if (( ${#name_exact[@]} > 0 )); then
+            matches=("${name_exact[@]}")
+        elif (( ${#name_match[@]} > 0 )); then
+            matches=("${name_match[@]}")
+        else
+            matches=("${url_match[@]}")
+        fi
     fi
 
     if (( ${#matches[@]} == 0 )); then

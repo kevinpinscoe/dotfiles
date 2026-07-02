@@ -138,6 +138,12 @@ gitme github.com/foo   # match by remote URL
 gitme utils            # interactive picker if multiple matches
 ```
 
+Matching is tiered by specificity: an exact repo-name match wins, then a
+repo-name substring match, and only if neither matches does gitme fall back to
+remote-URL substring matches. This keeps a term that appears in every repo's
+remote (e.g. the `kevininscoe.com` Gitea host) from returning every repo —
+`gitme kevininscoe.com` jumps straight to the repo named `kevininscoe.com`.
+
 Tab completion lists repo names and remote URLs from the cache.
 
 ### Rebuilding the cache
