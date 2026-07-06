@@ -1,3 +1,11 @@
+---
+title: ~/.bash.d Runbook
+tags: [runbook, operations]
+vault_link: runbooks/home-kinscoe-.dotfiles-bash-.bash.d.md
+source_path: /home/kinscoe/.dotfiles/bash/.bash.d/RUNBOOK.md
+---
+
+> 📓 Indexed in the PKM knowledge vault at `runbooks/home-kinscoe-.dotfiles-bash-.bash.d.md` (symlink → this file).
 # ~/.bash.d Runbook
 
 ## AI sync workflow (dotfiles)

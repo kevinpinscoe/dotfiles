@@ -1,3 +1,11 @@
+---
+title: Brewfile RUNBOOK
+tags: [runbook, operations]
+vault_link: runbooks/home-kinscoe-.dotfiles-brewfile.md
+source_path: /home/kinscoe/.dotfiles/Brewfile/RUNBOOK.md
+---
+
+> 📓 Indexed in the PKM knowledge vault at `runbooks/home-kinscoe-.dotfiles-brewfile.md` (symlink → this file).
 # Brewfile RUNBOOK
 
 ## What is a Brewfile?
