@@ -1,0 +1,66 @@
+---
+syntax: sh
+tags: [ markdown, viewer, tui ]
+---
+# Command mdfried
+
+## What does this command do:
+
+A markdown viewer for the terminal that renders images and Big Headers.
+
+## Installed from
+
+For Fedora install using: curl -sSfL https://github.com/benjajaja/mdfried/releases/latest/download/mdfried -o ~/.local/bin/mdfried && chmod +x ~/.local/bin/mdfried
+For Raspberry Pi install using: sudo apt install -y libchafa-dev && cargo install --locked mdfried
+For Mac install using: curl -sSfL https://github.com/benjajaja/mdfried/releases/latest/download/mdfried_macos_aarch64 -o ~/.local/bin/mdfried && chmod +x ~/.local/bin/mdfried && xattr -d com.apple.quarantine ~/.local/bin/mdfried
+
+## Command path
+
+For Fedora run: ~/.local/bin/mdfried
+For Raspberry Pi run: ~/.cargo/bin/mdfried
+For Mac run: ~/.local/bin/mdfried
+
+## Command documentation
+
+Docs can be found at https://github.com/benjajaja/mdfried
+
+## Command options
+
+Usage: mdfried [OPTIONS] [SOURCE]
+
+  [SOURCE]  Markdown source: a file path, a URL, a "github:owner/repo" ref,
+            or '-' / omit for stdin.
+
+  -d, --deep-fry                            Extra deep fried images.
+  -w, --watch                               Watch the markdown file, reload on changes.
+  -s, --setup                               Force font setup (again).
+      --print-config                        Write a mostly complete config example to stdout.
+      --no-cap-checks                       Do not query the terminal stdin for capabilities.
+      --debug-override-protocol-type <P>    Force graphics protocol to a specific type.
+      --log [<FILE>]                        Log with RUST_LOG to FILE, or stderr if omitted.
+  -h, --help                                Print help.
+  -V, --version                             Print version.
+
+# View a local markdown file
+mdfried ./README.md
+
+# Read from stdin (pipe markdown in)
+cat notes.md | mdfried -
+mdfried < notes.md
+
+# Render a README straight from a GitHub repo
+mdfried github:benjajaja/mdfried
+
+# Render a markdown file at a URL
+mdfried https://raw.githubusercontent.com/benjajaja/mdfried/master/README.md
+
+# Live-reload while editing
+mdfried --watch ./draft.md
+
+# Re-run interactive font setup
+mdfried --setup
+
+# Print an example config to a new config file
+mdfried --print-config > ~/.config/mdfried/config.toml
+
+# In-program: type ':help' for keybindings, ':help configuration', or ':changelog'
