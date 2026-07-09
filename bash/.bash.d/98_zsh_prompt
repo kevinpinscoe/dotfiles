@@ -1,17 +1,26 @@
 setopt PROMPT_SUBST
 
-# Set the zsh prompt based on if we are root or a regular user
-if [ "$EUID" = 0 ] || [ "$(whoami)" = 'root' ]; then
-    PS1='%F{yellow}[%~]%f
+# Builds PS1; kept as a function (not just inline) so it can be re-run later
+# in ~/.zshrc after REALM_LABEL/REALM_COLOR are set — e.g. by a container's
+# ~/container-zshrc.sh, which is sourced after this file.
+_set_prompt() {
+    if [ "$EUID" = 0 ] || [ "$(whoami)" = 'root' ]; then
+        PS1='%F{yellow}[%~]%f
 %B%F{red}%n@%m%f%F{yellow}#%f%b '
-else
-    # Slim PS1 — context lives in the tmux status bar
-    hostn=$(/usr/bin/uname -n)
-    if [[ "${hostn}" == "kevin" ]]; then
-        host_color="208"   # orange (256-color)
+    elif [[ -n "$REALM_LABEL" ]]; then
+        # Environment-local identity overrides the generic user@host prompt
+        # below — container hostnames are random IDs, not meaningful to show.
+        PS1='%B%F{'"${REALM_COLOR:-208}"'}'"${REALM_LABEL}"'>%f%b '
     else
-        host_color="cyan"
-    fi
+        # Slim PS1 — context lives in the tmux status bar
+        hostn=$(/usr/bin/uname -n)
+        if [[ "${hostn}" == "kevin" ]]; then
+            host_color="208"   # orange (256-color)
+        else
+            host_color="cyan"
+        fi
 
-    PS1='%B%F{cyan}%n@%f%B%F{'"${host_color}"'}%m%f%F{yellow}>%f%b '
-fi
+        PS1='%B%F{cyan}%n@%f%B%F{'"${host_color}"'}%m%f%F{yellow}>%f%b '
+    fi
+}
+_set_prompt
