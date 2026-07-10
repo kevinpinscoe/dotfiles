@@ -86,16 +86,24 @@ for pkg in "${PACKAGES[@]}"; do
   fi
 done
 
+# ghostty is a GUI terminal emulator — it cannot run inside a container, so
+# skip stowing it there even on an otherwise-Fedora/Debian OS match.
+IS_CONTAINER=false
+[[ -f /.dockerenv ]] && IS_CONTAINER=true
+[[ "$(systemd-detect-virt 2>/dev/null)" == "docker" ]] && IS_CONTAINER=true
+
 # ghostty config is platform-specific (tmux binary path differs per OS)
 OS="$(uname -s)"
 GHOSTTY_PKG=""
-if [[ "$OS" == "Darwin" ]]; then
-  GHOSTTY_PKG="ghostty-mac"
-elif [[ "$OS" == "Linux" ]]; then
-  if grep -qi "fedora" /etc/os-release 2>/dev/null; then
-    GHOSTTY_PKG="ghostty-fedora"
-  elif grep -qi "debian\|ubuntu\|raspbian" /etc/os-release 2>/dev/null; then
-    GHOSTTY_PKG="ghostty-debian"
+if [[ "$IS_CONTAINER" == "false" ]]; then
+  if [[ "$OS" == "Darwin" ]]; then
+    GHOSTTY_PKG="ghostty-mac"
+  elif [[ "$OS" == "Linux" ]]; then
+    if grep -qi "fedora" /etc/os-release 2>/dev/null; then
+      GHOSTTY_PKG="ghostty-fedora"
+    elif grep -qi "debian\|ubuntu\|raspbian" /etc/os-release 2>/dev/null; then
+      GHOSTTY_PKG="ghostty-debian"
+    fi
   fi
 fi
 if [[ -n "${GHOSTTY_PKG:-}" && -d "$DOTFILES_DIR/$GHOSTTY_PKG" ]]; then
