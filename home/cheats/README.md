@@ -23,10 +23,18 @@ Cheat reads from two locations:
 1. Update `GENERATE-CHEAT.md` with the command details (name, docs URL, summary, template, tags).
 2. Create the file using the template in `~/cheats/templates/` as a guide — or ask Claude to generate it.
 3. Place the file in the correct subdirectory with **no file extension**:
-   - `~/cheats/all/<command>` — cross-platform (Fedora + Raspberry Pi + Mac install sections)
+   - `~/cheats/all/<command>` — cross-platform (Fedora + Raspberry Pi + Mac + Mac-container install sections)
    - `~/cheats/fedora/<command>` — Fedora-only
    - `~/cheats/mac/<command>` — macOS-only
    - `~/cheats/rpi/<command>` — Raspberry Pi / Debian-only
+   - `~/cheats/mac-container/<command>` — Mac-container-only (Fedora Linux on ARM/aarch64)
+
+> **Four hosts, four install sections.** A cross-platform (`all`) sheet now carries
+> **four** install sections: Fedora, Raspberry Pi, Mac, and Mac-container. The
+> Mac-container host (`b38e685e79b8`, a Fedora Docker container on the work Mac) runs
+> Fedora Linux on **ARM (aarch64)**, not x86_64. It installs `dnf` packages exactly
+> like the Fedora workstation, but any **direct binary download must fetch the
+> `aarch64`/`arm64` build**, never the `x86_64`/`amd64` build.
 4. Commit directly in `~/.dotfiles` (cheats are stowed — no copy step needed):
    ```sh
    git -C ~/.dotfiles add home/cheats/<dir>/<command>

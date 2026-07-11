@@ -65,6 +65,13 @@ cheatpaths:
     tags: [ rpi ]
     readonly: true
 
+  # Mac container: Fedora Linux on ARM (aarch64), hostname b38e685e79b8,
+  # a Docker container running on the work Mac.
+  - name: mac-container
+    path: ~/cheats/mac-container
+    tags: [ mac-container ]
+    readonly: true
+
   # Cheatsheets that are tagged "all" are stored here by default:
   - name: all
     #path: /home/kinscoe/.config/cheat/cheatsheets/personal

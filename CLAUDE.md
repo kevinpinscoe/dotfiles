@@ -97,11 +97,12 @@ Files are numbered to control load order:
 
 ## Cheatsheets system
 
-Uses the [`cheat`](https://github.com/cheat/cheat) CLI. Cheatsheets live in `home/cheats/` (stowed to `~/cheats/`) and are organized by platform:
-- `home/cheats/all/` — platform-agnostic (tagged `all`)
+Uses the [`cheat`](https://github.com/cheat/cheat) CLI. Cheatsheets live in `home/cheats/` (stowed to `~/cheats/`) and are organized by platform (four possible hosts):
+- `home/cheats/all/` — platform-agnostic (tagged `all`); an `all` sheet carries **four** install sections (Fedora, Raspberry Pi, Mac, Mac-container)
 - `home/cheats/mac/` — macOS only (tagged `mac`)
-- `home/cheats/fedora/` — Fedora Linux (tagged `fedora`)
+- `home/cheats/fedora/` — Fedora Linux workstation, x86_64 (tagged `fedora`)
 - `home/cheats/rpi/` (not in repo but referenced in config) — Raspberry Pi
+- `home/cheats/mac-container/` — Mac-container only (tagged `mac-container`): Fedora Linux on **ARM (aarch64)**, hostname `b38e685e79b8`, a Docker container on the work Mac. Same `dnf` installs as Fedora, but direct binary downloads must use the `aarch64`/`arm64` build, never `x86_64`/`amd64`.
 
 Community cheatsheets are cloned separately and not tracked in this repo.
 
@@ -111,7 +112,7 @@ Edit `GENERATE-CHEAT.MD`, fill in the template variables, then run:
 ```bash
 bash home/cheats/generate-cheat.sh
 ```
-This calls Claude with `CLAUDE.md` and `GENERATE-CHEAT.MD` as context. Templates are in `home/cheats/templates/` (`all.md`, `fedora.md`).
+This calls Claude with `CLAUDE.md` and `GENERATE-CHEAT.MD` as context. Templates are in `home/cheats/templates/` (`all.md`, `fedora.md`, `mac-container.md`).
 
 ## Desktop application configuration and runbooks
 
@@ -149,20 +150,21 @@ On Raspberry Pi (Debian), same convention as Fedora: `~/.local/bin/` for binarie
 
 ## MANDATORY: cross-machine todo entries
 
-This repo is stowed on three machines (macOS, Fedora, Raspberry Pi 5). When a change made here requires a follow-up command (e.g. `bash install.sh`, `bash migrate-to-stow.sh`, `bash restore.sh`, or any manual step) on machines **other than the one you are currently working on**, append a one-line entry to `~/todo/<os>/TODO.md` for each target machine so Kevin sees the pending task the next time he is on that host.
+This repo is stowed on four machines (macOS, Fedora workstation, Raspberry Pi 5, and the Mac-container — a Fedora/ARM Docker container on the work Mac). When a change made here requires a follow-up command (e.g. `bash install.sh`, `bash migrate-to-stow.sh`, `bash restore.sh`, or any manual step) on machines **other than the one you are currently working on**, append a one-line entry to `~/todo/<os>/TODO.md` for each target machine so Kevin sees the pending task the next time he is on that host.
 
 Folder mapping (match the directories that already exist under `~/todo/`):
 
 | Target machine | Current OS detection | Todo file |
 |----------------|---------------------|-----------|
 | macOS | `uname -s` == `Darwin` | `~/todo/mac/TODO.md` |
-| Fedora workstation | `uname -s` == `Linux`, `/etc/os-release` contains `fedora` | `~/todo/fedora/TODO.md` |
+| Fedora workstation | `uname -s` == `Linux`, `/etc/os-release` contains `fedora`, **and not** the Mac-container (no `/mac-home`, hostname ≠ `b38e685e79b8`) | `~/todo/fedora/TODO.md` |
 | Raspberry Pi 5 (Debian) | `uname -s` == `Linux`, `/etc/os-release` contains `debian` | `~/todo/rpi/TODO.md` |
+| Mac-container (Fedora/ARM) | `uname -s` == `Linux`, `/etc/os-release` contains `fedora`, **and** `/mac-home` exists or hostname == `b38e685e79b8` | `~/todo/mac-container/TODO.md` |
 
 ### Rules
 
 1. Detect the current host with `uname -s` (and `/etc/os-release` on Linux). **Do not** append to the current host's TODO.md — the change is already applied here.
-2. Append to **every** other host's TODO.md that is affected by the change. Cross-platform package changes (e.g. a new entry in the `PACKAGES=(...)` array in `install.sh`) affect all three; platform-specific changes may only affect one.
+2. Append to **every** other host's TODO.md that is affected by the change. Cross-platform package changes (e.g. a new entry in the `PACKAGES=(...)` array in `install.sh`) affect all four; platform-specific changes may only affect one. Note the Mac-container shares the Fedora OS branch of `install.sh` (it is Fedora/ARM), so a stow-package change reaches it too — give it its own TODO line.
 3. Entry format — one line per task:
    ```
    YYYY-MM-DD <command to run>  # <short reason>

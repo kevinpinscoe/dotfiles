@@ -10,9 +10,6 @@ tags: [ {{TAGS}} ]
 
 ## Installed from
 
-For Fedora install using: {{INSTALL_METHOD_FEDORA}}
-For Raspberry Pi install using: {{INSTALL_METHOD_RPI}}
-For Mac install using: {{INSTALL_METHOD_MAC}}
 For Mac container (Fedora Linux, ARM/aarch64) install using: {{INSTALL_METHOD_MAC_CONTAINER}}
 
 > Note: the Mac container runs Fedora Linux on ARM (aarch64), not x86_64. When a
@@ -21,9 +18,6 @@ For Mac container (Fedora Linux, ARM/aarch64) install using: {{INSTALL_METHOD_MA
 
 ## Command path
 
-For Fedora run: {{COMMAND_PATH_FEDORA}}
-For Raspberry Pi run: {{COMMAND_PATH_RPI}}
-For Mac run: {{COMMAND_PATH_MAC}}
 For Mac container run: {{COMMAND_PATH_MAC_CONTAINER}}
 
 ## Command documentation
