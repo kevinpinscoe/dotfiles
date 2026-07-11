@@ -57,3 +57,4 @@ if [[ -n "$SSH_CLIENT" ]]; then
 fi
 
 [[ -f ~/.environment/self-hosted-services.sh ]] && source ~/.environment/self-hosted-services.sh
+. "$HOME/.cargo/env"
