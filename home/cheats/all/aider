@@ -1,0 +1,73 @@
+---
+syntax: sh
+tags: [ ai, llm, coding-assistant, pair-programming, git, python, cli ]
+---
+# Command aider
+
+## What does this command do:
+
+Aider lets you pair program with LLMs to start a new project or build on your
+existing codebase.
+
+## Installed from
+
+Aider is the Python package `aider-chat` (PyPI). It pins `numpy==1.24.3`, which
+will NOT build on Python 3.13 — install it under Python 3.12. All k-fed hosts have
+`mise`, so use it to provide a 3.12 toolchain and point `pipx` at it.
+
+For Fedora install using: mise install python@3.12 && pipx install --python "$(mise where python@3.12)/bin/python" aider-chat
+For Raspberry Pi install using: mise install python@3.12 && pipx install --python "$(mise where python@3.12)/bin/python" aider-chat
+For Mac install using: mise install python@3.12 && pipx install --python "$(mise where python@3.12)/bin/python" aider-chat
+For Mac container (Fedora Linux, ARM/aarch64) install using: mise install python@3.12 && pipx install --python "$(mise where python@3.12)/bin/python" aider-chat
+
+> Note: the Mac container runs Fedora Linux on ARM (aarch64), not x86_64. aider is
+> a pure-Python (pipx) install, so there is no arch-specific binary to pick — the
+> same command works on aarch64 and x86_64.
+>
+> Upgrade on any host: `pipx upgrade aider-chat`. Uninstall: `pipx uninstall aider-chat`.
+> The official `aider-install` bootstrapper (`pipx run aider-install`) is an
+> alternative that auto-provides its own Python 3.12 via `uv`.
+
+## Command path
+
+For Fedora run: ~/.local/bin/aider
+For Raspberry Pi run: ~/.local/bin/aider
+For Mac run: ~/.local/bin/aider
+For Mac container run: ~/.local/bin/aider
+
+## Command documentation
+
+Docs can be found at https://aider.chat/docs/install.html
+
+See also:
+- https://github.com/Aider-AI/aider
+- https://aider.chat/
+
+## Command options
+
+aider [OPTIONS] [FILE ...]
+
+  --model MODEL           Model to use for the main chat (env: AIDER_MODEL)
+  --sonnet                Use the Anthropic Claude Sonnet model
+  --opus                  Use the Anthropic Claude Opus model
+  --deepseek              Use the DeepSeek model
+  --api-key PROVIDER=KEY  Set an API key, e.g. anthropic=sk-...
+  --architect             Use architect edit format for the main chat
+  --file FILE             Add a file to the chat (repeatable)
+  --read FILE             Add a read-only file for context (repeatable)
+  -m, --message COMMAND   Run a single message/command then exit
+  -f, --message-file FILE Read the message to send from a file
+  --yes-always            Auto-confirm every prompt (non-interactive)
+  --commit                Commit all pending changes with an AI commit message
+  --auto-commits, --no-auto-commits   Toggle auto-commit of aider's edits
+  --vim                   Use vi editing mode in the terminal
+  --dark-mode             Colors for a dark terminal background
+  --light-mode            Colors for a light terminal background
+  --version               Show the version number and exit
+  --help                  Show the full help and exit
+
+  # Common usage
+  aider                            # start in the current git repo
+  aider file1.py file2.py          # start with specific files in the chat
+  aider --model sonnet             # pick a model
+  aider --sonnet main.go           # edit main.go with Claude Sonnet
