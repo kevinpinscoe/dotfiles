@@ -13,12 +13,14 @@ LNAV -- The Logfile Navigator, log file viewer for the terminal.
 For Fedora install using: curl -sSfL https://github.com/tstack/lnav/releases/download/v0.14.0/lnav-0.14.0-linux-musl-x86_64.zip -o /tmp/lnav.zip && unzip /tmp/lnav.zip -d /tmp/lnav-install && mv /tmp/lnav-install/lnav-0.14.0/lnav ~/.local/bin/lnav && chmod +x ~/.local/bin/lnav
 For Raspberry Pi install using: curl -sSfL https://github.com/tstack/lnav/releases/download/v0.14.0/lnav-0.14.0-linux-musl-arm64.zip -o /tmp/lnav.zip && unzip /tmp/lnav.zip -d /tmp/lnav-install && mv /tmp/lnav-install/lnav-0.14.0/lnav ~/.local/bin/lnav && chmod +x ~/.local/bin/lnav
 For Mac install using: brew install lnav
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -sSfL https://github.com/tstack/lnav/releases/download/v0.14.0/lnav-0.14.0-linux-musl-arm64.zip -o /tmp/lnav.zip && unzip /tmp/lnav.zip -d /tmp/lnav-install && mv /tmp/lnav-install/lnav-0.14.0/lnav ~/.local/bin/lnav && chmod +x ~/.local/bin/lnav
 
 ## Command path
 
 For Fedora run: ~/.local/bin/lnav
 For Raspberry Pi run: ~/.local/bin/lnav
 For Mac run: /opt/homebrew/bin/lnav
+For Mac container run: ~/.local/bin/lnav
 
 ## Command documentation
 

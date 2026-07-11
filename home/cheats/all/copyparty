@@ -13,12 +13,14 @@ Portable file server with accelerated resumable uploads, dedup, WebDAV, SFTP, FT
 For Fedora install using: curl -sSfL https://github.com/9001/copyparty/releases/download/v1.20.14/copyparty-sfx.py -o ~/.local/bin/copyparty && chmod +x ~/.local/bin/copyparty
 For Raspberry Pi install using: curl -sSfL https://github.com/9001/copyparty/releases/download/v1.20.14/copyparty-sfx.py -o ~/.local/bin/copyparty && chmod +x ~/.local/bin/copyparty
 For Mac install using: brew install copyparty
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -sSfL https://github.com/9001/copyparty/releases/download/v1.20.14/copyparty-sfx.py -o ~/.local/bin/copyparty && chmod +x ~/.local/bin/copyparty
 
 ## Command path
 
 For Fedora run: ~/.local/bin/copyparty
 For Raspberry Pi run: ~/.local/bin/copyparty
 For Mac run: /opt/homebrew/bin/copyparty
+For Mac container run: ~/.local/bin/copyparty
 
 ## Command documentation
 

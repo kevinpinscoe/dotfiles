@@ -16,12 +16,14 @@ For Raspberry Pi install using: build from source (not in Debian repos)
   git clone https://github.com/martanne/abduco.git && cd abduco
   ./configure && make && sudo make install
 For Mac install using: brew install abduco
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install abduco
 
 ## Command path
 
 For Fedora run: /usr/bin/abduco
 For Raspberry Pi run: /usr/local/bin/abduco
 For Mac run: /opt/homebrew/bin/abduco
+For Mac container run: /usr/bin/abduco
 
 ## Command documentation
 

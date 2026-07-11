@@ -19,12 +19,20 @@ gh api repos/sigstore/gitsign/releases/latest --jq '.tag_name'
 curl -sSfL https://github.com/sigstore/gitsign/releases/latest/download/gitsign_0.14.0_linux_arm64 -o ~/.local/bin/gitsign && chmod +x ~/.local/bin/gitsign
 ```
 For Mac install using: `brew install sigstore/tap/gitsign`
+For Mac container (Fedora Linux, ARM/aarch64) install using:
+```
+# Check current version first:
+gh api repos/sigstore/gitsign/releases/latest --jq '.tag_name'
+# Download binary directly to ~/.local/bin (replace 0.14.0 with current version if newer):
+curl -sSfL https://github.com/sigstore/gitsign/releases/latest/download/gitsign_0.14.0_linux_arm64 -o ~/.local/bin/gitsign && chmod +x ~/.local/bin/gitsign
+```
 
 ## Command path
 
 For Fedora run: `~/.local/bin/gitsign`
 For Raspberry Pi run: `~/.local/bin/gitsign`
 For Mac run: `gitsign`
+For Mac container run: `~/.local/bin/gitsign`
 
 ## Command documentation
 

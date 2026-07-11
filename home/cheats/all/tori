@@ -13,12 +13,14 @@ Docker server monitoring without the stack. Metrics, logs, and alerts from your 
 For Fedora install using: curl -fsSL https://raw.githubusercontent.com/thobiasn/tori-cli/main/deploy/install.sh | sh -s -- --client
 For Raspberry Pi install using: curl -fsSL https://raw.githubusercontent.com/thobiasn/tori-cli/main/deploy/install.sh | sh -s -- --client
 For Mac install using: curl -fsSL https://raw.githubusercontent.com/thobiasn/tori-cli/main/deploy/install.sh | sh -s -- --client
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -fsSL https://raw.githubusercontent.com/thobiasn/tori-cli/main/deploy/install.sh | sh -s -- --client
 
 ## Command path
 
 For Fedora run: ~/.local/bin/tori
 For Raspberry Pi run: ~/.local/bin/tori
 For Mac run: ~/.local/bin/tori
+For Mac container run: ~/.local/bin/tori
 
 ## Command documentation
 

@@ -23,12 +23,14 @@ Install from GitHub release .deb/.rpm instead; see the canonical runbook above.
 (dead) Fedora: curl -sS "https://ftp.osuosl.org/pub/sftpgo/yum/x86_64/sftpgo.repo" | sudo tee /etc/yum.repos.d/sftpgo.repo && sudo dnf install -y sftpgo
 (dead) Raspberry Pi: curl -sS https://ftp.osuosl.org/pub/sftpgo/apt/gpg.key | sudo tee /etc/apt/trusted.gpg.d/sftpgo.asc && echo "deb https://ftp.osuosl.org/pub/sftpgo/apt bookworm main" | sudo tee /etc/apt/sources.list.d/sftpgo.list && sudo apt update && sudo apt install -y sftpgo
 For Mac install using: brew install sftpgo  (still works)
+(dead) Mac container (Fedora, aarch64): curl -sS "https://ftp.osuosl.org/pub/sftpgo/yum/aarch64/sftpgo.repo" | sudo tee /etc/yum.repos.d/sftpgo.repo && sudo dnf install -y sftpgo  — same dead osuosl mirror as Fedora; install the aarch64 .rpm from the GitHub release instead, see the canonical runbook above.
 
 ## Command path
 
 For Fedora run: /usr/bin/sftpgo
 For Raspberry Pi run: /usr/bin/sftpgo
 For Mac run: /opt/homebrew/bin/sftpgo
+For Mac container run: /usr/bin/sftpgo
 
 ## Command documentation
 

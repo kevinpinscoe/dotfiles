@@ -13,12 +13,14 @@ Postgres CLI with autocompletion and syntax highlighting
 For Fedora install using: curl -sSfL https://github.com/Balaji01-4D/pgxcli/releases/download/v0.1.0/pgxcli_0.1.0_linux_amd64.rpm -o /tmp/pgxcli.rpm && sudo dnf install -y /tmp/pgxcli.rpm
 For Raspberry Pi install using: curl -sSfL https://github.com/Balaji01-4D/pgxcli/releases/download/v0.1.0/pgxcli_0.1.0_linux_arm64.tar.gz | tar -xzf - -C /tmp && mv /tmp/pgxcli ~/.local/bin/pgxcli && chmod +x ~/.local/bin/pgxcli
 For Mac install using: curl -sSfL https://github.com/Balaji01-4D/pgxcli/releases/download/v0.1.0/pgxcli_0.1.0_darwin_arm64.tar.gz | tar -xzf - -C /tmp && mv /tmp/pgxcli ~/.local/bin/pgxcli && chmod +x ~/.local/bin/pgxcli
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -sSfL https://github.com/Balaji01-4D/pgxcli/releases/download/v0.1.0/pgxcli_0.1.0_linux_arm64.tar.gz | tar -xzf - -C /tmp && mv /tmp/pgxcli ~/.local/bin/pgxcli && chmod +x ~/.local/bin/pgxcli
 
 ## Command path
 
 For Fedora run: /usr/bin/pgxcli
 For Raspberry Pi run: ~/.local/bin/pgxcli
 For Mac run: ~/.local/bin/pgxcli
+For Mac container run: ~/.local/bin/pgxcli
 
 ## Command documentation
 

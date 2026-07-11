@@ -20,12 +20,14 @@ sudo apt update
 sudo apt install glow
 ```
 For Mac install using: `homebrew install glow`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `sudo dnf install glow`
 
 ## Command path
 
 For Fedora run: `glow`
 For Raspberry Pi run: `glow`
 For Mac run: `glow`
+For Mac container run: `glow`
 
 ## Command documentation
 

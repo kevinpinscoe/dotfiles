@@ -13,12 +13,14 @@ Joplin - privacy-focused note taking app with sync capabilities and stores as Ma
 For Fedora install using: NPM_CONFIG_PREFIX=~/.joplin-bin npm install --loglevel=error -g joplin && ln -sf ~/.joplin-bin/bin/joplin ~/.local/bin/joplin
 For Raspberry Pi install using: NPM_CONFIG_PREFIX=~/.joplin-bin npm install --loglevel=error -g joplin && ln -sf ~/.joplin-bin/bin/joplin ~/.local/bin/joplin
 For Mac install using: NPM_CONFIG_PREFIX=~/.joplin-bin npm install --loglevel=error -g joplin && ln -sf ~/.joplin-bin/bin/joplin ~/.local/bin/joplin
+For Mac container (Fedora Linux, ARM/aarch64) install using: NPM_CONFIG_PREFIX=~/.joplin-bin npm install --loglevel=error -g joplin && ln -sf ~/.joplin-bin/bin/joplin ~/.local/bin/joplin
 
 ## Command path
 
 For Fedora run: ~/.local/bin/joplin
 For Raspberry Pi run: ~/.local/bin/joplin
 For Mac run: ~/.local/bin/joplin
+For Mac container run: ~/.local/bin/joplin
 
 ## Command documentation
 

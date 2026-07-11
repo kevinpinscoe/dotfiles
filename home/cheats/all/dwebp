@@ -13,12 +13,14 @@ Decodes and decompresses a .webp image file into PNG, PPM, PGM, BMP, or TIFF.
 For Fedora install using: sudo dnf install libwebp-tools
 For Raspberry Pi install using: sudo apt install webp
 For Mac install using: brew install webp
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install libwebp-tools
 
 ## Command path
 
 For Fedora run: /usr/bin/dwebp
 For Raspberry Pi run: /usr/bin/dwebp
 For Mac run: /opt/homebrew/bin/dwebp
+For Mac container run: /usr/bin/dwebp
 
 ## Command documentation
 

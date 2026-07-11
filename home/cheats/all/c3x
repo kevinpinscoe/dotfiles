@@ -13,12 +13,14 @@ Open source cloud cost estimation for Terraform, Terragrunt, and CloudFormation
 For Fedora install using: curl -sSfL https://github.com/c3xdev/c3x/releases/download/v1.0.1/c3x-linux-amd64.tar.gz -o /tmp/c3x.tar.gz && tar -xzf /tmp/c3x.tar.gz -C /tmp && mv /tmp/c3x-linux-amd64 ~/.local/bin/c3x && chmod +x ~/.local/bin/c3x
 For Raspberry Pi install using: curl -sSfL https://github.com/c3xdev/c3x/releases/download/v1.0.1/c3x-linux-arm64.tar.gz -o /tmp/c3x.tar.gz && tar -xzf /tmp/c3x.tar.gz -C /tmp && mv /tmp/c3x-linux-arm64 ~/.local/bin/c3x && chmod +x ~/.local/bin/c3x
 For Mac install using: brew install c3xdev/tap/c3x
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -sSfL https://github.com/c3xdev/c3x/releases/download/v1.0.1/c3x-linux-arm64.tar.gz -o /tmp/c3x.tar.gz && tar -xzf /tmp/c3x.tar.gz -C /tmp && mv /tmp/c3x-linux-arm64 ~/.local/bin/c3x && chmod +x ~/.local/bin/c3x
 
 ## Command path
 
 For Fedora run: ~/.local/bin/c3x
 For Raspberry Pi run: ~/.local/bin/c3x
 For Mac run: /opt/homebrew/bin/c3x
+For Mac container run: ~/.local/bin/c3x
 
 ## Command documentation
 

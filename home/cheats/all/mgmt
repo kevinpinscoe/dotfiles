@@ -13,6 +13,7 @@ Next generation distributed, event-driven, parallel config management!
 For Fedora install using: curl -sSfL https://github.com/purpleidea/mgmt/releases/download/1.0.2/mgmt-linux-amd64-1.0.2 -o ~/.local/bin/mgmt && chmod +x ~/.local/bin/mgmt
 For Raspberry Pi install using: git clone --recursive https://github.com/purpleidea/mgmt/ ~/mgmt && cd ~/mgmt && make deps && make && cp mgmt ~/.local/bin/mgmt && rm -rf ~/mgmt
 For Mac install using: brew install gnu-sed grep coreutils make && export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:/opt/homebrew/opt/grep/libexec/gnubin:/opt/homebrew/opt/coreutils/libexec/gnubin:$HOME/go/bin:$PATH" && git clone --recursive https://github.com/purpleidea/mgmt/ ~/mgmt && cd ~/mgmt && gmake deps && gmake && cp mgmt ~/.local/bin/mgmt && rm -rf ~/mgmt
+For Mac container (Fedora Linux, ARM/aarch64) install using: git clone --recursive https://github.com/purpleidea/mgmt/ ~/mgmt && cd ~/mgmt && make deps && make && cp mgmt ~/.local/bin/mgmt && rm -rf ~/mgmt
 
 ## Mac install notes
 
@@ -26,6 +27,7 @@ The macOS recipe diverges from Linux because:
 For Fedora run: ~/.local/bin/mgmt
 For Raspberry Pi run: ~/.local/bin/mgmt
 For Mac run: ~/.local/bin/mgmt
+For Mac container run: ~/.local/bin/mgmt
 
 ## Command documentation
 

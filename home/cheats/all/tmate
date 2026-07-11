@@ -13,12 +13,14 @@ tmate is a fork of tmux that adds a relay server in the middle to make terminal 
 For Fedora install using: curl -sSfL https://github.com/tmate-io/tmate/releases/download/2.4.0/tmate-2.4.0-static-linux-amd64.tar.xz -o /tmp/tmate.tar.xz && tar -xJf /tmp/tmate.tar.xz -C /tmp && mv /tmp/tmate-2.4.0-static-linux-amd64/tmate ~/.local/bin/tmate && chmod +x ~/.local/bin/tmate
 For Raspberry Pi install using: curl -sSfL https://github.com/tmate-io/tmate/releases/download/2.4.0/tmate-2.4.0-static-linux-arm64v8.tar.xz -o /tmp/tmate.tar.xz && tar -xJf /tmp/tmate.tar.xz -C /tmp && mv /tmp/tmate-2.4.0-static-linux-arm64v8/tmate ~/.local/bin/tmate && chmod +x ~/.local/bin/tmate
 For Mac install using: brew install tmate
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -sSfL https://github.com/tmate-io/tmate/releases/download/2.4.0/tmate-2.4.0-static-linux-arm64v8.tar.xz -o /tmp/tmate.tar.xz && tar -xJf /tmp/tmate.tar.xz -C /tmp && mv /tmp/tmate-2.4.0-static-linux-arm64v8/tmate ~/.local/bin/tmate && chmod +x ~/.local/bin/tmate
 
 ## Command path
 
 For Fedora run: ~/.local/bin/tmate
 For Raspberry Pi run: ~/.local/bin/tmate
 For Mac run: /opt/homebrew/bin/tmate
+For Mac container run: ~/.local/bin/tmate
 
 ## Command documentation
 

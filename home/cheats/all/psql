@@ -13,12 +13,14 @@ Interactive PostgreSQL terminal client for running queries and managing database
 For Fedora install using: sudo dnf install postgresql.x86_64
 For Raspberry Pi install using: sudo apt update && sudo apt install postgresql-client
 For Mac install using: brew update && brew install libpq && brew link --force libpq
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install postgresql.aarch64
 
 ## Command path
 
 For Fedora run: /usr/bin/psql
 For Raspberry Pi run: /usr/bin/psql
 For Mac run: /opt/homebrew/opt/libpq/bin/psql
+For Mac container run: /usr/bin/psql
 
 ## Command documentation
 

@@ -13,12 +13,14 @@ D2 is a modern diagram scripting language that turns text to diagrams.
 For Fedora install using: `curl -fsSL https://d2lang.com/install.sh | sh`
 For Raspberry Pi install using: `curl -fsSL https://d2lang.com/install.sh | sh`
 For Mac install using: `curl -fsSL https://d2lang.com/install.sh | sh`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `curl -fsSL https://d2lang.com/install.sh | sh`
 
 ## Command path
 
 For Fedora run: `~/.local/bin/d2`
 For Raspberry Pi run: `~/.local/bin/d2`
 For Mac run: `~/.local/bin/d2`
+For Mac container run: `~/.local/bin/d2`
 
 ## Command documentation
 

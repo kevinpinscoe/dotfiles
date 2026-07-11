@@ -33,11 +33,25 @@ sudo apt-get update && sudo apt-get install -y trivy
 
 For Mac install using: `brew install trivy`
 
+For Mac container (Fedora Linux, ARM/aarch64) install using:
+```
+sudo tee /etc/yum.repos.d/trivy.repo << 'EOF'
+[trivy]
+name=Trivy repository
+baseurl=https://aquasecurity.github.io/trivy-repo/rpm/releases/$basearch/
+gpgcheck=1
+enabled=1
+gpgkey=https://aquasecurity.github.io/trivy-repo/rpm/public.key
+EOF
+sudo dnf install -y trivy
+```
+
 ## Command path
 
 For Fedora run: /usr/bin/trivy
 For Raspberry Pi run: /usr/bin/trivy
 For Mac run: /opt/homebrew/bin/trivy
+For Mac container run: /usr/bin/trivy
 
 ## Command documentation
 

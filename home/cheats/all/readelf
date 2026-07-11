@@ -13,12 +13,14 @@ readelf is a command-line tool used to display detailed information about ELF (E
 For Fedora install using: sudo dnf install binutils
 For Raspberry Pi install using: sudo apt install binutils
 For Mac install using: brew install binutils  # installs as greadelf; readelf is not natively available on macOS
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install binutils
 
 ## Command path
 
 For Fedora run: /usr/bin/readelf
 For Raspberry Pi run: /usr/bin/readelf
 For Mac run: $(brew --prefix)/bin/greadelf  # note: not useful on Apple Silicon; ELF is a Linux/Unix binary format
+For Mac container run: /usr/bin/readelf
 
 ## Command documentation
 

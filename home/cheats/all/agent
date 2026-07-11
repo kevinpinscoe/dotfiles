@@ -15,12 +15,14 @@ Also installed as legacy alias: cursor-agent
 For Fedora install using: curl https://cursor.com/install -fsS | bash
 For Raspberry Pi install using: curl https://cursor.com/install -fsS | bash
 For Mac install using: curl https://cursor.com/install -fsS | bash
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl https://cursor.com/install -fsS | bash
 
 ## Command path
 
 For Fedora run: ~/.local/bin/agent
 For Raspberry Pi run: ~/.local/bin/agent
 For Mac run: ~/.local/bin/agent
+For Mac container run: ~/.local/bin/agent
 
 ## Command documentation
 

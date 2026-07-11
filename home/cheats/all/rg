@@ -13,12 +13,14 @@ ripgrep recursively searches directories for a regex pattern while respecting yo
 For Fedora install using: `sudo dnf install ripgrep`
 For Raspberry Pi install using: `sudo apt-get install ripgrep`
 For Mac install using: `brew install ripgrep`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `sudo dnf install ripgrep`
 
 ## Command path
 
 For Fedora run: `rg`
 For Raspberry Pi run: `rg`
 For Mac run: `rg`
+For Mac container run: `rg`
 
 ## Command documentation
 

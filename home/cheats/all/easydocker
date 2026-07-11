@@ -13,12 +13,14 @@ EasyDocker is a TUI focused on investigating and troubleshooting Docker resource
 For Fedora install using: export EASYDOCKER_INSTALL_DIR=~/.local/bin && curl -fsSL https://raw.githubusercontent.com/joao-zanutto/easydocker/main/install/install.sh | sh
 For Raspberry Pi install using: export EASYDOCKER_INSTALL_DIR=~/.local/bin && curl -fsSL https://raw.githubusercontent.com/joao-zanutto/easydocker/main/install/install.sh | sh
 For Mac install using: curl -fsSL https://raw.githubusercontent.com/joao-zanutto/easydocker/main/install/install.sh | sh
+For Mac container (Fedora Linux, ARM/aarch64) install using: export EASYDOCKER_INSTALL_DIR=~/.local/bin && curl -fsSL https://raw.githubusercontent.com/joao-zanutto/easydocker/main/install/install.sh | sh
 
 ## Command path
 
 For Fedora run: ~/.local/bin/easydocker
 For Raspberry Pi run: ~/.local/bin/easydocker
 For Mac run: /usr/local/bin/easydocker
+For Mac container run: ~/.local/bin/easydocker
 
 ## Command documentation
 

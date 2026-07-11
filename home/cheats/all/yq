@@ -29,12 +29,14 @@ sudo wget "https://github.com/mikefarah/yq/releases/latest/download/${bin}" -O /
 sudo chmod +x /usr/local/bin/yq
 ```
 For Mac install using: `brew install yq`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `sudo dnf install yq`
 
 ## Command path
 
 For Fedora run: `/usr/bin/yq`
 For Raspberry Pi run: `/usr/local/bin/yq`
 For Mac run: `/usr/local/bin/yq`
+For Mac container run: `/usr/bin/yq`
 
 ## Command documentation
 

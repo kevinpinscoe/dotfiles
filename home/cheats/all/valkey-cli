@@ -13,12 +13,14 @@ Command line interface for Valkey key-value databases, optimized for caching and
 For Fedora install using: sudo dnf install valkey
 For Raspberry Pi install using: sudo apt install valkey
 For Mac install using: brew install valkey
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install valkey
 
 ## Command path
 
 For Fedora run: valkey-cli
 For Raspberry Pi run: valkey-cli
 For Mac run: valkey-cli
+For Mac container run: valkey-cli
 
 ## Command documentation
 

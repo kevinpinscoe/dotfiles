@@ -13,12 +13,14 @@ S3cmd is a free command line tool and client for uploading, retrieving and manag
 For Fedora install using: sudo dnf install s3cmd
 For Raspberry Pi install using: sudo apt install s3cmd
 For Mac install using: brew install s3cmd
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install s3cmd
 
 ## Command path
 
 For Fedora run: /usr/bin/s3cmd
 For Raspberry Pi run: /usr/bin/s3cmd
 For Mac run: /opt/homebrew/bin/s3cmd
+For Mac container run: /usr/bin/s3cmd
 
 ## Command documentation
 

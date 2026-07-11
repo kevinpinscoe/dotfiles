@@ -13,12 +13,14 @@ mise is a developer environment manager. When you enter a repo, mise ensures the
 For Fedora install using: curl https://mise.run | sh
 For Raspberry Pi install using: curl https://mise.run | sh
 For Mac install using: brew install mise
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl https://mise.run | sh
 
 ## Command path
 
 For Fedora run: ~/.local/bin/mise
 For Raspberry Pi run: ~/.local/bin/mise
 For Mac run: /opt/homebrew/bin/mise
+For Mac container run: ~/.local/bin/mise
 
 ## Command documentation
 

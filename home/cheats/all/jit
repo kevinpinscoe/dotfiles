@@ -24,11 +24,16 @@ For Mac install using:
   brew install rust
   cargo install jit-cli
 
+For Mac container (Fedora Linux, ARM/aarch64) install using:
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && source ~/.cargo/env
+  cargo install jit-cli
+
 ## Command path
 
 For Fedora run: ~/.cargo/bin/jit
 For Raspberry Pi run: ~/.cargo/bin/jit
 For Mac run: ~/.cargo/bin/jit
+For Mac container run: ~/.cargo/bin/jit
 
 ## Command documentation
 

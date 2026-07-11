@@ -20,6 +20,7 @@ git clone git@github.com:kevinpinscoe/tools.git ~/tools
 For Fedora run: `~/tools/ddir`
 For Raspberry Pi run: `~/tools/ddir`
 For Mac run: `~/tools/ddir`
+For Mac container run: `~/tools/ddir`
 
 ## Command documentation
 

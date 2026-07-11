@@ -13,12 +13,14 @@ Resource monitor that shows usage and stats for processor, memory, disks, networ
 For Fedora install using: sudo dnf install btop
 For Raspberry Pi install using: sudo apt install btop
 For Mac install using: brew install btop
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install btop
 
 ## Command path
 
 For Fedora run: /usr/bin/btop
 For Raspberry Pi run: /usr/bin/btop
 For Mac run: /opt/homebrew/bin/btop
+For Mac container run: /usr/bin/btop
 
 ## Command documentation
 

@@ -13,12 +13,14 @@ Print or check SHA checksums (SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-512
 For Fedora install using: `sudo dnf install perl-Digest-SHA` (usually pre-installed with perl)
 For Raspberry Pi install using: `sudo apt install libdigest-sha-perl` (usually pre-installed with perl)
 For Mac install using: ships with macOS by default (provided by system Perl)
+For Mac container (Fedora Linux, ARM/aarch64) install using: `sudo dnf install perl-Digest-SHA` (usually pre-installed with perl)
 
 ## Command path
 
 For Fedora run: `/usr/bin/shasum`
 For Raspberry Pi run: `/usr/bin/shasum`
 For Mac run: `/usr/bin/shasum`
+For Mac container run: `/usr/bin/shasum`
 
 ## Command documentation
 

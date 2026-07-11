@@ -20,12 +20,14 @@ nvm use 22
 npm install -g husky
 ```
 For Mac install using: `brew install husky`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `npm install -g husky`
 
 ## Command path
 
 For Fedora run: `~/.local/bin/husky`
 For Raspberry Pi run: `~/.nvm/versions/node/v22.22.2/bin/husky`
 For Mac run: `husky`
+For Mac container run: `~/.local/bin/husky`
 
 ## Command documentation
 

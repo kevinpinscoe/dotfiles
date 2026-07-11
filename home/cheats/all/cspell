@@ -20,12 +20,14 @@ nvm use 22
 npm install -g cspell
 ```
 For Mac install using: `brew install cspell`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `npm install -g cspell`
 
 ## Command path
 
 For Fedora run: `~/.local/bin/cspell`
 For Raspberry Pi run: `~/.nvm/versions/node/v22.22.2/bin/cspell`
 For Mac run: `cspell`
+For Mac container run: `~/.local/bin/cspell`
 
 ## Command documentation
 

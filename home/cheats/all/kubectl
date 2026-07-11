@@ -13,12 +13,14 @@ Kubernetes provides a command line tool for communicating with a Kubernetes clus
 For Fedora install using: curl -sSfL "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl
 For Raspberry Pi install using: curl -sSfL "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl" -o ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl
 For Mac install using: brew install kubectl
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -sSfL "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl" -o ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl
 
 ## Command path
 
 For Fedora run: ~/.local/bin/kubectl
 For Raspberry Pi run: ~/.local/bin/kubectl
 For Mac run: /opt/homebrew/bin/kubectl
+For Mac container run: ~/.local/bin/kubectl
 
 ## Command documentation
 

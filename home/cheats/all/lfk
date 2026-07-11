@@ -13,12 +13,14 @@ Lightning-fast, keyboard-focused, yazi-inspired terminal user interface for navi
 For Fedora install using: curl -sSfL https://github.com/janosmiko/lfk/releases/download/v0.9.24/lfk_0.9.24_linux_amd64.tar.gz | tar -xz -C ~/.local/bin lfk && chmod +x ~/.local/bin/lfk
 For Raspberry Pi install using: curl -sSfL https://github.com/janosmiko/lfk/releases/download/v0.9.24/lfk_0.9.24_linux_arm64.tar.gz | tar -xz -C ~/.local/bin lfk && chmod +x ~/.local/bin/lfk
 For Mac install using: brew install janosmiko/tap/lfk
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -sSfL https://github.com/janosmiko/lfk/releases/download/v0.9.24/lfk_0.9.24_linux_arm64.tar.gz | tar -xz -C ~/.local/bin lfk && chmod +x ~/.local/bin/lfk
 
 ## Command path
 
 For Fedora run: ~/.local/bin/lfk
 For Raspberry Pi run: ~/.local/bin/lfk
 For Mac run: /opt/homebrew/bin/lfk
+For Mac container run: ~/.local/bin/lfk
 
 ## Command documentation
 

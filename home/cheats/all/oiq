@@ -13,12 +13,14 @@ Fast, open-source tool for estimating infrastructure costs from Terraform plans 
 For Fedora install using: curl -sSfL https://github.com/terrateamio/openinfraquote/releases/download/v1.10.0/oiq-linux-amd64-v1.10.0.tar.gz -o /tmp/oiq.tar.gz && tar -xzf /tmp/oiq.tar.gz -C /tmp && chmod +x /tmp/oiq && mv /tmp/oiq ~/.local/bin/oiq && rm /tmp/oiq.tar.gz
 For Raspberry Pi install using: curl -sSfL https://github.com/terrateamio/openinfraquote/releases/download/v1.10.0/oiq-linux-arm64-v1.10.0.tar.gz -o /tmp/oiq.tar.gz && tar -xzf /tmp/oiq.tar.gz -C /tmp && chmod +x /tmp/oiq && mv /tmp/oiq ~/.local/bin/oiq && rm /tmp/oiq.tar.gz
 For Mac install using: brew tap terrateamio/openinfraquote && brew install openinfraquote
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -sSfL https://github.com/terrateamio/openinfraquote/releases/download/v1.10.0/oiq-linux-arm64-v1.10.0.tar.gz -o /tmp/oiq.tar.gz && tar -xzf /tmp/oiq.tar.gz -C /tmp && chmod +x /tmp/oiq && mv /tmp/oiq ~/.local/bin/oiq && rm /tmp/oiq.tar.gz
 
 ## Command path
 
 For Fedora run: ~/.local/bin/oiq
 For Raspberry Pi run: ~/.local/bin/oiq
 For Mac run: /opt/homebrew/bin/oiq
+For Mac container run: ~/.local/bin/oiq
 
 ## Command documentation
 

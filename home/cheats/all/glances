@@ -13,12 +13,14 @@ Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS
 For Fedora install using: sudo dnf install glances
 For Raspberry Pi install using: sudo apt install glances
 For Mac install using: brew install glances
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install glances
 
 ## Command path
 
 For Fedora run: /usr/bin/glances
 For Raspberry Pi run: /usr/bin/glances
 For Mac run: /opt/homebrew/bin/glances
+For Mac container run: /usr/bin/glances
 
 ## Command documentation
 

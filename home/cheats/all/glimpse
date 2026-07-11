@@ -13,12 +13,14 @@ A CLI that extracts structured context from your git history — for AI agents, 
 For Fedora install using: pip install --user gitglimpse
 For Raspberry Pi install using: pip install --user gitglimpse
 For Mac install using: pip install --user gitglimpse
+For Mac container (Fedora Linux, ARM/aarch64) install using: pip install --user gitglimpse
 
 ## Command path
 
 For Fedora run: ~/.local/bin/glimpse
 For Raspberry Pi run: ~/.local/bin/glimpse
 For Mac run: ~/.local/bin/glimpse
+For Mac container run: ~/.local/bin/glimpse
 
 ## Command documentation
 

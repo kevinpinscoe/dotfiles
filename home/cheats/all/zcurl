@@ -13,12 +13,14 @@ It's a curl alternative with stunning box-style output that makes API testing ac
 For Fedora install using: npm install -g @12britz/zcurl
 For Raspberry Pi install using: npm install -g @12britz/zcurl
 For Mac install using: npm install -g @12britz/zcurl
+For Mac container (Fedora Linux, ARM/aarch64) install using: npm install -g @12britz/zcurl
 
 ## Command path
 
 For Fedora run: /home/kinscoe/.local/bin/zcurl
 For Raspberry Pi run: /usr/local/bin/zcurl
 For Mac run: /opt/homebrew/bin/zcurl
+For Mac container run: /home/kinscoe/.local/bin/zcurl
 
 ## Command documentation
 

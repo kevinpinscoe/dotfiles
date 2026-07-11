@@ -13,12 +13,14 @@ Allow you to reorder lines by drag and drop using a GUI
 For Fedora install using: sudo dnf install python3-pyside6 && git clone https://github.com/kevinpinscoe/line-reorder-gui /tmp/lrg && cp /tmp/lrg/line_reorder.py /tmp/lrg/line-reorder ~/bin/ && chmod +x ~/bin/line-reorder
 For Raspberry Pi install using: pip install --user PySide6 && git clone https://github.com/kevinpinscoe/line-reorder-gui /tmp/lrg && cp /tmp/lrg/line_reorder.py /tmp/lrg/line-reorder ~/bin/ && chmod +x ~/bin/line-reorder
 For Mac install using: pip install --user PySide6 && git clone https://github.com/kevinpinscoe/line-reorder-gui /tmp/lrg && cp /tmp/lrg/line_reorder.py /tmp/lrg/line-reorder ~/bin/ && chmod +x ~/bin/line-reorder
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install python3-pyside6 && git clone https://github.com/kevinpinscoe/line-reorder-gui /tmp/lrg && cp /tmp/lrg/line_reorder.py /tmp/lrg/line-reorder ~/bin/ && chmod +x ~/bin/line-reorder
 
 ## Command path
 
 For Fedora run: ~/bin/line-reorder
 For Raspberry Pi run: ~/bin/line-reorder
 For Mac run: ~/bin/line-reorder
+For Mac container run: ~/bin/line-reorder
 
 ## Command documentation
 

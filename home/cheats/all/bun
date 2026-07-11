@@ -13,12 +13,14 @@ Bun is a fast, all-in-one JavaScript and TypeScript toolkit designed to serve as
 For Fedora install using: curl -fsSL https://bun.com/install | bash
 For Raspberry Pi install using: curl -fsSL https://bun.com/install | bash
 For Mac install using: brew install oven-sh/bun/bun
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -fsSL https://bun.com/install | bash
 
 ## Command path
 
 For Fedora run: ~/.bun/bin/bun
 For Raspberry Pi run: ~/.bun/bin/bun
 For Mac run: /opt/homebrew/bin/bun
+For Mac container run: ~/.bun/bin/bun
 
 ## Command documentation
 

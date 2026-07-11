@@ -13,12 +13,14 @@ A comprehensive port management tool for developers with CLI and GUI interfaces
 For Fedora install using: npm install -g portkeeper
 For Raspberry Pi install using: npm install -g portkeeper
 For Mac install using: npm install -g portkeeper
+For Mac container (Fedora Linux, ARM/aarch64) install using: npm install -g portkeeper
 
 ## Command path
 
 For Fedora run: /home/kinscoe/.local/bin/portman
 For Raspberry Pi run: ~/.local/bin/portman
 For Mac run: /opt/homebrew/bin/portman
+For Mac container run: /home/kinscoe/.local/bin/portman
 
 ## Command documentation
 

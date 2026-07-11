@@ -13,12 +13,14 @@ Software projects are displayed by Gource as an animated tree with the root dire
 For Fedora install using: `sudo dnf install gource`
 For Raspberry Pi install using: `sudo apt install gource`
 For Mac install using: `brew install gource`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `sudo dnf install gource`
 
 ## Command path
 
 For Fedora run: `/usr/bin/gource`
 For Raspberry Pi run: `/usr/bin/gource`
 For Mac run: `/usr/bin/gource`
+For Mac container run: `/usr/bin/gource`
 
 ## Command documentation
 

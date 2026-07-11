@@ -13,12 +13,14 @@ The ggshield command line tool helps developers detect and prevent vulnerabiliti
 For Fedora install using: pipx install ggshield
 For Raspberry Pi install using: pipx install ggshield
 For Mac install using: brew install ggshield
+For Mac container (Fedora Linux, ARM/aarch64) install using: pipx install ggshield
 
 ## Command path
 
 For Fedora run: /home/kinscoe/.local/bin/ggshield
 For Raspberry Pi run: ~/.local/bin/ggshield
 For Mac run: /opt/homebrew/bin/ggshield
+For Mac container run: /home/kinscoe/.local/bin/ggshield
 
 ## Command documentation
 

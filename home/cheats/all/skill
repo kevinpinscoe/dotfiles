@@ -13,12 +13,14 @@ A TUI based command line skills chooser to be executed by Claude-code
 For Fedora install using: `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-linux-amd64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`
 For Raspberry Pi install using: `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-linux-arm64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`
 For Mac install using: `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-darwin-arm64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `curl -L https://github.com/kevinpinscoe/skills-tui/releases/latest/download/skill-linux-arm64 -o ~/.local/bin/skill && chmod +x ~/.local/bin/skill`
 
 ## Command path
 
 For Fedora run: `~/.local/bin/skill`
 For Raspberry Pi run: `~/.local/bin/skill`
 For Mac run: `~/.local/bin/skill`
+For Mac container run: `~/.local/bin/skill`
 
 ## Command documentation
 

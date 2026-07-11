@@ -13,12 +13,14 @@ GNU Aspell a command line spell checker
 For Fedora install using: `sudo dnf install aspell`
 For Raspberry Pi install using: `sudo apt install aspell`
 For Mac install using: `brew install aspell`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `sudo dnf install aspell`
 
 ## Command path
 
 For Fedora run: `aspell`
 For Raspberry Pi run: `aspell`
 For Mac run: `aspell`
+For Mac container run: `aspell`
 
 ## Command documentation
 

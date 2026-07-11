@@ -13,12 +13,14 @@ A markdown viewer for the terminal that renders images and Big Headers.
 For Fedora install using: curl -sSfL https://github.com/benjajaja/mdfried/releases/latest/download/mdfried -o ~/.local/bin/mdfried && chmod +x ~/.local/bin/mdfried
 For Raspberry Pi install using: sudo apt install -y libchafa-dev && cargo install --locked mdfried
 For Mac install using: curl -sSfL https://github.com/benjajaja/mdfried/releases/latest/download/mdfried_macos_aarch64 -o ~/.local/bin/mdfried && chmod +x ~/.local/bin/mdfried && xattr -d com.apple.quarantine ~/.local/bin/mdfried
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install -y chafa-devel && cargo install --locked mdfried
 
 ## Command path
 
 For Fedora run: ~/.local/bin/mdfried
 For Raspberry Pi run: ~/.cargo/bin/mdfried
 For Mac run: ~/.local/bin/mdfried
+For Mac container run: ~/.cargo/bin/mdfried
 
 ## Command documentation
 

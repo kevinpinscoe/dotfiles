@@ -31,11 +31,19 @@ curl -L https://github.com/woodpecker-ci/woodpecker/releases/download/v3.13.0/wo
 mv /tmp/woodpecker-cli ~/.local/bin/
 ```
 
+For Mac container (Fedora Linux, ARM/aarch64) install using:
+```
+curl -L https://github.com/woodpecker-ci/woodpecker/releases/download/v3.13.0/woodpecker-cli_linux_arm64.tar.gz \
+  | tar xz -C /tmp
+sudo mv /tmp/woodpecker-cli /usr/local/bin/
+```
+
 ## Command path
 
 For Fedora run: woodpecker-cli
 For Raspberry Pi run: woodpecker-cli
 For Mac run: ~/.local/bin/woodpecker-cli
+For Mac container run: woodpecker-cli
 
 ## Authentication / environment setup
 

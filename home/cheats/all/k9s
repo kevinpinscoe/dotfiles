@@ -13,12 +13,14 @@ K9s provides a terminal UI to interact with your Kubernetes clusters
 For Fedora install using: sudo dnf install k9s
 For Raspberry Pi install using: curl -sSfL https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_arm64.tar.gz | tar -xz -C ~/.local/bin/ k9s
 For Mac install using: brew install derailed/k9s/k9s
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install k9s
 
 ## Command path
 
 For Fedora run: /usr/bin/k9s
 For Raspberry Pi run: ~/.local/bin/k9s
 For Mac run: /opt/homebrew/bin/k9s
+For Mac container run: /usr/bin/k9s
 
 ## Command documentation
 

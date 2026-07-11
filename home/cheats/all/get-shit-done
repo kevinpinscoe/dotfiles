@@ -13,12 +13,14 @@ A light-weight and powerful meta-prompting, context engineering and spec-driven 
 For Fedora install using: npx get-shit-done-cc@latest --claude --global
 For Raspberry Pi install using: npx get-shit-done-cc@latest --claude --global
 For Mac install using: npx get-shit-done-cc@latest --claude --global
+For Mac container (Fedora Linux, ARM/aarch64) install using: npx get-shit-done-cc@latest --claude --global
 
 ## Command path
 
 For Fedora run: N/A — slash commands installed to ~/.claude/
 For Raspberry Pi run: N/A — slash commands installed to ~/.claude/
 For Mac run: N/A — slash commands installed to ~/.claude/
+For Mac container run: N/A — slash commands installed to ~/.claude/
 
 ## Command documentation
 

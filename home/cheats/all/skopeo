@@ -13,12 +13,14 @@ Work with remote images registries - retrieving information, images, signing con
 For Fedora install using: sudo dnf install skopeo
 For Raspberry Pi install using: sudo apt install skopeo
 For Mac install using: brew install skopeo
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install skopeo
 
 ## Command path
 
 For Fedora run: /usr/bin/skopeo
 For Raspberry Pi run: /usr/bin/skopeo
 For Mac run: /opt/homebrew/bin/skopeo
+For Mac container run: /usr/bin/skopeo
 
 ## Command documentation
 

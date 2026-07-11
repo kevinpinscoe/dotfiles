@@ -19,6 +19,7 @@ For Mac install using: cd ~/tools && git pull
 For Fedora run: ~/tools/newest-file
 For Raspberry Pi run: ~/tools/newest-file
 For Mac run: ~/tools/newest-file
+For Mac container run: ~/tools/newest-file
 
 ## Command documentation
 

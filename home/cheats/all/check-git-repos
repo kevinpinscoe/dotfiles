@@ -13,12 +13,14 @@ Walks $HOME recursively, finds every git repository, and reports any that are ou
 For Fedora install using: curl -Lo ~/bin/check-git-repos https://github.com/kevinpinscoe/tools/releases/download/check-git-repos-v1.3.0/check-git-repos-linux-amd64 && chmod +x ~/bin/check-git-repos
 For Raspberry Pi install using: curl -Lo ~/bin/check-git-repos https://github.com/kevinpinscoe/tools/releases/download/check-git-repos-v1.3.0/check-git-repos-linux-arm64 && chmod +x ~/bin/check-git-repos
 For Mac install using: curl -Lo ~/bin/check-git-repos https://github.com/kevinpinscoe/tools/releases/download/check-git-repos-v1.3.0/check-git-repos-darwin-arm64 && chmod +x ~/bin/check-git-repos
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -Lo ~/bin/check-git-repos https://github.com/kevinpinscoe/tools/releases/download/check-git-repos-v1.3.0/check-git-repos-linux-arm64 && chmod +x ~/bin/check-git-repos
 
 ## Command path
 
 For Fedora run: /home/kinscoe/bin/check-git-repos
 For Raspberry Pi run: ~/bin/check-git-repos
 For Mac run: ~/bin/check-git-repos
+For Mac container run: /home/kinscoe/bin/check-git-repos
 
 ## Command documentation
 

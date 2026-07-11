@@ -13,12 +13,14 @@ A simple program that emulates the detach feature of screen
 For Fedora install using: sudo dnf install dtach
 For Raspberry Pi install using: sudo apt install dtach
 For Mac install using: brew install dtach
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install dtach
 
 ## Command path
 
 For Fedora run: /usr/bin/dtach
 For Raspberry Pi run: /usr/bin/dtach
 For Mac run: /opt/homebrew/bin/dtach
+For Mac container run: /usr/bin/dtach
 
 ## Command documentation
 

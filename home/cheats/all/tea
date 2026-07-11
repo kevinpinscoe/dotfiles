@@ -13,12 +13,14 @@ A command line tool to interact with Gitea servers
 For Fedora install using: compile from source into $HOME/go/bin/tea
 For Raspberry Pi install using: compile from source into $HOME/go/bin/tea
 For Mac install using: `brew install tea`
+For Mac container (Fedora Linux, ARM/aarch64) install using: compile from source into $HOME/go/bin/tea
 
 ## Command path
 
 For Fedora run: tea
 For Raspberry Pi run: tea
 For Mac run: tea
+For Mac container run: tea
 
 ## Command documentation
 

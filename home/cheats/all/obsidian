@@ -13,12 +13,14 @@ Anything you can do in Obsidian you can do from the command line
 For Fedora install using: Download AppImage from https://obsidian.md/download, run it, then enable CLI in Settings → General → "Command line interface" and follow on-screen instructions (copies binary to ~/.local/bin/obsidian)
 For Raspberry Pi install using: Download AppImage from https://obsidian.md/download, run it, then enable CLI in Settings → General → "Command line interface" and follow on-screen instructions (copies binary to ~/.local/bin/obsidian)
 For Mac install using: Download from https://obsidian.md/download, install app, then enable CLI in Settings → General → "Command line interface" and follow on-screen instructions (creates symlink at /usr/local/bin/obsidian)
+For Mac container (Fedora Linux, ARM/aarch64) install using: Download AppImage from https://obsidian.md/download, run it, then enable CLI in Settings → General → "Command line interface" and follow on-screen instructions (copies binary to ~/.local/bin/obsidian)
 
 ## Command path
 
 For Fedora run: ~/.local/bin/obsidian
 For Raspberry Pi run: ~/.local/bin/obsidian
 For Mac run: /usr/local/bin/obsidian
+For Mac container run: ~/.local/bin/obsidian
 
 ## Command documentation
 

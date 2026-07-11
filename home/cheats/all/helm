@@ -13,12 +13,14 @@ The Kubernetes Package Manager
 For Fedora install using: sudo dnf install helm
 For Raspberry Pi install using: curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null && echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list && sudo apt-get update && sudo apt-get install helm
 For Mac install using: brew install helm
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install helm
 
 ## Command path
 
 For Fedora run: /usr/bin/helm
 For Raspberry Pi run: /usr/bin/helm
 For Mac run: /opt/homebrew/bin/helm
+For Mac container run: /usr/bin/helm
 
 ## Command documentation
 

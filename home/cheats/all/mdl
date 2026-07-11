@@ -13,12 +13,14 @@ Markdown lint tool
 For Fedora install using: gem install --user-install --bindir ~/.local/bin mdl
 For Raspberry Pi install using: gem install --user-install --bindir ~/.local/bin mdl
 For Mac install using: gem install --user-install --bindir ~/.local/bin mdl
+For Mac container (Fedora Linux, ARM/aarch64) install using: gem install --user-install --bindir ~/.local/bin mdl
 
 ## Command path
 
 For Fedora run: ~/.local/bin/mdl
 For Raspberry Pi run: ~/.local/bin/mdl
 For Mac run: ~/.local/bin/mdl
+For Mac container run: ~/.local/bin/mdl
 
 ## Command documentation
 

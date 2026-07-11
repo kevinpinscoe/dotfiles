@@ -13,12 +13,14 @@ A SQL-like document editor cli
 For Fedora install using: GOTOOLCHAIN=auto go install github.com/overthinkinglabs/sqd@latest
 For Raspberry Pi install using: GOTOOLCHAIN=auto go install github.com/overthinkinglabs/sqd@latest
 For Mac install using: GOTOOLCHAIN=auto go install github.com/overthinkinglabs/sqd@latest
+For Mac container (Fedora Linux, ARM/aarch64) install using: GOTOOLCHAIN=auto go install github.com/overthinkinglabs/sqd@latest
 
 ## Command path
 
 For Fedora run: ~/go/bin/sqd
 For Raspberry Pi run: ~/go/bin/sqd
 For Mac run: ~/go/bin/sqd
+For Mac container run: ~/go/bin/sqd
 
 ## Command documentation
 

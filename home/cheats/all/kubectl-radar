@@ -13,6 +13,7 @@ Open-source kubectl plugin — a self-hosted web UI for Kubernetes clusters with
 For Fedora install using: RADAR_VER=$(curl -fsSL https://api.github.com/repos/skyhook-io/radar/releases/latest | sed -n 's/.*"tag_name": "\(v[^"]*\)".*/\1/p') && curl -fsSL "https://github.com/skyhook-io/radar/releases/download/${RADAR_VER}/radar_${RADAR_VER}_linux_amd64.tar.gz" | tar -xzC ~/.local/bin kubectl-radar && chmod +x ~/.local/bin/kubectl-radar
 For Raspberry Pi install using: RADAR_VER=$(curl -fsSL https://api.github.com/repos/skyhook-io/radar/releases/latest | sed -n 's/.*"tag_name": "\(v[^"]*\)".*/\1/p') && curl -fsSL "https://github.com/skyhook-io/radar/releases/download/${RADAR_VER}/radar_${RADAR_VER}_linux_arm64.tar.gz" | tar -xzC ~/.local/bin kubectl-radar && chmod +x ~/.local/bin/kubectl-radar
 For Mac install using: RADAR_VER=$(curl -fsSL https://api.github.com/repos/skyhook-io/radar/releases/latest | sed -n 's/.*"tag_name": "\(v[^"]*\)".*/\1/p') && curl -fsSL "https://github.com/skyhook-io/radar/releases/download/${RADAR_VER}/radar_${RADAR_VER}_darwin_arm64.tar.gz" | tar -xzC ~/.local/bin kubectl-radar && chmod +x ~/.local/bin/kubectl-radar
+For Mac container (Fedora Linux, ARM/aarch64) install using: RADAR_VER=$(curl -fsSL https://api.github.com/repos/skyhook-io/radar/releases/latest | sed -n 's/.*"tag_name": "\(v[^"]*\)".*/\1/p') && curl -fsSL "https://github.com/skyhook-io/radar/releases/download/${RADAR_VER}/radar_${RADAR_VER}_linux_arm64.tar.gz" | tar -xzC ~/.local/bin kubectl-radar && chmod +x ~/.local/bin/kubectl-radar
 
 # Note: the official `curl -fsSL https://get.radarhq.io | sh` also works but
 # installs to /usr/local/bin (requires sudo) and creates a `radar` shorthand
@@ -24,6 +25,7 @@ For Mac install using: RADAR_VER=$(curl -fsSL https://api.github.com/repos/skyho
 For Fedora run: ~/.local/bin/kubectl-radar
 For Raspberry Pi run: ~/.local/bin/kubectl-radar
 For Mac run: ~/.local/bin/kubectl-radar
+For Mac container run: ~/.local/bin/kubectl-radar
 
 ## Command documentation
 

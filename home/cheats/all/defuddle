@@ -13,12 +13,14 @@ Defuddle is an open-source tool that extracts core content from web pages by str
 For Fedora install using: `npm install -g defuddle`
 For Raspberry Pi install using: `npm install -g defuddle`
 For Mac install using: `npm install -g defuddle`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `npm install -g defuddle`
 
 ## Command path
 
 For Fedora run: `defuddle`
 For Raspberry Pi run: `defuddle`
 For Mac run: `/opt/homebrew/bin/defuddle`
+For Mac container run: `defuddle`
 
 ## Command documentation
 

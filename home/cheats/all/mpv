@@ -13,12 +13,14 @@ Command line media player
 For Fedora install using: sudo dnf install -y mpv
 For Raspberry Pi install using: sudo apt install -y mpv
 For Mac install using: brew install mpv
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install -y mpv
 
 ## Command path
 
 For Fedora run: /usr/bin/mpv
 For Raspberry Pi run: /usr/bin/mpv
 For Mac run: /opt/homebrew/bin/mpv
+For Mac container run: /usr/bin/mpv
 
 ## Command documentation
 

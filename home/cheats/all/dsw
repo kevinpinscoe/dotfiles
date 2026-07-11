@@ -13,12 +13,14 @@ A webhook for command line commands defined by YAML
 For Fedora install using: curl -sSfL https://github.com/overthinkinglabs/dsw/releases/download/v0.0.3/dsw_0.0.3_linux_amd64.tar.gz -o /tmp/dsw.tar.gz && tar -xzf /tmp/dsw.tar.gz -C ~/.local/bin/ && chmod +x ~/.local/bin/dsw
 For Raspberry Pi install using: curl -sSfL https://github.com/overthinkinglabs/dsw/releases/download/v0.0.3/dsw_0.0.3_linux_arm64.tar.gz -o /tmp/dsw.tar.gz && tar -xzf /tmp/dsw.tar.gz -C ~/.local/bin/ && chmod +x ~/.local/bin/dsw
 For Mac install using: curl -sSfL https://github.com/overthinkinglabs/dsw/releases/download/v0.0.3/dsw_0.0.3_darwin_arm64.tar.gz -o /tmp/dsw.tar.gz && tar -xzf /tmp/dsw.tar.gz -C ~/.local/bin/ && chmod +x ~/.local/bin/dsw
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -sSfL https://github.com/overthinkinglabs/dsw/releases/download/v0.0.3/dsw_0.0.3_linux_arm64.tar.gz -o /tmp/dsw.tar.gz && tar -xzf /tmp/dsw.tar.gz -C ~/.local/bin/ && chmod +x ~/.local/bin/dsw
 
 ## Command path
 
 For Fedora run: ~/.local/bin/dsw
 For Raspberry Pi run: ~/.local/bin/dsw
 For Mac run: ~/.local/bin/dsw
+For Mac container run: ~/.local/bin/dsw
 
 ## Command documentation
 

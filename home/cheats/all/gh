@@ -24,12 +24,14 @@ For Raspberry Pi install using:
   && sudo apt install gh -y
 ```
 For Mac install using: `brew install gh`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `sudo dnf install gh`
 
 ## Command path
 
 For Fedora run: `/usr/bin/gh`
 For Raspberry Pi run: `/usr/bin/gh`
 For Mac run: `/usr/bin/gh`
+For Mac container run: `/usr/bin/gh`
 
 ## Command documentation
 

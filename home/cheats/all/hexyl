@@ -13,12 +13,14 @@ A command-line colorized hex viewer
 For Fedora install using: `sudo dnf install hexyl`
 For Raspberry Pi install using: `sudo apt-get install hexyl`
 For Mac install using: `brew install hexyl`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `sudo dnf install hexyl`
 
 ## Command path
 
 For Fedora run: `/usr/bin/hexyl`
 For Raspberry Pi run: `/usr/bin/hexyl`
 For Mac run: `/opt/homebrew/bin/hexyl`
+For Mac container run: `/usr/bin/hexyl`
 
 ## Command documentation
 
