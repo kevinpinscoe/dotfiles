@@ -2,8 +2,18 @@
 [ -t 1 ] || exit 0
 output=$(cspell --no-must-find-files --cache --cache-location "${HOME}/.config/cspell/.cspellcache" --config "${HOME}/.cspell.json" "$1" 2>&1)
 if [[ $? -ne 0 ]]; then
+  echo "cspell found possible spelling issues:" >&2
   echo "$output" >&2
   echo "" >&2
   echo "To add a word: echo '<word>' >> ~/.config/cspell/custom-words.txt" >&2
-  exit 1
+  echo "" >&2
+  if [ -e /dev/tty ]; then
+    read -r -p "Commit anyway? [y/N] " reply < /dev/tty
+    case "$reply" in
+      [Yy]*) exit 0 ;;
+      *) echo "Commit aborted." >&2; exit 1 ;;
+    esac
+  fi
+  # No terminal available (e.g. scripted commit): don't block.
+  exit 0
 fi
