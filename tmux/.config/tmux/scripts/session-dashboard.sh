@@ -141,7 +141,11 @@ if [[ ${ONCE} -eq 1 ]]; then
 fi
 
 # Interactive loop mode
-trap 'tput cnorm 2>/dev/null; printf "\033[?25h"; exit 0' INT TERM
+# EXIT trap guarantees the cursor comes back no matter how this window dies
+# (kill-window, closed terminal tab, killed session, error) — not just on a
+# clean 'q' or a caught INT/TERM.
+trap 'tput cnorm 2>/dev/null || printf "\033[?25h"' EXIT
+trap 'exit 0' INT TERM HUP
 
 tput civis 2>/dev/null || printf '\033[?25l'  # hide cursor while running
 
@@ -152,5 +156,3 @@ while true; do
         [[ "${key}" == "q" ]] && break
     fi
 done
-
-tput cnorm 2>/dev/null || printf '\033[?25h'

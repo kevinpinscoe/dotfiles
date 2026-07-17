@@ -73,3 +73,8 @@ fi
 
 # Disable terminal bell
 unsetopt BEEP
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/kevini/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
