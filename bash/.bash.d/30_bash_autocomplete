@@ -4,7 +4,7 @@ if command -v kubectl >/dev/null 2>&1; then
     complete -o default -F __start_kubectl k
 fi
 
-if [[ -f "$HOME/private-tools/gitme/gitme" ]]; then
-    source "$HOME/private-tools/gitme/gitme"
-    [[ -f "$HOME/private-tools/gitme/gitme-completion.bash" ]] && source "$HOME/private-tools/gitme/gitme-completion.bash"
+if [[ -f "$HOME/Projects/public/gitme/gitme" ]]; then
+    source "$HOME/Projects/public/gitme/gitme"
+    [[ -f "$HOME/Projects/public/gitme/gitme-completion.bash" ]] && source "$HOME/Projects/public/gitme/gitme-completion.bash"
 fi

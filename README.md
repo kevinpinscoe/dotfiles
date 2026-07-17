@@ -71,7 +71,7 @@ If stow needs to merge new files into an existing real `$HOME` subdirectory, it 
 Some shell fragments expect files that are intentionally not tracked here:
 
 - `~/bin/` for personal helper scripts such as prompt and completion helpers
-- `~/private-tools/gitme/` (clone of [davorg/gitme](https://github.com/davorg/gitme)) for quick git repo jumping; sourced at shell startup by `30_bash_autocomplete` / `30_zsh_autocomplete`
+- `~/Projects/public/gitme/` (clone of [davorg/gitme](https://github.com/davorg/gitme)) for quick git repo jumping; sourced at shell startup by `30_bash_autocomplete` / `30_zsh_autocomplete`
 - `~/.environment/` for machine-specific environment variables, aliases, and secrets
 
 This repository is public-safe only if secrets and private tooling remain outside version control.

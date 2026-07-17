@@ -12,9 +12,9 @@ Easily find local Git repos
 
 Forked from https://github.com/davorg/gitme — using https://github.com/kevinpinscoe/gitme
 
-For Fedora install using: `git clone git@github.com:kevinpinscoe/gitme.git ~/private-tools/gitme`
-For Raspberry Pi install using: `git clone git@github.com:kevinpinscoe/gitme.git ~/private-tools/gitme`
-For Mac install using: `git clone git@github.com:kevinpinscoe/gitme.git ~/private-tools/gitme`
+For Fedora install using: `git clone git@github.com:kevinpinscoe/gitme.git ~/Projects/public/gitme`
+For Raspberry Pi install using: `git clone git@github.com:kevinpinscoe/gitme.git ~/Projects/public/gitme`
+For Mac install using: `git clone git@github.com:kevinpinscoe/gitme.git ~/Projects/public/gitme`
 
 ## Command path
 
@@ -34,7 +34,7 @@ Lines starting with # are comments. No cache rebuild needed after editing.
 /home/kinscoe/Projects/3rd-party-repos/*
 
 # Exclude a specific repo
-/home/kinscoe/private-tools/gitme
+/home/kinscoe/Projects/public/gitme
 
 Override the ignore file path: `export GITME_IGNORE=/path/to/ignore-file`
 
