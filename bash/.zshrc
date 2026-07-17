@@ -50,9 +50,14 @@ fi
 # Raise the ceiling before the plugin registers its wrappers.
 export FUNCNEST=1000
 
-# zsh-sage: intelligent autosuggestions (Homebrew; macOS only)
-if [[ -f /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh ]]; then
-    source /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh
+# zsh-sage: intelligent autosuggestions (macOS only)
+# Loading from the local fork (kevin/clamp-postdisplay-width branch) instead
+# of the Homebrew Cellar copy while testing the POSTDISPLAY width-clamp fix
+# for the tmux history-recall cursor bug. Revert to the Homebrew path below
+# once the fix is confirmed and upstreamed/tapped:
+#   source /opt/homebrew/opt/zsh-sage/zsh-sage.plugin.zsh
+if [[ -f ~/Projects/public/zsh-sage/zsh-sage.plugin.zsh ]]; then
+    source ~/Projects/public/zsh-sage/zsh-sage.plugin.zsh
     # EDITOR=vim makes zsh pick the viins keymap, where right-arrow is bound
     # to vi-forward-char. zsh-sage only wraps forward-char, so the suggestion
     # isn't accepted. Rebind right-arrow in viins to the wrapped forward-char.
