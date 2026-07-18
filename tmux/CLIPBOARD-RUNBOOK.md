@@ -31,6 +31,19 @@ only emits OSC 52 when `set-clipboard` is `on`. They are not independent.
   - the manual root-table `DoubleClick1Pane` / `TripleClick1Pane` bindings
     (tmux-yank's defaults use bare `copy-pipe-and-cancel`, which skips the override)
   - the `copy-mode-vi` `MouseDragEnd1Pane` binding (drag-select)
+- Whole-buffer copy command: `~/.config/tmux/copy-raw.sh` (same package). Identical
+  to `copy.sh` **except it preserves newlines** — `copy.sh` does `tr -d $'\r\n'`,
+  which is correct for word/line selections but would flatten a whole scrollback
+  into one line. Referenced by three bindings:
+  - `prefix Y` — full scrollback (`capture-pane -S -`)
+  - `prefix M-y` — visible pane only
+  - `copy-mode-vi A` — select-all top-to-bottom and copy
+
+  `prefix Y` **must be bound after the `run '~/.tmux/plugins/tpm/tpm'` line** —
+  tmux-yank binds `Y` to copy-pane-pwd and would otherwise clobber it. It lives
+  in the `--- Post-plugin overrides ---` section at the bottom of `.tmux.conf`.
+  If `prefix Y` starts copying the pane's path instead of the buffer, that
+  binding has been moved back above the tpm line.
 - copyq runs headless on **xvfb display `:99`** (`xvfb-run --auto-servernum`).
   On the Pi the copyq server is reachable with **or** without `DISPLAY=:99`.
 
