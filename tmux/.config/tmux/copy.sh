@@ -19,5 +19,11 @@ else
             printf '%s' "$content" | DISPLAY=:0 xsel --clipboard --input 2>/dev/null
         fi
     fi
-    ~/.local/bin/broadcast_clip_from_pi.sh 2>/dev/null &
+    # Clipboard broadcast is Pi-only by design: rpi5/core is the sole originator,
+    # pushing its clipboard out to Fedora and the Mac. No host broadcasts back, so
+    # this script exists only on the Pi. Guard it so its absence elsewhere is
+    # explicit rather than an error silently swallowed by 2>/dev/null.
+    if [[ -x ~/.local/bin/broadcast_clip_from_pi.sh ]]; then
+        ~/.local/bin/broadcast_clip_from_pi.sh 2>/dev/null &
+    fi
 fi

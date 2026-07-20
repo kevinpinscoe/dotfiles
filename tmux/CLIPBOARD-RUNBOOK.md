@@ -96,3 +96,11 @@ Then drag-select text in tmux and paste locally (Ctrl/Cmd-V) to confirm.
 - macOS (work MacBook): `10.1.10.84` — receives via `pbcopy`.
 - The broadcast script swallows all errors (`2>/dev/null &`), so its failures are
   invisible. Prefer the OSC 52 path; treat broadcast as best-effort only.
+- **Broadcast is one-directional and Pi-only by design.** `broadcast_clip_from_pi.sh`
+  exists only on rpi5/core, which is the sole originator — it pushes its clipboard
+  *out* to Fedora and the Mac, and neither of those hosts broadcasts back. `copy.sh`
+  and `copy-raw.sh` are shared dotfiles that run on every non-Darwin host, so they
+  guard the call with `[[ -x ... ]]`; on Fedora and the mac-container the broadcast is
+  simply skipped. Before 2026-07-20 the call was unguarded and its "No such file"
+  error was silently swallowed on those hosts — the guard makes the Pi-only intent
+  explicit rather than accidental.
