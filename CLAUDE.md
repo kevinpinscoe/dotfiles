@@ -116,18 +116,18 @@ This calls Claude with `CLAUDE.md` and `GENERATE-CHEAT.MD` as context. Templates
 
 ## Desktop application configuration and runbooks
 
-`desktop-apps-configuration-and-runbooks/` holds per-app operational notes, install procedures, and personal usage notes for GUI/desktop applications across all three platforms. It is not a Stow package — nothing here is symlinked into `$HOME`.
+Per-app operational notes, install procedures, and personal usage notes for GUI/desktop applications do **not** live in this repo. They live in the separate, Gitea-hosted `app-configuration` repo at `~/Projects/private/app-configuration/apps/<app-slug>/RUNBOOK.md`. Nothing desktop-app-related is stowed into `$HOME` from `.dotfiles`.
 
-Each application gets its own subdirectory with a `RUNBOOK.md`. Platform-specific content lives in named sections within the single RUNBOOK, not in separate per-OS files. Every RUNBOOK starts with a `## Operation` section for personal usage notes, followed by technical install/config/troubleshooting content.
+Conventions enforced in that repo: each app gets its own subdirectory with a `RUNBOOK.md`; platform-specific content lives in named sections within the single RUNBOOK, not in separate per-OS files; every RUNBOOK starts with a `## Operation` section for personal usage notes, followed by technical install/config/troubleshooting content.
 
 ```
-desktop-apps-configuration-and-runbooks/
-└── <AppName>/
+~/Projects/private/app-configuration/apps/
+└── <app-slug>/
     ├── RUNBOOK.md
     └── <supporting files>
 ```
 
-To add a runbook for a new app, create `desktop-apps-configuration-and-runbooks/<AppName>/RUNBOOK.md` and add a row to the table in `desktop-apps-configuration-and-runbooks/README.md`.
+To add a runbook for a new app, create `~/Projects/private/app-configuration/apps/<app-slug>/RUNBOOK.md` and add a row to that repo's `README.md` tree. See that repo's `README.md` for the full layout and conventions.
 
 ## Third-party binary install paths
 
