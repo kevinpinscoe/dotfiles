@@ -1,0 +1,86 @@
+---
+syntax: sh
+tags: [ claude, usage ]
+---
+# Command claude-monitor
+
+## What does this command do:
+
+Real-time monitor of Claude Code token usage and limits, with predictions and warnings.
+
+> Installed via pipx (Python package, version 4.0.0). The same package also
+> provides the aliases `ccm`, `ccmonitor`, `claude-code-monitor`, and `cmonitor`
+> — all point at the same tool.
+
+## Installed from
+
+For Fedora install using: pipx install claude-monitor
+For Raspberry Pi install using: sudo apt install pipx  # if pipx is missing, then: pipx install claude-monitor
+For Mac install using: brew install pipx && pipx install claude-monitor   # or: uv tool install claude-monitor
+For Mac container (Fedora Linux, ARM/aarch64) install using: pipx install claude-monitor
+
+> Note: the Mac container runs Fedora Linux on ARM (aarch64), not x86_64. When a
+> package is not installed via `dnf`, download the `aarch64`/`arm64` build of the
+> binary — never the `x86_64`/`amd64` build used on the Fedora workstation.
+> claude-monitor is a pure-Python package installed via pipx, so no
+> architecture-specific build is needed — the same `pipx install` works on aarch64.
+
+## Command path
+
+For Fedora run: ~/.local/bin/claude-monitor
+For Raspberry Pi run: ~/.local/bin/claude-monitor
+For Mac run: ~/.local/bin/claude-monitor
+For Mac container run: ~/.local/bin/claude-monitor
+
+## Command documentation
+
+Docs can be found at https://github.com/Maciek-roboblog/Claude-Code-Usage-Monitor
+
+## Command options
+
+```sh
+# Run the real-time monitor (default view)
+claude-monitor
+
+# Take a single snapshot and exit (no live loop) — handy for scripts
+claude-monitor --once
+
+# Choose a plan: pro, max5, max20, team, custom (default: custom)
+claude-monitor --plan max20
+
+# Pick a view: realtime, daily, monthly, session, entries, sessions, burn-rate
+claude-monitor --view daily
+
+# Structured output for piping: rich (default), json, text, csv
+claude-monitor --once --output json
+
+# Only count Anthropic/Claude models (exclude models routed via Claude Code Router)
+claude-monitor --filter-models anthropic
+
+# Theme: light, dark, classic, auto (default: auto)
+claude-monitor --theme dark
+
+# Plain output, no emoji, no header banner
+claude-monitor --no-emoji --no-header
+
+# Run as a Claude Code statusline hook (reads session JSON on stdin)
+claude-monitor --statusline
+
+# Set a custom token limit (used with --plan custom)
+claude-monitor --plan custom --custom-limit-tokens 500000
+
+# Show version / help
+claude-monitor --version
+claude-monitor --help
+```
+
+Common flags:
+- `--plan {pro,max5,max20,team,custom}` — plan type (default: custom)
+- `--view {realtime,daily,monthly,session,entries,sessions,burn-rate}` — view mode
+- `--once` — measure once, print a snapshot, and exit
+- `--output {rich,json,text,csv}` — output format
+- `--timezone str` — e.g. `America/New_York` (default: auto)
+- `--refresh-rate int` — data refresh in seconds (default: 10)
+- `--theme {light,dark,classic,auto}` — display theme
+- `--statusline` — one-line status hook for Claude Code
+- `--reset-hour {0-23}` — reset hour for daily limits
