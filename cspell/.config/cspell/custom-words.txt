@@ -588,3 +588,5 @@ moc
 Journaling
 GHSA
 istanbuljs
+Substack
+substackcdn
