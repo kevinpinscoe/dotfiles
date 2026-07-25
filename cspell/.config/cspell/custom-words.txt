@@ -590,3 +590,10 @@ GHSA
 istanbuljs
 Substack
 substackcdn
+fwupd
+fwupdmgr
+lvfs
+LVFS
+polkit
+freebind
+FreeBind
