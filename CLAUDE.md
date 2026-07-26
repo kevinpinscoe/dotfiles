@@ -157,7 +157,7 @@ Folder mapping (match the directories that already exist under `~/todo/`):
 | Target machine | Current OS detection | Todo file |
 |----------------|---------------------|-----------|
 | macOS | `uname -s` == `Darwin` | `~/todo/mac/TODO.md` |
-| Fedora workstation | `uname -s` == `Linux`, `/etc/os-release` contains `fedora`, **and not** the Mac-container (no `/mac-home`, hostname ≠ `b38e685e79b8`) | `~/todo/fedora/TODO.md` |
+| Fedora workstation (FLDW) | `uname -s` == `Linux`, `/etc/os-release` contains `fedora`, **and not** the Mac-container (no `/mac-home`, hostname ≠ `b38e685e79b8`) | `~/todo/FLDW/TODO.md` |
 | Raspberry Pi 5 (Debian) | `uname -s` == `Linux`, `/etc/os-release` contains `debian` | `~/todo/rpi/TODO.md` |
 | Mac-container (Fedora/ARM) | `uname -s` == `Linux`, `/etc/os-release` contains `fedora`, **and** `/mac-home` exists or hostname == `b38e685e79b8` | `~/todo/mac-container/TODO.md` |
 
