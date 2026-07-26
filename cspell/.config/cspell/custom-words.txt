@@ -1,5 +1,6 @@
 ACMR
 ACPI
+AKIA
 AMDGPU
 AMRAD
 AORUS
@@ -230,6 +231,7 @@ filestash
 firewalld
 fnm
 fomawo
+fpath
 frontendbinary
 frontmatter
 gcal
