@@ -1,0 +1,136 @@
+---
+syntax: sh
+tags: [ security,secrets,git,scanner,credentials ]
+---
+# Command gitleaks
+
+## What does this command do:
+
+Scans git repositories, directories, files, and stdin for hardcoded secrets — API keys, tokens, passwords, private keys — in both current content and full git history.
+
+## Installed from
+
+For Fedora install using: sudo dnf install gitleaks
+For Raspberry Pi install using:
+```bash
+# Debian Trixie's apt package is 8.16.0 (old detect/protect CLI) — use the
+# upstream release binary instead so the syntax matches the other three hosts.
+VER=8.30.1
+curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${VER}/gitleaks_${VER}_linux_arm64.tar.gz" \
+  | tar -xz -C /tmp gitleaks
+install -m 0755 /tmp/gitleaks ~/.local/bin/gitleaks
+gitleaks version
+```
+For Mac install using: brew install gitleaks
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install gitleaks
+
+> Note: the Mac container runs Fedora Linux on ARM (aarch64), not x86_64. When a
+> package is not installed via `dnf`, download the `aarch64`/`arm64` build of the
+> binary — never the `x86_64`/`amd64` build used on the Fedora workstation.
+> gitleaks is packaged by Fedora itself, so `dnf` covers both arches here.
+
+## Command path
+
+For Fedora run: /usr/bin/gitleaks
+For Raspberry Pi run: ~/.local/bin/gitleaks
+For Mac run: /opt/homebrew/bin/gitleaks
+For Mac container run: /usr/bin/gitleaks
+
+## Command documentation
+
+Docs can be found at https://github.com/gitleaks/gitleaks
+
+## Command options
+
+# Show version
+gitleaks version
+
+# Scan the git history of the repo in the current directory
+gitleaks git .
+
+# Scan the git history of a repo elsewhere
+gitleaks git /path/to/repo
+
+# Scan only staged changes — use this in a pre-commit hook
+gitleaks git --staged .
+
+# Scan only the working-tree diff (uncommitted changes)
+gitleaks git --pre-commit .
+
+# Scan a commit range using git log options
+gitleaks git --log-opts="HEAD~5..HEAD" .
+
+# Generate clickable links for a forge
+gitleaks git --platform github .
+
+# Scan a directory or single file WITHOUT using git history
+gitleaks dir /path/to/dir
+gitleaks dir ./config.yaml
+
+# Follow symlinks while scanning a directory
+gitleaks dir --follow-symlinks /path/to/dir
+
+# Scan piped input
+cat some_file | gitleaks stdin
+
+# Redact secrets from output (100% by default; partial with a percentage)
+gitleaks git --redact .
+gitleaks git --redact=20 .
+
+# Write a report — formats: json, csv, junit, sarif, template
+gitleaks git . --report-format json --report-path leaks.json
+gitleaks dir . --report-format sarif --report-path leaks.sarif
+
+# Verbose output — prints each finding as it is discovered
+gitleaks git -v .
+
+# Use a specific config file
+gitleaks git -c .gitleaks.toml .
+# Config precedence: --config/-c > $GITLEAKS_CONFIG > $GITLEAKS_CONFIG_TOML > (target)/.gitleaks.toml > built-in
+
+# Run only specific rules by id
+gitleaks git --enable-rule=aws-access-token,github-pat .
+
+# Ignore known/accepted findings via a baseline file
+gitleaks git . --report-format json --report-path baseline.json   # create it
+gitleaks git . --baseline-path baseline.json                      # then scan against it
+
+# Point at a .gitleaksignore file (fingerprints of accepted findings)
+gitleaks git -i /path/to/.gitleaksignore .
+
+# Honour or ignore inline "gitleaks:allow" comments
+gitleaks git --ignore-gitleaks-allow .
+
+# Skip files larger than N megabytes
+gitleaks git --max-target-megabytes 10 .
+
+# Recurse into archives and encoded blobs (both default to 0 = off)
+gitleaks dir --max-archive-depth 2 --max-decode-depth 2 .
+
+# Quiet the banner / color / log level
+gitleaks git --no-banner --no-color -l error .
+
+# Change the exit code used when leaks are found (default 1; 0 = never fail)
+gitleaks git . --exit-code 0
+
+# Fail the scan if it runs longer than N seconds
+gitleaks git . --timeout 300
+
+# Shell completion (zsh)
+gitleaks completion zsh > "${fpath[1]}/_gitleaks"
+
+# Suppress a single false positive — append to the offending line:
+#   my_key = "AKIA..." # gitleaks:allow
+
+# Suppress by fingerprint — put the fingerprint from the report into .gitleaksignore:
+#   echo '<commit>:<file>:<rule-id>:<line>' >> .gitleaksignore
+
+# Use as a pre-commit hook (.git/hooks/pre-commit)
+#   #!/usr/bin/env bash
+#   gitleaks git --staged --redact --no-banner . || {
+#     echo "gitleaks blocked this commit"; exit 1;
+#   }
+
+# NOTE: 'gitleaks detect' and 'gitleaks protect' are the deprecated pre-8.19 names
+# for 'gitleaks git' and 'gitleaks git --staged'. Debian's apt package (8.16.0)
+# still uses the old names — that is why the Pi install above uses the upstream binary.
