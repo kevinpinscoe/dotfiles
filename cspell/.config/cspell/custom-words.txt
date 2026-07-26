@@ -597,3 +597,5 @@ LVFS
 polkit
 freebind
 FreeBind
+parzival
+gopass
