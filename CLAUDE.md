@@ -171,8 +171,9 @@ Folder mapping (match the directories that already exist under `~/todo/`):
    ```
    Example: `2026-04-22 cd ~/.dotfiles && git pull && bash install.sh  # new stow package 'foo' added`
 4. Create `~/todo/<os>/TODO.md` if it does not exist. Do not create anything else in those folders.
-5. Kevin removes the line himself after running the command — do not touch existing entries.
-6. Mention the appended entries in your response so Kevin can sanity-check the target list.
+5. `~/todo` is its own git repo — the Gitea repo `todo-os` (`ssh://git@git.kevininscoe.com:2223/kinscoe/todo-os.git`), separate from `.dotfiles`. Appending a line is not enough: stage only the `TODO.md` files you touched, commit them there, and push, so the other hosts actually see the entry on their next pull.
+6. Kevin removes the line himself after running the command — do not touch existing entries.
+7. Mention the appended entries in your response so Kevin can sanity-check the target list.
 
 ## MANDATORY: adding a new stow package
 
