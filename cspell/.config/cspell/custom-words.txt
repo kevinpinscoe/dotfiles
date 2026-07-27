@@ -603,3 +603,11 @@ freebind
 FreeBind
 parzival
 gopass
+kfed
+magicdns
+MagicDNS
+hetzner
+tofu
+kuma
+gitkeep
+mise
