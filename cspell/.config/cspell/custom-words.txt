@@ -207,6 +207,7 @@ dnf
 docroot
 doko
 dokoapp
+drainable
 drakkan
 dumpall
 dxflrs
@@ -257,6 +258,7 @@ gotmpl
 gource
 gpgsign
 greadelf
+greppable
 griffo
 growpart
 grvydev
