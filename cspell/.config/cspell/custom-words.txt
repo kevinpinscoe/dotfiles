@@ -207,6 +207,7 @@ dnf
 docroot
 doko
 dokoapp
+donetick
 drainable
 drakkan
 dumpall
@@ -514,7 +515,9 @@ tinyemu
 tlog
 tlogs
 tlsv
+todoist
 toggleable
+toodledo
 topdirs
 toplevel
 tskey
@@ -535,6 +538,7 @@ valkey
 vanco
 vcpu
 venv
+vermilian
 vhost
 vhosts
 viins
