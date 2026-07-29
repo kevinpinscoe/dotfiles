@@ -5,6 +5,7 @@
     { "path": "/Users/kevini/ai", "name": "AI" }
   ],
   "settings": {
-    "terminal.integrated.cwd": "/Users/kevini/Projects"
+    "terminal.integrated.cwd": "/Users/kevini/Projects",
+    "git.ignoreLimitWarning": true
   }
 }

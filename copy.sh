@@ -110,6 +110,12 @@ if [[ "$os_type" == "Darwin" ]]; then
     "$projects_dir/kevins-work.code-workspace" \
     "$dotfiles_vscode/Projects/kevins-work.code-workspace"
 
+  if [[ -f "$projects_dir/kevins-acst.code-workspace" ]]; then
+    cp -v \
+      "$projects_dir/kevins-acst.code-workspace" \
+      "$dotfiles_vscode/Projects/kevins-acst.code-workspace"
+  fi
+
   if command -v code &>/dev/null; then
     code --list-extensions > "$dotfiles_vscode/extensions.txt"
     echo "Saved VS Code extensions list"

@@ -98,6 +98,13 @@ elif [[ "$(uname -s)" == "Darwin" ]]; then
     cp -v \
       "$dotfiles_vscode/Projects/kevins-work.code-workspace" \
       "$projects_dir/kevins-work.code-workspace"
+
+    if [[ -f "$dotfiles_vscode/Projects/kevins-acst.code-workspace" ]]; then
+      ensure_dest_dir "$projects_dir/kevins-acst.code-workspace"
+      cp -v \
+        "$dotfiles_vscode/Projects/kevins-acst.code-workspace" \
+        "$projects_dir/kevins-acst.code-workspace"
+    fi
   fi
 
 else
