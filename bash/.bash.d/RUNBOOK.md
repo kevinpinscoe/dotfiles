@@ -114,7 +114,15 @@ It also prints `.readme.txt` if one exists in the directory.
 
 Ahead/behind counts are read from git's locally cached remote-tracking refs (e.g. `origin/main` in `.git/refs/remotes/`). This requires no network call and is instant.
 
-To keep those refs fresh, a background `git fetch --all` is triggered automatically whenever `.git/FETCH_HEAD` is older than 5 minutes. The fetch is fire-and-forget (`disown`ed) and does not block the prompt.
+To keep those refs fresh, a background `git fetch --all --no-write-fetch-head` is triggered automatically whenever the refs are older than 2 minutes. The fetch is fire-and-forget (`disown`ed) and does not block the prompt.
+
+**Why `--no-write-fetch-head`, and why staleness is measured from a sentinel.** `git pull` is internally `git fetch` followed by `git merge FETCH_HEAD`. A backgrounded fetch that writes `FETCH_HEAD` at the same moment corrupts it mid-pull — the merge then aborts with `fatal: Cannot fast-forward to multiple branches` or `fatal: not something we can merge in .git/FETCH_HEAD`. This is not hypothetical: `cd <repo> && git pull --ff-only` failed **60/60** times in testing whenever the repo's refs were stale enough to trigger the auto-fetch. Dropping `--all` does **not** help — a plain backgrounded `git fetch` fails at the same rate. Only suppressing the `FETCH_HEAD` write fixes it (0/60 failures after).
+
+Because nothing writes `FETCH_HEAD` in the background any more, its mtime is no longer a usable clock. Staleness is measured instead from a sentinel file, `<git-dir>/.cd-last-fetch`, touched **only after a successful fetch** — so an offline or failed refresh keeps reporting stale refs and the next `cd` retries rather than pretending they are fresh. On first use in a repo that predates the sentinel, the function falls back to `FETCH_HEAD`'s mtime so the repo is not misreported as "never fetched".
+
+The git directory is resolved with `git rev-parse --git-common-dir`, not by assuming `<repo-root>/.git`: `.git` is a *file* in submodules and linked worktrees, and can live elsewhere entirely with a separate git directory. Using the *common* dir means every linked worktree shares one sentinel, matching the remote-tracking refs they already share.
+
+On git older than 2.29 (no `--no-write-fetch-head`), the background fetch is **skipped entirely** rather than run unsafely. The banner still reports ahead/behind from cached refs; run `check-remote` to refresh on demand.
 
 ## gitme — quick git repo navigation
 

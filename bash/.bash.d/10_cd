@@ -28,9 +28,49 @@ cd() {
     behind=$(git rev-list --count "HEAD..@{upstream}" 2>/dev/null)
 
     # How stale are the cached remote refs?
-    fetch_head="${repo_root}/.git/FETCH_HEAD"
-    if [ -f "$fetch_head" ]; then
-      fetch_mtime=$(stat -c %Y "$fetch_head" 2>/dev/null || stat -f %m "$fetch_head" 2>/dev/null || echo 0)
+    #
+    # Staleness is measured from our own sentinel, not FETCH_HEAD. The background
+    # refresh below runs with --no-write-fetch-head so it can never clobber
+    # FETCH_HEAD out from under a concurrent `git pull` — pull is fetch followed
+    # by `merge FETCH_HEAD`, and a racing `fetch --all` used to leave several
+    # for-merge entries there, aborting the merge with "Cannot fast-forward to
+    # multiple branches". With nothing writing FETCH_HEAD in the background, its
+    # mtime is no longer a usable clock, hence the sentinel.
+    #
+    # Resolve the real git dir rather than assuming ${repo_root}/.git: it is a
+    # *file* in submodules and linked worktrees, and can live elsewhere entirely
+    # via GIT_DIR or a separate git directory. --git-common-dir keeps every linked
+    # worktree sharing one sentinel, matching the remote-tracking refs they
+    # already share.
+    git_dir=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null)
+    if [ -z "$git_dir" ]; then
+      # git < 2.31 has no --path-format; --git-common-dir may return a path
+      # relative to the current directory, which is $PWD right after the cd.
+      git_dir=$(git rev-parse --git-common-dir 2>/dev/null)
+      case "$git_dir" in
+        '' | /*) ;;
+        *) git_dir="${PWD}/${git_dir}" ;;
+      esac
+    fi
+
+    if [ -n "$git_dir" ]; then
+      fetch_stamp="${git_dir}/.cd-last-fetch"
+    else
+      fetch_stamp=""
+    fi
+
+    # Prefer the sentinel; fall back to FETCH_HEAD so a repo that predates the
+    # sentinel is not reported as "never fetched" on the first cd into it.
+    if [ -n "$fetch_stamp" ] && [ -f "$fetch_stamp" ]; then
+      stamp_file="$fetch_stamp"
+    elif [ -n "$git_dir" ] && [ -f "${git_dir}/FETCH_HEAD" ]; then
+      stamp_file="${git_dir}/FETCH_HEAD"
+    else
+      stamp_file=""
+    fi
+
+    if [ -n "$stamp_file" ]; then
+      fetch_mtime=$(stat -c %Y "$stamp_file" 2>/dev/null || stat -f %m "$stamp_file" 2>/dev/null || echo 0)
       fetch_age=$(( $(date +%s) - fetch_mtime ))
       if [ "$fetch_age" -lt 60 ]; then
         refs_age="refs ${fetch_age}s old"
@@ -61,10 +101,36 @@ cd() {
       echo "  run 'check-remote' to see what is different on remote"
     fi
 
-    # Refresh remote refs in background if FETCH_HEAD is older than 2 minutes
-    if [ "$fetch_age" -gt 120 ]; then
-      git fetch --all --quiet 2>/dev/null &
-      disown
+    # Refresh remote refs in background if they are older than 2 minutes.
+    # Skipped when the git dir could not be resolved — without a sentinel to
+    # stamp, every cd would re-fetch forever.
+    if [ "$fetch_age" -gt 120 ] && [ -n "$fetch_stamp" ]; then
+      # Probe --no-write-fetch-head (git 2.29+) once per shell. These dotfiles
+      # are shared across k-fed hosts with differing git versions.
+      # Match on 'write-fetch-head': `git fetch -h` renders the pair as
+      # "--[no-]write-fetch-head", so grepping the literal long flag never hits.
+      if [ -z "${_CD_FETCH_SAFE+x}" ]; then
+        if git fetch -h 2>&1 | grep -q -- 'write-fetch-head'; then
+          _CD_FETCH_SAFE=yes
+        else
+          # Older git cannot suppress the FETCH_HEAD write at all, and dropping
+          # --all does NOT help: a plain backgrounded `git fetch` racing a pull
+          # still corrupts FETCH_HEAD (measured 60/60 failures either way). There
+          # is no safe way to auto-fetch here, so don't — the banner still reports
+          # ahead/behind from cached refs, and `check-remote` refreshes on demand.
+          _CD_FETCH_SAFE=no
+        fi
+      fi
+      # The flags are written literally rather than held in a variable: this file
+      # is sourced by zsh as well as bash, and zsh does not word-split unquoted
+      # parameters, so "$opts" would arrive as one argument and git would exit 129.
+      if [ "$_CD_FETCH_SAFE" = yes ]; then
+        # Stamp only on success, so an offline or failed refresh keeps reporting
+        # stale refs and the next cd retries instead of pretending they are fresh.
+        { git fetch --quiet --all --no-write-fetch-head 2>/dev/null \
+            && touch "$fetch_stamp" 2>/dev/null; } &
+        disown
+      fi
     fi
   else
     unset GIT_REPO_HOME
