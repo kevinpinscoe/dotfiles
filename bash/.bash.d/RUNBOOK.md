@@ -87,6 +87,25 @@ curl https://mise.run | sh
 brew install mise
 ```
 
+### mise is the only version manager — do not add another
+
+`~/ai/directives/when-building-or-scaffolding-code-in-a-git-repo.md` names mise the single
+tool version manager and forbids `pyenv`, `rbenv`, `nvm`, `fnm`, `tfenv`, `tofuenv`, and
+`goenv`. Any fragment that activates one of those will load *after* `03_mise` — the numeric
+prefixes are the load order — and its own `PATH` prepend then wins, silently overriding every
+mise-managed version.
+
+**Removed 2026-08-02: `23_bashrc_fedora_fnm`.** It ran `fnm env --use-on-cd`, putting
+`/run/user/$UID/fnm_multishells/…/bin` ahead of the mise shims. `mise doctor` had been
+reporting it as *"mise tool paths are not first in PATH"*. Node is now pinned globally in
+`~/.config/mise/config.toml` (`node = "24.15.0"`, the same version fnm had as its default), so
+`node` and `npm` resolve identically — from `~/.local/share/mise/installs/node/…` instead.
+
+The `fnm` binary at `~/.local/bin/fnm` and its versions under `~/.local/share/fnm` were left
+in place; nothing activates them. Remove them whenever convenient. If you ever need a Node
+version that mise does not have, `mise use -g node@<version>` — never reinstate a shell
+fragment for a second version manager.
+
 
 ## cd override (`10_cd`)
 
