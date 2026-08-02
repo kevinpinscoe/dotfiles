@@ -1,120 +1,84 @@
 ---
 syntax: sh
-tags: [ node, nodejs, version-manager, fnm ]
+tags: [ node, nodejs, version-manager, fnm, mise, removed ]
 ---
-# Command fnm
+# Command fnm — REMOVED, use mise
 
 ## What does this command do:
 
-Fast Node Manager — install, switch, and manage multiple Node.js versions. Uses `.node-version` or `.nvmrc` files for per-project version pinning.
+Nothing here anymore. **fnm is not installed and must not be reinstalled.**
 
-## Installed from
+`~/ai/directives/when-building-or-scaffolding-code-in-a-git-repo.md` names **mise** the single
+tool version manager on every host and forbids `pyenv`, `rbenv`, `nvm`, `fnm`, `tfenv`,
+`tofuenv`, and `goenv` by name.
 
-For Fedora install using:
-```
-curl -fsSL https://fnm.vercel.app/install | bash
-# or download the binary directly:
-curl -fsSL https://github.com/Schniz/fnm/releases/latest/download/fnm-linux.zip \
-  -o /tmp/fnm.zip && unzip /tmp/fnm.zip -d ~/.local/bin && chmod +x ~/.local/bin/fnm
-```
-Then add shell integration to ~/.bashrc or ~/.zshrc:
-```
-eval "$(fnm env --use-on-cd)"
-```
+Removed 2026-08-02: the binary (`~/.local/bin/fnm`), its Node versions
+(`~/.local/share/fnm`, v18.18.2 / v20.20.2 / v24.15.0), and the shell fragment
+`~/.bash.d/23_bashrc_fedora_fnm`. That fragment loaded *after* `03_mise` and its
+`fnm env --use-on-cd` prepend beat the mise shims, so `mise doctor` reported "mise tool paths
+are not first in PATH" and every mise-managed Node version was being silently overridden.
+See `~/.bash.d/RUNBOOK.md` and the 2026-08-02 entry in `~/ai/fedora/CHANGELOG.md`.
 
 ## Command path
 
-For Fedora run: ~/.local/bin/fnm  (FNM_DIR defaults to ~/.local/share/fnm)
+None. `command -v fnm` returns nothing, by design.
 
 ## Command documentation
 
-Docs can be found at https://github.com/Schniz/fnm
+mise: https://mise.jdx.dev/ — see also `cheat mise`.
 
 ## Command options
 
-# Show installed version
-fnm --version
+# --- fnm -> mise translation ---
 
-# --- Installing Node versions ---
+# Install a Node version
+#   was: fnm install 22 / fnm install --lts / fnm install latest
+mise install node@22
+mise install node@lts
+mise install node@latest
 
-# Install latest LTS
-fnm install --lts
+# Use a version in the current directory (writes mise.toml)
+#   was: fnm use 22
+mise use node@22
 
-# Install a specific version
-fnm install 22
-fnm install 22.14.0
+# Set the global default (writes ~/.config/mise/config.toml)
+#   was: fnm default 22
+mise use -g node@22
 
-# Install latest available
-fnm install latest
+# List installed versions
+#   was: fnm list / fnm ls
+mise ls node
 
-# --- Using a version ---
+# List available remote versions
+#   was: fnm list-remote / fnm ls-remote
+mise ls-remote node
 
-# Switch to a version in the current shell
-fnm use 22
-fnm use lts/iron
+# Show the active version
+#   was: fnm current
+mise current node
 
-# Switch based on .nvmrc or .node-version in current dir
-fnm use
+# Uninstall a version
+#   was: fnm uninstall 20
+mise uninstall node@20
 
-# --- Listing ---
+# Run a command under a specific version without switching
+#   was: fnm exec --using 20 node --version
+mise x node@20 -- node --version
 
-# List locally installed versions
-fnm list
-fnm ls
+# --- Auto-switching on cd ---
 
-# List all available remote versions
-fnm list-remote
-fnm ls-remote
-
-# List LTS versions only
-fnm list-remote --lts
-
-# Show current active version
-fnm current
-
-# --- Default version ---
-
-# Get the current default
-fnm default
-
-# Set a version as default (used in new shells)
-fnm default 22
-
-# --- Aliases ---
-
-# Create a named alias
-fnm alias 22.14.0 work-project
-
-# Remove an alias
-fnm unalias work-project
-
-# --- Uninstalling ---
-
-fnm uninstall 20
-fnm uni 20
+# fnm needed `--use-on-cd` in shell init. mise does this natively via
+# `mise activate` in ~/.bash.d/03_mise — no per-tool hook, and nothing to add.
+# Drop a mise.toml in the repo and cd into it:
+#
+#   [tools]
+#   node = "22"
 
 # --- Project version pinning ---
 
-# Create a .node-version file (fnm and volta compatible)
-node --version > .node-version
+# Do NOT create .node-version or .nvmrc — the directive forbids per-tool version
+# files. Pin in mise.toml instead:
+mise use node@22        # writes [tools] node = "22" into ./mise.toml
 
-# Create a .nvmrc file (nvm compatible)
-node --version > .nvmrc
-# fnm reads both formats; .node-version takes precedence
-
-# With --use-on-cd in shell init, fnm switches automatically on cd
-
-# --- Environment ---
-
-# Print env vars (used in shell init)
-fnm env
-fnm env --use-on-cd        # also hooks cd to auto-switch
-
-# Run a command in a specific Node context without switching shell
-fnm exec --using 20 node --version
-
-# --- Shell completions ---
-
-fnm completions --shell bash >> ~/.bash_completion
-fnm completions --shell zsh  >> ~/.zshrc
-fnm completions --shell fish > ~/.config/fish/completions/fnm.fish
+# Verify the config and that declared tools are installed (required pre-commit)
+mise doctor

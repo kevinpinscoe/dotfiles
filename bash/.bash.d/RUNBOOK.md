@@ -101,10 +101,14 @@ reporting it as *"mise tool paths are not first in PATH"*. Node is now pinned gl
 `~/.config/mise/config.toml` (`node = "24.15.0"`, the same version fnm had as its default), so
 `node` and `npm` resolve identically — from `~/.local/share/mise/installs/node/…` instead.
 
-The `fnm` binary at `~/.local/bin/fnm` and its versions under `~/.local/share/fnm` were left
-in place; nothing activates them. Remove them whenever convenient. If you ever need a Node
-version that mise does not have, `mise use -g node@<version>` — never reinstate a shell
-fragment for a second version manager.
+fnm is now gone entirely — the binary (`~/.local/bin/fnm`), its Node versions
+(`~/.local/share/fnm`, 538 MB across v18.18.2 / v20.20.2 / v24.15.0), and the tmpfs
+multishell directories under `/run/user/$UID/fnm_multishells/` were all removed the same day.
+mise already had all three versions, so nothing was lost. `cheat fnm` now redirects to the
+mise equivalents rather than explaining how to install fnm.
+
+If you need a Node version mise does not have, `mise use -g node@<version>` — never reinstate
+a shell fragment for a second version manager.
 
 
 ## cd override (`10_cd`)
