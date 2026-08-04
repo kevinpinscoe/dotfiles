@@ -16,5 +16,8 @@ alias dlogin='BAO_ADDR=https://openbao.kevininscoe.com BAO_TOKEN="$(cat ~/.envir
 
 alias km='cd $HOME/KnowledgeVault'
 
+# cd into the Obsidian PKM vault inside KnowledgeVault
+alias pkm='cd $HOME/KnowledgeVault/PKM'
+
 # SSH into the acst account on this machine
 alias work='ssh acst@127.0.0.1'
