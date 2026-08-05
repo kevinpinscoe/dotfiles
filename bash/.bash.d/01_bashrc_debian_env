@@ -7,6 +7,7 @@ fi
 
 # gitme search roots (Debian/Pi): home directory
 export GITME_DIRS="$HOME"
-# CHECK_GIT_REPOS deliberately unset: check-git-repos always scans $HOME, and
-# the variable is additive, so setting it to $HOME only walked the tree twice.
-export CHECK_GIT_BRANCH="$HOME"
+# CHECK_GIT_REPOS and CHECK_GIT_BRANCH deliberately unset: both tools always
+# scan $HOME and treat these variables as additive extra roots (check-git-branch
+# since v2.0.0), so setting them to $HOME only walked the tree twice. There is
+# nothing beyond $HOME to scan on Raspberry Pi OS.
