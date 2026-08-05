@@ -13,11 +13,9 @@
 	name = Kevin P. Inscoe
 	signingkey = ~/.ssh/id_ed25519_signing.pub
 [credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+	helper = !/opt/homebrew/bin/gh auth git-credential
 [core]
 	hooksPath = ~/.config/git/hooks
 [filter "lfs"]
