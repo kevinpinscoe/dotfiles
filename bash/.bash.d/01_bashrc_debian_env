@@ -7,5 +7,6 @@ fi
 
 # gitme search roots (Debian/Pi): home directory
 export GITME_DIRS="$HOME"
-export CHECK_GIT_REPOS="$HOME"
+# CHECK_GIT_REPOS deliberately unset: check-git-repos always scans $HOME, and
+# the variable is additive, so setting it to $HOME only walked the tree twice.
 export CHECK_GIT_BRANCH="$HOME"

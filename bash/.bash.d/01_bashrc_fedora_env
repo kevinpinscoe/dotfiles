@@ -7,5 +7,7 @@ fi
 
 # gitme search roots (Fedora): home directory plus containers repo
 export GITME_DIRS="$HOME:/opt/containers"
-export CHECK_GIT_REPOS="$HOME:/opt/containers"
+# check-git-repos always scans $HOME; CHECK_GIT_REPOS is additive, so listing
+# $HOME here only made it walk the tree twice. Extra roots only.
+export CHECK_GIT_REPOS="/opt/containers"
 export CHECK_GIT_BRANCH="$HOME:/opt/containers"

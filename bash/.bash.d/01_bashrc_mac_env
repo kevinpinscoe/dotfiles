@@ -10,7 +10,8 @@ unset BAO_TOKEN
 
 # gitme search roots (Mac): scan home directory only
 export GITME_DIRS="$HOME"
-export CHECK_GIT_REPOS="$HOME"
+# CHECK_GIT_REPOS deliberately unset: check-git-repos always scans $HOME, and
+# the variable is additive, so setting it to $HOME only walked the tree twice.
 export CHECK_GIT_BRANCH="$HOME"
 
 [[ -f "$HOME/.environment/zsh_secrets.sh" ]] && source "$HOME/.environment/zsh_secrets.sh"
