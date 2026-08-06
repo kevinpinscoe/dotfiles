@@ -12,10 +12,13 @@
 	email = kevin.inscoe@gmail.com
 	name = Kevin P. Inscoe
 	signingkey = ~/.ssh/id_ed25519_signing.pub
+# This file is shared across every host, so the gh helper cannot be a fixed path.
+# On macOS git may be invoked with a PATH that excludes /opt/homebrew/bin, so the
+# absolute Homebrew path is used there. Every other host resolves gh from PATH.
 [credential "https://github.com"]
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = "!f() { if [ \"$(uname -s)\" = Darwin ]; then /opt/homebrew/bin/gh auth git-credential \"$@\"; else gh auth git-credential \"$@\"; fi; }; f"
 [credential "https://gist.github.com"]
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = "!f() { if [ \"$(uname -s)\" = Darwin ]; then /opt/homebrew/bin/gh auth git-credential \"$@\"; else gh auth git-credential \"$@\"; fi; }; f"
 [core]
 	hooksPath = ~/.config/git/hooks
 [filter "lfs"]
