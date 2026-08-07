@@ -21,6 +21,11 @@ export GITME_DIRS="$HOME"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 
+# Feed brew a GitHub token from the mac-local OpenBao (app/github) so it never
+# falls back to `git credential fill` -> the macOS keychain for GitHub API
+# rate-limit relief. Silent no-op if the mac-local bao is sealed/logged out.
+export HOMEBREW_GITHUB_API_TOKEN="$(bao kv get -field=token -mount=app github 2>/dev/null)"
+
 # Cargo (Rust) bin — for tools installed via `cargo install` (e.g. jit-cli)
 [[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
