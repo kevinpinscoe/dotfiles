@@ -34,6 +34,7 @@ alias dock='killall Dock'
 alias awspw='pwgen -cyn 15'
 alias proj='cd ~/Projects'
 alias pcm='cd ~/PCM'
+alias j='cd ~/Journal'
 alias private='cd ~/Projects/private'
 alias public='cd ~/Projects/public'
 unalias reload 2>/dev/null

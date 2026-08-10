@@ -25,6 +25,26 @@ Do not commit or push without an explicit user confirmation.
 See `~/.dotfiles/CLAUDE.md` for the full dotfiles repo layout.
 
 
+## Directory-jump aliases (`20_bashrc_aliases`)
+
+Loaded on every host, in bash and zsh alike.
+
+| Alias | Command | Purpose |
+|-------|---------|---------|
+| `proj` | `cd ~/Projects` | Jump to the Projects tree |
+| `private` | `cd ~/Projects/private` | Jump to private projects |
+| `public` | `cd ~/Projects/public` | Jump to public projects |
+| `pcm` | `cd ~/PCM` | Jump to the PCM Obsidian vault |
+| `j` | `cd ~/Journal` | Jump to the Journal directory |
+| `ai` | `cd $HOME/ai` | Jump to the AI directives tree |
+| `dl` | `cd ~/Downloads` | Jump to Downloads |
+| `dotfiles` | `cd ~/.dotfiles` | Jump to this repo |
+
+`j` changes directory into `~/Journal`. It is unrelated to the Fedora-only `journal` alias
+below, which launches Obsidian.
+
+---
+
 ## Fedora-only aliases (`22_bashrc_fedora_aliases`)
 
 | Alias | Command | Purpose |
