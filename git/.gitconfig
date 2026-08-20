@@ -34,3 +34,5 @@
 	allowedsignersfile = ~/.ssh/allowed_signers
 [credential]
 	helper = store
+[fetch]
+	prune = true
