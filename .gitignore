@@ -24,3 +24,4 @@ vim/.vim/.netrwhist
 **/*.pyc
 **/*.pyo
 **/__pycache__/
+**/ai-wt/
