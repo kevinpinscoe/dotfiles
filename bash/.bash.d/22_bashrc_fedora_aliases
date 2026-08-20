@@ -6,7 +6,7 @@ if [ ! -f /etc/fedora-release ]; then
 fi
 
 # cd into the personal journal vault (Fedora only; macOS uses ~/Journal/Professional)
-alias j='cd ~/Journal/personal-journal'
+alias j='cd ~/Journal/personal-journal/personal-journal'
 
 # Launch Obsidian Personal Journal vault
 alias journal='~/AppImages/Obsidian.AppImage "obsidian://open?vault=Personal%20Journal" &>/dev/null &'
