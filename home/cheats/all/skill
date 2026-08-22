@@ -53,5 +53,5 @@ skills --list
 # Order categories/skills: alpha (default), mtime, or recent
 skills --sort=recent
 
-# Set a custom skills root directory (default: ~/skills/skills)
+# Set a custom skills root directory (default: ~/.claude/skills)
 SKILLS_DIR=<path> skills
