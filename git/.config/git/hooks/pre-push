@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
-while read local_ref local_sha remote_ref remote_sha; do
+# Shared pre-push hook. Reached via core.hooksPath=~/.config/git/hooks, so it runs
+# for every repo on this host and must stay harmless in repos that don't need it.
+#
+# Git feeds the ref list on stdin, and stdin can only be drained once. Both
+# consumers below need it, so capture it first rather than reading it inline.
+refs="$(cat)"
+
+# --- Signed-tag enforcement -------------------------------------------------
+while read -r local_ref local_sha remote_ref remote_sha; do
   if [[ "$local_ref" == refs/tags/v* ]]; then
     tag="${local_ref#refs/tags/}"
     if ! git tag -v "$tag" &>/dev/null; then
@@ -7,4 +15,12 @@ while read local_ref local_sha remote_ref remote_sha; do
       exit 1
     fi
   fi
-done
+done <<< "$refs"
+
+# --- Git LFS ----------------------------------------------------------------
+# Uploads LFS objects to the remote before the push completes. Without this, a
+# repo using LFS pushes pointer files whose contents never reach the server.
+# Exits successfully and does nothing in repos with no LFS-tracked paths.
+if command -v git-lfs >/dev/null 2>&1; then
+  printf '%s\n' "$refs" | git lfs pre-push "$@" || exit $?
+fi
