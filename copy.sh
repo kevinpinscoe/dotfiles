@@ -49,11 +49,9 @@ if [[ "$os_type" == "Linux" ]]; then
         "$dotfiles_vscode/Projects/public/pastebooks/.vscode/settings.json"
     fi
 
-    if [[ -f "$projects_dir/home-projects.code-workspace" ]]; then
-      cp -v \
-        "$projects_dir/home-projects.code-workspace" \
-        "$dotfiles_vscode/Projects/home-projects.code-workspace"
-    fi
+    # home-projects.code-workspace is NOT captured here. It is stowed from
+    # vscode-personal/, so the live file IS the repo file — there is nothing
+    # to copy, and copying would write it into the wrong (unstowed) path.
 
     if [[ -f "$HOME/.config/Code/User/chatLanguageModels.json" ]]; then
       cp -v \

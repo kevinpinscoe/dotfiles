@@ -1,7 +1,6 @@
 {
   "folders": [
     { "path": "/home/kinscoe/Projects", "name": "PROJECTS" },
-    { "path": "/home/kinscoe", "name": "HOME" },
     { "path": "/home/kinscoe/KnowledgeVault", "name": "KNOWLEDGE" },
     { "path": "/home/kinscoe/ai", "name": "AI" },
     { "path": "/containers", "name": "CONTAINERS-SYSTEM" }
