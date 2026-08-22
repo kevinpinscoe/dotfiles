@@ -1,12 +1,23 @@
 #!/usr/bin/env bash
-# Shared pre-push hook. Reached via core.hooksPath=~/.config/git/hooks, so it runs
-# for every repo on this host and must stay harmless in repos that don't need it.
+# Shared pre-push hook. Reached via core.hooksPath=~/.config/git/hooks, so it runs for
+# every repo on this host and must stay harmless in repos that need none of it.
 #
-# Git feeds the ref list on stdin, and stdin can only be drained once. Both
-# consumers below need it, so capture it first rather than reading it inline.
-refs="$(cat)"
+# Mirrors the delegation shape of the shared pre-commit hook, with one difference that
+# matters: pre-push is handed the ref list on STDIN, and stdin can only be drained once.
+# Every consumer below needs it, so it is captured up front and replayed to each in turn.
+# A consumer that read stdin inline would leave the next one with nothing — silently.
+#
+# Order is deliberate:
+#   1. host policy  — cheap, and can reject before any work is done
+#   2. repo's hook  — may run tests, may reject
+#   3. LFS upload   — transfers data, so it goes last; nothing is uploaded for a push
+#                     that was going to be refused anyway
+set -uo pipefail
 
-# --- Signed-tag enforcement -------------------------------------------------
+refs="$(cat)"
+repo_root="$(git rev-parse --show-toplevel 2>/dev/null)"
+
+# --- 1. Host policy: tags matching v* must be signed -------------------------------
 while read -r local_ref local_sha remote_ref remote_sha; do
   if [[ "$local_ref" == refs/tags/v* ]]; then
     tag="${local_ref#refs/tags/}"
@@ -17,10 +28,19 @@ while read -r local_ref local_sha remote_ref remote_sha; do
   fi
 done <<< "$refs"
 
-# --- Git LFS ----------------------------------------------------------------
-# Uploads LFS objects to the remote before the push completes. Without this, a
-# repo using LFS pushes pointer files whose contents never reach the server.
-# Exits successfully and does nothing in repos with no LFS-tracked paths.
+# --- 2. Delegate to a repo-local .githooks/pre-push, if one exists -----------------
+# No-op in repos that do not have one. Stdin is replayed so the local hook sees the
+# same ref list Git would have given it.
+if [[ -n "$repo_root" ]]; then
+  local_hook="$repo_root/.githooks/pre-push"
+  if [[ -f "$local_hook" && -x "$local_hook" ]]; then
+    printf '%s\n' "$refs" | "$local_hook" "$@" || exit $?
+  fi
+fi
+
+# --- 3. Git LFS --------------------------------------------------------------------
+# Uploads LFS objects before the push completes. Without this, a repo using LFS pushes
+# pointer files whose contents never reach the server. No-op where nothing is tracked.
 if command -v git-lfs >/dev/null 2>&1; then
   printf '%s\n' "$refs" | git lfs pre-push "$@" || exit $?
 fi
