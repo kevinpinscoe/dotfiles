@@ -21,7 +21,7 @@ bash install.sh
 bash restore.sh           # optional, restores VS Code settings
 ```
 
-Use `copy.sh` only to capture VS Code settings from a live machine back into this repo. All other config (shell, vim, cheat) is live via symlinks — just edit in place.
+Use `copy.sh` only to capture VS Code `settings.json`, keybindings and snippets from a live machine back into this repo. All other config (shell, vim, cheat) is live via symlinks — just edit in place, including the Linux workspace file `~/Projects/home-projects.code-workspace` (see `vscode-personal/` below).
 
 ## Repository Layout
 
@@ -43,7 +43,8 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - `ghostty-mac/` — Ghostty terminal config for macOS (Homebrew tmux path)
 - `ghostty-debian/` — Ghostty terminal config for Raspberry Pi / Debian (built from source)
 - `hammerspoon/` — Hammerspoon `init.lua` (macOS only); only stowed when `uname -s` == `Darwin`
-- `vscode/` — host-specific VS Code settings snapshots (not stowed; restored via `restore.sh`)
+- `vscode/` — host-specific VS Code settings snapshots (not stowed; restored via `restore.sh`). `settings.json` stays a snapshot on purpose: VS Code rewrites it in place whenever a setting is changed through the UI, and the personal (Linux) and professional (macOS) copies are different files.
+- `vscode-personal/` — **stowed, Linux only.** Carries just `Projects/home-projects.code-workspace`, the FLDW's multi-root workspace file, symlinked to `~/Projects/home-projects.code-workspace`. It is stowed rather than snapshotted so that edits to the workspace roots are tracked in git the moment they are made, instead of drifting until someone remembers to run `copy.sh`. Do not add it to `copy.sh` or `restore.sh` — the live file *is* the repo file.
 - [`Brewfile/`](Brewfile/RUNBOOK.md) — Homebrew manifest (taps, formulae, casks, VS Code extensions) for bootstrapping a Mac via `brew bundle install`; not stowed
 - `desktop-setup/` — platform-specific setup guides and system screenshots
   - [`fedora-kde/`](desktop-setup/fedora-kde/) — Fedora KDE Plasma setup (including [Claude Desktop](desktop-setup/fedora-kde/claude-desktop/README.md))
@@ -62,7 +63,7 @@ If stow needs to merge new files into an existing real `$HOME` subdirectory, it 
 
 - `bash install.sh` — stows all packages (creates symlinks in `$HOME`)
 - `bash restore.sh` — restores VS Code settings after `install.sh`
-- `bash copy.sh` — copies VS Code config from the live system back into this repo
+- `bash copy.sh` — copies VS Code config from the live system back into this repo (not the workspace file — that one is stowed)
 
 `restore.sh` contains hostname-specific logic. If you are adapting this repo for another system, update it before use.
 

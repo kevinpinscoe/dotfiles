@@ -67,13 +67,10 @@ if [[ "$(uname -s)" == "Linux" ]]; then
       "$pastebooks_dir/.vscode/settings.json"
   fi
 
-  projects_dir="$HOME/Projects"
-  if [[ -d "$projects_dir" ]]; then
-    ensure_dest_dir "$projects_dir/home-projects.code-workspace"
-    cp -v \
-      "$dotfiles_vscode/Projects/home-projects.code-workspace" \
-      "$projects_dir/home-projects.code-workspace"
-  fi
+  # home-projects.code-workspace is NOT restored here. It lives in the
+  # vscode-personal stow package and is symlinked into ~/Projects by
+  # install.sh, so edits to it are tracked in git the moment they are made.
+  # Copying it here would replace that symlink with a stale regular file.
 
 elif [[ "$(uname -s)" == "Darwin" ]]; then
   echo "Restoring VS Code config for macOS"

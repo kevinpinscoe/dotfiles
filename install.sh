@@ -131,6 +131,28 @@ if [[ "$OS" == "Darwin" && -d "$DOTFILES_DIR/cursor-professional" ]]; then
   echo "Stowed: cursor-professional"
 fi
 
+# vscode-personal is Linux-only: it carries the FLDW's multi-root workspace
+# file, ~/Projects/home-projects.code-workspace. ~/Projects/ is a real directory
+# holding every project checkout, so stow unfolds and symlinks the single file
+# inside it rather than the whole directory.
+#
+# Only the workspace file is stowed. The rest of the VS Code config stays
+# snapshot-based via copy.sh / restore.sh, because VS Code rewrites
+# settings.json in place whenever a setting is changed through the UI, and the
+# personal (Linux) and professional (macOS) settings are different files.
+if [[ "$OS" == "Linux" && -d "$DOTFILES_DIR/vscode-personal" ]]; then
+  mkdir -p "$HOME/Projects"
+  # stow refuses to overwrite a real file. Hosts set up before this package
+  # existed have a plain copy left by the old restore.sh flow; move it aside
+  # rather than deleting it, so a host-local edit is never silently lost.
+  workspace_file="$HOME/Projects/home-projects.code-workspace"
+  if [[ -e "$workspace_file" && ! -L "$workspace_file" ]]; then
+    mv -v "$workspace_file" "$workspace_file.pre-stow.$(date +%Y%m%d-%H%M%S)"
+  fi
+  stow -d "$DOTFILES_DIR" -t "$HOME" --restow vscode-personal
+  echo "Stowed: vscode-personal"
+fi
+
 # zsh-autosuggestions — install if absent (grey-text history suggestions; right-arrow to accept)
 if [[ "$OS" == "Linux" ]] && [[ ! -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
   if grep -qi "fedora" /etc/os-release 2>/dev/null; then
@@ -146,4 +168,5 @@ if [[ ! -d "$HOME/.config/cheat/cheatsheets/community" ]]; then
   git clone https://github.com/cheat/cheatsheets "$HOME/.config/cheat/cheatsheets/community"
 fi
 
-echo "Done. Run restore.sh to also restore VS Code config."
+echo "Done. Run restore.sh to also restore VS Code settings.json and snippets."
+echo "(home-projects.code-workspace is stowed, not restored — it is live via symlink.)"

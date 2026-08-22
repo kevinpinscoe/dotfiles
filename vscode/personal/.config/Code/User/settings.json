@@ -2,7 +2,7 @@
   // Disable nagging
   "extensions.ignoreRecommendations": true,
   "extensions.autoCheckUpdates": false,
-  "extensions.autoUpdate": false,
+  "extensions.autoUpdate": "off",
   "update.mode": "none",
 
   // Poor practice but is causing me grief
@@ -111,4 +111,75 @@
     "*.mmd": "markdown",
   },
   "claudeCode.preferredLocation": "panel",
+
+  // ---------------------------------------------------------------------
+  // File watching / search scope  (APP-1)
+  //
+  // The extension host was OOM-crashing hourly: the workspace watched all of
+  // $HOME, giving one watcher process 490k inotify watches and a 2 GB RSS.
+  // The event flood filled the extension host's V8 heap until it aborted
+  // (SIGTRAP / exit 133). These excludes keep the watcher off trees that
+  // churn constantly and are never edited by hand.
+  // ---------------------------------------------------------------------
+  "files.watcherExclude": {
+    // VS Code defaults, restated so they survive this override
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.hg/store/**": true,
+
+    // Caches and per-user state: ~204k directories, none hand-edited
+    "**/.cache/**": true,
+    "**/.local/**": true,
+    "**/.venv/**": true,
+    "**/venv/**": true,
+    "**/__pycache__/**": true,
+    "**/.mypy_cache/**": true,
+    "**/.ruff_cache/**": true,
+    "**/.pytest_cache/**": true,
+
+    // VS Code's own output — watching it feeds its own events back in
+    "**/.config/Code/**": true,
+    "**/.vscode/extensions/**": true,
+
+    // Never explored per ~/CLAUDE.md, and 22 repos deep
+    "**/3rd-party-repos/**": true,
+
+    // Build output
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/target/**": true,
+    "**/.terraform/**": true
+  },
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.cache": true,
+    "**/.local": true,
+    "**/.venv": true,
+    "**/__pycache__": true,
+    "**/.config/Code": true,
+    "**/3rd-party-repos": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.terraform": true
+  },
+
+  // ---------------------------------------------------------------------
+  // Git repository discovery  (APP-1)
+  //
+  // Auto-detection opened 42 repos but logged 183 open events — repeated
+  // teardown/reopen churn — and 375 `git status -z -uall` calls in one
+  // session. "openEditors" attaches Git only to repos you actually have a
+  // file open in. Set back to true if you want the old scan-everything
+  // behaviour.
+  // ---------------------------------------------------------------------
+  "git.autoRepositoryDetection": "openEditors",
+  "git.repositoryScanMaxDepth": 2,
+  "git.repositoryScanIgnoredFolders": [
+    "node_modules",
+    ".cache",
+    ".local",
+    "3rd-party-repos"
+  ],
 }
