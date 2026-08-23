@@ -21,3 +21,13 @@ alias pkm='cd $HOME/KnowledgeVault/PKM'
 
 # SSH into the acst account on this machine
 alias work='ssh acst@127.0.0.1'
+
+# Open the prescription pickup log in LibreOffice Calc.
+# FLDW only: this file is Fedora-gated, but `john` is Fedora too and has no
+# clone of ~/sheets/spreadsheet-files, so the alias is gated on the hostname
+# rather than the distribution. See https://youtrack.kevininscoe.com/issue/APP-5
+# setsid detaches Calc from the terminal; the subshell keeps job-control noise
+# out of the prompt in both bash and zsh.
+if [[ "$(hostname)" == "kevin" ]]; then
+    alias pi='(setsid soffice --calc "$HOME/sheets/spreadsheet-files/medical/prescription-inventory.fods" >/dev/null 2>&1 &)'
+fi
