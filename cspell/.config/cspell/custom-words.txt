@@ -615,3 +615,9 @@ tofu
 kuma
 gitkeep
 mise
+jsonl
+atis
+promptSource
+toolUseResult
+sourceToolAssistantUUID
+toolDenialKind
