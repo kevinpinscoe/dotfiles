@@ -1,0 +1,47 @@
+---
+syntax: sh
+tags: [ claude, terminal, logging, tui ]
+---
+# Command claude-log-view
+
+## What does this command do:
+
+Python curses TUI for browsing and viewing `myclaude` session logs. Picks the
+`_<REL>` cwd-group matching the current directory (or falls back to the most
+recently modified group), lists its `*.log` files, and views the selected log
+either raw (`less -R`) or cleaned through an ANSI-stripping pipeline
+(`ansifilter`/`ansi2txt` | `col -b` | `tr -d '\r'` | `cat -s` | `less`).
+
+## Installed from
+
+For Fedora install using: git clone git@github.com:kevinpinscoe/tools.git ~/tools (then keep ~/tools on PATH)
+For Raspberry Pi install using: git clone git@github.com:kevinpinscoe/tools.git ~/tools (then keep ~/tools on PATH)
+For Mac install using: git clone git@github.com:kevinpinscoe/tools.git ~/tools (then keep ~/tools on PATH)
+For Mac container (Fedora Linux, ARM/aarch64) install using: git clone git@github.com:kevinpinscoe/tools.git ~/tools (then keep ~/tools on PATH)
+
+> Not a package — it's a script in the `kevinpinscoe/tools` repo. Pull to sync
+> updates: `git -C ~/tools pull`. Needs only `python3` (stdlib) and `less`;
+> `ansifilter` or `ansi2txt` is optional but required for the cleaned view.
+
+## Command path
+
+For Fedora run: ~/tools/claude-log-view
+For Raspberry Pi run: ~/tools/claude-log-view
+For Mac run: ~/tools/claude-log-view
+For Mac container run: ~/tools/claude-log-view
+
+## Command documentation
+
+Docs can be found at ~/tools/RUNBOOK.md (## claude-log-view section)
+
+## Command options
+
+# Open the picker (starts on the cwd's log group)
+claude-log-view
+
+# Inside the picker:
+#   j / k / g / G / PgUp / PgDn   navigate the list
+#   Enter                          drill into a cwd-group, or open a log
+#   d                               back to the cwd-group list
+#   r                               toggle raw <-> cleaned view of the open log
+#   q / Esc                         quit (or go up one level)

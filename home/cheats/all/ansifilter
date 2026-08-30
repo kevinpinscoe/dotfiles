@@ -1,0 +1,57 @@
+---
+syntax: sh
+tags: [ terminal, ansi, logs, text ]
+---
+# Command ansifilter
+
+## What does this command do:
+
+Strips ANSI/VT100 terminal escape codes from text, or converts them to
+HTML/LaTeX/RTF/SVG/BBCode/Pango markup. Used by `myclaude`, `mycodex`, and
+`claude-log-view` in `~/tools` to clean colorized session logs into plain,
+readable text.
+
+## Installed from
+
+For Fedora install using: sudo dnf install ansifilter
+For Raspberry Pi install using: sudo apt install ansifilter
+For Mac install using: brew install ansifilter
+For Mac container (Fedora Linux, ARM/aarch64) install using: sudo dnf install ansifilter
+
+> `colorized-logs` (providing `ansi2txt`) is an apt/dnf-only fallback when
+> `ansifilter` isn't available — it has no Homebrew formula, so `ansifilter`
+> is the one option that covers all four hosts.
+
+## Command path
+
+For Fedora run: /usr/bin/ansifilter
+For Raspberry Pi run: /usr/bin/ansifilter
+For Mac run: /opt/homebrew/bin/ansifilter
+For Mac container run: /usr/bin/ansifilter
+
+## Command documentation
+
+Docs can be found at http://andre-simon.de/doku/ansifilter/en/ansifilter.php
+
+## Command options
+
+# Strip ANSI codes from a file, write plain text to stdout
+ansifilter -i session.log
+
+# Strip ANSI codes from stdin, write to stdout
+cat session.log | ansifilter
+
+# Write filtered output to a file instead of stdout
+ansifilter -i session.log -o session.txt
+
+# Follow a growing file like `tail -f`, filtering as it grows
+ansifilter -t -i session.log
+
+# Convert to HTML instead of plain text (keeps color as CSS)
+ansifilter -H -i session.log -o session.html
+
+# Ignore ANSI formatting entirely, just pass text through
+ansifilter -p -i session.log
+
+# Typical cleanup pipeline used by myclaude/claude-log-view:
+ansifilter -i session.log | col -b | tr -d '\r' | cat -s

@@ -1,0 +1,54 @@
+---
+syntax: sh
+tags: [ claude, terminal, session, logging ]
+---
+# Command myclaude
+
+## What does this command do:
+
+Launches `claude` inside a named `abduco` session, with `script(1)` recording
+the entire terminal session to disk. On exit it cleans the raw `.log` into a
+readable `.txt` sibling by stripping alt-screen redraws and ANSI escapes (via
+`ansifilter`/`ansi2txt`). The older `screen`-based implementation ships
+alongside it as `myclaude-screen` for hosts without `abduco`.
+
+## Installed from
+
+For Fedora install using: git clone git@github.com:kevinpinscoe/tools.git ~/tools (then keep ~/tools on PATH)
+For Raspberry Pi install using: git clone git@github.com:kevinpinscoe/tools.git ~/tools (then keep ~/tools on PATH)
+For Mac install using: git clone git@github.com:kevinpinscoe/tools.git ~/tools (then keep ~/tools on PATH)
+For Mac container (Fedora Linux, ARM/aarch64) install using: git clone git@github.com:kevinpinscoe/tools.git ~/tools (then keep ~/tools on PATH)
+
+> Not a package — it's a script in the `kevinpinscoe/tools` repo. Pull to sync
+> updates: `git -C ~/tools pull`.
+
+## Command path
+
+For Fedora run: ~/tools/myclaude
+For Raspberry Pi run: ~/tools/myclaude
+For Mac run: ~/tools/myclaude
+For Mac container run: ~/tools/myclaude
+
+## Command documentation
+
+Docs can be found at ~/tools/RUNBOOK.md (## myclaude section)
+
+## Command options
+
+# Launch (run from any directory under $HOME; prompts for a session name)
+myclaude
+
+# Post-process a raw .log into a cleaned .txt sibling (e.g. after a detach)
+myclaude --clean <log-file>
+
+# Detach from a running session (session keeps running and logging)
+# Ctrl+\
+
+# Reattach to a detached session
+abduco -a <session-name>
+
+# List running sessions
+abduco
+
+# Legacy screen-based variant, for hosts without abduco
+myclaude-screen
