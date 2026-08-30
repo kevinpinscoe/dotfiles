@@ -35,13 +35,14 @@ Cheat reads from two locations:
 > Fedora Linux on **ARM (aarch64)**, not x86_64. It installs `dnf` packages exactly
 > like the Fedora workstation, but any **direct binary download must fetch the
 > `aarch64`/`arm64` build**, never the `x86_64`/`amd64` build.
-4. Commit directly in `~/.dotfiles` (cheats are stowed — no copy step needed):
-   ```sh
-   git -C ~/.dotfiles add home/cheats/<dir>/<command>
-   git -C ~/.dotfiles commit -m "Add cheat sheet for <command>"
-   git -C ~/.dotfiles push
-   ```
-5. On other workstations: `git -C ~/.dotfiles pull` to get the new sheet.
+4. `~/.dotfiles` is a non-work project repo, so a cheat sheet change goes through the
+   same YouTrack-issue-and-pull-request workflow as any other change there — a YouTrack
+   issue naming the branch, work done in `~/.dotfiles/ai-wt/<ISSUE-ID>/` (never the
+   primary working tree — cheats are stowed, so no copy step is needed either way),
+   commits pushed on that branch, and a pull request Kevin reviews and merges himself.
+   Full mechanics: `~/ai/directives/when-working-in-a-git-tracked-repo.md`.
+5. On other workstations, once the pull request is merged: `git -C ~/.dotfiles pull` to
+   get the new sheet.
 
 > **Note:** `copy.sh` in `~/.dotfiles` only syncs VS Code settings — it does not touch cheat sheets.
 > Cheats are live via stow symlinks; committing them to git is all that is needed.
