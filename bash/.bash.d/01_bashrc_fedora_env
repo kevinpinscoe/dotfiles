@@ -6,9 +6,11 @@ if [ ! -f /etc/fedora-release ]; then
 fi
 
 # gitme search roots (Fedora): home directory plus containers repo
-export GITME_DIRS="$HOME:/opt/containers"
+# /opt/containers was retired 2026-09-01 under FLDW-9; every self-hosted service (and
+# this repo's own working tree) moved to /home/containers.
+export GITME_DIRS="$HOME:/home/containers"
 # Both tools always scan $HOME and treat these variables as additive (
 # check-git-branch since v2.0.0), so they list extra roots only. Scanned here:
-# $HOME + /opt/containers.
-export CHECK_GIT_REPOS="/opt/containers"
-export CHECK_GIT_BRANCH="/opt/containers"
+# $HOME + /home/containers.
+export CHECK_GIT_REPOS="/home/containers"
+export CHECK_GIT_BRANCH="/home/containers"
