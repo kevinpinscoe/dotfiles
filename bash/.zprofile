@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/kevini/.docker/bin"
+# End of Docker Desktop section.
+
 # ~/.zprofile - sourced for login shells (macOS Terminal opens login shells)
 # Sets up PATH and environment before .zshrc runs.
 # Mirrors the login environment from .bash_profile -> .bashrc -> 01_bashrc_mac_env
