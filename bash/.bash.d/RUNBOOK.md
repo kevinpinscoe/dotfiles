@@ -34,7 +34,6 @@ Loaded on every host, in bash and zsh alike.
 | `proj` | `cd ~/Projects` | Jump to the Projects tree |
 | `private` | `cd ~/Projects/private` | Jump to private projects |
 | `public` | `cd ~/Projects/public` | Jump to public projects |
-| `pcm` | `cd ~/PCM` | Jump to the PCM Obsidian vault |
 | `j` | `cd ~/Journal` | Jump to the Journal directory |
 | `ai` | `cd $HOME/ai` | Jump to the AI directives tree |
 | `dl` | `cd ~/Downloads` | Jump to Downloads |
@@ -42,6 +41,15 @@ Loaded on every host, in bash and zsh alike.
 
 `j` changes directory into `~/Journal`. It is unrelated to the Fedora-only `journal` alias
 below, which launches Obsidian.
+
+### `pcm` — jump to the PCM vault and label the tab
+
+`pcm` is a **shell function**, not a plain alias, because it does two things: `cd ~/PCM`, then
+`set-ghostty-tab-name PCM` (`~/tools/set-ghostty-tab-name`, must be on `PATH`) to label the
+Ghostty/tmux tab. A standalone executable — even one placed in `~/private-tools` or `~/tools` —
+cannot do the `cd` half: a spawned process can never change its parent shell's working
+directory, only a function running in the shell itself can. That is also why this lives here
+alongside `lastdl` and `reload` rather than as a script elsewhere.
 
 ---
 
