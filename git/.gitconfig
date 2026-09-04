@@ -28,6 +28,9 @@
 	required = true
 [safe]
 	directory = /opt/containers
+	directory = /mac-home/Journal/Professional
+	directory = /mac-home/Projects/acst/aws-terraform-config
+	directory = /mac-home/WorkKnowledgeVault
 [push]
 	autoSetupRemote = true
 [gpg "ssh"]
