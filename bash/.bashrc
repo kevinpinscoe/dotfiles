@@ -57,4 +57,5 @@ if [[ -n "$SSH_CLIENT" ]]; then
 fi
 
 [[ -f ~/.environment/self-hosted-services.sh ]] && source ~/.environment/self-hosted-services.sh
+[[ -f ~/.environment/openbao/openbao-env.sh ]] && source ~/.environment/openbao/openbao-env.sh
 . "$HOME/.cargo/env"
