@@ -1,9 +1,28 @@
-_pathadd() { [[ ":$PATH:" != *":$1:"* ]] && export PATH="$PATH:$1"; }
-_pathadd /usr/local/bin
-_pathadd /usr/bin
-_pathadd /bin
-_pathadd /usr/local/sbin
-_pathadd /usr/sbin
-_pathadd /sbin
+# Tooling directories added earlier (00_bashrc_env, 01_*_env) must always win over the
+# standard OS command directories below on a name collision -- e.g. a `reset` shim in
+# ~/tools superseding /usr/bin/reset. Prepending private-tools here is not enough on its
+# own: the six standard dirs below are usually *already* in the inherited login PATH
+# (from a login manager, /etc/profile, etc.), so a plain "add if missing" is a no-op that
+# leaves them wherever the environment happened to put them -- sometimes ahead of a
+# custom tooling directory. Force them to the true end of PATH instead.
+
+_pathadd() { [[ ":$PATH:" != *":$1:"* ]] && export PATH="$1:$PATH"; }
 _pathadd "$HOME/private-tools"
 unset -f _pathadd
+
+_pathtoend() {
+  local dir="$1"
+  [ -d "$dir" ] || return 0
+  local wrapped=":$PATH:"
+  wrapped="${wrapped//:$dir:/:}"
+  wrapped="${wrapped#:}"
+  wrapped="${wrapped%:}"
+  export PATH="$wrapped:$dir"
+}
+_pathtoend /usr/local/sbin
+_pathtoend /usr/local/bin
+_pathtoend /usr/sbin
+_pathtoend /usr/bin
+_pathtoend /sbin
+_pathtoend /bin
+unset -f _pathtoend
