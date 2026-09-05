@@ -98,6 +98,46 @@ reload
 
 
 
+## Standard OS directories forced to the end of PATH (`02_core_path_env`)
+
+`~/.bash.d/02_core_path_env` runs on every platform (no `mac`/`fedora`/`debian` marker in its
+filename, so the filter table above always sources it) and does two things:
+
+1. Prepends `$HOME/private-tools` — a tooling directory, same as the ones `00_bashrc_env` adds.
+2. Forces `/usr/local/sbin`, `/usr/local/bin`, `/usr/sbin`, `/usr/bin`, `/sbin`, `/bin` to the
+   **true end** of `$PATH`, regardless of where the inherited login environment placed them.
+
+### Why "add if missing" wasn't enough
+
+The obvious approach — `_pathadd` with an append (`PATH="$PATH:$dir"`), skipped when `$dir` is
+already present — is what this file used before KHC-46, and it was a near-total no-op on every
+host: the login environment (a display manager, `/etc/profile`, `/etc/environment`) already puts
+the standard OS bin/sbin directories on `$PATH` before any dotfile ever runs, so `_pathadd`'s
+"already present" guard triggered immediately and left those directories sitting wherever the
+inherited environment happened to put them — sometimes ahead of a custom tooling directory added
+later in this same file (`private-tools`) or a directory this repo installs a shim into (`~/tools`,
+for the `reset`/`rg`/`ugrep` shims). Forcing tool directories ahead of the standard OS ones only
+worked by accident, whichever way the inherited `$PATH` happened to be ordered.
+
+### The fix — strip and re-append
+
+`_pathtoend` strips its argument from `$PATH` wherever it currently sits (`${wrapped//:$dir:/:}`,
+a global substitution supported by both bash and zsh — no word-splitting or shell-specific
+tricks needed) and re-appends it once, at whatever is currently the end of `$PATH`. Called last,
+after every tooling directory this file and the ones before it have already added, this
+guarantees the six standard directories land after all of them — deterministically, not by
+however the login environment happened to order things.
+
+This is why a shim placed in `~/tools` (e.g. `reset`, or the existing `ugrep`/`rg` ->
+`human-only-search-guard` pair) always wins over the real `/usr/bin/reset` or `/usr/bin/rg`: by
+the time `02_core_path_env` finishes, `/usr/bin` is guaranteed to come after `~/tools` on `$PATH`,
+on Fedora, the Raspberry Pi (Debian/core), and macOS alike.
+
+`02_fedora_path_env`'s own append of `/var/lib/snapd/bin` runs after this file (alphabetically
+`core` < `debian` < `fedora`), so it lands after the forced-to-end standard directories too — a
+vendor package directory, not custom tooling, so trailing even the standard OS dirs is the right
+place for it.
+
 ## mise activation (`03_mise`)
 
 The file `~/.bash.d/03_mise` activates [mise](https://mise.jdx.dev/) in the current shell session. It runs after the `02_*` PATH fragments so that `mise` is already on `$PATH`, and `mise activate` prepends its shims directory to `$PATH` so mise-managed tool versions take precedence.
