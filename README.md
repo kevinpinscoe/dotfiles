@@ -34,6 +34,7 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - `aspell/` — `.aspell.en.pws` personal dictionary
 - `cspell/` — `.cspell.json` global cspell config (auto-discovered from `~/`) and `~/.config/cspell/custom-words.txt` personal word list
 - `cheat/` — `cheat` CLI config (`~/.config/cheat/conf.yml`)
+- `markdownlint/` — shared `markdownlint-cli2` config (`~/.config/markdownlint/.markdownlint-cli2.jsonc`); paired with the `mdlint`/`mdlint-fix` aliases in `bash/.bash.d/20_bashrc_aliases` (KTA-4)
 - `home/` — everything that stows into `~/` but doesn't fit a dedicated package (e.g. `~/cheats/`)
 - `tmux/` — `.tmux.conf` and `~/.config/tmux/status/` scripts (workingon, git, aws, k8s); shared across platforms
 - `opensessions/` — `~/.config/opensessions/config.json` (opensessions tmux sidebar config: sidebar position, width, theme) and `~/.tmux/plugins/opensessions/bin/` (`opensessions-server`, `opensessions-sidebar`, `.opensessions-version`; `lazydiff` is not tracked — it lives in `~/.local/bin/`)

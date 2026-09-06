@@ -69,6 +69,8 @@ alias awalledcity='cd $HOME/Projects/private/walled_city; code -n $HOME/Projects
 alias ai='cd $HOME/ai'
 alias il='ps -ef | grep input-leap | grep -v grep'
 alias vi='vim'
+alias mdlint='markdownlint-cli2 --config ~/.config/markdownlint/.markdownlint-cli2.jsonc'
+alias mdlint-fix='markdownlint-cli2 --fix --config ~/.config/markdownlint/.markdownlint-cli2.jsonc'
 alias commit-repo='claude "$(cat ~/ai/directives/when-making-changes-in-a-directory-that-is-also-a-git-repo.md)"'
 alias resume.sh='echo "resume.sh" >> .gitignore'
 alias kmrx-loop='mpv --loop --vf=lavfi="[drawbox=x=331:y=263:w=24:h=24:color=black@1.0:t=fill,drawbox=x=335:y=267:w=16:h=16:color=red@1.0:t=fill]" https://radar.weather.gov/ridge/standard/KMRX_loop.gif'

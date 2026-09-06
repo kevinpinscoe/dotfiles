@@ -30,6 +30,10 @@ mkdir -p "$HOME/.config/cspell"
 # alongside conf.yml and must not be tracked in this repo).
 mkdir -p "$HOME/.config/cheat"
 
+# ~/.config/markdownlint/ must be a real directory so stow symlinks
+# .markdownlint-cli2.jsonc inside it rather than symlinking the whole directory.
+mkdir -p "$HOME/.config/markdownlint"
+
 # ~/.config/git/ must be a real directory so stow symlinks ignore and hooks/
 # inside it rather than symlinking the whole directory — git may also write
 # credentials or other runtime files alongside the tracked config.
@@ -78,7 +82,7 @@ done < <(find "$HOME/.config/tmux/status" -maxdepth 1 -type l -print0)
 # writes settings.json and other runtime files into ~/.claude/ alongside hooks/.
 mkdir -p "$HOME/.claude/hooks"
 
-PACKAGES=(bash vim aspell cheat cspell home tmux git opensessions yazi claude)
+PACKAGES=(bash vim aspell cheat cspell home tmux git opensessions yazi claude markdownlint)
 for pkg in "${PACKAGES[@]}"; do
   if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
     stow -d "$DOTFILES_DIR" -t "$HOME" --restow "$pkg"
