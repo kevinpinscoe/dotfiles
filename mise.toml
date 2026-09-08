@@ -1,0 +1,8 @@
+[tools]
+# No tool versions pinned — this repo is shell configuration (zsh/bash rc
+# fragments, git config, vim config) with no build step and no runtime of its
+# own. Scaffolded per ~/ai/directives/when-building-or-scaffolding-code-in-a-git-repo.md
+# §2, which requires the file in every repo so there is a config entry point if
+# that ever changes.
+# python = "3.12"
+# node = "22"
