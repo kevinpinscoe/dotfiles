@@ -23,8 +23,48 @@ export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 
 # Feed brew a GitHub token from the mac-local OpenBao (app/github) so it never
 # falls back to `git credential fill` -> the macOS keychain for GitHub API
-# rate-limit relief. Silent no-op if the mac-local bao is sealed/logged out.
-export HOMEBREW_GITHUB_API_TOKEN="$(bao kv get -field=token -mount=app github 2>/dev/null)"
+# rate-limit relief.
+#
+# KSA-19, 2026-09-05: this used to be an eager
+#   export HOMEBREW_GITHUB_API_TOKEN="$(bao kv get -field=token -mount=app github)"
+# which was wrong twice over. It ran `bao kv get` on EVERY shell start, using
+# the ambient root token from ~/.vault-token; and it left a raw GitHub PAT in
+# the environment of every process descended from that shell, where `ps -E`,
+# a crash dump, or an AI session's subprocess could pick it up.
+#
+# Now the token is fetched only when brew actually runs, through a read-only
+# AppRole (app/github, identity `ai`), and it lives only in brew's own process.
+brew() {
+    local cfg="${PARZIVAL_CONFIG_HOME:-$HOME/.config/parzival}" p role=github-adhoc
+    p="$(command -v parzival 2>/dev/null)"
+    [[ -x "$p" ]] || p="$HOME/.local/bin/parzival"
+
+    if [[ -x "$p" && -f "$cfg/$role.secret-id" && -f "$cfg/$role.role-id" ]]; then
+        local identity=ai
+        [[ -f "$cfg/$role.identity" ]] && identity="$(<"$cfg/$role.identity")"
+        env -u BAO_TOKEN \
+            PARZIVAL_OPENBAO_AUTH=approle \
+            PARZIVAL_OPENBAO_ROLE_ID="$(<"$cfg/$role.role-id")" \
+            PARZIVAL_OPENBAO_SECRET_ID_PROVIDER=file \
+            PARZIVAL_OPENBAO_SECRET_ID_FILE="$cfg/$role.secret-id" \
+            "$p" exec --as "$identity" "$role" -- \
+            sh -c 'HOMEBREW_GITHUB_API_TOKEN=$(sed -n "s/^TOKEN=//p" "$GITHUB_ADHOC_ENV_FILE") \
+                   exec /opt/homebrew/bin/brew "$@"' brew-wrapper "$@"
+        return $?
+    fi
+
+    # NB: the env-file is read with sed, not sourced. Sourcing it would also
+    # set USER=kevinpinscoe from the credential's `user` field and clobber the
+    # real $USER for the child process -- observed 2026-09-05, brew warned
+    # "Could not determine home directory for $USER". Any consumer that
+    # sources one of these files has the same problem; see KSA-19.
+
+    # No AppRole here (or no parzival): run brew without the token. It still
+    # works -- the token is only for GitHub API rate-limit relief -- so this
+    # degrades rather than failing, which is what the old `2>/dev/null` was
+    # reaching for less precisely.
+    command brew "$@"
+}
 
 # Cargo (Rust) bin — for tools installed via `cargo install` (e.g. jit-cli)
 [[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
