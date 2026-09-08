@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# YDOTOOL_SOCKET for interactive shells on the FLDW (FLDW-53).
+#
+# Meant to be *sourced* from a host's shell rc, never executed directly. The
+# `fedora` in the filename is load-bearing: ~/.zshrc and ~/.bashrc only source
+# a *fedora* file when IS_FEDORA is true, and ydotool is Linux-only.
+#
+# ydotoold is started by the packaged ydotool.service, whose drop-in at
+# /etc/systemd/system/ydotool.service.d/override.conf puts the socket at
+# /tmp/.ydotool_socket with mode 0600 owned by this user. Without this export
+# the ydotool client looks under $XDG_RUNTIME_DIR instead and reports
+# "failed to connect socket".
+#
+# This is a convenience for typing `ydotool ...` by hand. It is NOT what makes
+# the KDE global hotkey work: ~/bin/type-common-value sets YDOTOOL_SOCKET
+# itself, because Plasma-launched commands do not inherit an interactive
+# shell's environment.
+#
+# See ~/Projects/private/app-configuration/apps/ydotool/RUNBOOK.md.
+
+export YDOTOOL_SOCKET=/tmp/.ydotool_socket
