@@ -31,6 +31,7 @@
 	directory = /mac-home/Journal/Professional
 	directory = /mac-home/Projects/acst/aws-terraform-config
 	directory = /mac-home/WorkKnowledgeVault
+	directory = /usr/local/sbin/automation
 [push]
 	autoSetupRemote = true
 [gpg "ssh"]
