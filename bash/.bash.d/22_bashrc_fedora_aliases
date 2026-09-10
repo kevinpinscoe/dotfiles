@@ -11,8 +11,18 @@ alias j='cd ~/Journal/personal-journal/personal-journal'
 # Launch Obsidian Personal Journal vault
 alias journal='~/AppImages/Obsidian.AppImage "obsidian://open?vault=Personal%20Journal" &>/dev/null &'
 
-# Log in to self-hosted Gitea container registry (token brokered from OpenBao, no on-disk file)
-alias dlogin='BAO_ADDR=https://openbao.kevininscoe.com BAO_TOKEN="$(cat ~/.environment/.vault-token)" bao kv get -field=token -mount=app gitea | docker login git.kevininscoe.com --username kevin --password-stdin'
+# Log in to self-hosted Gitea container registry. Token brokered by parzival --
+# bao:app/gitea deliberately excludes parzival's `get` mode everywhere in
+# ~/.config/parzival/policy.json, so the token is never held as a bash variable
+# here; it is rendered to $PARZIVAL_CRED_FILE for the lifetime of this one
+# `docker login` call and read from there, the same gitea-token exec profile
+# ~/admin/sentinel/lib/check-gitea.sh uses. KSA-20 (PARZIVAL-2 fallout):
+# replaces the old `cat ~/.environment/.vault-token` read -- that file was
+# permanently removed 2026-09-05.
+dlogin() {
+    parzival exec --as tea gitea-token -- \
+        sh -c 'docker login git.kevininscoe.com --username kevin --password-stdin < "$PARZIVAL_CRED_FILE"'
+}
 
 alias km='cd $HOME/KnowledgeVault'
 
