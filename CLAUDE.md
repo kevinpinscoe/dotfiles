@@ -102,7 +102,7 @@ Uses the [`cheat`](https://github.com/cheat/cheat) CLI. Cheatsheets live in `hom
 - `home/cheats/mac/` — macOS only (tagged `mac`)
 - `home/cheats/fedora/` — Fedora Linux workstation, x86_64 (tagged `fedora`)
 - `home/cheats/rpi/` (not in repo but referenced in config) — Raspberry Pi
-- `home/cheats/mac-container/` — Mac-container only (tagged `mac-container`): Fedora Linux on **ARM (aarch64)**, hostname `b38e685e79b8`, a Docker container on the work Mac. Same `dnf` installs as Fedora, but direct binary downloads must use the `aarch64`/`arm64` build, never `x86_64`/`amd64`.
+- `home/cheats/mac-container/` — Mac-container only (tagged `mac-container`): Fedora Linux on **ARM (aarch64)**, hostname `9a00984adb00`, a Docker container on the work Mac. Same `dnf` installs as Fedora, but direct binary downloads must use the `aarch64`/`arm64` build, never `x86_64`/`amd64`.
 
 Community cheatsheets are cloned separately and not tracked in this repo.
 
@@ -157,9 +157,9 @@ Folder mapping (match the directories that already exist under `~/todo/`):
 | Target machine | Current OS detection | Todo file |
 |----------------|---------------------|-----------|
 | macOS | `uname -s` == `Darwin` | `~/todo/mac/TODO.md` |
-| Fedora workstation (FLDW) | `uname -s` == `Linux`, `/etc/os-release` contains `fedora`, **and not** the Mac-container (no `/mac-home`, hostname ≠ `b38e685e79b8`) | `~/todo/FLDW/TODO.md` |
+| Fedora workstation (FLDW) | `uname -s` == `Linux`, `/etc/os-release` contains `fedora`, **and not** the Mac-container (no `/mac-home`, hostname ≠ `9a00984adb00`) | `~/todo/FLDW/TODO.md` |
 | Raspberry Pi 5 (Debian) | `uname -s` == `Linux`, `/etc/os-release` contains `debian` | `~/todo/rpi/TODO.md` |
-| Mac-container (Fedora/ARM) | `uname -s` == `Linux`, `/etc/os-release` contains `fedora`, **and** `/mac-home` exists or hostname == `b38e685e79b8` | `~/todo/mac-container/TODO.md` |
+| Mac-container (Fedora/ARM) | `uname -s` == `Linux`, `/etc/os-release` contains `fedora`, **and** `/mac-home` exists or hostname == `9a00984adb00` | `~/todo/mac-container/TODO.md` |
 
 ### Rules
 

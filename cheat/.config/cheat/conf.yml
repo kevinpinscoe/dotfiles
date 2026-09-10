@@ -65,7 +65,7 @@ cheatpaths:
     tags: [ rpi ]
     readonly: true
 
-  # Mac container: Fedora Linux on ARM (aarch64), hostname b38e685e79b8,
+  # Mac container: Fedora Linux on ARM (aarch64), hostname 9a00984adb00,
   # a Docker container running on the work Mac.
   - name: mac-container
     path: ~/cheats/mac-container
