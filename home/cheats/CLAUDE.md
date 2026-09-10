@@ -25,7 +25,7 @@ Organized by platform (four possible hosts):
 - `~/cheats/fedora/` — Fedora workstation only (x86_64)
 - `~/cheats/mac/` — macOS only
 - `~/cheats/rpi/` — Raspberry Pi / Debian only
-- `~/cheats/mac-container/` — Mac-container only: Fedora Linux on ARM (aarch64), hostname `b38e685e79b8`, a Docker container on the work Mac. Same `dnf` installs as Fedora, but direct binary downloads must use the `aarch64`/`arm64` build.
+- `~/cheats/mac-container/` — Mac-container only: Fedora Linux on ARM (aarch64), hostname `9a00984adb00`, a Docker container on the work Mac. Same `dnf` installs as Fedora, but direct binary downloads must use the `aarch64`/`arm64` build.
 
 ### These are community developed cheats
 ~/.config/cheat/cheatsheets

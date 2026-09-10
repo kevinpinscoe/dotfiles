@@ -31,7 +31,7 @@ Cheat reads from two locations:
 
 > **Four hosts, four install sections.** A cross-platform (`all`) sheet now carries
 > **four** install sections: Fedora, Raspberry Pi, Mac, and Mac-container. The
-> Mac-container host (`b38e685e79b8`, a Fedora Docker container on the work Mac) runs
+> Mac-container host (`9a00984adb00`, a Fedora Docker container on the work Mac) runs
 > Fedora Linux on **ARM (aarch64)**, not x86_64. It installs `dnf` packages exactly
 > like the Fedora workstation, but any **direct binary download must fetch the
 > `aarch64`/`arm64` build**, never the `x86_64`/`amd64` build.
