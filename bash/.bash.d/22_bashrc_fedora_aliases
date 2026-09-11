@@ -26,8 +26,14 @@ dlogin() {
 
 alias km='cd $HOME/KnowledgeVault'
 
-# cd into the Obsidian PKM vault inside KnowledgeVault
-alias pkm='cd $HOME/KnowledgeVault/PKM'
+# cd into the Obsidian PKM vault inside KnowledgeVault and label the tab.
+# A function, not a plain alias -- see the `pcm` function in 20_bashrc_aliases
+# and its RUNBOOK.md writeup for why (a spawned process can't cd its parent
+# shell, only a function running in the shell itself can).
+unalias pkm 2>/dev/null
+pkm() {
+    cd "$HOME/KnowledgeVault/PKM" && set-ghostty-tab-name PKM
+}
 
 # SSH into the acst account on this machine
 alias work='ssh acst@127.0.0.1'

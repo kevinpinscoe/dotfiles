@@ -60,7 +60,7 @@ alongside `lastdl` and `reload` rather than as a script elsewhere.
 | `journal` | `~/AppImages/Obsidian.AppImage …` | Open Obsidian Personal Journal vault |
 | `dlogin` | `docker login git.kevininscoe.com …` | Log in to self-hosted Gitea container registry |
 | `km` | `cd $HOME/KnowledgeVault` | Jump to KnowledgeVault directory |
-| `pkm` | `cd $HOME/KnowledgeVault/PKM` | Jump to the Obsidian PKM vault |
+| `pkm` | `cd $HOME/KnowledgeVault/PKM && set-ghostty-tab-name PKM` | Jump to the Obsidian PKM vault and label the tab |
 | `work` | `ssh acst@127.0.0.1` | SSH into the acst account on this machine |
 | `pi` | `setsid soffice --calc …/prescription-inventory.fods` | Open the prescription pickup log in LibreOffice Calc — **FLDW only** |
 
@@ -68,6 +68,10 @@ alongside `lastdl` and `reload` rather than as a script elsewhere.
 too and has no clone of `~/sheets/spreadsheet-files`, so `pi` is additionally wrapped in
 `[[ "$(hostname)" == "kevin" ]]` and is defined on the FLDW alone. `setsid` detaches Calc from
 the terminal, and the surrounding subshell keeps job-control output off the prompt.
+
+`pkm` is a **shell function**, not a plain alias, for the same reason as `pcm` (see above): a
+spawned process can never change its parent shell's working directory, only a function running
+in the shell itself can. It mirrors `pcm` exactly — `cd`, then `set-ghostty-tab-name PKM`.
 
 ---
 
