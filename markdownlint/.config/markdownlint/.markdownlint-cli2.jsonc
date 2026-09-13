@@ -1,16 +1,16 @@
 {
+  // No top-level "globs" here, deliberately (KTA-7): this file is only ever used via
+  // `--config` alongside an explicit file argument (the `mdlint`/`mdlint-fix` aliases run
+  // `markdownlint-cli2 --config <this file> <target>`), and markdownlint-cli2 adds a
+  // config-level "globs" to the CLI-provided target rather than replacing it — so a "globs"
+  // entry here silently pulls in every Markdown file the glob reaches instead of linting only
+  // the named target. Confirmed via markdownlint-cli2 v0.23.2: with "globs": ["**/*.md", ...]
+  // present, `markdownlint-cli2 --config <this> TARGET.md` reports
+  // "Finding: TARGET.md **/*.md !node_modules/** ..." and lints every match, not just TARGET.md.
   "config": {
     "default": true,
     "MD013": false,
     "MD033": false,
     "MD041": false
-  },
-  "globs": [
-    "**/*.md",
-    "!node_modules/**",
-    "!data/**",
-    "!vendor/**",
-    "!dist/**",
-    "!build/**"
-  ]
+  }
 }
