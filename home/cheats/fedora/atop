@@ -1,0 +1,52 @@
+---
+syntax: sh
+tags: [ top, perf, swap, slow ]
+---
+# Command atop
+
+## What does this command do:
+
+System and process monitor for Linux
+
+## Installed from
+
+For Fedora install using: sudo dnf install -y atop
+
+## Command path
+
+For Fedora run: /usr/sbin/atop
+
+## Command documentation
+
+Docs can be found at https://packages.fedoraproject.org/pkgs/atop/atop/
+
+## Command options
+
+# Live monitoring (interactive)
+atop
+atop 5              # refresh every 5 seconds
+atop -a             # show all processes/cgroups, not just active
+
+# Sort processes by resource
+atop -C             # sort by CPU (default)
+atop -M             # sort by memory
+atop -D             # sort by disk activity
+atop -N             # sort by network activity
+
+# Alternate process views (press these keys interactively too)
+atop -m             # memory-related process info
+atop -d             # disk-related process info
+atop -n             # network-related process info
+atop -s             # scheduling-related process info
+atop -c             # show command line per process
+
+# Bar graphs
+atop -B             # bar graphs for system statistics
+
+# Record and replay
+atop -w /var/log/atop/atop.raw 60      # write raw samples every 60s
+atop -r /var/log/atop/atop.raw          # replay a raw logfile
+atop -r y -b 1400 -e 1600               # replay yesterday, 14:00-16:00
+
+# Version info
+atop -V
