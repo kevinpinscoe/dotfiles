@@ -2,7 +2,8 @@
   "folders": [
     { "path": "/Users/kevini/Projects", "name": "PROJECTS" },
     { "path": "/Users/kevini", "name": "HOME" },
-    { "path": "/Users/kevini/ai", "name": "AI" }
+    { "path": "/Users/kevini/ai", "name": "AI" },
+    { "path": "/Users/kevini/Projects/ai-lanes", "name": "LANES" }
   ],
   "settings": {
     "terminal.integrated.cwd": "/Users/kevini/Projects",
