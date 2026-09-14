@@ -182,4 +182,6 @@
     ".local",
     "3rd-party-repos"
   ],
+  "workbench.editor.showTabs": "single",
+  "explorer.openEditors.visible": 15,
 }
