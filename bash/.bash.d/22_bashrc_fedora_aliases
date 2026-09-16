@@ -24,7 +24,19 @@ dlogin() {
         sh -c 'docker login git.kevininscoe.com --username kevin --password-stdin < "$PARZIVAL_CRED_FILE"'
 }
 
-alias km='cd $HOME/KnowledgeVault'
+# Jump to the knowledge vault. The directory name differs per Fedora host: the
+# FLDW has ~/KnowledgeVault, while the mac-container / realm-test container's ~
+# is symlinks into the Mac's home, whose vault is ~/WorkKnowledgeVault.
+# 21_bashrc_mac_aliases already points `km` there, but that file is macOS-gated
+# and never runs inside the container, so `km` fell through to this Fedora
+# definition and failed with
+# "cd: no such file or directory: /home/kevini/KnowledgeVault".
+# Gate on the directory rather than the hostname, as 01_bashrc_fedora_env does.
+if [ -d "$HOME/KnowledgeVault" ]; then
+    alias km='cd $HOME/KnowledgeVault'
+else
+    alias km='cd $HOME/WorkKnowledgeVault'
+fi
 
 # cd into the Obsidian PKM vault inside KnowledgeVault and label the tab.
 # A function, not a plain alias -- see the `pcm` function in 20_bashrc_aliases

@@ -59,10 +59,18 @@ alongside `lastdl` and `reload` rather than as a script elsewhere.
 |-------|---------|---------|
 | `journal` | `~/AppImages/Obsidian.AppImage …` | Open Obsidian Personal Journal vault |
 | `dlogin` | `docker login git.kevininscoe.com …` | Log in to self-hosted Gitea container registry |
-| `km` | `cd $HOME/KnowledgeVault` | Jump to KnowledgeVault directory |
+| `km` | `cd $HOME/KnowledgeVault`, or `cd $HOME/WorkKnowledgeVault` when that first path is absent | Jump to the knowledge vault — the FLDW has `KnowledgeVault`, the mac-container / realm-test container has `WorkKnowledgeVault` |
 | `pkm` | `cd $HOME/KnowledgeVault/PKM && set-ghostty-tab-name PKM` | Jump to the Obsidian PKM vault and label the tab |
 | `work` | `ssh acst@127.0.0.1` | SSH into the acst account on this machine |
 | `pi` | `setsid soffice --calc …/prescription-inventory.fods` | Open the prescription pickup log in LibreOffice Calc — **FLDW only** |
+
+`km` carries a gate of its own. `21_bashrc_mac_aliases` points it at `~/WorkKnowledgeVault`, but
+that file is macOS-gated, so inside the mac-container / realm-test container (Fedora, with `~`
+symlinked into the Mac's home) `km` fell through to this file and failed with
+`cd: no such file or directory: /home/kevini/KnowledgeVault`. It now picks whichever vault
+directory exists, gated on the directory rather than the hostname — the same approach
+`01_bashrc_fedora_env` uses for `/home/containers`. `pkm` is left pointing at
+`~/KnowledgeVault/PKM`: that vault has no counterpart in the container.
 
 `pi` carries a second gate the others do not. The file is Fedora-gated, but `john` runs Fedora
 too and has no clone of `~/sheets/spreadsheet-files`, so `pi` is additionally wrapped in
