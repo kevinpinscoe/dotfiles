@@ -1,0 +1,70 @@
+---
+syntax: sh
+tags: [ editor, ide ]
+---
+# Command zed
+
+## What does this command do:
+
+Zed's CLI to open files and projects from the terminal.
+
+## Installed from
+
+The `zed` binary is the CLI — there is no separate CLI-only package. It is the
+same executable that also launches the GUI editor (same pattern as VS Code's
+`code` command). Running `zed` with no arguments or with a path opens a GUI
+window by design; flags like `--version`/`--help` print straight to the
+terminal with no window.
+
+For Fedora install using: curl -f https://zed.dev/install.sh | sh
+For Mac install using: brew install --cask zed
+For Mac container (Fedora Linux, ARM/aarch64) install using: curl -f https://zed.dev/install.sh | sh
+
+> Note: the Mac container runs Fedora Linux on ARM (aarch64), not x86_64. The
+> install script auto-detects the architecture and fetches the aarch64 build;
+> no separate arch-specific step is needed here.
+
+**Raspberry Pi: intentionally not installed/documented.** Zed requires a
+Vulkan-compatible GPU, and its docs list generic 64-bit ARM support but do not
+mention Raspberry Pi. The RPi5's VideoCore VII GPU has known incomplete/unstable
+Vulkan support, so a Zed install there is unlikely to actually run even though
+the aarch64 binary would technically install. Decision made 2026-09-15; revisit
+if RPi5 Vulkan support matures.
+
+## Command path
+
+For Fedora run: ~/.local/bin/zed
+For Mac run: /opt/homebrew/bin/zed
+For Mac container run: ~/.local/bin/zed
+
+## Command documentation
+
+Docs can be found at https://zed.dev/docs/reference/cli
+
+## Command options
+
+zed [OPTIONS] [PATHS_WITH_POSITION]...
+
+  [PATHS_WITH_POSITION]...   Paths to open (space-separated). Use
+                             path:line:column to open at a given line/column.
+  -w, --wait                 Wait for all given paths to be opened/closed
+                              before exiting (useful as $EDITOR)
+  -a, --add                  Add files to the currently open workspace
+  -n, --new                  Create a new workspace
+  -e, --existing             Open in existing Zed window
+      --user-data-dir DIR    Custom directory for user data (db, extensions, logs)
+  -v, --version               Print Zed's version and the app path
+      --foreground            Run in foreground (shows all logs, for debugging)
+      --zed ZED                Custom path to Zed.app or the zed binary
+      --dev-container          Open the project in a dev container
+      --help                   Show the full help and exit
+
+  # Common usage
+  zed                       # open Zed (GUI window)
+  zed .                     # open the current directory as a project
+  zed file.txt              # open a specific file
+  zed file.txt:42:10        # open at line 42, column 10
+  zed -n path/to/project    # force a new window
+  zed -w file.txt           # wait until closed (e.g. as $EDITOR)
+  zed -v                    # print version, no GUI
+  zed --help                # print usage, no GUI
