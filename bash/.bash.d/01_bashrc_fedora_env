@@ -5,12 +5,28 @@ if [ ! -f /etc/fedora-release ]; then
     return
 fi
 
-# gitme search roots (Fedora): home directory plus containers repo
+# gitme / check-git-* search roots (Fedora): $HOME plus the home-containers repo,
+# on hosts that actually have it.
+#
 # /opt/containers was retired 2026-09-01 under FLDW-9; every self-hosted service (and
-# this repo's own working tree) moved to /home/containers.
-export GITME_DIRS="$HOME:/home/containers"
-# Both tools always scan $HOME and treat these variables as additive (
-# check-git-branch since v2.0.0), so they list extra roots only. Scanned here:
-# $HOME + /home/containers.
-export CHECK_GIT_REPOS="/home/containers"
-export CHECK_GIT_BRANCH="/home/containers"
+# this repo's own working tree) moved to /home/containers -- but only on the FLDW.
+# Other Fedora hosts (the mac-container / realm-test container) have no such tree, and
+# check-git-repos/check-git-branch exit with an error when a listed root is missing, so
+# gate on the directory rather than on /etc/fedora-release. Before this test existed,
+# both tools failed outright in the container with
+# "CHECK_GIT_BRANCH: /home/containers: no such file or directory".
+#
+# Both tools always scan $HOME and treat these variables as additive (check-git-branch
+# since v2.0.0), so they list extra roots only. Scanned on the FLDW: $HOME +
+# /home/containers. Elsewhere on Fedora: $HOME alone.
+#
+# unset rather than merely skipping the export, so a value inherited from a container
+# image or a parent shell cannot leak through and reintroduce the failure.
+if [ -d /home/containers ]; then
+    export GITME_DIRS="$HOME:/home/containers"
+    export CHECK_GIT_REPOS="/home/containers"
+    export CHECK_GIT_BRANCH="/home/containers"
+else
+    export GITME_DIRS="$HOME"
+    unset CHECK_GIT_REPOS CHECK_GIT_BRANCH
+fi
