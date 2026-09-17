@@ -35,6 +35,10 @@
 
   // Explorer
   "explorer.confirmDelete": false,
+  "explorer.openEditors.visible": 15,
+
+  // Vertical tabs (single horizontal tab + Open Editors as vertical list)
+  "workbench.editor.showTabs": "single",
 
   // Redhat
   "redhat.telemetry.enabled": false,
