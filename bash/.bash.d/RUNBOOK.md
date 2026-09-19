@@ -53,6 +53,19 @@ alongside `lastdl` and `reload` rather than as a script elsewhere.
 
 ---
 
+## `ai-lane`, `ai-lanes`, `lanes-sync` — aliases for `lane-sync` (`20_bashrc_aliases`)
+
+All three are plain aliases for `lane-sync`, the AI Lanes dispatcher at
+`~/private-tools/lane-sync` (documented in `~/private-tools/RUNBOOK.md`). They exist because the
+command's real name is easy to misremember — the "s" lands on the wrong half of "ai-lanes" — so
+every plausible spelling reaches the same script rather than a `command not found`.
+
+They are defined in `20_bashrc_aliases` rather than a platform-specific fragment, so they load on
+every host in both bash and zsh. Nothing new goes on `PATH`: `~/private-tools` is already added by
+`02_core_path_env`.
+
+---
+
 ## Fedora-only aliases (`22_bashrc_fedora_aliases`)
 
 | Alias | Command | Purpose |
