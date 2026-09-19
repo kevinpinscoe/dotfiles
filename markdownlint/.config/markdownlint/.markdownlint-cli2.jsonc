@@ -11,6 +11,23 @@
     "default": true,
     "MD013": false,
     "MD033": false,
-    "MD041": false
+    "MD041": false,
+
+    // MD025 and MD024 are tuned for the k-fed runbook shape that
+    // `~/ai/directives/when-creating-a-runbook.md` mandates, rather than switched off.
+    //
+    // MD025: every runbook carries YAML front matter whose `title:` is defined as "the
+    // runbook's H1", and then opens its body with that H1. markdownlint counts the front
+    // matter as the document's title by default, so the body H1 reads as a second one and
+    // every runbook in k-fed fails. Setting `front_matter_title` to "" stops the front
+    // matter being treated as a title; a genuine second H1 in the body is still caught.
+    // This is the same front-matter problem MD041 is already disabled for, above.
+    //
+    // MD024: a runbook documenting many tools gives each one the same subsections —
+    // `### Usage`, `### Dependencies`, `### Environment`. `siblings_only` permits the
+    // repeat across different parent sections while still catching a true duplicate
+    // under one parent.
+    "MD024": { "siblings_only": true },
+    "MD025": { "front_matter_title": "" }
   }
 }
