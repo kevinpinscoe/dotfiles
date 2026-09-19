@@ -53,12 +53,16 @@ alongside `lastdl` and `reload` rather than as a script elsewhere.
 
 ---
 
-## `ai-lane`, `ai-lanes`, `lanes-sync` — aliases for `lane-sync` (`20_bashrc_aliases`)
+## Aliases for `lane-sync` (`20_bashrc_aliases`)
 
-All three are plain aliases for `lane-sync`, the AI Lanes dispatcher at
-`~/private-tools/lane-sync` (documented in `~/private-tools/RUNBOOK.md`). They exist because the
-command's real name is easy to misremember — the "s" lands on the wrong half of "ai-lanes" — so
-every plausible spelling reaches the same script rather than a `command not found`.
+`ai-lane`, `ai-lanes`, `ai-lane-sync`, `ai-lanes-sync`, `ai-sync` and `lanes-sync` are all plain
+aliases for `lane-sync`, the AI Lanes dispatcher at `~/private-tools/lane-sync` (documented in
+`~/private-tools/RUNBOOK.md`). They exist because the command's real name is easy to misremember —
+the "s" lands on the wrong half of "ai-lanes", and "sync" drops out altogether — so every
+plausible spelling reaches the same script rather than a `command not found`.
+
+Add another the same way if a spelling turns up that is not covered. Nothing depends on the list
+being short, and a missing name costs a failed command at exactly the moment the tool was wanted.
 
 They are defined in `20_bashrc_aliases` rather than a platform-specific fragment, so they load on
 every host in both bash and zsh. Nothing new goes on `PATH`: `~/private-tools` is already added by
