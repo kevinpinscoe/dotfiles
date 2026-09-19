@@ -6,6 +6,7 @@ source_path: /home/kinscoe/.dotfiles/bash/.bash.d/RUNBOOK.md
 ---
 
 > 📓 Indexed in the PKM knowledge vault at `runbooks/home-kinscoe-.dotfiles-bash-.bash.d.md` (symlink → this file).
+
 # ~/.bash.d Runbook
 
 ## AI sync workflow (dotfiles)
@@ -24,13 +25,12 @@ Do not commit or push without an explicit user confirmation.
 
 See `~/.dotfiles/CLAUDE.md` for the full dotfiles repo layout.
 
-
 ## Directory-jump aliases (`20_bashrc_aliases`)
 
 Loaded on every host, in bash and zsh alike.
 
 | Alias | Command | Purpose |
-|-------|---------|---------|
+| ------- | --------- | --------- |
 | `proj` | `cd ~/Projects` | Jump to the Projects tree |
 | `private` | `cd ~/Projects/private` | Jump to private projects |
 | `public` | `cd ~/Projects/public` | Jump to public projects |
@@ -69,7 +69,7 @@ every host in both bash and zsh. Nothing new goes on `PATH`: `~/private-tools` i
 ## Fedora-only aliases (`22_bashrc_fedora_aliases`)
 
 | Alias | Command | Purpose |
-|-------|---------|---------|
+| ------- | --------- | --------- |
 | `journal` | `~/AppImages/Obsidian.AppImage …` | Open Obsidian Personal Journal vault |
 | `dlogin` | `docker login git.kevininscoe.com …` | Log in to self-hosted Gitea container registry |
 | `km` | `cd $HOME/KnowledgeVault`, or `cd $HOME/WorkKnowledgeVault` when that first path is absent | Jump to the knowledge vault — the FLDW has `KnowledgeVault`, the mac-container / realm-test container has `WorkKnowledgeVault` |
@@ -100,7 +100,7 @@ in the shell itself can. It mirrors `pcm` exactly — `cd`, then `set-ghostty-ta
 
 The `reload` function is defined in `~/.bash.d/20_bashrc_aliases`. Run it after editing any file in `~/.bash.d/` to load those changes into your current shell without opening a new terminal.
 
-```
+```bash
 reload
 ```
 
@@ -108,20 +108,18 @@ reload
 
 `reload` sources `~/.bash_profile`, which in turn sources `~/.bashrc`. The sourcing loop in `~/.bashrc` then re-reads every file in `~/.bash.d/`:
 
-```
+```text
 ~/.bash_profile  →  ~/.bashrc  →  for file in ~/.bash.d/*
 ```
 
 ### File filtering rules (in `~/.bashrc`)
 
 | Pattern | Behaviour |
-|---------|-----------|
+| --------- | ----------- |
 | `*_zsh_*` | Always skipped (zsh-only files) |
 | `*.md` | Always skipped (documentation files) |
 | `*mac*` | Only sourced when `$IS_MACOS == true` |
 | everything else | Always sourced |
-
-
 
 ## Standard OS directories forced to the end of PATH (`02_core_path_env`)
 
@@ -210,16 +208,15 @@ mise equivalents rather than explaining how to install fnm.
 If you need a Node version mise does not have, `mise use -g node@<version>` — never reinstate
 a shell fragment for a second version manager.
 
-
 ## cd override (`10_cd`)
 
 The file `~/.bash.d/10_cd` defines a `cd()` shell function that wraps `builtin cd`.
 
-### What it does
+### What the `cd` override does
 
 Every time you `cd` into a directory that is inside a git repo, it prints a single-line summary showing the current branch and your sync status relative to the remote:
 
-```
+```text
 git: main  |  PULL NEEDED — 1 commit(s) behind
 ```
 
@@ -294,6 +291,7 @@ gitme --rebuild-cache
 ```
 
 When to run it:
+
 - After cloning a new repo anywhere under `$HOME`
 - After moving or deleting a repo
 - If tab completion stops showing a repo you expect
