@@ -72,7 +72,8 @@ fi
 
 [[ -f ~/.environment/self-hosted-services.sh ]] && source ~/.environment/self-hosted-services.sh
 [[ -f ~/.environment/zsh_secrets.sh ]] && source ~/.environment/zsh_secrets.sh
-[[ -f ~/.environment/openbao/openbao-env.sh ]] && source ~/.environment/openbao/openbao-env.sh
+# Temporarily allow bao commands to work on mac
+#[[ -f ~/.environment/openbao/openbao-env.sh ]] && source ~/.environment/openbao/openbao-env.sh
 
 # Container-local overrides (not stowed; exists only on hosts that have it)
 [[ -f ~/container-zshrc.sh ]] && source ~/container-zshrc.sh
