@@ -76,7 +76,13 @@ alias commit-repo='claude "$(cat ~/ai/directives/when-making-changes-in-a-direct
 alias resume.sh='echo "resume.sh" >> .gitignore'
 alias kmrx-loop='mpv --loop --vf=lavfi="[drawbox=x=331:y=263:w=24:h=24:color=black@1.0:t=fill,drawbox=x=335:y=267:w=16:h=16:color=red@1.0:t=fill]" https://radar.weather.gov/ridge/standard/KMRX_loop.gif'
 alias menu='menu-app'
-alias signin='eval $(op signin)'
+
+# ophome/opwork (~/private-tools/ophomesrc, ~/private-tools/opworksrc) must be *sourced*,
+# not executed, so op signin's `eval $(...)` session token lands in this shell rather than
+# a forked child's — see ~/private-tools/RUNBOOK.md. Replaces the old ambiguous `signin`
+# alias (`eval $(op signin)`), which prompted for whichever account it felt like.
+alias ophome='source ~/private-tools/ophomesrc'
+alias opwork='source ~/private-tools/opworksrc'
 
 # lane-sync (~/private-tools/lane-sync) answers to every plausible spelling of
 # its own name, because which half of "ai-lanes" carries the "s" — and whether
