@@ -40,6 +40,7 @@ pcm() {
 alias j='cd ~/Journal'
 alias private='cd ~/Projects/private'
 alias public='cd ~/Projects/public'
+alias workspace='cd ~/Projects/workspaces'
 unalias reload 2>/dev/null
 function reload {
     # exec a fresh login shell instead of re-sourcing the rc.
