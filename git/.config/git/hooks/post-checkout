@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Delegate to a repo-local .githooks/post-checkout if one exists.
+# Safe everywhere: no-ops in repos that don't have .githooks/post-checkout.
+# Git also runs post-checkout after `git worktree add` (with the new worktree as cwd), which is
+# what km-vault-lint uses to install a worktree's local engine link. A post-checkout exit
+# status cannot undo a checkout, so a failing repo hook is reported but never propagated.
+# git-lfs's own post-checkout is deliberately not called: none ran before this delegator
+# existed, and adding one would be a separate behaviour change.
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+if [[ -n "$repo_root" ]]; then
+    local_hook="$repo_root/.githooks/post-checkout"
+    if [[ -f "$local_hook" && -x "$local_hook" ]]; then
+        "$local_hook" "$@" || echo "post-checkout: $local_hook exited $?" >&2
+    fi
+fi
+exit 0

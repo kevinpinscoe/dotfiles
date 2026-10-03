@@ -52,6 +52,46 @@ After each commit, confirms the commit was signed by gitsign. Prints `[gitsign] 
 
 ---
 
+### post-checkout — repo-local delegation
+
+**File:** `.config/git/hooks/post-checkout`
+
+Runs a repository's own `.githooks/post-checkout`, if it has an executable one — the same
+delegation shape as `pre-commit` and `pre-push`. Git runs `post-checkout` after a branch
+checkout, a clone, and `git worktree add` (inside the new worktree). In a repository without
+`.githooks/post-checkout` it does nothing and prints nothing. It always exits 0: a
+`post-checkout` status cannot undo a checkout, so a failing repo hook is reported on stderr and
+not propagated.
+
+**Why it exists:** the km-vault-lint vaults (`~/PCM`, `~/KnowledgeVault`) ship a
+`.githooks/post-checkout` that installs a new worktree's local linter link
+(<https://youtrack.kevininscoe.com/issue/KOA-22>). Without this delegator `core.hooksPath` makes
+every repo hook unreachable, so that hook would never run.
+
+**Existing behaviour preserved.** Before this file, no `post-checkout` ran on any host:
+`core.hooksPath` bypasses `.git/hooks/`, and this directory had none. An inventory on the FLDW
+(2026-10-03) found no `.githooks/post-checkout` and no `.git/hooks/post-checkout` under
+`~/Projects` (excluding `3rd-party-repos/`), `~/web`, `~/sheets`, `~/KnowledgeVault`, `~/PCM`,
+`~/ai`, `~/admin`, `~/tools`, `~/private-tools`, `~/.dotfiles`, `~/.claude/skills` or `~/Journal`.
+Re-run it before activating on any host — a dormant repo hook would start running:
+
+```bash
+find ~/Projects ~/web ~/KnowledgeVault ~/PCM ~/ai ~/admin -maxdepth 5 \
+  \( -path '*/3rd-party-repos' -o -path '*/ai-wt' -o -path '*/node_modules' \) -prune -o \
+  -path '*/.githooks/post-checkout' -print
+```
+
+git-lfs's own `post-checkout` is deliberately **not** called (none ran before), so LFS
+behaviour is unchanged.
+
+**Activation** (per host, after the change is merged): `bash ~/.dotfiles/install.sh`, or just
+`stow -d ~/.dotfiles -t ~ git`. Check with `ls -l ~/.config/git/hooks/post-checkout`.
+
+**Rollback:** `rm ~/.config/git/hooks/post-checkout` takes effect at once on that host; revert
+the commit here and re-stow to remove it everywhere.
+
+---
+
 ### pre-push — signed tag enforcement
 
 **File:** `.config/git/hooks/pre-push`
