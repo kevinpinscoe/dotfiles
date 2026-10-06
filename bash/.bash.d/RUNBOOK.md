@@ -143,7 +143,7 @@ the standard OS bin/sbin directories on `$PATH` before any dotfile ever runs, so
 "already present" guard triggered immediately and left those directories sitting wherever the
 inherited environment happened to put them — sometimes ahead of a custom tooling directory added
 later in this same file (`private-tools`) or a directory this repo installs a shim into (`~/tools`,
-for the `reset`/`rg`/`ugrep` shims). Forcing tool directories ahead of the standard OS ones only
+for the `rg`/`ugrep` shims). Forcing tool directories ahead of the standard OS ones only
 worked by accident, whichever way the inherited `$PATH` happened to be ordered.
 
 ### The fix — strip and re-append
@@ -155,8 +155,8 @@ after every tooling directory this file and the ones before it have already adde
 guarantees the six standard directories land after all of them — deterministically, not by
 however the login environment happened to order things.
 
-This is why a shim placed in `~/tools` (e.g. `reset`, or the existing `ugrep`/`rg` ->
-`human-only-search-guard` pair) always wins over the real `/usr/bin/reset` or `/usr/bin/rg`: by
+This is why a shim placed in `~/tools` (e.g. the `ugrep`/`rg` -> `human-only-search-guard`
+pair) always wins over the real `/usr/bin/rg`: by
 the time `02_core_path_env` finishes, `/usr/bin` is guaranteed to come after `~/tools` on `$PATH`,
 on Fedora, the Raspberry Pi (Debian/core), and macOS alike.
 
@@ -247,6 +247,56 @@ Because nothing writes `FETCH_HEAD` in the background any more, its mtime is no 
 The git directory is resolved with `git rev-parse --git-common-dir`, not by assuming `<repo-root>/.git`: `.git` is a *file* in submodules and linked worktrees, and can live elsewhere entirely with a separate git directory. Using the *common* dir means every linked worktree shares one sentinel, matching the remote-tracking refs they already share.
 
 On git older than 2.29 (no `--no-write-fetch-head`), the background fetch is **skipped entirely** rather than run unsafely. The banner still reports ahead/behind from cached refs; run `check-remote` to refresh on demand.
+
+## Returning an idle shell to rest (`zero`, `12_zsh_zero`)
+
+`zero` is a zsh function for the moment an AI session in a Ghostty/tmux tab has exited and the
+tab is back at a zsh prompt. One command puts that shell back to its resting state:
+
+```zsh
+zero
+```
+
+In order, it:
+
+1. `cd`s to `$HOME` with `builtin cd`, stopping there if that fails.
+2. Runs `set-ghostty-tab-name --reset` (from `~/tools`), which hands the tab label back to tmux,
+   so an idle tab reads `zsh` again. Skipped when the helper is not on `$PATH`; a failure is
+   ignored, so a missing or broken helper never stops the clearing.
+3. Clears the screen with `clear`.
+4. Inside tmux only, clears **this pane's** scrollback: `tmux clear-history -t "$TMUX_PANE"`.
+
+It keeps the shell itself running. Shell command history, other panes, other tmux sessions,
+and background jobs are left alone. Outside tmux it does steps 1–3; there is no tmux history
+to clear.
+
+### Why it is a function, and why zsh-only
+
+A script runs in a child process, and a child cannot change its parent shell's working
+directory, so the `cd` would be lost. The function is defined in `12_zsh_zero`; the `_zsh_` in
+the filename is what makes `~/.bashrc` skip it (see the filter table above). It uses
+`emulate -L zsh`, so the caller's shell options do not change how it runs.
+
+### Why the screen is cleared before the scrollback
+
+tmux's `scroll-on-clear` option (on by default since tmux 3.3) moves the screen's contents into
+the pane's history when the screen is cleared. Clearing the history first would leave the old
+screen sitting in the scrollback afterwards.
+
+### It replaced the `reset` shim
+
+Until KTA-51, `~/tools/reset` was a `$PATH` shim that reset the tab label and then `exec`ed the
+real `reset`. That is gone. `reset` is the system terminal-repair command (`/usr/bin/reset`)
+again, and `zero` is the command for returning to idle.
+
+### Troubleshooting
+
+| Symptom | Check |
+| --- | --- |
+| `zero: command not found` | The shell started before `12_zsh_zero` existed. Open a new shell, or `source ~/.bash.d/12_zsh_zero`. `whence -v zero` should say `zero is a shell function`. |
+| Tab label did not change | `command -v set-ghostty-tab-name` — it lives in `~/tools`. Outside tmux it sets the terminal title instead. A tab Kevin renamed by hand keeps following tmux once `--reset` hands it back. |
+| Old output still in the scrollback | `echo $TMUX_PANE` must be set, and `tmux show -gv scroll-on-clear` shows the option that pushes the cleared screen into history. |
+| `reset` still relabels the tab | `whence -va reset` — a stale `~/tools/reset` means `~/tools` has not been pulled since KTA-51. |
 
 ## gitme — quick git repo navigation
 
