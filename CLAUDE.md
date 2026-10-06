@@ -87,6 +87,7 @@ Files are numbered to control load order:
 - `02_core_path_env` / `02_fedora_path_env` — PATH setup
 - `03_mise` — mise developer environment manager activation (bash + zsh, all platforms)
 - `10_cd` — cd helpers
+- `12_zsh_zero` — `zero` (zsh-only): return an idle shell to `$HOME`, reset the tab label, clear screen and tmux scrollback
 - `20_bashrc_aliases` / `21_bashrc_mac_aliases` / `22_bashrc_fedora_aliases` — aliases
 - `30_bash_autocomplete` / `30_zsh_autocomplete` — tab completion (bash/zsh)
 - `31_bash_mac_autocomplete` / `31_zsh_mac_autocomplete` — macOS tab completion (bash/zsh)

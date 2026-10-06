@@ -1,0 +1,26 @@
+# zero -- return an idle interactive shell to its resting state, typically after
+# an AI session in this Ghostty/tmux tab has exited: cd to $HOME, hand the tab
+# label back to tmux (`zsh` at an idle prompt), clear the screen, then clear
+# this pane's scrollback. Replaces the retired ~/tools/reset shim (KTA-51).
+#
+# A function rather than a script: only the shell itself can change its own
+# working directory. zsh-only (the `_zsh_` in this file's name keeps ~/.bashrc
+# from sourcing it). See RUNBOOK.md in this directory.
+unalias zero 2>/dev/null
+zero() {
+    emulate -L zsh
+    builtin cd -- "$HOME" || return
+
+    # Best-effort: a missing helper, or one that fails, must not stop the
+    # clearing below.
+    if (( $+commands[set-ghostty-tab-name] )); then
+        set-ghostty-tab-name --reset || true
+    fi
+
+    # Order matters: tmux's scroll-on-clear pushes the cleared screen into
+    # history, so the history is cleared after the screen, not before.
+    clear
+    if [[ -n $TMUX && -n $TMUX_PANE ]]; then
+        tmux clear-history -t "$TMUX_PANE"
+    fi
+}

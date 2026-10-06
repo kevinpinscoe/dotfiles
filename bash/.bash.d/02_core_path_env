@@ -1,6 +1,6 @@
 # Tooling directories added earlier (00_bashrc_env, 01_*_env) must always win over the
-# standard OS command directories below on a name collision -- e.g. a `reset` shim in
-# ~/tools superseding /usr/bin/reset. Prepending private-tools here is not enough on its
+# standard OS command directories below on a name collision -- e.g. the `rg`/`ugrep` shims in
+# ~/tools superseding /usr/bin/rg and /usr/bin/ugrep. Prepending private-tools here is not enough on its
 # own: the six standard dirs below are usually *already* in the inherited login PATH
 # (from a login manager, /etc/profile, etc.), so a plain "add if missing" is a no-op that
 # leaves them wherever the environment happened to put them -- sometimes ahead of a
