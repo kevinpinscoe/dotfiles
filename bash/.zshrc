@@ -85,3 +85,15 @@ fpath=(/Users/kevini/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+# WMI-36: give brew the gh token so it never falls back to git-credential-osxkeychain.
+# Homebrew checks HOMEBREW_GITHUB_API_TOKEN first; without it, sandboxed brew steps cannot
+# read ~/.config/gh and fall back to the macOS Keychain, raising a prompt. The token lives
+# only in brew's environment for that one invocation.
+brew() {
+  if [[ $OSTYPE == darwin* ]] && [[ -z $HOMEBREW_GITHUB_API_TOKEN ]] && (( $+commands[gh] )); then
+    HOMEBREW_GITHUB_API_TOKEN=$(gh auth token 2>/dev/null) command brew "$@"
+  else
+    command brew "$@"
+  fi
+}

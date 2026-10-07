@@ -16,8 +16,10 @@
 # On macOS git may be invoked with a PATH that excludes /opt/homebrew/bin, so the
 # absolute Homebrew path is used there. Every other host resolves gh from PATH.
 [credential "https://github.com"]
+	helper =
 	helper = "!f() { if [ \"$(uname -s)\" = Darwin ]; then /opt/homebrew/bin/gh auth git-credential \"$@\"; else gh auth git-credential \"$@\"; fi; }; f"
 [credential "https://gist.github.com"]
+	helper =
 	helper = "!f() { if [ \"$(uname -s)\" = Darwin ]; then /opt/homebrew/bin/gh auth git-credential \"$@\"; else gh auth git-credential \"$@\"; fi; }; f"
 [core]
 	hooksPath = ~/.config/git/hooks
