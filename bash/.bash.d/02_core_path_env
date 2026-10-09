@@ -6,9 +6,18 @@
 # leaves them wherever the environment happened to put them -- sometimes ahead of a
 # custom tooling directory. Force them to the true end of PATH instead.
 
-_pathadd() { [[ ":$PATH:" != *":$1:"* ]] && export PATH="$1:$PATH"; }
-_pathadd "$HOME/private-tools"
-unset -f _pathadd
+# private-tools is moved to the front even when already present: an inherited PATH (e.g. a
+# JetBrains IDE terminal) can carry it behind ~/bin, and "add if missing" would leave it there.
+_pathtofront() {
+  local dir="$1"
+  local wrapped=":$PATH:"
+  wrapped="${wrapped//:$dir:/:}"
+  wrapped="${wrapped#:}"
+  wrapped="${wrapped%:}"
+  export PATH="$dir:$wrapped"
+}
+_pathtofront "$HOME/private-tools"
+unset -f _pathtofront
 
 _pathtoend() {
   local dir="$1"
