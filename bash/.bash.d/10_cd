@@ -15,6 +15,23 @@ cd() {
     unset WORKINGON
   fi
 
+  # Never run git in the realm-deploy-test container's own writable directories (WMI-45).
+  # Everything under /Users/Shared/kevini-container is written by the container, and a
+  # repository there can set core.sshCommand, core.fsmonitor, credential.helper or a hook that
+  # git would run here, on the Mac, as you. Git has no setting that stops repository-local
+  # config from naming a program, so the only safe rule is not to run git there at all.
+  # Match the physical path, lower-cased: a symlink into it, or different case (APFS is
+  # case-insensitive), must not slip past.
+  _kc_pwd="$(pwd -P 2>/dev/null | tr '[:upper:]' '[:lower:]')/"
+  case "$_kc_pwd" in
+    /users/shared/kevini-container/*|/private/users/shared/kevini-container/*)
+      unset _kc_pwd
+      unset GIT_REPO_HOME
+      printf 'cd: container-written directory (WMI-45): no git run here; copy data out with ~/docker/outbox-copy.sh\n' >&2
+      return 0 ;;
+  esac
+  unset _kc_pwd
+
   # Detect git repo
   if repo_root=$(git rev-parse --show-toplevel 2>/dev/null); then
     export GIT_REPO_HOME="$repo_root"
