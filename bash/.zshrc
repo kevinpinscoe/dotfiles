@@ -99,4 +99,4 @@ brew() {
 }
 
 # Launch Claude Code from a trusted workspace dir (home dir trust isn't persisted)
-claude() { (cd ~/Projects/workspaces && command claude "$@"); }
+claude() { cd ~/Projects/workspaces && command claude "$@"; }
