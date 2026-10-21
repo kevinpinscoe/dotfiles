@@ -1,0 +1,97 @@
+---
+syntax: sh
+tags: [ markdown, viewer, terminal ]
+---
+# Command markless
+
+## What does this command do:
+
+A terminal markdown viewer with image support
+
+## Installed from
+
+For Fedora install using: `mkdir -p ~/.local/bin && curl -sSfL https://github.com/jvanderberg/markless/releases/download/v0.9.29/markless-x86_64-unknown-linux-gnu.tar.gz | tar -xz -C ~/.local/bin markless && chmod +x ~/.local/bin/markless`
+For Raspberry Pi install using: `mkdir -p ~/.local/bin && curl -sSfL https://github.com/jvanderberg/markless/releases/download/v0.9.29/markless-aarch64-unknown-linux-gnu.tar.gz | tar -xz -C ~/.local/bin markless && chmod +x ~/.local/bin/markless`
+For Mac install using: `mkdir -p ~/.local/bin && curl -sSfL https://github.com/jvanderberg/markless/releases/download/v0.9.29/markless-aarch64-apple-darwin.tar.gz | tar -xz -C ~/.local/bin markless && chmod +x ~/.local/bin/markless`  (no Homebrew formula exists)
+For Mac container (Fedora Linux, ARM/aarch64) install using: `mkdir -p ~/.local/bin && curl -sSfL https://github.com/jvanderberg/markless/releases/download/v0.9.29/markless-aarch64-unknown-linux-gnu.tar.gz | tar -xz -C ~/.local/bin markless && chmod +x ~/.local/bin/markless`
+
+> Note: the Mac container runs Fedora Linux on ARM (aarch64), not x86_64. When a
+> package is not installed via `dnf`, download the `aarch64`/`arm64` build of the
+> binary — never the `x86_64`/`amd64` build used on the Fedora workstation.
+> The container's `~/.local` is wiped on rebuild, so reinstall after a rebuild.
+
+Alternative on any host with a Rust toolchain: `cargo install markless --locked`
+The Linux builds need glibc 2.39 or newer.
+
+## Command path
+
+For Fedora run: `~/.local/bin/markless`
+For Raspberry Pi run: `~/.local/bin/markless`
+For Mac run: `~/.local/bin/markless`
+For Mac container run: `~/.local/bin/markless`
+
+## Command documentation
+
+Docs can be found at https://github.com/jvanderberg/markless
+
+## Command options
+
+# View a markdown file
+markless README.md
+
+# Browse the current directory (default when no path is given)
+markless .
+
+# Browse a directory
+markless src/
+
+# Watch the file and auto-reload on change
+markless -w <file.md>
+
+# Hide / show the table of contents sidebar at start
+markless --no-toc <file.md>
+markless --toc <file.md>
+
+# Disable inline images (placeholders only)
+markless --no-images <file.md>
+
+# Force an image protocol: kitty, sixel, iterm2, halfblock
+markless --image-mode kitty <file.md>
+markless --force-half-cell <file.md>
+
+# Force the highlight theme background: auto, light, dark
+markless --theme dark <file.md>
+
+# Limit the word-wrap width
+markless --wrap-width 100 <file.md>
+
+# Use an external editor instead of the built-in one
+markless --editor vim <file.md>
+markless --no-editor <file.md>
+
+# Render inline math as images instead of Unicode
+markless --no-inline-math <file.md>
+markless --inline-math <file.md>
+
+# Save current flags as defaults / clear saved defaults
+markless --theme dark --no-toc --save
+markless --clear
+
+# Debugging
+markless --perf <file.md>
+markless --render-debug-log /tmp/markless.log <file.md>
+
+# Version / help
+markless --version
+markless --help
+
+# Key bindings (in the viewer)
+#   j/k or arrows  scroll          Space/b    page down/up
+#   Ctrl-d/Ctrl-u  half page       g/G        top/bottom
+#   /              search          Enter/Esc  next match / clear
+#   t / T          toggle TOC / toggle and focus TOC
+#   B / F          browse mode / file-only mode
+#   e / Ctrl-e     edit mode       Ctrl-s     save
+#   w              toggle watch    r/R        reload
+#   o              open links 1-9  ?/F1       help
+#   q / Ctrl-c     quit
