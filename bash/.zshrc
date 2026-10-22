@@ -100,3 +100,8 @@ brew() {
 
 # Launch Claude Code from a trusted workspace dir (home dir trust isn't persisted)
 claude() { cd ~/Projects/workspaces && command claude "$@"; }
+
+# De-duplicate PATH last: the sourced ~/.bash.d files, mise and Docker prepend with
+# `export PATH=...`, which bypasses `typeset -U path`; assigning the array re-applies it.
+typeset -U path
+path=($path)

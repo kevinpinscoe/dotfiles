@@ -1,3 +1,7 @@
+# Keep $path (and so $PATH) free of duplicates: later prepends of a directory already
+# present, e.g. ~/.local/bin inherited from a parent shell or tmux, keep only one entry.
+typeset -U path
+
 # The following lines were added by Docker Desktop to add commands to your PATH.
 export PATH="$PATH:/Users/kevini/.docker/bin"
 # End of Docker Desktop section.
@@ -31,3 +35,7 @@ export PATH="$HOME/bin:$HOME/.local/bin:$HOME/tools:$HOME/go/bin:$PATH"
 
 # macOS system cryptex
 export PATH="$PATH:/System/Cryptexes/App/usr/bin"
+
+# Re-assign the array so `typeset -U path` (top of file) takes effect: zsh only de-duplicates on
+# assignment to `path`, not on the `export PATH="...:$PATH"` lines above.
+path=($path)
