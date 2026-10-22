@@ -28,7 +28,7 @@ lastdl() {
 }
 alias wx='curl https://wttr.in/Greeneville_TN'
 alias k='kubectl'
-alias eks='~/tools/eks; source ~/.environment/.env_set.sh'
+alias eks='~/tools/eks; source "${AWS_ENV_FILE:-$HOME/.environment/.env_set.sh}"'
 alias vt100='TERM=vt100; export TERM'
 alias dock='killall Dock'
 alias awspw='pwgen -cyn 15'
