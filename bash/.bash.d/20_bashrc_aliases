@@ -66,6 +66,13 @@ alias yt-extract='yt-export'
 alias home='cd "$(git rev-parse --show-toplevel)"'
 alias main=~/bin/git-default-branch.sh
 alias dotfiles='cd ~/.dotfiles'
+unalias shell 2>/dev/null
+shell() {
+    # Tab naming is best-effort: set-ghostty-tab-name falls back to an OSC 2
+    # title over SSH, and may be absent on a host without ~/tools.
+    cd ~ && { command -v set-ghostty-tab-name >/dev/null 2>&1 \
+        && set-ghostty-tab-name shell 2>/dev/null; return 0; }
+}
 if [ -n "${work:-}" ]; then
     alias "${work}"="cd ~/Projects/${work}"
 fi
