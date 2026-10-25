@@ -1,0 +1,8 @@
+# zsh history for Debian hosts (e.g. core).
+# macOS and Fedora get HISTFILE/HISTSIZE/SAVEHIST from the system /etc/zshrc;
+# Debian ships none, so zsh defaults to HISTSIZE=30, SAVEHIST=0 and no history
+# file, which leaves zsh-autosuggestions with nothing to suggest from.
+HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE
