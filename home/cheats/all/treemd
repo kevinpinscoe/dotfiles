@@ -1,0 +1,114 @@
+---
+syntax: sh
+tags: [ markdown, tui, cli, navigation, tree ]
+---
+# Command treemd
+
+## What does this command do:
+
+A (TUI/CLI) Markdown navigator with tree-based structural navigation.
+
+## Installed from
+
+For Fedora install using: `mkdir -p ~/.local/bin && curl -sSfL https://github.com/Epistates/treemd/releases/download/v0.10.0/treemd-x86_64-unknown-linux-gnu.tar.gz | tar -xzO treemd-x86_64-unknown-linux-gnu > ~/.local/bin/treemd && chmod +x ~/.local/bin/treemd`
+For Raspberry Pi install using: `mkdir -p ~/.local/bin && curl -sSfL https://github.com/Epistates/treemd/releases/download/v0.10.0/treemd-aarch64-unknown-linux-gnu.tar.gz | tar -xzO treemd-aarch64-unknown-linux-gnu > ~/.local/bin/treemd && chmod +x ~/.local/bin/treemd`
+For Mac install using: `brew install treemd`
+For Mac container (Fedora Linux, ARM/aarch64) install using: `mkdir -p ~/.local/bin && curl -sSfL https://github.com/Epistates/treemd/releases/download/v0.10.0/treemd-aarch64-unknown-linux-gnu.tar.gz | tar -xzO treemd-aarch64-unknown-linux-gnu > ~/.local/bin/treemd && chmod +x ~/.local/bin/treemd`
+
+> Note: the Mac container runs Fedora Linux on ARM (aarch64), not x86_64. When a
+> package is not installed via `dnf`, download the `aarch64`/`arm64` build of the
+> binary — never the `x86_64`/`amd64` build used on the Fedora workstation.
+> The container's `~/.local` is wiped on rebuild, so reinstall after a rebuild.
+
+The archive member is named after the build (for example
+`treemd-x86_64-unknown-linux-gnu`), not `treemd`, so it must be renamed on install.
+
+## Command path
+
+For Fedora run: `~/.local/bin/treemd`
+For Raspberry Pi run: `~/.local/bin/treemd`
+For Mac run: `/opt/homebrew/bin/treemd`
+For Mac container run: `~/.local/bin/treemd`
+
+## Command documentation
+
+Docs can be found at https://github.com/Epistates/treemd
+
+## Command options
+
+# Open a file in the TUI
+treemd README.md
+
+# Pick a file in a directory
+treemd .
+
+# Open a URL, or a GitHub repository's README
+treemd https://raw.githubusercontent.com/rust-lang/rust/HEAD/README.md
+treemd github:epistates/treemd
+
+# Read from stdin
+cat doc.md | treemd -l
+
+# List headings, with their line ranges
+treemd -l README.md
+treemd -l -n README.md
+
+# Show the heading tree
+treemd --tree README.md
+
+# Narrow a listing by text or by level (1-6)
+treemd -l --filter install README.md
+treemd -l -L 2 README.md
+
+# Heading list as JSON (--output: plain, json, tree)
+treemd -l -o json README.md
+
+# Print one section
+treemd -s Installation README.md
+
+# Find the heading at or before a line number
+treemd --at-line 42 README.md
+
+# Count headings by level
+treemd --count README.md
+
+# Query the document (full syntax: treemd --query-help)
+treemd -q '.h2' README.md
+treemd -q '.code[rust]' README.md
+treemd -q '.h1[Features] > .h2' README.md
+treemd -q '.link | url' README.md
+
+# Query output format: plain, json, json-pretty, jsonl, md, tree
+treemd -q '.h2' --query-output json README.md
+
+# Exit 1 when a query matches nothing
+treemd -q '.h2[Install]' -e README.md || echo "no install section"
+
+# Theme, color mode and images in the TUI
+treemd --theme Nord README.md
+treemd --color-mode 256 README.md
+treemd --no-images README.md
+treemd --images README.md
+
+# Shell completions (interactive; edits your shell config)
+treemd --setup-completions
+
+# Man page
+treemd --man-page > treemd.1
+
+# Version / help
+treemd --version
+treemd --help
+
+# Key bindings (in the TUI)
+#   j/k or arrows  next/previous heading     g/G      first/last heading
+#   p              parent heading            Tab      switch pane
+#   d/u            page down/up              w        hide the outline
+#   Enter          fold in the outline       m / '    set / jump to bookmark
+#   /              search the section        s        filter the outline
+#   f              follow a link by number   i        step through elements
+#   e              open editor at the line   y        copy the element
+#   :              command palette           ?        list all keys
+#   Ctrl+z         undo the last edit
+#
+# Table cell edits are written straight back to the file.
