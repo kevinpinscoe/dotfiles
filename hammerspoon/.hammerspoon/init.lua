@@ -12,3 +12,9 @@ end
 hs.hotkey.bind({"ctrl"}, "v", function()
   openSpotlightClipboard()
 end)
+
+-- Control + Option + N opens a new fleeting note in the work-fleeting-notes vault
+hs.hotkey.bind({"ctrl", "alt"}, "n", function()
+  local name = os.date("%Y-%m-%d-%H%M%S")
+  hs.urlevent.openURL("obsidian://new?vault=work-fleeting-notes&name=" .. name)
+end)
