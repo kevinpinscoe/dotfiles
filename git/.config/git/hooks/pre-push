@@ -8,6 +8,7 @@
 # A consumer that read stdin inline would leave the next one with nothing — silently.
 #
 # Order is deliberate:
+#   0. grounding guard — refuses to publish AI grounding documents to github.com
 #   1. host policy  — cheap, and can reject before any work is done
 #   2. repo's hook  — may run tests, may reject
 #   3. LFS upload   — transfers data, so it goes last; nothing is uploaded for a push
@@ -16,6 +17,15 @@ set -uo pipefail
 
 refs="$(cat)"
 repo_root="$(git rev-parse --show-toplevel 2>/dev/null)"
+
+# --- 0. Grounding-document guard, when installed on this host ----------------------
+# Checks every ref update bound for github.com against the destination's live refs. A
+# dangling link means the guard was installed but its source is gone: refuse, do not
+# skip. Hosts without the guard are unaffected.
+guard="$HOME/.local/libexec/grounding-guard"
+if [[ -L "$guard" || -e "$guard" ]]; then
+  printf '%s\n' "$refs" | "$guard" pre-push "$@" || exit $?
+fi
 
 # --- 1. Host policy: tags matching v* must be signed -------------------------------
 while read -r local_ref local_sha remote_ref remote_sha; do
