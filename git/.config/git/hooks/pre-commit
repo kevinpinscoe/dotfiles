@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# Grounding-document guard, when installed on this host. It refuses to commit AI grounding
+# documents (CLAUDE.md, AGENTS.md and similar) in any repository with a github.com remote.
+# A dangling link means the guard was installed but its source is gone: the commit is
+# refused rather than left unguarded. Hosts without the guard are unaffected.
+guard="$HOME/.local/libexec/grounding-guard"
+if [[ -L "$guard" || -e "$guard" ]]; then
+    "$guard" pre-commit || exit $?
+fi
+
 # Delegate to a repo-local .githooks/pre-commit if one exists.
 # Safe everywhere: no-ops in repos that don't have .githooks/pre-commit.
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
