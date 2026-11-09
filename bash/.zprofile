@@ -1,10 +1,10 @@
-# Keep $path (and so $PATH) free of duplicates: later prepends of a directory already
-# present, e.g. ~/.local/bin inherited from a parent shell or tmux, keep only one entry.
-typeset -U path
-
 # The following lines were added by Docker Desktop to add commands to your PATH.
 export PATH="$PATH:/Users/kevini/.docker/bin"
 # End of Docker Desktop section.
+
+# Keep $path (and so $PATH) free of duplicates: later prepends of a directory already
+# present, e.g. ~/.local/bin inherited from a parent shell or tmux, keep only one entry.
+typeset -U path
 
 # ~/.zprofile - sourced for login shells (macOS Terminal opens login shells)
 # Sets up PATH and environment before .zshrc runs.
