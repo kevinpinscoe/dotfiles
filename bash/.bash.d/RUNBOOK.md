@@ -259,7 +259,10 @@ zero
 
 In order, it:
 
-1. `cd`s to `$HOME` with `builtin cd`, stopping there if that fails.
+1. `cd`s with `builtin cd`, stopping there if that fails: to `~/WorkKnowledgeVault` on the Mac
+   (`$OSTYPE` is `darwin*`) and in mac-container (`$HOST` is `mac-container`), and to `$HOME`
+   on every other host. mac-container reads this same file through its `~/.bash.d` symlink
+   into the Mac's dotfiles, which is why it is matched by hostname.
 2. Runs `set-ghostty-tab-name --reset` (from `~/tools`), which hands the tab label back to tmux,
    so an idle tab reads `zsh` again. Skipped when the helper is not on `$PATH`; a failure is
    ignored, so a missing or broken helper never stops the clearing.

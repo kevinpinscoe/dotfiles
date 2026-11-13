@@ -1,5 +1,6 @@
 # zero -- return an idle interactive shell to its resting state, typically after
-# an AI session in this Ghostty/tmux tab has exited: cd to $HOME, hand the tab
+# an AI session in this Ghostty/tmux tab has exited: cd to $HOME (~/WorkKnowledgeVault
+# on the Mac and mac-container), hand the tab
 # label back to tmux (`zsh` at an idle prompt), clear the screen, then clear
 # this pane's scrollback. Replaces the retired ~/tools/reset shim (KTA-51).
 #
@@ -9,7 +10,15 @@
 unalias zero 2>/dev/null
 zero() {
     emulate -L zsh
-    builtin cd -- "$HOME" || return
+
+    # The Mac and mac-container rest in the work vault; every other host in
+    # $HOME. mac-container sources this same file through ~/.bash.d, so it is
+    # matched by hostname.
+    local dest=$HOME
+    if [[ $OSTYPE == darwin* || $HOST == mac-container ]]; then
+        dest=$HOME/WorkKnowledgeVault
+    fi
+    builtin cd -- "$dest" || return
 
     # Best-effort: a missing helper, or one that fails, must not stop the
     # clearing below.
