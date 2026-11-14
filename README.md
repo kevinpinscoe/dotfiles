@@ -9,6 +9,7 @@ Dotfiles are managed with [GNU Stow](https://www.gnu.org/software/stow/). `insta
 Install stow first (`apt install stow` / `brew install stow` / `dnf install stow`).
 
 **First time on a host that previously used the old copy-based setup:**
+
 ```bash
 bash migrate-to-stow.sh   # removes old copies so stow can create symlinks
 bash install.sh
@@ -16,6 +17,7 @@ bash restore.sh           # optional, restores VS Code settings
 ```
 
 **Fresh host:**
+
 ```bash
 bash install.sh
 bash restore.sh           # optional, restores VS Code settings
@@ -40,6 +42,10 @@ Stow packages map directly to `$HOME`. Each top-level directory is a package:
 - `opensessions/` — `~/.config/opensessions/config.json` (opensessions tmux sidebar config: sidebar position, width, theme) and `~/.tmux/plugins/opensessions/bin/` (`opensessions-server`, `opensessions-sidebar`, `.opensessions-version`; `lazydiff` is not tracked — it lives in `~/.local/bin/`)
 - `yazi/` — `~/.config/yazi/plugins/ls-deluxe-colors.yazi/` Yazi linemode plugin that colors mtime by age and file size (lsd-style)
 - `git/` — `.gitconfig` (global git config) and `~/.config/git/` (global ignore, global hooks); shared across platforms
+- `claude/` — Claude Code hook scripts, stowed per file into `~/.claude/hooks/`, which stays a real directory because Claude Code writes its own files beside it. `settings.json` is per host and never tracked, so a hook is linked here but registered on each host separately.
+  - `bell-notify.sh` — rings the terminal bell on Stop/Notification.
+  - `lastdl-inject.sh` — `UserPromptSubmit` hook (AI-131). When a prompt contains the token `@lastdl`, it gives the agent the absolute path of the newest completed download, checking `~/Downloads` and `/mac-home/Downloads` and skipping `.part`/`.crdownload`/`.download` files. Without the token it prints nothing, and it always exits 0.
+- `claude-setup/` — not stowed. `register-lastdl-hook.sh` installs the `@lastdl` hook on the host it runs on: it fast-forwards `~/.dotfiles`, restows `claude`, then adds the hook to `~/.claude/settings.json` after taking a timestamped backup. It is idempotent. Run it once per host with `bash ~/.dotfiles/claude-setup/register-lastdl-hook.sh`, adding `--no-pull` to skip the git update.
 - `ghostty-fedora/` — Ghostty terminal config for Fedora (absolute tmux path)
 - `ghostty-mac/` — Ghostty terminal config for macOS (Homebrew tmux path)
 - `ghostty-debian/` — Ghostty terminal config for Raspberry Pi / Debian (built from source)
@@ -103,6 +109,7 @@ Raspberry Pi 5 running Debian Trixie with a display attached. Ghostty is built f
 **tmux auto-attach on SSH login** is in `.bashrc` — no extra setup needed after `install.sh`.
 
 **First-time setup on a fresh Pi:**
+
 ```bash
 sudo apt install stow git tmux pkg-config gettext libxml2-utils \
   libgtk-4-dev libadwaita-1-dev libgtk4-layer-shell-dev
@@ -132,6 +139,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 **If migrating a Pi that was previously set up with the old copy-based deploy-debian.sh:**
+
 ```bash
 # Remove the real (non-symlinked) files so stow can take over
 rm -rf ~/.bash.d ~/.tmux.conf ~/.config/tmux/status/*.sh
