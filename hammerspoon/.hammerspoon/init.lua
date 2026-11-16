@@ -5,20 +5,40 @@
 -- ~/.environment/phrases.txt
 
 --------------------------------------------------
--- Spotlight Clipboard History
+-- Current Clipboard Check
 --------------------------------------------------
 
-local function openSpotlightClipboard()
-  hs.eventtap.keyStroke({"cmd"}, "space")
+-- Shows what is on the clipboard right now, secrets in the
+-- clear, via ~/bin/clipcheck.sh. Not for screen sharing.
+-- Press again to dismiss; it also closes after 15 seconds.
 
-  hs.timer.doAfter(0.15, function()
-    hs.eventtap.keyStroke({"cmd"}, "4")
+local clipcheckScript = os.getenv("HOME") .. "/bin/clipcheck.sh"
+local clipcheckAlert = nil
+
+local function showClipboard()
+  if clipcheckAlert then
+    hs.alert.closeSpecific(clipcheckAlert)
+    clipcheckAlert = nil
+    return
+  end
+
+  local output = hs.execute("/bin/bash '" .. clipcheckScript .. "' 2>&1")
+
+  clipcheckAlert = hs.alert.show(output, {
+    textFont = "Menlo",
+    textSize = 16,
+    atScreenEdge = 0,
+  }, hs.screen.mainScreen(), 15)
+
+  local shown = clipcheckAlert
+  hs.timer.doAfter(15, function()
+    if clipcheckAlert == shown then clipcheckAlert = nil end
   end)
 end
 
--- Control + V opens Spotlight Clipboard History
+-- Control + V shows the current clipboard contents
 hs.hotkey.bind({"ctrl"}, "v", function()
-  openSpotlightClipboard()
+  showClipboard()
 end)
 
 --------------------------------------------------
