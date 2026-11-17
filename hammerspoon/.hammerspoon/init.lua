@@ -114,3 +114,8 @@ end)
 hs.hotkey.bind({"ctrl", "alt"}, "b", function()
   insertPhrase("b")
 end)
+
+-- Control + Option + W
+hs.hotkey.bind({"ctrl", "alt"}, "w", function()
+  insertPhrase("w")
+end)
